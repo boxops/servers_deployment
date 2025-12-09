@@ -2,12 +2,6 @@
 
 Enterprise-grade infrastructure deployment and service management platform using Terraform and Ansible on Proxmox VE.
 
-> ⚠️ **Security Notice**: This repository contains example configurations. Before deploying to production:
-> - Replace all example IP addresses, hostnames, and credentials
-> - Use `ansible-vault` to encrypt sensitive variables
-> - Never commit `terraform.tfstate` files or real credentials to version control
-> - Review and update all `.tfvars.example` files with your actual infrastructure details
-
 ## Overview
 
 This project provides a comprehensive Infrastructure as Code (IaC) solution for deploying and managing enterprise network services on Proxmox VE. The platform automates VM provisioning, service configuration, and ongoing management through declarative configuration.
@@ -118,8 +112,7 @@ servers_deployment/
 │   ├── grafana/         # Visualization
 │   └── ...              # Other services
 ├── terraform/           # Infrastructure as Code
-│   ├── PROXMOX-NODE-01/   # Production node 1 VMs
-│   ├── PROXMOX-NODE-02/   # Production node 2 VMs
+│   ├── PVE-HOME/        # Lab environment
 │   └── example/         # Example templates
 ├── docs/                # Documentation
 ├── scripts/             # Automation scripts
