@@ -1,0 +1,12 @@
+$TTL 86400
+@   IN  SOA  ns.{{ item.name }}. admin.{{ item.name }}. (
+           {{ ansible_date_time.epoch }} ; serial
+           3600       ; refresh
+           1800       ; retry
+           604800     ; expire
+           86400 )    ; negative cache TTL
+
+    IN  NS  ns.{{ item.name }}.
+ns  IN  A   10.0.1.10
+
+www IN  A   10.0.1.20

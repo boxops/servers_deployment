@@ -1,0 +1,36 @@
+---
+- name: Install OpenLDAP server
+  apt:
+    name: slapd
+    state: present
+  become: true
+
+- name: Ensure OpenLDAP is running and enabled
+  service:
+    name: slapd
+    state: started
+    enabled: true
+  become: true
+
+- name: Copy custom LDAP config if provided
+  template:
+    src: slapd.conf.j2
+    dest: /etc/ldap/slapd.conf
+  notify: Restart slapd
+  become: true
+  when: ldap_custom_config | default(false)
+
+- name: Set LDAP admin password
+  command: "slappasswd -s {{ ldap_admin_password }}"
+  register: ldap_admin_pass_hash
+  become: true
+  when: ldap_admin_password is defined
+
+- name: Configure LDAP admin password
+  lineinfile:
+    path: /etc/ldap/slapd.conf
+    regexp: '^rootpw'
+    line: "rootpw {{ ldap_admin_pass_hash.stdout }}"
+  notify: Restart slapd
+  become: true
+  when: ldap_admin_password is defined

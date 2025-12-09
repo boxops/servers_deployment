@@ -1,0 +1,48 @@
+---
+# sudo -s
+# systemctl stop zabbix-server
+- name: Stop Zabbix server
+  service:
+    name: zabbix-server
+    state: stopped
+  tags: server
+
+# wget https://repo.zabbix.com/zabbix/7.4/release/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.4+ubuntu24.04_all.deb
+- name: Download Zabbix repository package
+  get_url:
+    url: "{{ zabbix_repository_package }}"
+    dest: /tmp/zabbix-release.deb
+  tags: server
+
+# # dpkg -i zabbix-release_latest_7.4+ubuntu24.04_all.deb
+- name: Install Zabbix repository
+  command: dpkg -i /tmp/zabbix-release.deb
+  tags: server
+
+# apt update -y
+- name: Update package cache
+  apt:
+    update_cache: true
+  tags: server
+
+# DEBIAN_FRONTEND=noninteractive apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent -y
+- name: Install Zabbix server and frontend
+  apt:
+    name:
+      - zabbix-server-mysql
+      - zabbix-frontend-php
+      - zabbix-apache-conf
+      - zabbix-sql-scripts
+      - zabbix-agent
+    state: present
+    update_cache: yes
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+  tags: server
+
+# systemctl start zabbix-server
+- name: Start Zabbix server
+  service:
+    name: zabbix-server
+    state: started
+  tags: server

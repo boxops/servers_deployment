@@ -1,0 +1,26 @@
+---
+- name: Deploy Grafana Server Infrastructure
+  hosts: all
+  become: true
+  gather_facts: true
+  
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install basic packages
+      apt:
+        name:
+          - curl
+          - wget
+          - gnupg
+          - software-properties-common
+        state: present
+
+- name: Deploy Grafana Servers
+  hosts: grafana_servers
+  become: true
+  roles:
+    - grafana

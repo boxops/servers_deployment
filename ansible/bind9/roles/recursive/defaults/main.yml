@@ -1,0 +1,14 @@
+---
+bind9_packages:
+  - bind9
+  - bind9utils
+  - bind9-doc
+  - bind9-host
+  - dnsutils
+bind9_recursor: true
+bind9_forward: true
+bind9_forward_servers:
+  - 8.8.8.8
+  - 1.1.1.1
+bind9_listen_on: []
+bind9_enable_ipv6: false

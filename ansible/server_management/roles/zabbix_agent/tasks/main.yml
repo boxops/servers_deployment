@@ -1,0 +1,136 @@
+---
+# If firewalld is used on the target host, run these commands to allow Zabbix server to reach the agent
+# sudo firewall-cmd --permanent --zone=public --add-rich-rule='rule family="ipv4" source address="172.22.2.5" port protocol="tcp" port="10050" accept'
+# sudo firewall-cmd --reload
+
+- name: Install required system packages
+  apt:
+    name:
+      - python3
+      - python3-pip
+      - python3-venv
+      - python3-dev
+      - build-essential
+    state: present
+    update_cache: true
+  tags:
+    - common
+
+- name: Check whether zabbix-release package is installed
+  shell: dpkg-query -W -f='{{"${Status}"}}' zabbix-release
+  register: zabbix_release_check
+  failed_when: false
+  changed_when: false
+
+- name: Download zabbix-release deb (only when not installed)
+  get_url:
+    url: "{{ zabbix_release_deb_url }}"
+    dest: "/tmp/{{ zabbix_release_deb_name }}"
+    mode: '0644'
+  when: zabbix_release_check.rc != 0 and zabbix_agent_install
+  tags:
+    - zabbix
+
+- name: Install zabbix-release package (adds official repo)
+  apt:
+    deb: "/tmp/{{ zabbix_release_deb_name }}"
+    state: present
+  when: zabbix_release_check.rc != 0 and zabbix_agent_install
+  tags:
+    - zabbix
+
+- name: Ensure apt cache is up to date
+  apt:
+    update_cache: yes
+  when: zabbix_agent_install
+  tags:
+    - zabbix
+
+- name: Install zabbix agent package
+  apt:
+    name: "{{ zabbix_agent_package }}"
+    state: present
+  when: zabbix_agent_install
+  tags:
+    - zabbix
+
+- name: Ensure /etc/zabbix/zabbix_agentd.conf exists
+  file:
+    path: /etc/zabbix/zabbix_agentd.conf
+    state: touch
+    owner: root
+    group: root
+    mode: '0644'
+  when: zabbix_agent_install
+  tags:
+    - zabbix
+
+- name: Set Zabbix Server in config
+  lineinfile:
+    path: /etc/zabbix/zabbix_agentd.conf
+    regexp: '^Server='
+    line: 'Server={{ zabbix_server }}'
+    create: yes
+    backup: yes
+  notify: Restart zabbix-agent
+  when: zabbix_agent_install and zabbix_server is defined
+  tags:
+    - zabbix
+
+- name: Set Zabbix ServerActive in config
+  lineinfile:
+    path: /etc/zabbix/zabbix_agentd.conf
+    regexp: '^ServerActive='
+    line: 'ServerActive={{ zabbix_server_active }}'
+    create: yes
+    backup: yes
+  notify: Restart zabbix-agent
+  when: zabbix_agent_install and zabbix_server_active is defined
+  tags:
+    - zabbix
+
+- name: Set Hostname in config
+  lineinfile:
+    path: /etc/zabbix/zabbix_agentd.conf
+    regexp: '^Hostname='
+    line: 'Hostname={{ zabbix_hostname }}'
+    create: yes
+    backup: yes
+  notify: Restart zabbix-agent
+  when: zabbix_agent_install and zabbix_hostname is defined
+  tags:
+    - zabbix
+
+- name: Ensure zabbix-agent service is enabled and running
+  systemd:
+    name: zabbix-agent
+    enabled: yes
+    state: started
+  when: zabbix_agent_install
+  tags:
+    - zabbix
+
+# # Enable firewalld management for this host so the zabbix_agent role will add the rule
+# zabbix_firewalld_manage: true
+# zabbix_firewalld_zone: public
+# zabbix_agent_listen_port: 10050
+
+# # --- optional firewalld support (no-op unless zabbix_firewalld_manage is true) ---
+# - name: Check if firewalld is active
+#   command: firewall-cmd --state
+#   register: firewalld_state
+#   failed_when: false
+#   changed_when: false
+#   tags:
+#     - zabbix
+
+# - name: Add firewalld rich rule to allow Zabbix server to reach agent
+#   ansible.builtin.firewalld:
+#     zone: "{{ zabbix_firewalld_zone | default('public') }}"
+#     rich_rule: "rule family=\"ipv4\" source address=\"{{ zabbix_server }}\" port protocol=\"tcp\" port=\"{{ zabbix_agent_listen_port | default(10050) }}\" accept"
+#     permanent: yes
+#     immediate: yes
+#     state: enabled
+#   when: (zabbix_firewalld_manage | default(false)) and (firewalld_state.rc == 0)
+#   tags:
+#     - zabbix

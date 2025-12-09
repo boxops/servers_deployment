@@ -1,0 +1,446 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: ed8b8d16b49849a68710cebebabf9305
+      name: Custom
+  templates:
+    - uuid: 28bf5420d753408896dfb8f72256c93f
+      template: Ubiquiti_AF60-LR
+      name: Ubiquiti_AF60-LR
+      groups:
+        - name: Custom
+      items:
+        - uuid: aefa066db70a4ea88eee6437cc48fe00
+          name: af60Bandwidth
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.1.3.1
+          key: af60Bandwidth
+          delay: 10m
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60Bandwidth
+        - uuid: 2ea2708db05b4a339f860ef9b6df6ece
+          name: af60CpuUsage
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.2.6.1
+          key: af60CpuUsage
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: '%'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60CpuUsage
+        - uuid: c4ace545b89444d1a69c8d5899e9f446
+          name: af60DevModel
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.2.2.1
+          key: af60DevModel
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60DevModel
+        - uuid: 14a540514e5d4c80ae5e1529c88b3952
+          name: af60DevName
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.2.3.1
+          key: af60DevName
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60DevName
+        - uuid: 4f96db866791438c8745f7709625d6c8
+          name: af60FirmwareVersion
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.2.4.1
+          key: af60FirmwareVersion
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60FirmwareVersion
+        - uuid: 970a15ff2c91434bb67307bf0e6f0ea9
+          name: af60GpsAltFt
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.4.6.1
+          key: af60GpsAltFt
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          description: 'GPS Atlitude in feet'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60GpsAltFt
+        - uuid: c2c3d8c7eb254e64ac9e42257a74d5e7
+          name: af60GpsAltM
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.4.5.1
+          key: af60GpsAltM
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          description: 'GPS Atlitude in meters'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60GpsAltM
+        - uuid: a4b4ae4be693444f9b718b080ab9f614
+          name: af60GpsFix
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.4.2.1
+          key: af60GpsFix
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60GpsFix
+        - uuid: d616cf1971c94cd7b9eef995ace9dc8a
+          name: af60GpsHDOP
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.4.9.1
+          key: af60GpsHDOP
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          description: 'GPS Horizontal Dilution of Precision'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60GpsHDOP
+        - uuid: 175cbf61f67840b68cc0f47f6c94345f
+          name: af60GpsLat
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.4.3.1
+          key: af60GpsLat
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60GpsLat
+        - uuid: b8ce89ce103c4b3899becb4808308a48
+          name: af60GpsLon
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.4.4.1
+          key: af60GpsLon
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60GpsLon
+        - uuid: 5d164f7a185946d48cedb8d6814b26c6
+          name: af60GpsSatsTracked
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.4.8.1
+          key: af60GpsSatsTracked
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60GpsSatsTracked
+        - uuid: b5a83083ef6c4346ae627d35e00bc2de
+          name: af60GpsSatsVisible
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.4.7.1
+          key: af60GpsSatsVisible
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60GpsSatsVisible
+        - uuid: 1511f8844b014099a988337c1492b8f7
+          name: af60GpsStatus
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.4.1.1
+          key: af60GpsStatus
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60GpsStatus
+        - uuid: de63c821cd09437fb5f128abbae023bc
+          name: af60LastIp
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.1.5.1
+          key: af60LastIp
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60LastIp
+        - uuid: 968708266b9245eba4c7d2839996538a
+          name: af60Mac
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.2.1.1
+          key: af60Mac
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60Mac
+        - uuid: 7b0c6d17bbe844b4a89e57e051a477d4
+          name: af60MemoryUsage
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.2.5.1
+          key: af60MemoryUsage
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: '%'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60MemoryUsage
+        - uuid: 6dfd9fbe42ba4171a56b5a959010fc89
+          name: af60OrientationRoll
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.5.2.1
+          key: af60OrientationRoll
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60OrientationRoll
+        - uuid: fcc1f44e1a6a41cc9dce3b7b5782b76b
+          name: af60OrientationTilt
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.5.1.1
+          key: af60OrientationTilt
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60OrientationTilt
+        - uuid: 7f04b44af98d4c7e971d163af5f2e2d5
+          name: af60Ssid
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.1.4.1
+          key: af60Ssid
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60Ssid
+        - uuid: d27a28beb2e648d6b078ea510c1037e2
+          name: sunMaxBatCurrent
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.1.1.1
+          key: sunMaxBatCurrent
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: A
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60Role
+        - uuid: 4c5cdfbcb28740adaff45cfb74ff534d
+          name: sunMaxOutCurrent
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.1.3.1
+          key: sunMaxOutCurrent
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60Frequency
+        - uuid: 84236bb272644d8390fe6389c1e45b14
+          name: sunMaxPVCurrent
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.1.2.1
+          key: sunMaxPVCurrent
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60Frequency
+      discovery_rules:
+        - uuid: 1f8497fe4ce04c008c487f79a9914648
+          name: InterfaceAdminStatusDiscoveryRule
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},.1.3.6.1.2.1.2.2.1.2]'
+          key: ifAdminStatus.discovery
+          delay: 1h
+          item_prototypes:
+            - uuid: effc2efbbd7b4d2f88f4f147d12acef5
+              name: 'ifAdminStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.2.1.2.2.1.7.{#SNMPINDEX}'
+              key: 'ifAdminStatus[{#SNMPVALUE}]'
+              history: 7d
+              trends: '0'
+              tags:
+                - tag: source
+                  value: interface
+      valuemaps:
+        - uuid: 75c5d07110bf481d953739b325fa4ad1
+          name: InterfaceStatus
+          mappings:
+            - value: '1'
+              newvalue: up
+            - value: '2'
+              newvalue: down
+            - value: '3'
+              newvalue: testing

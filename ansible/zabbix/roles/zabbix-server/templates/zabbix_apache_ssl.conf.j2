@@ -1,0 +1,23 @@
+<IfModule mod_ssl.c>
+    <VirtualHost *:443>
+        ServerName {{ zabbix_fqdn | default(ansible_fqdn) }}
+        
+        SSLEngine on
+        SSLCertificateFile /etc/apache2/ssl/zabbix.crt
+        SSLCertificateKeyFile /etc/apache2/ssl/zabbix.key
+        {% if ssl_chain_cert is defined %}
+        SSLCertificateChainFile /etc/apache2/ssl/zabbix-chain.crt
+        {% endif %}
+
+        DocumentRoot /usr/share/zabbix
+        
+        <Directory /usr/share/zabbix>
+            Options FollowSymLinks
+            AllowOverride None
+            Require all granted
+        </Directory>
+        
+        ErrorLog ${APACHE_LOG_DIR}/zabbix_error.log
+        CustomLog ${APACHE_LOG_DIR}/zabbix_access.log combined
+    </VirtualHost>
+</IfModule>

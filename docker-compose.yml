@@ -1,0 +1,13 @@
+services:
+  infrastructure-dev:
+    build: .
+    container_name: infrastructure-deployment-dev
+    volumes:
+      - .:/workspace
+      - ~/.ssh:/home/developer/.ssh:ro
+    working_dir: /workspace
+    environment:
+      - TERM=xterm-256color
+    stdin_open: true
+    tty: true
+    command: /bin/bash

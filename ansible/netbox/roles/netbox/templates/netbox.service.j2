@@ -1,0 +1,20 @@
+# {{ ansible_managed }}
+[Unit]
+Description=NetBox WSGI Service
+After=network.target
+
+[Service]
+User={{ netbox_user }}
+Group={{ netbox_group }}
+WorkingDirectory={{ netbox_home }}/netbox
+ExecStart={{ netbox_home }}/venv/bin/gunicorn \
+          --pid /var/run/netbox.pid \
+          --pythonpath {{ netbox_home }}/netbox \
+          --config {{ netbox_home }}/gunicorn.py \
+          netbox.wsgi
+Restart=on-failure
+RestartSec=30
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target

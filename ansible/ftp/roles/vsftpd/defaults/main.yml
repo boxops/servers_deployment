@@ -1,0 +1,11 @@
+---
+# Defaults for vsftpd role
+vsftpd_listen: true
+vsftpd_listen_ipv6: false
+vsftpd_local_enable: true
+vsftpd_write_enable: true
+vsftpd_local_umask: '022'
+vsftpd_chroot_local_user: true
+vsftpd_user_sub_token: $USER
+vsftpd_local_root: '/home/{{ vsftpd_user | default("ftpuser") }}'
+vsftpd_user: ftpuser

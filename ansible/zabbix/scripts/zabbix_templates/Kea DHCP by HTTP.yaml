@@ -1,0 +1,517 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: ed8b8d16b49849a68710cebebabf9305
+      name: Custom
+  templates:
+    - uuid: a8bd256b17fe4d61b6aae940f57d899a
+      template: 'Kea DHCP by HTTP'
+      name: 'Kea DHCP by HTTP'
+      groups:
+        - name: Custom
+      items:
+        - uuid: 7e10101974874fd38f5995f768bd434f
+          name: 'Kea DHCP Build Report'
+          type: HTTP_AGENT
+          key: dhcp.build.report
+          delay: 10m
+          value_type: TEXT
+          url: 'http://{HOST.IP}:{$KEA_DHCP_PORT}'
+          posts: '{ "command": "build-report", "service": [ "dhcp4" ] }'
+          headers:
+            - name: Content-Type
+              value: application/json
+          request_method: POST
+          tags:
+            - tag: source
+              value: dhcp
+        - uuid: a65dc122a55b4371bc0e46fce3996063
+          name: 'DHCP Build Report'
+          type: DEPENDENT
+          key: dhcp.build.report.item
+          value_type: TEXT
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[0][''text'']'
+          master_item:
+            key: dhcp.build.report
+          tags:
+            - tag: source
+              value: dhcp
+        - uuid: 0bbca526876949e9a11d22a0c6eaa669
+          name: 'Kea DHCP Config Get'
+          type: HTTP_AGENT
+          key: dhcp.config.get
+          delay: 5m
+          value_type: TEXT
+          status: DISABLED
+          url: 'http://{HOST.IP}:{$KEA_DHCP_PORT}'
+          posts: '{ "command": "config-get", "service": [ "dhcp4" ] }'
+          headers:
+            - name: Content-Type
+              value: application/json
+          request_method: POST
+          tags:
+            - tag: source
+              value: dhcp
+        - uuid: 1573355e2af1433abd82c5fc76afbea2
+          name: 'HA Local Server Name'
+          type: DEPENDENT
+          key: dhcp.ha.local.server.name
+          value_type: TEXT
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[0][''arguments''][''high-availability''][0][''ha-servers''][''local''][''server-name'']'
+          master_item:
+            key: dhcp.status.get
+          tags:
+            - tag: source
+              value: dhcp
+        - uuid: 2815fa953a424316b16f103fc172dc05
+          name: 'HA Local Server Role'
+          type: DEPENDENT
+          key: dhcp.ha.local.server.role
+          value_type: TEXT
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[0][''arguments''][''high-availability''][0][''ha-servers''][''local''][''role'']'
+          master_item:
+            key: dhcp.status.get
+          tags:
+            - tag: source
+              value: dhcp
+        - uuid: ea2f2ad3a4bc4e60bad1d562bed6ae8c
+          name: 'HA Mode'
+          type: DEPENDENT
+          key: dhcp.ha.mode
+          value_type: TEXT
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[0][''arguments''][''high-availability''][0][''ha-mode'']'
+          master_item:
+            key: dhcp.status.get
+          tags:
+            - tag: source
+              value: dhcp
+        - uuid: 4ad047b140364b179ab47576445e1b39
+          name: 'HA Remote Server Name'
+          type: DEPENDENT
+          key: dhcp.ha.remote.server.name
+          value_type: TEXT
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[0][''arguments''][''high-availability''][0][''ha-servers''][''remote''][''server-name'']'
+          master_item:
+            key: dhcp.status.get
+          tags:
+            - tag: source
+              value: dhcp
+        - uuid: efad8761d2f84519891939e2792a9cad
+          name: 'HA Remote Server Role'
+          type: DEPENDENT
+          key: dhcp.ha.remote.server.role
+          value_type: TEXT
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[0][''arguments''][''high-availability''][0][''ha-servers''][''remote''][''role'']'
+          master_item:
+            key: dhcp.status.get
+          tags:
+            - tag: source
+              value: dhcp
+        - uuid: f505458ad9a040e4bdb98f182401e051
+          name: 'HA Sockets Status'
+          type: DEPENDENT
+          key: dhcp.ha.sockets.status
+          value_type: TEXT
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[0][''arguments''][''sockets''][''status'']'
+          master_item:
+            key: dhcp.status.get
+          tags:
+            - tag: source
+              value: dhcp
+        - uuid: 6d812e87381340d9a653cfab7d3fc1bc
+          name: 'HA Uptime'
+          type: DEPENDENT
+          key: dhcp.ha.uptime
+          trends: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[0][''arguments''][''uptime'']'
+            - type: MULTIPLIER
+              parameters:
+                - '0.01'
+          master_item:
+            key: dhcp.status.get
+          tags:
+            - tag: source
+              value: dhcp
+        - uuid: 606e680f406d4025b5c9b9156fa83359
+          name: 'Kea DHCP Lease4 Get All'
+          type: HTTP_AGENT
+          key: dhcp.lease4.get.all
+          delay: 5m
+          value_type: TEXT
+          status: DISABLED
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[0][''arguments''][''leases'']'
+          url: 'http://{HOST.IP}:{$KEA_DHCP_PORT}'
+          posts: '{ "command": "lease4-get-all", "service": [ "dhcp4" ] }'
+          headers:
+            - name: Content-Type
+              value: application/json
+          request_method: POST
+          tags:
+            - tag: source
+              value: dhcp
+        - uuid: 143ed43665e74f4b81bd503905ab60ee
+          name: 'Kea DHCP Lease6 Get All'
+          type: HTTP_AGENT
+          key: dhcp.lease6.get.all
+          delay: 5m
+          value_type: TEXT
+          status: DISABLED
+          url: 'http://{HOST.IP}:{$KEA_DHCP_PORT}'
+          posts: '{ "command": "lease6-get-all", "service": [ "dhcp4" ] }'
+          headers:
+            - name: Content-Type
+              value: application/json
+          request_method: POST
+          tags:
+            - tag: source
+              value: dhcp
+        - uuid: 827a94c4e54a47199e05feb0c4f2b4cc
+          name: 'Kea DHCP Stat Lease4 Get'
+          type: HTTP_AGENT
+          key: dhcp.stat.lease4.get
+          delay: 5m
+          value_type: TEXT
+          status: DISABLED
+          url: 'http://{HOST.IP}:{$KEA_DHCP_PORT}'
+          posts: '{ "command": "stat-lease4-get", "service": [ "dhcp4" ] }'
+          headers:
+            - name: Content-Type
+              value: application/json
+          request_method: POST
+          tags:
+            - tag: source
+              value: dhcp
+        - uuid: 166e31f6ade34e34876b6a97a8fd014d
+          name: 'Kea DHCP Stat Lease6 Get'
+          type: HTTP_AGENT
+          key: dhcp.stat.lease6.get
+          delay: 5m
+          value_type: TEXT
+          status: DISABLED
+          url: 'http://{HOST.IP}:{$KEA_DHCP_PORT}'
+          posts: '{ "command": "stat-lease6-get", "service": [ "dhcp4" ] }'
+          headers:
+            - name: Content-Type
+              value: application/json
+          request_method: POST
+          tags:
+            - tag: source
+              value: dhcp
+        - uuid: 7ba5859cab564f0fa470a598a441b250
+          name: 'Kea DHCP Statistics Get All'
+          type: HTTP_AGENT
+          key: dhcp.statistics.get.all
+          delay: 5m
+          value_type: TEXT
+          status: DISABLED
+          url: 'http://{HOST.IP}:{$KEA_DHCP_PORT}'
+          posts: '{ "command": "statistic-get-all", "service": [ "dhcp4" ] }'
+          headers:
+            - name: Content-Type
+              value: application/json
+          request_method: POST
+          tags:
+            - tag: source
+              value: dhcp
+        - uuid: a94275ced1194607a9a39dbf05263c61
+          name: 'Kea DHCP Status Get'
+          type: HTTP_AGENT
+          key: dhcp.status.get
+          value_type: TEXT
+          url: 'http://{HOST.IP}:{$KEA_DHCP_PORT}'
+          posts: '{ "command": "status-get", "service": [ "dhcp4" ] }'
+          headers:
+            - name: Content-Type
+              value: application/json
+          request_method: POST
+          tags:
+            - tag: source
+              value: dhcp
+        - uuid: 62cbba575f0a435eb9c7053c6cbf88eb
+          name: 'DHCP App Version'
+          type: DEPENDENT
+          key: dhcp.version
+          value_type: TEXT
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[0][''text'']'
+          master_item:
+            key: dhcp.version.get
+          tags:
+            - tag: source
+              value: dhcp
+        - uuid: 0db0122cf6314bb098c65d92a60cddc9
+          name: 'DHCP App Version Extended'
+          type: DEPENDENT
+          key: dhcp.version.extended
+          value_type: TEXT
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$[0][''arguments''][''extended'']'
+          master_item:
+            key: dhcp.version.get
+          tags:
+            - tag: source
+              value: dhcp
+        - uuid: 46139f11ee8d47dc92dabe9e1eec809b
+          name: 'Kea DHCP Version Get'
+          type: HTTP_AGENT
+          key: dhcp.version.get
+          delay: 5m
+          value_type: TEXT
+          url: 'http://{HOST.IP}:{$KEA_DHCP_PORT}'
+          posts: '{ "command": "version-get", "service": [ "dhcp4" ] }'
+          headers:
+            - name: Content-Type
+              value: application/json
+          request_method: POST
+          tags:
+            - tag: source
+              value: dhcp
+        - uuid: b70427d36ce24d63945f923bfa340de5
+          name: 'DHCP Lease4 Total Count'
+          type: DEPENDENT
+          key: kea.lease4.total_count
+          value_type: TEXT
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.length()
+          master_item:
+            key: dhcp.lease4.get.all
+          tags:
+            - tag: source
+              value: dhcp
+      discovery_rules:
+        - uuid: a43d3c48b786453da6ae25e3a7f8bde9
+          name: 'Kea Lease4 Subnet Discovery'
+          type: DEPENDENT
+          key: kea.lease4.subnet.discovery
+          status: DISABLED
+          master_item:
+            key: dhcp.lease4.get.all
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+      macros:
+        - macro: '{$KEA_DHCP_IP}'
+          value: 192.168.11.91
+        - macro: '{$KEA_DHCP_PORT}'
+          value: '8000'
+      dashboards:
+        - uuid: 006fe69a1ed04945b09f805101843bb7
+          name: 'Kea DHCP'
+          auto_start: 'NO'
+          pages:
+            - name: Summary
+              widgets:
+                - type: item
+                  name: 'App Version'
+                  width: '17'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Kea DHCP by HTTP'
+                        key: dhcp.version
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+                - type: item
+                  name: 'Lease4 Total Count'
+                  x: '17'
+                  width: '17'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Kea DHCP by HTTP'
+                        key: kea.lease4.total_count
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+            - name: 'High Availability'
+              widgets:
+                - type: item
+                  name: 'HA Mode'
+                  width: '36'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Kea DHCP by HTTP'
+                        key: dhcp.ha.mode
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+                - type: item
+                  name: 'HA Local Server Name'
+                  'y': '3'
+                  width: '36'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Kea DHCP by HTTP'
+                        key: dhcp.ha.local.server.name
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+                - type: item
+                  name: 'HA Local Server Role'
+                  'y': '6'
+                  width: '36'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Kea DHCP by HTTP'
+                        key: dhcp.ha.local.server.role
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+                - type: item
+                  name: 'HA Sockets Status'
+                  'y': '9'
+                  width: '36'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Kea DHCP by HTTP'
+                        key: dhcp.ha.sockets.status
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+                - type: svggraph
+                  name: 'HA Uptime'
+                  x: '36'
+                  width: '36'
+                  height: '3'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: 'HA Uptime'
+                    - type: STRING
+                      name: reference
+                      value: HVLYV
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: item
+                  name: 'HA Remote Server Name'
+                  x: '36'
+                  'y': '3'
+                  width: '36'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Kea DHCP by HTTP'
+                        key: dhcp.ha.remote.server.name
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+                - type: item
+                  name: 'HA Remote Server Role'
+                  x: '36'
+                  'y': '6'
+                  width: '36'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Kea DHCP by HTTP'
+                        key: dhcp.ha.remote.server.role
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'

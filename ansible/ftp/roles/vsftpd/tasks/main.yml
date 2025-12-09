@@ -1,0 +1,28 @@
+---
+- name: Install vsftpd package
+  apt:
+    name: vsftpd
+    state: present
+    update_cache: yes
+
+- name: Ensure ftp user exists (optional local user)
+  user:
+    name: ftpuser
+    system: no
+    create_home: yes
+    shell: /bin/false
+
+- name: Deploy vsftpd configuration
+  template:
+    src: vsftpd.conf.j2
+    dest: /etc/vsftpd.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart vsftpd
+
+- name: Ensure vsftpd service is enabled and started
+  systemd:
+    name: vsftpd
+    enabled: yes
+    state: started

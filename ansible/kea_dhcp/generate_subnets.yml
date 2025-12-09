@@ -1,0 +1,16 @@
+---
+# This playbook runs scripts/generate_subnet4_from_netbox.py script by passing DHCP IPs as arguments
+# The targeted IPs are collected from the Ansible inventory
+- name: Generate Kea DHCP Subnet Configurations from Netbox
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Run scripts/generate_subnet4_from_netbox.py for each host
+      ansible.builtin.command:
+        cmd: python3 scripts/generate_subnet4_from_netbox.py {{ ansible_host }}
+      delegate_to: localhost
+      register: validate_result
+
+    - name: Show script output
+      ansible.builtin.debug:
+        var: validate_result.stdout

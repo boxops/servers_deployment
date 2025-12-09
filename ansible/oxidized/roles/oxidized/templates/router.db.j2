@@ -1,0 +1,14 @@
+# Example router database - Replace with your actual devices
+# Format: IP:hostname:device_type:username:password:enable_password
+# 
+# Supported device types: ubiquiti_edge, ubiquiti_edgeswitch, juniper_junos, cisco_ios, etc.
+# See: https://github.com/ytti/oxidized#supported-os-types
+
+# Example entries (replace with your actual devices):
+# 10.0.1.10:example-switch-01:ubiquiti_edgeswitch:admin:{{ vault_switch_password }}:{{ vault_enable_password }}
+# 10.0.1.20:example-router-01:juniper_junos:netconf_user:{{ vault_router_password }}
+# 10.0.1.30:example-core-sw:cisco_ios:admin:{{ vault_cisco_password }}:{{ vault_enable_password }}
+
+# Use Ansible vault for sensitive credentials:
+# ansible-vault create group_vars/oxidized/vault.yml
+# Then reference: {{ vault_device_password }}

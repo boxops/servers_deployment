@@ -1,0 +1,19 @@
+# {{ ansible_managed }}
+bind {{ redis_bind }}
+port {{ redis_port }}
+{% if redis_password %}
+requirepass {{ redis_password }}
+{% endif %}
+
+protected-mode yes
+daemonize yes
+pidfile /var/run/redis/redis-server.pid
+logfile /var/log/redis/redis-server.log
+dir /var/lib/redis
+
+save 900 1
+save 300 10
+save 60 10000
+
+maxmemory 256mb
+maxmemory-policy allkeys-lru

@@ -1,0 +1,59 @@
+---
+- name: Verify Zabbix servers
+  hosts: zabbix_servers
+  become: true
+
+  tasks:
+    - name: Verify Zabbix server is running
+      systemd:
+        name: zabbix-server
+        state: started
+        enabled: true
+      tags: service
+
+    - name: Verify database connection
+      command: >
+        mysql -u {{ zabbix_server_dbuser }} -p{{ zabbix_server_dbpassword }} 
+        -h {{ zabbix_server_dbhost }} {{ zabbix_server_dbname }} -e "SELECT 1"
+      register: db_test
+      changed_when: false
+      ignore_errors: true
+      tags: database
+
+    - name: Show database test results if failed
+      debug:
+        var: db_test.stderr
+      when: db_test.rc != 0
+      tags: database
+
+    - name: Verify frontend-server communication
+      uri:
+        url: "http://localhost/zabbix/api_jsonrpc.php"  # Added /zabbix path
+        method: POST
+        body_format: json
+        body:
+          jsonrpc: "2.0"
+          method: "apiinfo.version"
+          id: 1
+          params: {}
+        status_code: 200
+        return_content: yes
+      register: api_test
+      changed_when: false
+      ignore_errors: true
+      retries: 3
+      delay: 10
+
+    - name: Show API test results
+      debug:
+        var: api_test.json
+      when: api_test.json is defined
+      tags: zabbix
+
+    - name: Verify Zabbix web interface
+      uri:
+        url: "http://localhost/zabbix"
+        status_code: 200
+      register: web_test
+      changed_when: false
+      ignore_errors: true

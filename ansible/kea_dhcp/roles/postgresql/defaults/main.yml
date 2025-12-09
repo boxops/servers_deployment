@@ -1,0 +1,6 @@
+postgresql_db: "dhcp"
+postgresql_original_user: "postgres"
+postgresql_user: "admin"
+postgresql_password: "v2DhuDKA"
+postgresql_host: "localhost"
+postgresql_port: 5432

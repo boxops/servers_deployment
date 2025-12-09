@@ -1,0 +1,96 @@
+---
+- name: Ensure keyring directory exists
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+
+- name: Download and dearmor ISC Kea GPG key
+  ansible.builtin.shell: |
+    curl -fsSL "{{ kea_apt_keyring_url }}" | gpg --dearmor -o {{ kea_apt_keyring_path }}
+  args:
+    creates: "{{ kea_apt_keyring_path }}"
+
+- name: Add ISC Kea APT repository using signed-by keyring
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by={{ kea_apt_keyring_path }}] {{ kea_apt_repository }}"
+    filename: "{{ kea_apt_filename }}"
+    state: present
+    update_cache: yes
+
+- name: Install required Debian packages
+  ansible.builtin.package:
+    name:
+      - debian-keyring
+      - debian-archive-keyring
+      - apt-transport-https
+    state: present
+
+- name: Install Kea packages
+  ansible.builtin.package:
+    name: "{{ kea_packages }}"
+    state: present
+
+- name: Enable/disable Kea services
+  ansible.builtin.service:
+    name: "{{ item.svc }}"
+    enabled: "{{ item.enabled }}"
+  loop:
+    - { svc: "{{ kea_dhcp4_svc }}", enabled: "{{ kea_dhcp4_enable }}" }
+    - { svc: "{{ kea_dhcp6_svc }}", enabled: "{{ kea_dhcp6_enable }}" }
+    - { svc: "{{ kea_ddns_svc }}", enabled: "{{ kea_ddns_enable }}" }
+    - { svc: "{{ kea_ctrl_agent_svc }}", enabled: "{{ kea_ctrl_agent_enable }}" }
+
+# - name: Render and print kea-dhcp4.conf
+#   ansible.builtin.template:
+#     src: "kea-dhcp4.conf.j2"
+#     dest: "/tmp/kea-dhcp4.conf"
+#   when: kea_dhcp4_enable
+
+- name: Ensure Kea configuration directory exists
+  ansible.builtin.file:
+    path: "{{ kea_dhcp4_config_path | dirname }}"
+    state: directory
+    mode: '0755'
+
+# DHCP4 Config
+- name: Deploy Kea DHCP4 configuration from intended_configs
+  ansible.builtin.copy:
+    src: "intended_configs/{{ inventory_hostname }}.kea-dhcp4.conf"
+    dest: "{{ kea_dhcp4_config_path }}"
+    owner: root
+    group: root
+    mode: '0644'
+  tags:
+    - kea_dhcp4
+
+- name: Validate Kea DHCP4 config
+  ansible.builtin.command: "kea-dhcp4 -t {{ kea_dhcp4_config_path }}"
+  register: kea_config_check
+  changed_when: false
+  failed_when: kea_config_check.rc != 0
+  notify:
+    - Restart kea-dhcp4
+  tags:
+    - kea_dhcp4
+
+# Control Agent config
+- name: Deploy Kea Control Agent configuration from intended_configs
+  ansible.builtin.copy:
+    src: "intended_configs/{{ inventory_hostname }}.kea-ctrl-agent.conf"
+    dest: "{{ kea_ctrl_agent_config_path }}"
+    owner: root
+    group: root
+    mode: '0644'
+  tags:
+    - kea_ctrl_agent
+
+- name: Validate Kea Control Agent config
+  ansible.builtin.command: "kea-ctrl-agent -t {{ kea_ctrl_agent_config_path }}"
+  register: kea_ctrl_config_check
+  changed_when: false
+  failed_when: kea_ctrl_config_check.rc != 0
+  notify:
+    - Restart kea-ctrl-agent
+  tags:
+    - kea_ctrl_agent

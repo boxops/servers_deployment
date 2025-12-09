@@ -1,0 +1,6 @@
+---
+grafana_edition: "grafana"  # Set to "grafana-enterprise" to install Enterprise
+grafana_repo_url: "https://apt.grafana.com"
+grafana_repo_dist: "stable"
+grafana_repo_comp: "main"
+grafana_key_path: "/etc/apt/keyrings/grafana.gpg"

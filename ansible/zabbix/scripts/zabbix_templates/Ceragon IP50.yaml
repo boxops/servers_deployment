@@ -1,0 +1,14 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: ed8b8d16b49849a68710cebebabf9305
+      name: Custom
+  templates:
+    - uuid: 25945e544fe04c9c815693fe55af8df5
+      template: 'Ceragon IP50'
+      name: 'Ceragon IP50'
+      description: |
+        Supported types:
+        IP-50
+      groups:
+        - name: Custom

@@ -1,0 +1,1651 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: ed8b8d16b49849a68710cebebabf9305
+      name: Custom
+  templates:
+    - uuid: f1ee2cce61874d8e98c1d4a04124b3be
+      template: 'Ceragon IP20'
+      name: 'Ceragon IP20'
+      description: |
+        Template generated from SNMP OID walk
+        
+        Supported types:
+        IP-20
+        IP-20E
+        IP-20E-
+      groups:
+        - name: Custom
+      items:
+        - uuid: 95f67ea37f5c49d49dbad683607b591d
+          name: 'Device Serial Number'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.2281.10.1.2.10.1.1.6.127
+          key: genEquipInventorySerialNumber
+          delay: 1h
+          value_type: TEXT
+          inventory_link: SERIALNO_A
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+        - uuid: eb55b72ab13b4841b1d03da50da23ab0
+          name: 'Device Software Running Version'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.2281.10.4.1.13.1.1.4.1
+          key: genEquipMngSwIDUVersionsRunningVersion
+          delay: 1h
+          value_type: TEXT
+          inventory_link: SOFTWARE
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+        - uuid: 353f34725c3d40b6976ec86fb5139293
+          name: genEquipUnitIduTemperature.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.2281.10.1.1.9.0
+          key: genEquipUnitIduTemperature.0
+          delay: 5m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: C
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: genEquipUnitIduTemperature.0
+        - uuid: c92aa1b944654210a596c86115d055b1
+          name: genEquipUnitIduVoltageInput.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.2281.10.1.1.10.0
+          key: genEquipUnitIduVoltageInput.0
+          delay: 5m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: V
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: genEquipUnitIduVoltageInput.0
+        - uuid: 56ef66b1209b4fc5a5f017fa7e32a140
+          name: genEquipUnitLicenseCode.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.2281.10.1.3.2.0
+          key: genEquipUnitLicenseCode.0
+          delay: 5m
+          history: 7d
+          value_type: TEXT
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: genEquipUnitLicenseCode.0
+        - uuid: 6eb28317f77f497298f6b1101f24bd9b
+          name: genEquipUnitLicenseDateCode.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.2281.10.1.3.14.0
+          key: genEquipUnitLicenseDateCode.0
+          delay: 5m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: genEquipUnitLicenseDateCode.0
+        - uuid: 9656e41563fc45739da732388598bd64
+          name: genEquipUnitLicenseDemoAdmin.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.2281.10.1.3.6.0
+          key: genEquipUnitLicenseDemoAdmin.0
+          delay: 5m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: genEquipUnitLicenseDemoAdmin.0
+        - uuid: fecd8a84beab4e9b9a6c7de947d5ef70
+          name: genEquipUnitLicenseDemoTimer.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.2281.10.1.3.7.0
+          key: genEquipUnitLicenseDemoTimer.0
+          delay: 5m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: genEquipUnitLicenseDemoTimer.0
+        - uuid: a4512cf19d79420f80ce2afb97818bf2
+          name: genEquipUnitLicenseType.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.2281.10.1.3.1.0
+          key: genEquipUnitLicenseType.0
+          delay: 5m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: genEquipUnitLicenseType.0
+        - uuid: d6deeb6a90b24f7dac7fc3cd79676b2b
+          name: genEquipUnitLicenseValidationNumber.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.2281.10.1.3.15.0
+          key: genEquipUnitLicenseValidationNumber.0
+          delay: 5m
+          history: 7d
+          value_type: TEXT
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: genEquipUnitLicenseValidationNumber.0
+      discovery_rules:
+        - uuid: d5d3d98b5459423fb5488302399bc5ab
+          name: genEquipCurrentAlarm
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.2281.10.3.1.2.1.9]'
+          key: genEquipCurrentAlarm.discovery
+          delay: 1h
+          item_prototypes:
+            - uuid: 6b949ba5af424de2b2ee2b751bec6df5
+              name: 'genEquipCurrentAlarmAdditionalInfo {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.3.1.2.1.14.{#SNMPINDEX}'
+              key: 'genEquipCurrentAlarmAdditionalInfo[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipCurrentAlarm
+            - uuid: 20c69369a4e74274add90587bcc03fcb
+              name: 'genEquipCurrentAlarmCorrectiveActions {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.3.1.2.1.11.{#SNMPINDEX}'
+              key: 'genEquipCurrentAlarmCorrectiveActions[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipCurrentAlarm
+            - uuid: 418d6de5c8a74fdc89deeb4bf1e25da6
+              name: 'genEquipCurrentAlarmCounter {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.3.1.2.1.1.{#SNMPINDEX}'
+              key: 'genEquipCurrentAlarmCounter[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipCurrentAlarm
+            - uuid: 78f23d856ff84a14bb60302a04ee13b3
+              name: 'genEquipCurrentAlarmDesc {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.3.1.2.1.9.{#SNMPINDEX}'
+              key: 'genEquipCurrentAlarmDesc[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipCurrentAlarm
+            - uuid: 12bbed40a8c44a1e8385637d88828e1d
+              name: 'genEquipCurrentAlarmId {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.3.1.2.1.3.{#SNMPINDEX}'
+              key: 'genEquipCurrentAlarmId[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipCurrentAlarm
+            - uuid: 0cf7d70be3004d5c9fbfc3c237366217
+              name: 'genEquipCurrentAlarmIfIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.3.1.2.1.7.{#SNMPINDEX}'
+              key: 'genEquipCurrentAlarmIfIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipCurrentAlarm
+            - uuid: c7b2af8b71c940b282cfd45ffa3535bf
+              name: 'genEquipCurrentAlarmInstance {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.3.1.2.1.5.{#SNMPINDEX}'
+              key: 'genEquipCurrentAlarmInstance[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipCurrentAlarm
+            - uuid: 4cc08f03d29f4d1b92129031d2dafd3e
+              name: 'genEquipCurrentAlarmProbableCause {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.3.1.2.1.10.{#SNMPINDEX}'
+              key: 'genEquipCurrentAlarmProbableCause[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipCurrentAlarm
+            - uuid: c075790f0fa2416896ad092f9656d49d
+              name: 'genEquipCurrentAlarmRaisedTimeT {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.3.1.2.1.2.{#SNMPINDEX}'
+              key: 'genEquipCurrentAlarmRaisedTimeT[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipCurrentAlarm
+            - uuid: 74d31aefa9b5429589ee6e8aa17ceb74
+              name: 'genEquipCurrentAlarmSeverity {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.3.1.2.1.6.{#SNMPINDEX}'
+              key: 'genEquipCurrentAlarmSeverity[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipCurrentAlarm
+              trigger_prototypes:
+                - uuid: 727352f5a101439faa2bfd00a73eac1e
+                  expression: 'last(/Ceragon IP20/genEquipCurrentAlarmSeverity[{#SNMPVALUE}])=0'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Ceragon IP20/genEquipCurrentAlarmSeverity[{#SNMPVALUE}])=5'
+                  name: 'Alarm: {#SNMPVALUE}'
+                  manual_close: 'YES'
+                - uuid: bd3fcef97f8b4a8dbc19017cb82d9c0f
+                  expression: 'last(/Ceragon IP20/genEquipCurrentAlarmSeverity[{#SNMPVALUE}])=1'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Ceragon IP20/genEquipCurrentAlarmSeverity[{#SNMPVALUE}])=5'
+                  name: 'Alarm: {#SNMPVALUE}'
+                  priority: HIGH
+                  manual_close: 'YES'
+                - uuid: 044af2e9f6794c0b90b33d487d796eb9
+                  expression: 'last(/Ceragon IP20/genEquipCurrentAlarmSeverity[{#SNMPVALUE}])=2'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Ceragon IP20/genEquipCurrentAlarmSeverity[{#SNMPVALUE}])=5'
+                  name: 'Alarm: {#SNMPVALUE}'
+                  priority: AVERAGE
+                  manual_close: 'YES'
+                - uuid: ddbbed79f19d4093b570415683a1d496
+                  expression: 'last(/Ceragon IP20/genEquipCurrentAlarmSeverity[{#SNMPVALUE}])=3'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Ceragon IP20/genEquipCurrentAlarmSeverity[{#SNMPVALUE}])=5'
+                  name: 'Alarm: {#SNMPVALUE}'
+                  priority: INFO
+                  manual_close: 'YES'
+                - uuid: b5094f8f976447848f26a48bd19464e7
+                  expression: 'last(/Ceragon IP20/genEquipCurrentAlarmSeverity[{#SNMPVALUE}])=4'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Ceragon IP20/genEquipCurrentAlarmSeverity[{#SNMPVALUE}])=5'
+                  name: 'Alarm: {#SNMPVALUE}'
+                  priority: WARNING
+                  manual_close: 'YES'
+            - uuid: 9e3cd645fca74d75a64485d9b2091465
+              name: 'genEquipCurrentAlarmSlotId {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.3.1.2.1.13.{#SNMPINDEX}'
+              key: 'genEquipCurrentAlarmSlotId[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipCurrentAlarm
+            - uuid: de9a45a47ef94d85a79fb3b557fdffa0
+              name: 'genEquipCurrentAlarmState {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.3.1.2.1.12.{#SNMPINDEX}'
+              key: 'genEquipCurrentAlarmState[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipCurrentAlarm
+            - uuid: 678c440053f64fa484fdedad754cd045
+              name: 'genEquipCurrentAlarmUserText {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.3.1.2.1.15.{#SNMPINDEX}'
+              key: 'genEquipCurrentAlarmUserText[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipCurrentAlarm
+        - uuid: 3176507003a84bfc9c3cd5eddf9df83f
+          name: genEquipInventory
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.2281.10.1.2.10.1.1.1]'
+          key: genEquipInventory.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: ab8169ca1a504669b893ba96c85e5ef7
+              name: 'genEquipInventoryCardName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.1.2.10.1.1.2.{#SNMPINDEX}'
+              key: 'genEquipInventoryCardName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipInventory
+            - uuid: 76d687b44df943a2baf23284e0ad59c8
+              name: 'genEquipInventoryCardSubType {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.1.2.10.1.1.4.{#SNMPINDEX}'
+              key: 'genEquipInventoryCardSubType[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipInventory
+            - uuid: fb809a685c314519b1e390dea6612337
+              name: 'genEquipInventoryCardType {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.1.2.10.1.1.3.{#SNMPINDEX}'
+              key: 'genEquipInventoryCardType[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipInventory
+            - uuid: ea04915b7e6c413983f9019418e596cd
+              name: 'genEquipInventoryPartNumber {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.1.2.10.1.1.5.{#SNMPINDEX}'
+              key: 'genEquipInventoryPartNumber[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipInventory
+            - uuid: f5defc04ac96425abd156b80ab596a3c
+              name: 'genEquipInventorySerialNumber {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.1.2.10.1.1.6.{#SNMPINDEX}'
+              key: 'genEquipInventorySerialNumber[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipInventory
+            - uuid: a136b5df31e540aaaee6033c3157d442
+              name: 'genEquipInventorySlotIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.1.2.10.1.1.1.{#SNMPINDEX}'
+              key: 'genEquipInventorySlotIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipInventory
+        - uuid: 0ca5b3f0d92f426a8dde7901f2ebfcba
+          name: genEquipMngSwIDUVersions
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.2281.10.4.1.13.1.1.1]'
+          key: genEquipMngSwIDUVersions.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: 434c60de74ed4d87ab53d35ffe85f01d
+              name: 'genEquipMngSwIDUVersionsCounter {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.4.1.13.1.1.1.{#SNMPINDEX}'
+              key: 'genEquipMngSwIDUVersionsCounter[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipMngSwIDUVersions
+            - uuid: eef9bea33ea54a2686e1f4eeb4b8b8ca
+              name: 'genEquipMngSwIDUVersionsDowngradePackage {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.4.1.13.1.1.7.{#SNMPINDEX}'
+              key: 'genEquipMngSwIDUVersionsDowngradePackage[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipMngSwIDUVersions
+            - uuid: d0bd5ebd83684359b4a960aff22f7e38
+              name: 'genEquipMngSwIDUVersionsInstalledVersion {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.4.1.13.1.1.5.{#SNMPINDEX}'
+              key: 'genEquipMngSwIDUVersionsInstalledVersion[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipMngSwIDUVersions
+            - uuid: af155f6cc3274a09971c003f0a2f4264
+              name: 'genEquipMngSwIDUVersionsPackageName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.4.1.13.1.1.2.{#SNMPINDEX}'
+              key: 'genEquipMngSwIDUVersionsPackageName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipMngSwIDUVersions
+            - uuid: 39b9b18aefbe4027941b9a3012daa062
+              name: 'genEquipMngSwIDUVersionsResetType {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.4.1.13.1.1.8.{#SNMPINDEX}'
+              key: 'genEquipMngSwIDUVersionsResetType[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipMngSwIDUVersions
+            - uuid: 602c3753d4cc46a98941273e7d76ee04
+              name: 'genEquipMngSwIDUVersionsRunningVersion {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.4.1.13.1.1.4.{#SNMPINDEX}'
+              key: 'genEquipMngSwIDUVersionsRunningVersion[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipMngSwIDUVersions
+            - uuid: 4e964c088f4d46a685ddb58b856edf1f
+              name: 'genEquipMngSwIDUVersionsTargetDevice {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.4.1.13.1.1.3.{#SNMPINDEX}'
+              key: 'genEquipMngSwIDUVersionsTargetDevice[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipMngSwIDUVersions
+        - uuid: 35f46298978a4cb2a1ac7cea8767024e
+          name: genEquipRadioMRMC
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.2281.10.7.4.1.1.1]'
+          key: genEquipRadioMRMC.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: e3d9d15087c54ab9a445b0d298aa201a
+              name: 'genEquipRadioMRMCCurrRxBitrate {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.4.1.1.11.{#SNMPINDEX}'
+              key: 'genEquipRadioMRMCCurrRxBitrate[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRadioMRMC
+            - uuid: 100697f78fcd48dc954612a9894b829d
+              name: 'genEquipRadioMRMCCurrRxProfile {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.4.1.1.9.{#SNMPINDEX}'
+              key: 'genEquipRadioMRMCCurrRxProfile[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRadioMRMC
+            - uuid: 7e8e61f80f8f4d0690fc26d15ed91bc0
+              name: 'genEquipRadioMRMCCurrRxQAM {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.4.1.1.10.{#SNMPINDEX}'
+              key: 'genEquipRadioMRMCCurrRxQAM[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRadioMRMC
+            - uuid: e6248aebb83f46edbb7de6bc91a93824
+              name: 'genEquipRadioMRMCCurrRxVc {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.4.1.1.12.{#SNMPINDEX}'
+              key: 'genEquipRadioMRMCCurrRxVc[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRadioMRMC
+            - uuid: e930cce31168420894e33e411896be1e
+              name: 'genEquipRadioMRMCCurrTxBitrate {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.4.1.1.7.{#SNMPINDEX}'
+              key: 'genEquipRadioMRMCCurrTxBitrate[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRadioMRMC
+            - uuid: 21a4299727da4615ab860ff53b7611a0
+              name: 'genEquipRadioMRMCCurrTxProfile {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.4.1.1.5.{#SNMPINDEX}'
+              key: 'genEquipRadioMRMCCurrTxProfile[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRadioMRMC
+            - uuid: 129ac8d350484afcbfd5585e36a449bd
+              name: 'genEquipRadioMRMCCurrTxQAM {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.4.1.1.6.{#SNMPINDEX}'
+              key: 'genEquipRadioMRMCCurrTxQAM[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRadioMRMC
+            - uuid: 3088e90ff12a40dda2f2bf7792e4f965
+              name: 'genEquipRadioMRMCCurrTxVc {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.4.1.1.8.{#SNMPINDEX}'
+              key: 'genEquipRadioMRMCCurrTxVc[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRadioMRMC
+            - uuid: 45f3fe7160734ed8a4274562873c9adb
+              name: 'genEquipRadioMRMCRadioId {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.4.1.1.1.{#SNMPINDEX}'
+              key: 'genEquipRadioMRMCRadioId[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRadioMRMC
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 356b49b9f20e4c49a1ba342d2444dcda
+          name: genEquipRadioStatus
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.2281.10.7.1.1.1]'
+          key: genEquipRadioStatus.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: c935e5fba55845629d0e13953baf82b5
+              name: 'genEquipRadioStatusBER {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.1.1.4.{#SNMPINDEX}'
+              key: 'genEquipRadioStatusBER[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRadioStatus
+            - uuid: e5b77583a02a49bcb190bfe43c8ce5b2
+              name: 'genEquipRadioStatusDefectedBlocks {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.1.1.3.{#SNMPINDEX}'
+              key: 'genEquipRadioStatusDefectedBlocks[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipRadioStatus
+            - uuid: ea3a19a2ee744038b9ab118c9b8673bf
+              name: 'genEquipRadioStatusMSE {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.1.1.2.{#SNMPINDEX}'
+              key: 'genEquipRadioStatusMSE[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRadioStatus
+            - uuid: 416401e6f76c48dab4cbad9582493aef
+              name: 'genEquipRadioStatusRadioId {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.1.1.1.{#SNMPINDEX}'
+              key: 'genEquipRadioStatusRadioId[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipRadioStatus
+            - uuid: 6f097f40e221480e8b2b9a836d485a1e
+              name: 'genEquipRadioStatusXPI {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.1.1.5.{#SNMPINDEX}'
+              key: 'genEquipRadioStatusXPI[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipRadioStatus
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 10b3db2093b2419ea31e5d3da79834c0
+          name: genEquipRemoteRadioR
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.2281.10.7.3.1.1.1]'
+          key: genEquipRemoteRadioR.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: a65cf3ef666d41508b271462fe65f395
+              name: 'genEquipRemoteRadioRadioId {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.3.1.1.1.{#SNMPINDEX}'
+              key: 'genEquipRemoteRadioRadioId[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRemoteRadioR
+            - uuid: 465beb12c16f4703afb756475d4bdcaf
+              name: 'genEquipRemoteRadioRemoteATPCoverrideState {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.3.1.1.16.{#SNMPINDEX}'
+              key: 'genEquipRemoteRadioRemoteATPCoverrideState[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRemoteRadioR
+            - uuid: d082f28b3b7443498eb1a97782b4ff6c
+              name: 'genEquipRemoteRadioRemoteATPCReferenceRxLevel {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.3.1.1.8.{#SNMPINDEX}'
+              key: 'genEquipRemoteRadioRemoteATPCReferenceRxLevel[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRemoteRadioR
+            - uuid: a5c1179125cd4cd3876994a8291b4324
+              name: 'genEquipRemoteRadioRemoteCommunication {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.3.1.1.2.{#SNMPINDEX}'
+              key: 'genEquipRemoteRadioRemoteCommunication[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRemoteRadioR
+            - uuid: 0dba4f0b383d4644aceca08f5b792576
+              name: 'genEquipRemoteRadioRemoteDefaultGatewayIpv6 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.3.1.1.28.{#SNMPINDEX}'
+              key: 'genEquipRemoteRadioRemoteDefaultGatewayIpv6[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipRemoteRadioR
+            - uuid: d5f47fcd86f241ca86ab3e07b7ca3d65
+              name: 'genEquipRemoteRadioRemoteDefaultGateway {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.3.1.1.10.{#SNMPINDEX}'
+              key: 'genEquipRemoteRadioRemoteDefaultGateway[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipRemoteRadioR
+            - uuid: 3b52d839984b4ade8a37d48fe2ba5be9
+              name: 'genEquipRemoteRadioRemoteForceMaxTxLevel {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.3.1.1.5.{#SNMPINDEX}'
+              key: 'genEquipRemoteRadioRemoteForceMaxTxLevel[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRemoteRadioR
+            - uuid: 147c7c1496ed4186978a0cf78ed25f52
+              name: 'genEquipRemoteRadioRemoteForceTxMute {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.3.1.1.14.{#SNMPINDEX}'
+              key: 'genEquipRemoteRadioRemoteForceTxMute[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRemoteRadioR
+            - uuid: 517afc0e19e44ac4bf4738132fe76056
+              name: 'genEquipRemoteRadioRemoteGreenModeAdmin {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.3.1.1.24.{#SNMPINDEX}'
+              key: 'genEquipRemoteRadioRemoteGreenModeAdmin[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRemoteRadioR
+            - uuid: 251860868c2b495da46abbe968a05f6b
+              name: 'genEquipRemoteRadioRemoteGreenReferenceRxLevel {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.3.1.1.21.{#SNMPINDEX}'
+              key: 'genEquipRemoteRadioRemoteGreenReferenceRxLevel[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRemoteRadioR
+            - uuid: 9a4bc3696bc84c50b43964938c9dc905
+              name: 'genEquipRemoteRadioRemoteIPAddr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.3.1.1.3.{#SNMPINDEX}'
+              key: 'genEquipRemoteRadioRemoteIPAddr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipRemoteRadioR
+            - uuid: 52da385eeebb4daa8f604557ce8a07d6
+              name: 'genEquipRemoteRadioRemoteIPv6Addr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.3.1.1.26.{#SNMPINDEX}'
+              key: 'genEquipRemoteRadioRemoteIPv6Addr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipRemoteRadioR
+            - uuid: ad4cca659bfe43b092500a33791a747e
+              name: 'genEquipRemoteRadioRemoteMNGvlan {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.3.1.1.22.{#SNMPINDEX}'
+              key: 'genEquipRemoteRadioRemoteMNGvlan[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipRemoteRadioR
+            - uuid: 13e9971f267041ebb952662c0e5faa1b
+              name: 'genEquipRemoteRadioRemoteMostSevereAlarm {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.3.1.1.11.{#SNMPINDEX}'
+              key: 'genEquipRemoteRadioRemoteMostSevereAlarm[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRemoteRadioR
+            - uuid: dc594dd99e2d4e2580771d859f299f36
+              name: 'genEquipRemoteRadioRemotePrefixLength {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.3.1.1.27.{#SNMPINDEX}'
+              key: 'genEquipRemoteRadioRemotePrefixLength[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipRemoteRadioR
+            - uuid: d1558846e9804bcebe78aba7b83dc125
+              name: 'genEquipRemoteRadioRemoteReset {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.3.1.1.23.{#SNMPINDEX}'
+              key: 'genEquipRemoteRadioRemoteReset[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRemoteRadioR
+            - uuid: 344539c616444670ac82fb699722a17b
+              name: 'genEquipRemoteRadioRemoteRxFreq {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.3.1.1.7.{#SNMPINDEX}'
+              key: 'genEquipRemoteRadioRemoteRxFreq[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipRemoteRadioR
+            - uuid: e660de9c314c4049a7f3d45e729b926e
+              name: 'genEquipRemoteRadioRemoteRxLevel {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.3.1.1.4.{#SNMPINDEX}'
+              key: 'genEquipRemoteRadioRemoteRxLevel[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRemoteRadioR
+            - uuid: ee5419aa37f14b77988cd9f59ad91bfe
+              name: 'genEquipRemoteRadioRemoteSlotID {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.3.1.1.13.{#SNMPINDEX}'
+              key: 'genEquipRemoteRadioRemoteSlotID[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRemoteRadioR
+            - uuid: 9814a04112c04c4fa940b09d872531aa
+              name: 'genEquipRemoteRadioRemoteSubnetMask {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.3.1.1.12.{#SNMPINDEX}'
+              key: 'genEquipRemoteRadioRemoteSubnetMask[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipRemoteRadioR
+            - uuid: 28ebfd6815594636a7bba5261fa93a4d
+              name: 'genEquipRemoteRadioRemoteTxFreq {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.3.1.1.6.{#SNMPINDEX}'
+              key: 'genEquipRemoteRadioRemoteTxFreq[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipRemoteRadioR
+            - uuid: e76a0fb9e38c40b7a931ae0c39d95982
+              name: 'genEquipRemoteRadioRemoteWebProtocol {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.7.3.1.1.25.{#SNMPINDEX}'
+              key: 'genEquipRemoteRadioRemoteWebProtocol[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRemoteRadioR
+        - uuid: 587831e97c224bde8963357e4753dcdd
+          name: genEquipRfuCfg
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.2281.10.5.2.1.1]'
+          key: genEquipRfuCfg.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: 135d48cfae8f4e1b98c751297c6e5d9f
+              name: 'genEquipRfuCfgATPCAdmin {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.2.1.5.{#SNMPINDEX}'
+              key: 'genEquipRfuCfgATPCAdmin[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuCfg
+            - uuid: 7d1a2cf55b774132afcb0ceac9b99771
+              name: 'genEquipRfuCfgATPCOverrideTimeout {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.2.1.16.{#SNMPINDEX}'
+              key: 'genEquipRfuCfgATPCOverrideTimeout[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipRfuCfg
+            - uuid: 6825e04543e64b2b80e0bd3fd85227dc
+              name: 'genEquipRfuCfgATPCOverrideTimerCancel {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.2.1.18.{#SNMPINDEX}'
+              key: 'genEquipRfuCfgATPCOverrideTimerCancel[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuCfg
+            - uuid: 22f02fead89547d7b1b7512a5af8c70c
+              name: 'genEquipRfuCfgATPCOverrideTxLevel {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.2.1.15.{#SNMPINDEX}'
+              key: 'genEquipRfuCfgATPCOverrideTxLevel[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuCfg
+            - uuid: a7b3409372bc4b4f8c95f6b27bf5fdf1
+              name: 'genEquipRfuCfgATPCRefRSL {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.2.1.6.{#SNMPINDEX}'
+              key: 'genEquipRfuCfgATPCRefRSL[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuCfg
+            - uuid: 7452d6ff5d524ec685d08b1854978ea8
+              name: 'genEquipRfuCfgId {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.2.1.1.{#SNMPINDEX}'
+              key: 'genEquipRfuCfgId[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipRfuCfg
+            - uuid: 58d62d22c3ef49dd951f8b8791d39586
+              name: 'genEquipRfuCfgLoopback {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.2.1.10.{#SNMPINDEX}'
+              key: 'genEquipRfuCfgLoopback[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuCfg
+            - uuid: 646c3db0cf26418c8937d48f618cbba7
+              name: 'genEquipRfuCfgMaxTxLevel {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.2.1.2.{#SNMPINDEX}'
+              key: 'genEquipRfuCfgMaxTxLevel[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuCfg
+            - uuid: b0642ed572b64236b2c644e0330ed60a
+              name: 'genEquipRfuCfgMuteTx {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.2.1.7.{#SNMPINDEX}'
+              key: 'genEquipRfuCfgMuteTx[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuCfg
+            - uuid: dc5ada86f17f4e4d92bb5149680a9502
+              name: 'genEquipRfuCfgRSLConnSrc {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.2.1.8.{#SNMPINDEX}'
+              key: 'genEquipRfuCfgRSLConnSrc[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuCfg
+            - uuid: fadba61fd2234b999ab32e713f034d6b
+              name: 'genEquipRfuCfgRxFreq {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.2.1.4.{#SNMPINDEX}'
+              key: 'genEquipRfuCfgRxFreq[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipRfuCfg
+            - uuid: 9b2d2e370189429a8e3c9a70531a7454
+              name: 'genEquipRfuCfgTxFreq {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.2.1.3.{#SNMPINDEX}'
+              key: 'genEquipRfuCfgTxFreq[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipRfuCfg
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: d2ed6e2dd9f5438ebd687595f9cb8b77
+          name: genEquipRfuStatus
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.2281.10.5.1.1.1]'
+          key: genEquipRfuStatus.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: 0d41ca644db04895ade0e47f1f35b600
+              name: 'genEquipRfuStatusBand {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.1.1.23.{#SNMPINDEX}'
+              key: 'genEquipRfuStatusBand[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuStatus
+            - uuid: 634952d7df26411cb5e87477ac592fb1
+              name: 'genEquipRfuStatusCommunication {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.1.1.30.{#SNMPINDEX}'
+              key: 'genEquipRfuStatusCommunication[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuStatus
+            - uuid: 40885e8eda8f4246b64bee47658acc1e
+              name: 'genEquipRfuStatusId {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.1.1.1.{#SNMPINDEX}'
+              key: 'genEquipRfuStatusId[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuStatus
+            - uuid: e611fd71e77844d5835b77b9375f1901
+              name: 'genEquipRfuStatusMaxBW {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.1.1.29.{#SNMPINDEX}'
+              key: 'genEquipRfuStatusMaxBW[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuStatus
+            - uuid: 3c9a6fa0a04e4fa3861f10f113b036be
+              name: 'genEquipRfuStatusMaxRxLevel {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.1.1.34.{#SNMPINDEX}'
+              key: 'genEquipRfuStatusMaxRxLevel[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuStatus
+            - uuid: afd96dc5643146c893480d989e5c77db
+              name: 'genEquipRfuStatusMaxTxLevel {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.1.1.27.{#SNMPINDEX}'
+              key: 'genEquipRfuStatusMaxTxLevel[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuStatus
+            - uuid: 05d61259a96746f59ab10d2e5379d90e
+              name: 'genEquipRfuStatusMinBW {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.1.1.28.{#SNMPINDEX}'
+              key: 'genEquipRfuStatusMinBW[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuStatus
+            - uuid: f0a7cf67747d41b0ba890bd4192c32f9
+              name: 'genEquipRfuStatusMinRxLevel {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.1.1.33.{#SNMPINDEX}'
+              key: 'genEquipRfuStatusMinRxLevel[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuStatus
+            - uuid: 7d5d26332bbd4a258aa53472743a848c
+              name: 'genEquipRfuStatusMinTxLevel {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.1.1.26.{#SNMPINDEX}'
+              key: 'genEquipRfuStatusMinTxLevel[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuStatus
+            - uuid: ea148797076443b8b7d0dccf84b5f493
+              name: 'genEquipRfuStatusPATemp {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.1.1.24.{#SNMPINDEX}'
+              key: 'genEquipRfuStatusPATemp[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuStatus
+            - uuid: d64102b392e944b18c65c31f65a57765
+              name: 'genEquipRfuStatusRFUMaxRxFreq {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.1.1.18.{#SNMPINDEX}'
+              key: 'genEquipRfuStatusRFUMaxRxFreq[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuStatus
+            - uuid: f593f5c1ba5a4bb19fac6a3f7bf00b5a
+              name: 'genEquipRfuStatusRFUMaxTxFreq {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.1.1.16.{#SNMPINDEX}'
+              key: 'genEquipRfuStatusRFUMaxTxFreq[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuStatus
+            - uuid: 03e922d5f0a34602847d1477f873a7c3
+              name: 'genEquipRfuStatusRFUMinRxFreq {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.1.1.19.{#SNMPINDEX}'
+              key: 'genEquipRfuStatusRFUMinRxFreq[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuStatus
+            - uuid: 9e6c34a5f53f4528b22f99f4db66d592
+              name: 'genEquipRfuStatusRFUMinTxFreq {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.1.1.17.{#SNMPINDEX}'
+              key: 'genEquipRfuStatusRFUMinTxFreq[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuStatus
+            - uuid: c8260d753c2b4226b3b1bd7994c2287c
+              name: 'genEquipRfuStatusRFUPartNumber {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.1.1.14.{#SNMPINDEX}'
+              key: 'genEquipRfuStatusRFUPartNumber[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipRfuStatus
+            - uuid: a0590199e3914b1f9f8621b1410ea2c2
+              name: 'genEquipRfuStatusRFUSerialNumber {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.1.1.13.{#SNMPINDEX}'
+              key: 'genEquipRfuStatusRFUSerialNumber[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipRfuStatus
+            - uuid: d9fcc7583552442c9bccbe90bf4cd3ae
+              name: 'genEquipRfuStatusRFUType {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.1.1.6.{#SNMPINDEX}'
+              key: 'genEquipRfuStatusRFUType[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuStatus
+            - uuid: 28ee324cd48547f094d7e55e76043234
+              name: 'genEquipRfuStatusRunningVersion {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.1.1.5.{#SNMPINDEX}'
+              key: 'genEquipRfuStatusRunningVersion[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: genEquipRfuStatus
+            - uuid: dca32f65239840b1b092ccd716a8927a
+              name: 'genEquipRfuStatusRxLevel {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.1.1.2.{#SNMPINDEX}'
+              key: 'genEquipRfuStatusRxLevel[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuStatus
+            - uuid: 17768036a14c41c58d1b286d0801767e
+              name: 'genEquipRfuStatusTxLevel {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.1.1.3.{#SNMPINDEX}'
+              key: 'genEquipRfuStatusTxLevel[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuStatus
+            - uuid: d7375b27bcf2425681bfb5cd38e2d0c3
+              name: 'genEquipRfuStatusTxMute {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.1.1.25.{#SNMPINDEX}'
+              key: 'genEquipRfuStatusTxMute[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuStatus
+            - uuid: 13e2fb36720f4dfdbe8f2aeaf19dea5d
+              name: 'genEquipRfuStatusTxRxFreqSeparation {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.2281.10.5.1.1.8.{#SNMPINDEX}'
+              key: 'genEquipRfuStatusTxRxFreqSeparation[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: genEquipRfuStatus
+      dashboards:
+        - uuid: 9f754cdd6ce54aa2aaca4bc7baa8ec26
+          name: 'Radio MRMC'
+          auto_start: 'NO'
+          pages:
+            - widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Ceragon IP20'
+                        key: 'genEquipRadioMRMCCurrRxBitrate[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: TEWIY
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  'y': '5'
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Ceragon IP20'
+                        key: 'genEquipRadioMRMCCurrTxBitrate[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: FXKSA
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  'y': '10'
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Ceragon IP20'
+                        key: 'genEquipRadioMRMCCurrRxProfile[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: NQGTI
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  'y': '15'
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Ceragon IP20'
+                        key: 'genEquipRadioMRMCCurrTxProfile[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: LVKSR
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  'y': '20'
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Ceragon IP20'
+                        key: 'genEquipRadioMRMCCurrRxQAM[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: PWZSW
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  'y': '25'
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Ceragon IP20'
+                        key: 'genEquipRadioMRMCCurrTxQAM[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: RRCIX
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+        - uuid: ce75b949c2fb49818656f9b823d82848
+          name: 'Radio Status'
+          auto_start: 'NO'
+          pages:
+            - widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Ceragon IP20'
+                        key: 'genEquipRadioStatusMSE[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: HSMLZ
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+        - uuid: 12b0043928184d21bf83dd319eeb16f0
+          name: 'Remote Radio'
+          auto_start: 'NO'
+          pages:
+            - widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Ceragon IP20'
+                        key: 'genEquipRemoteRadioRemoteRxLevel[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: DOGZL
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+        - uuid: 55cff30d10024356809cfc87f3ef034c
+          name: 'RFU Status'
+          auto_start: 'NO'
+          pages:
+            - widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Ceragon IP20'
+                        key: 'genEquipRfuStatusRFUMaxRxFreq[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: MYFMH
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  'y': '5'
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Ceragon IP20'
+                        key: 'genEquipRfuStatusRFUMaxTxFreq[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: XYPNR
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+        - uuid: cf394b45d11d4c16b5d63ef497487c31
+          name: 'System Health'
+          auto_start: 'NO'
+          pages:
+            - name: Temperature
+              widgets:
+                - type: gauge
+                  name: 'Current Device Temperature'
+                  width: '18'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ceragon IP20'
+                        key: genEquipUnitIduTemperature.0
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: svggraph
+                  name: 'Device Temperature'
+                  x: '18'
+                  width: '54'
+                  height: '5'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: genEquipUnitIduTemperature.0
+                    - type: STRING
+                      name: reference
+                      value: RXIHG
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+            - name: Voltage
+              widgets:
+                - type: gauge
+                  name: 'Current Device Voltage Input'
+                  width: '18'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ceragon IP20'
+                        key: genEquipUnitIduVoltageInput.0
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: svggraph
+                  name: 'Device Voltage Input'
+                  x: '18'
+                  width: '54'
+                  height: '5'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: genEquipUnitIduVoltageInput.0
+                    - type: STRING
+                      name: reference
+                      value: CGAIL
+                    - type: INTEGER
+                      name: righty
+                      value: '0'

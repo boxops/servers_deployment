@@ -1,0 +1,5 @@
+---
+# Servers settings
+server_user: server_name
+server_group: server_name
+server_home: /etc/server_name

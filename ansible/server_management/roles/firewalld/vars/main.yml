@@ -1,0 +1,20 @@
+---
+firewalld_zones:
+  - zone: public
+    description: Public zone
+  # - zone: internal
+  #   description: Internal zone
+
+firewalld_services:
+  - service: ssh
+    zone: public
+  - service: https
+    zone: public
+
+firewalld_ports:
+  - port: 443
+    protocol: tcp
+    zone: public
+  - port: 53
+    protocol: udp
+    zone: public

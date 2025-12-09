@@ -1,0 +1,57 @@
+---
+- name: Log Analysis for Kea DHCP Servers
+  hosts: all
+  gather_facts: no
+  vars:
+    log_files:
+      - /var/lib/kea/dhcp4.log
+      - /var/lib/kea/kea-dhcp4.bad-packets.log
+      - /var/lib/kea/dhcp4-dhcpsrv.log
+      - /var/lib/kea/dhcp4-leases.log
+      - /var/lib/kea/dhcp4-ha-hooks.log
+      - /var/lib/kea/dhcp4-commands.log
+      - /var/lib/kea/dhcp4-dhcp4.log
+      - /var/lib/kea/dhcp4-hooks.log
+      - /var/lib/kea/dhcp4-alloc-engine.log
+      - /var/lib/kea/dhcp4-commands.log
+      - /var/log/syslog
+    search_keywords:
+      - error
+      - fail
+      - critical
+    local_output_dir: ./log_analysis_results
+  tasks:
+    - name: Ensure local output directory exists
+      delegate_to: localhost
+      file:
+        path: "{{ local_output_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Fetch log files from remote hosts
+      become: yes
+      fetch:
+        src: "{{ item }}"
+        dest: "{{ local_output_dir }}/{{ inventory_hostname }}/"
+        flat: yes
+      loop: "{{ log_files }}"
+      ignore_errors: yes
+
+    - name: Search for keywords in fetched logs
+      delegate_to: localhost
+      shell: |
+        grep -Ei "{{ search_keywords | join('|') }}" {{ local_output_dir }}/{{ inventory_hostname }}/* || true
+      register: log_search_results
+      changed_when: false
+
+    # - name: Print matching log lines
+    #   debug:
+    #     msg: "{{ log_search_results.stdout_lines }}"
+
+    - name: Save matching log lines to a local file
+      delegate_to: localhost
+      copy:
+        content: "{{ log_search_results.stdout }}"
+        dest: "{{ local_output_dir }}/{{ inventory_hostname }}/matched_keywords.log"
+        mode: '0644'
+      when: log_search_results.stdout != ''

@@ -1,0 +1,37 @@
+---
+- name: Deploy Servers Infrastructure
+  hosts: all
+  become: true
+  gather_facts: true
+  
+  # tasks:
+  #   - name: Update package cache
+  #     apt:
+  #       update_cache: yes
+  #       cache_valid_time: 3600
+
+  #   - name: Install basic packages
+  #     apt:
+  #       name:
+  #         - curl
+  #         - wget
+  #         - gnupg
+  #         - software-properties-common
+  #         - acl
+  #         - rcs
+  #         - qemu-guest-agent
+  #       state: present
+
+  #   - name: Remove unwanted packages
+  #     apt:
+  #       name:
+  #         - modemmanager
+  #       state: absent
+
+- name: Deploy Servers
+  hosts: all
+  become: true
+  roles:
+    # - freeipa_client
+    # - mount_disk
+    - firewalld

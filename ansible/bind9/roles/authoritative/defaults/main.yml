@@ -1,0 +1,13 @@
+---
+bind9_packages:
+  - bind9
+  - bind9utils
+  - bind9-doc
+  - bind9-host
+  - dnsutils
+bind9_zones:
+  - name: nxg.whint
+    type: master
+    zone_file: db.nxg.whint
+bind9_listen_on: []
+bind9_enable_ipv6: false

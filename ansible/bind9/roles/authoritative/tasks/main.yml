@@ -1,0 +1,27 @@
+---
+- name: Install Bind9 packages
+  apt:
+    name: "{{ bind9_packages }}"
+    state: present
+  become: yes
+
+- name: Deploy named.conf.options
+  template:
+    src: named.conf.options.j2
+    dest: /etc/bind/named.conf.options
+  notify: Reload bind9
+
+- name: Create /etc/bind/zones/
+  file:
+    path: "/etc/bind/zones"
+    state: directory
+    owner: bind
+    group: bind
+    mode: '0755'
+
+- name: Deploy zone files
+  template:
+    src: zone.j2
+    dest: "/etc/bind/zones/{{ item.zone_file }}"
+  loop: "{{ bind9_zones }}"
+  notify: Reload bind9

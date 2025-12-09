@@ -1,0 +1,9 @@
+---
+- name: Deploy OpenLDAP server
+  hosts: openldap
+  become: true
+  roles:
+    - openldap
+  vars:
+    ldap_admin_password: "admin"
+    ldap_custom_config: true

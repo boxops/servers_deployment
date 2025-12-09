@@ -1,0 +1,23 @@
+---
+# Defaults for zabbix_agent role
+# These can be overridden in a playbook, host_vars, group_vars or via role vars.
+
+# Whether to install/manage the zabbix agent on target hosts
+zabbix_agent_install: true
+
+# Zabbix release package (deb) URL to add the official repo. Update if you need another version or distro.
+zabbix_release_deb_url: "https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.0-1+ubuntu24.04_all.deb"
+zabbix_release_deb_name: "zabbix-release_7.0-1+ubuntu24.04_all.deb"
+
+# Package name to install (the package provided by the zabbix repo)
+zabbix_agent_package: "zabbix-agent"
+
+# Zabbix server settings - set to actual server(s) in playbooks or group_vars
+# Can be a comma-separated list for active/passive configs
+zabbix_server: "172.22.2.5"
+zabbix_server_active: "172.22.2.5"
+
+# Hostname to set inside the Zabbix agent config. By default uses the fact variables.
+# zabbix_hostname: "{{ ansible_fqdn | default(ansible_hostname) }}" # example-server.example.local
+# remove domain part 
+zabbix_hostname: "{{ (ansible_fqdn | default(ansible_hostname)).split('.')[0] }}" # ab-thn-nxg-unifi02

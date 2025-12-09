@@ -1,0 +1,15 @@
+---
+- name: restart zabbix-proxy
+  systemd:
+    name: zabbix-proxy
+    state: restarted
+
+- name: reload zabbix-proxy
+  systemd:
+    name: zabbix-proxy
+    state: reloaded
+
+- name: restart zabbix-agent
+  systemd:
+    name: zabbix-agent
+    state: restarted

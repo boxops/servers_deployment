@@ -1,0 +1,89 @@
+---
+- name: Verify Zabbix servers
+  hosts: zabbix_servers
+  become: true
+
+  tasks:
+    # ### Let's Encrypt SSL for Production
+    # - name: Install certbot for Let's Encrypt
+    #   apt:
+    #     name:
+    #       - certbot
+    #       - python3-certbot-apache
+    #     state: present
+
+    # - name: Configure Apache for HTTPS (pre-certificate setup)
+    #   template:
+    #     src: zabbix_apache_ssl.conf.j2
+    #     dest: /etc/apache2/sites-available/zabbix-ssl.conf
+    #   notify: restart apache2
+
+    # - name: Enable Apache SSL module
+    #   command: a2enmod ssl
+    #   changed_when: false
+
+    # - name: Enable Apache site configuration
+    #   command: a2ensite zabbix-ssl
+    #   changed_when: false
+
+    # - name: Get Let's Encrypt certificate
+    #   command: certbot --apache -d {{ zabbix_fqdn }} --non-interactive --agree-tos --email {{ admin_email }} --redirect
+    #   when: zabbix_fqdn is defined
+    #   register: certbot_result
+    #   notify: restart apache2
+
+    # - name: Add certbot renewal cron job
+    #   cron:
+    #     name: "Certbot renewal"
+    #     minute: "0"
+    #     hour: "0"
+    #     job: "/usr/bin/certbot renew --quiet --post-hook \"systemctl reload apache2\""
+
+
+    # ### Self-Signed SSL Certificate
+    # - name: Install SSL packages
+    #   apt:
+    #     name: openssl
+    #     state: present
+
+    # - name: Create SSL directory
+    #   file:
+    #     path: /etc/apache2/ssl
+    #     state: directory
+    #     mode: 0750
+    #     owner: root
+    #     group: www-data
+
+    # - name: Generate self-signed certificate
+    #   command: |
+    #     openssl req -x509 -nodes -days 3650 -newkey rsa:2048 \
+    #     -keyout /etc/apache2/ssl/zabbix.key \
+    #     -out /etc/apache2/ssl/zabbix.crt \
+    #     -subj "/C={{ ssl_country }}/ST={{ ssl_state }}/L={{ ssl_locality }}/O={{ ssl_organization }}/CN={{ ssl_common_name }}"
+    #   args:
+    #     creates: /etc/apache2/ssl/zabbix.crt
+
+    # - name: Configure Apache for HTTPS
+    #   template:
+    #     src: zabbix_apache_ssl.conf.j2
+    #     dest: /etc/apache2/sites-available/zabbix-ssl.conf
+    #   notify: restart apache2
+
+    # - name: Enable Apache SSL module
+    #   command: a2enmod ssl
+    #   changed_when: false
+
+    # - name: Enable Apache site configuration
+    #   command: a2ensite zabbix-ssl
+    #   changed_when: false
+
+    # - name: Redirect HTTP to HTTPS
+    #   lineinfile:
+    #     path: /etc/apache2/sites-available/zabbix.conf
+    #     regexp: '^</VirtualHost>'
+    #     line: |
+    #       RewriteEngine On
+    #       RewriteCond %{HTTPS} off
+    #       RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+    #       </VirtualHost>
+    #   notify: restart apache2

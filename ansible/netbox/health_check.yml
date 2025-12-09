@@ -1,0 +1,64 @@
+# health-check.yml
+---
+- name: NetBox Deployment Health Check
+  hosts: netbox_servers
+  become: yes
+  gather_facts: no
+
+  tasks:
+    - name: Check Nginx service status
+      command: systemctl status nginx
+      register: nginx_status
+      ignore_errors: yes
+
+    - name: Show Nginx service status
+      debug:
+        var: nginx_status.stdout_lines
+
+    - name: Check NetBox systemd service status
+      command: systemctl status netbox
+      register: netbox_status
+      ignore_errors: yes
+
+    - name: Show NetBox service status
+      debug:
+        var: netbox_status.stdout_lines
+
+    - name: Test NetBox backend port (Gunicorn)
+      wait_for:
+        host: 127.0.0.1
+        port: 8001
+        timeout: 5
+      register: backend_port
+      ignore_errors: yes
+
+    - name: Show backend port check result
+      debug:
+        var: backend_port
+
+    - name: Check if NetBox responds locally
+      command: curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8001/
+      register: backend_http
+      ignore_errors: yes
+
+    - name: Show backend HTTP status
+      debug:
+        var: backend_http.stdout
+
+    - name: Tail Nginx error log
+      command: tail -n 20 /var/log/nginx/error.log
+      register: nginx_error_log
+      ignore_errors: yes
+
+    - name: Show Nginx error log
+      debug:
+        var: nginx_error_log.stdout_lines
+
+    # - name: Test Netbox Web UI
+    #   command: curl -s -o /dev/null -w "%{http_code}" http://{{ ansible_host }}:8000/
+    #   register: web_ui_status
+    #   ignore_errors: yes
+
+    # - name: Show Netbox Web UI status
+    #   debug:
+    #     var: web_ui_status

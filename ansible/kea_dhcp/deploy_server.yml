@@ -1,0 +1,37 @@
+---
+- name: Deploy Servers Infrastructure
+  hosts: all
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install basic packages
+      apt:
+        name:
+          - curl
+          - wget
+          - gnupg
+          - software-properties-common
+          - acl
+          - python3
+          - python3-pip
+          - python3-venv
+          - python3-dev
+          - python3-psycopg2
+          - isc-kea-hooks
+          # - rcs
+          # - qemu-guest-agent
+          # - firewalld
+        state: present
+
+- name: Deploy Servers
+  hosts: all
+  become: true
+  roles:
+    - postgresql
+    - kea_dhcp

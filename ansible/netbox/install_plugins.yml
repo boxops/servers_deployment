@@ -1,0 +1,70 @@
+---
+- name: Install Netbox plugins
+  hosts: all
+  become: true
+  gather_facts: true
+
+  vars:
+    pip_plugins:
+      - netbox_topology_views
+      - netbox-plugin-dns
+      - netbox-secrets
+      # Install a Diode server before using the plugin
+      # https://netboxlabs.com/docs/diode/getting-started/
+      - netboxlabs-diode-netbox-plugin
+    # Netbox configuration.py
+    plugins:
+      - netbox_topology_views
+      - netbox_dns
+      - netbox_secrets
+      - netbox_diode_plugin
+    # plugins_config:
+    #   netbox_topology_views: {}
+    #   netbox_dns:
+    #     dns_servers:
+    #       - 8.8.8.8
+    #       - 8.8.4.4
+
+  tasks:
+    # source /opt/netbox/venv/bin/activate
+    # pip install netbox-topology-views
+    - name: Install Netbox plugins via pip
+      pip:
+        name: "{{ item }}"
+        virtualenv: /opt/netbox/venv
+      loop: "{{ pip_plugins }}"
+
+    # PLUGINS = ["netbox_topology_views", "netbox_dns"]
+    - name: Ensure plugins are listed in Netbox configuration
+      lineinfile:
+        path: /opt/netbox/netbox/netbox/configuration.py
+        regexp: '^PLUGINS ='
+        line: "PLUGINS = {{ plugins | to_json }}"
+        insertafter: EOF
+      notify: Restart Netbox
+
+    # echo netbox-topology-views >> /opt/netbox/local_requirements.txt
+    - name: Ensure plugins are listed in local_requirements.txt
+      lineinfile:
+        path: /opt/netbox/local_requirements.txt
+        line: "{{ item }}"
+        state: present
+      loop: "{{ pip_plugins }}"
+
+    # python3 manage.py migrate
+    - name: Apply database migrations for Netbox plugins
+      command: /opt/netbox/venv/bin/python3 /opt/netbox/netbox/manage.py migrate
+      args:
+        chdir: /opt/netbox/netbox
+
+    # python3 manage.py collectstatic --no-input
+    - name: Collect static files for Netbox
+      command: /opt/netbox/venv/bin/python3 /opt/netbox/netbox/manage.py collectstatic --no-input
+      args:
+        chdir: /opt/netbox/netbox
+
+  handlers:
+    - name: Restart Netbox
+      systemd:
+        name: netbox
+        state: restarted

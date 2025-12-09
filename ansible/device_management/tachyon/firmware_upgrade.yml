@@ -1,0 +1,64 @@
+---
+# Reference: https://tachyon-networks.freshdesk.com/support/solutions/articles/67000659777-tachyon-networks-restful-api
+
+# Upgrading firmware
+
+# Upgrading your device's firmware is a multi-stage process, with the basic steps being:
+
+# The device asynchronously downloads the firmware from the user-specified specified URL
+# The device asynchronously flashes the firmware to the boot bank not currently in use
+# The device reboots, causing the new firmware to become active
+
+# During this process, the device keeps track of the status of the different steps.  This status information is fetchable via a GET request to the /update route.
+
+# Here is the process in more detail, with the API routes included:
+
+# POST to /login:
+# Authenticate using the login route above, and parse out the token from the returned cookie. (see example earlier in this article).
+
+# PUT device firmware URL to /update:
+# Send the device the URL where your firmware is being hosted. This will tell the device to start downloading the firmware, asynchronously. Here's an example using curl:
+
+# curl -H "Cookie: api_token=BDPOHY3HAAAAAAHAAXEKF4DGGNIDMQY37CSADC2N75IV4%3D%3D%3D"  -H "Content-type: application/json"  -X PUT -d "https://link-to-firmware-url" http://device-ip-address/cgi.lua/apiv1/update
+
+# GET firmware status from /update:
+# Poll the device for the firmware file download status. Do not start flashing the firmware until the firmware download step is complete. Here's an example using curl:
+
+# curl -H "Cookie: api_token=BDPOHY3HAAAAAAHAAXEKF4DGGNIDMQY37CSADC2N75IV4%3D%3D%3D" -X GET http://device-ip-address/cgi.lua/apiv1/update
+
+# The response message for this state will have the following format:
+
+# {"status":"SUCCESS","url":"<firmware_file_URL>", "state":"FIRMWARE_DOWNLOAD", "last_changed":1621633518}
+
+# POST to /update:
+# Tell the device to start asynchronously flashing the recently downloaded firmware file (and if you want to reset to defaults as well). Firmware images are flashed to the alternate bootbank, so this will not affect the normal operation of the device. Here's an example using curl:
+
+# curl -H "Cookie: api_token=BDPOHY3HAAAAAAHAAXEKF4DGGNIDMQY37CSADC2N75IV4%3D%3D%3D" -H "Content-type: application/json" -d '{"reset": false }' -X POST http://device-ip-address/cgi.lua/apiv1/update
+
+# GET  /update:
+# Poll the device for the firmware flashing status, and wait for the firmware flashing process to complete. (Refer to example from step 3 above). While flashing, you'll see a message similar to this one:
+
+# {"status":"IN_PROGRESS","last_changed":1672526537,"state":"FIRMWARE_FLASHING"}
+
+# Do not reboot until the flashing process is complete! 
+
+# The response message once firmware flashing is complete will have the following format:
+
+# {"status":"COMPLETE","last_changed":1621296280,"comment":"Reboot device for the new firmware to become active.","state":"FIRMWARE_FLASHING"}
+
+# POST to /reboot:
+# Tell the device to reboot in order to switch boot banks and complete the firmware upgrade. Here's an example using curl:
+
+# curl -H "Cookie: api_token=BDPOHY3HAAAAAAHAAXEKF4DGGNIDMQY37CSADC2N75IV4%3D%3D%3D" -H "Content-type: application/json" -X POST http://device-ip-address/cgi.lua/apiv1/update
+
+# POST to /login:
+# Authenticate again after boot up.
+
+# GET  /stats?type=system:
+# Fetch system version in order to verify the new version is active.
+
+
+# Example Upgrade Utility
+
+# There is a python-based bulk firmware upgrade script in the _examples folder of the Tachyon github repo that you can also reference.
+

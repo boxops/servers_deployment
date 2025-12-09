@@ -1,0 +1,74 @@
+---
+- name: Install PostgreSQL
+  apt:
+    name:
+      - postgresql
+      - postgresql-contrib
+    state: present
+  tags:
+    - postgresql
+
+- name: Ensure PostgreSQL is running
+  service:
+    name: postgresql
+    state: started
+    enabled: true
+  tags:
+    - postgresql
+
+# CREATE DATABASE dhcp
+- name: Create PostgreSQL database
+  community.postgresql.postgresql_db:
+    name: "{{ postgresql_db }}"
+  become: true
+  become_user: "{{ postgresql_original_user }}"
+  tags:
+    - postgresql
+
+# CREATE USER admin WITH PASSWORD 'your_password';
+- name: Create PostgreSQL user
+  community.postgresql.postgresql_user:
+    name: "{{ postgresql_user }}"
+    password: "{{ postgresql_password }}"
+    encrypted: true
+    db: "{{ postgresql_db }}"
+  become: true
+  become_user: "{{ postgresql_original_user }}"
+  tags:
+    - postgresql
+
+# GRANT ALL PRIVILEGES ON DATABASE $DATABASE_NAME TO $DATABASE_USER;
+- name: Grant all privileges to PostgreSQL user
+  community.postgresql.postgresql_privs:
+    db: "{{ postgresql_db }}"
+    type: database
+    objs: "{{ postgresql_db }}"
+    role: "{{ postgresql_user }}"
+    privs: ALL
+  become: true
+  become_user: "{{ postgresql_original_user }}"
+  tags:
+    - postgresql
+
+# GRANT CREATE ON SCHEMA public TO admin;
+- name: Grant CREATE privileges to PostgreSQL user
+  community.postgresql.postgresql_privs:
+    db: "{{ postgresql_db }}"
+    privs: CREATE
+    type: schema
+    objs: public
+    role: "{{ postgresql_user }}"
+  become: true
+  become_user: "{{ postgresql_original_user }}"
+  tags:
+    - postgresql
+
+# ALTER SYSTEM SET synchronous_commit=OFF;
+- name: Disable synchronous_commit
+  community.postgresql.postgresql_query:
+    query: "ALTER SYSTEM SET synchronous_commit = 'off';"
+    autocommit: yes
+  become: true
+  become_user: "{{ postgresql_original_user }}"
+  tags:
+    - postgresql

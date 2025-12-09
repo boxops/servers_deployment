@@ -1,0 +1,32 @@
+# Validation tasks
+- name: Validate firewalld zones
+  ansible.builtin.command: firewall-cmd --get-active-zones
+  register: firewalld_zones_output
+
+- name: Assert configured zones are present
+  ansible.builtin.assert:
+    that:
+      - "item.zone in firewalld_zones_output.stdout"
+  loop: "{{ firewalld_zones | default([]) }}"
+
+- name: Validate firewalld services
+  ansible.builtin.command: firewall-cmd --list-services --zone={{ item.zone | default('public') }}
+  register: firewalld_services_output
+  loop: "{{ firewalld_services | default([]) }}"
+
+- name: Assert configured services are present
+  ansible.builtin.assert:
+    that:
+      - "item.service in firewalld_services_output.results[loop.index0].stdout"
+  loop: "{{ firewalld_services | default([]) }}"
+
+- name: Validate firewalld ports
+  ansible.builtin.command: firewall-cmd --list-ports --zone={{ item.zone | default('public') }}
+  register: firewalld_ports_output
+  loop: "{{ firewalld_ports | default([]) }}"
+
+- name: Assert configured ports are present
+  ansible.builtin.assert:
+    that:
+      - "(item.port|string) ~ '/' ~ (item.protocol|default('tcp')) in firewalld_ports_output.results[loop.index0].stdout"
+  loop: "{{ firewalld_ports | default([]) }}"

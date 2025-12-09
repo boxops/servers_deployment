@@ -1,0 +1,78 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: ed8b8d16b49849a68710cebebabf9305
+      name: Custom
+  templates:
+    - uuid: 44c0f258d57f42edaf5e71e1ec824509
+      template: 'Tarana BN'
+      name: 'Tarana BN'
+      description: |
+        For mapping Tarana Base Node calls to web API
+        
+        NOTE: TARANA TAKES 15 MIN TO POLL DOWN DEVICES.
+      groups:
+        - name: Custom
+      items:
+        - uuid: 0fbe49d354ee4da4ad651104a608a93a
+          name: 'BN Telemetry Active Connections'
+          type: HTTP_AGENT
+          key: tarana.bn.activeconnections
+          preprocessing:
+            - type: REGEX
+              parameters:
+                - '^,result,table,_value\r?\n,_result,0,([0-9.]+)\r?\n\r?\n$'
+                - \1
+              error_handler: DISCARD_VALUE
+          timeout: 20s
+          url: 'http://192.168.1.210:8086/api/v2/query'
+          query_fields:
+            - name: org
+              value: ExampleISP
+          posts: |
+            from(bucket: "Tarana-Devices")
+              |> range(start: -1m)
+              |> filter(fn: (r) => r["_field"] == "/connections/global/state/active-connections")
+              |> filter(fn: (r) => r["_measurement"] == "{HOST.HOST}")
+              |> keep(columns: ["_value"])
+          headers:
+            - name: Authorization
+              value: 'Token FA8Z64WSbos_vFTPZfZGUekTelYcwKQiTBizgxigl8fLSiNaKJRcvkAi4vw4P90sRxqIC35hqG_S6fJWUDf4TQ=='
+            - name: Content-Type
+              value: application/vnd.flux
+            - name: Accept
+              value: application/json
+          request_method: POST
+        - uuid: f90c43b293c54e759c9e13722b3a1d83
+          name: 'BN Connected Status'
+          type: HTTP_AGENT
+          key: tarana.bn.connected.status
+          trends: '0'
+          status: DISABLED
+          inventory_link: TYPE
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.items[0].data.connected'
+            - type: JAVASCRIPT
+              parameters:
+                - 'return value === ''true'' ? 1 :0;'
+          url: 'https://api.tcs.taranawireless.com/v2/network/radios'
+          query_fields:
+            - name: serialNumber
+              value: '{HOST.HOST}'
+          headers:
+            - name: Content-Type
+              value: application/json
+            - name: x-api-key
+              value: yItSOA3kdT9OuQffQhtYU8cFkHSKGDB57KT7zfMg
+          triggers:
+            - uuid: e5efe4d66f444c5c9e9bb7879ea15444
+              expression: 'last(/Tarana BN/tarana.bn.connected.status)=0'
+              name: '{HOST.HOST} Connected Status to Tarana Cloud'
+              priority: HIGH
+      tags:
+        - tag: role
+          value: Backhaul
+        - tag: vendor
+          value: Tarana

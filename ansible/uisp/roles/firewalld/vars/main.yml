@@ -1,0 +1,43 @@
+---
+# 22 (SSH)
+# 53 (DNS)
+# 80 (Let’s Encrypt certificate automation)
+# 81 (Suspension page)
+# 443 (UI, API, Devices connector)
+# 8089 (Local Web Interface Remote Access)
+
+firewalld_zones:
+  - zone: public
+    description: Public zone
+  # - zone: internal
+  #   description: Internal zone
+
+firewalld_services:
+  - service: ssh
+    zone: public
+  - service: dns
+    zone: public
+  - service: http
+    zone: public
+  - service: https
+    zone: public
+
+firewalld_ports:
+  - port: 22
+    protocol: tcp
+    zone: public
+  - port: 53
+    protocol: tcp
+    zone: public
+  - port: 80
+    protocol: tcp
+    zone: public
+  - port: 81
+    protocol: tcp
+    zone: public
+  - port: 443
+    protocol: tcp
+    zone: public
+  - port: 8089
+    protocol: tcp
+    zone: public

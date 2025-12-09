@@ -1,0 +1,62 @@
+# Kea DHCP Health Check Playbook
+# This playbook checks if the Kea DHCP service is running, its process is active, the DHCP port is listening, and scans logs for errors.
+
+- name: Kea DHCP Health Check
+  hosts: all
+  become: true
+  gather_facts: false
+  tasks:
+
+    - name: Check if Kea DHCP service is running
+      ansible.builtin.service:
+        name: isc-kea-dhcp4-server
+        state: started
+      register: kea_service
+      ignore_errors: true
+
+    - name: Assert Kea DHCP service is running
+      ansible.builtin.assert:
+        that:
+          - kea_service.status.ActiveState == 'active'
+        fail_msg: "Kea DHCP service is not running!"
+        success_msg: "Kea DHCP service is running."
+      when: kea_service is defined and kea_service.status is defined
+
+    - name: Check if Kea DHCP process is running
+      ansible.builtin.shell: pgrep -f kea-dhcp4
+      register: kea_proc
+      changed_when: false
+      ignore_errors: true
+
+    - name: Assert Kea DHCP process is running
+      ansible.builtin.assert:
+        that:
+          - kea_proc.rc == 0
+        fail_msg: "Kea DHCP process is not running!"
+        success_msg: "Kea DHCP process is running."
+
+    - name: Check if DHCP port 67/UDP is listening
+      ansible.builtin.shell: ss -lun | grep ':67 '
+      register: dhcp_port
+      changed_when: false
+      ignore_errors: true
+
+    - name: Assert DHCP port 67/UDP is listening
+      ansible.builtin.assert:
+        that:
+          - dhcp_port.rc == 0
+        fail_msg: "DHCP port 67/UDP is not listening!"
+        success_msg: "DHCP port 67/UDP is listening."
+
+    - name: Check Kea DHCP logs for recent errors
+      ansible.builtin.shell: "grep -i 'error' /var/log/kea/kea-dhcp4.log | tail -n 10"
+      register: kea_log_errors
+      changed_when: false
+      ignore_errors: true
+
+    - name: Assert no recent errors in Kea DHCP logs
+      ansible.builtin.assert:
+        that:
+          - kea_log_errors.stdout == ''
+        fail_msg: "Recent errors found in Kea DHCP logs!"
+        success_msg: "No recent errors in Kea DHCP logs."

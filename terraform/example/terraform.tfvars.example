@@ -1,0 +1,12 @@
+# Copy this file to terraform.tfvars and fill in your values
+
+# Proxmox connection settings
+proxmox_api_url          = "https://your-proxmox-host:8006/api2/json"
+proxmox_api_token_id     = "your-token-id"
+proxmox_api_token_secret = "your-token-secret"
+proxmox_node             = "your-proxmox-node"
+proxmox_storage          = "local-lvm"
+proxmox_bridge           = "vmbr0"
+
+# VM template (must exist in Proxmox)
+vm_template = "ubuntu-22.04-template"

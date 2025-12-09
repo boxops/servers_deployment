@@ -1,0 +1,32 @@
+---
+# connect to servers, capture their OS and kernel versions, and print them out
+- name: Get Linux Versions
+  hosts: servers
+  gather_facts: no
+  tasks:
+    - name: Get OS and Kernel Version
+      ansible.builtin.shell: |
+        echo "OS Version: $(cat /etc/os-release | grep PRETTY_NAME | cut -d '=' -f2 | tr -d '\"')"
+        echo "Kernel Version: $(uname -r)"
+      register: os_info
+
+    - name: Print OS and Kernel Version
+      ansible.builtin.debug:
+        msg: "{{ os_info.stdout_lines }}"
+
+    # save to a csv file
+    # Unsupported parameters for (ansible.legacy.copy) module: append.
+    - name: Initialize linux_versions.csv on localhost (truncate/create)
+      ansible.builtin.copy:
+        content: "hostname,os_version,kernel_version\n"
+        dest: "./linux_versions.csv"
+        mode: '0644'
+      delegate_to: localhost
+      run_once: true
+
+    - name: Append OS and Kernel Version to CSV on localhost
+      ansible.builtin.shell: |
+        echo "{{ inventory_hostname }},{{ os_info.stdout_lines[0] | regex_replace('OS Version: ', '') }},{{ os_info.stdout_lines[1] | regex_replace('Kernel Version: ', '') }}" >> ./linux_versions.csv
+      args:
+        executable: /bin/bash
+      delegate_to: localhost

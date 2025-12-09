@@ -1,0 +1,667 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: ed8b8d16b49849a68710cebebabf9305
+      name: Custom
+  templates:
+    - uuid: a54e92153f43402288d52bcadcf44606
+      template: 'Ubiquiti AF60 OLD'
+      name: 'Ubiquiti AF60 OLD'
+      description: 'Template created with Zabbix Template Generator from SNMP walk data using iReasoning MIB browser'
+      groups:
+        - name: Custom
+      discovery_rules:
+        - uuid: b6e7f728d6f441898b795f9fc22222ba
+          name: af60Config
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.41112.1.11.1.1.1]'
+          key: af60Config.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: 7bcfb91561fa4655af73084f4feeaa12
+              name: 'af60Bandwidth {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.11.1.1.3.{#SNMPINDEX}'
+              key: 'af60Bandwidth[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: af60Config
+            - uuid: 5f25644dd8cf47c5b6968b18c7bb73a9
+              name: 'af60Frequency {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.11.1.1.2.{#SNMPINDEX}'
+              key: 'af60Frequency[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: af60Config
+            - uuid: 1cd80c5b83d64e80885b95f243197e40
+              name: 'af60LastIp {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.11.1.1.5.{#SNMPINDEX}'
+              key: 'af60LastIp[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: af60Config
+            - uuid: 793f67fa59f2464982e665adcbafcc5a
+              name: 'af60Role {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.11.1.1.1.{#SNMPINDEX}'
+              key: 'af60Role[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: af60Config
+            - uuid: dbff17a167524f32a215f9b47ffcfa70
+              name: 'af60Ssid {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.11.1.1.4.{#SNMPINDEX}'
+              key: 'af60Ssid[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: af60Config
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 09326c919d12421b8959dbcff26071c5
+          name: af60Gps
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.41112.1.11.1.4.1]'
+          key: af60Gps.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: bcb47705b31745c1bbd960a38f15e984
+              name: 'af60GpsAltFt {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.11.1.4.6.{#SNMPINDEX}'
+              key: 'af60GpsAltFt[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: af60Gps
+            - uuid: 1ee0deda1b534c3382b9c99a77c04a87
+              name: 'af60GpsAltM {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.11.1.4.5.{#SNMPINDEX}'
+              key: 'af60GpsAltM[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: af60Gps
+            - uuid: abe089a24e6c446eb1a6e9e509cd1693
+              name: 'af60GpsFix {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.11.1.4.2.{#SNMPINDEX}'
+              key: 'af60GpsFix[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: af60Gps
+            - uuid: d3eef92af8dd47619c7dbe46a5643e49
+              name: 'af60GpsHDOP {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.11.1.4.9.{#SNMPINDEX}'
+              key: 'af60GpsHDOP[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: af60Gps
+            - uuid: c6ef0c6d44224fb4a2070cb0b97e2cb8
+              name: 'af60GpsLat {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.11.1.4.3.{#SNMPINDEX}'
+              key: 'af60GpsLat[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: af60Gps
+            - uuid: 2932719c49754fe8a92d11adf0ee5ae9
+              name: 'af60GpsLon {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.11.1.4.4.{#SNMPINDEX}'
+              key: 'af60GpsLon[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: af60Gps
+            - uuid: 3a91b6502f4841a48ad45bfb08e98746
+              name: 'af60GpsSatsTracked {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.11.1.4.8.{#SNMPINDEX}'
+              key: 'af60GpsSatsTracked[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: af60Gps
+            - uuid: fb30ed669ad24d6db24116a4e2a42700
+              name: 'af60GpsSatsVisible {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.11.1.4.7.{#SNMPINDEX}'
+              key: 'af60GpsSatsVisible[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: af60Gps
+            - uuid: 6640e3cc6b394b0d9b78dea2b8b273db
+              name: 'af60GpsStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.11.1.4.1.{#SNMPINDEX}'
+              key: 'af60GpsStatus[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: af60Gps
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 3358a22a44434fc8b1248a54ac75004f
+          name: af60Orientation
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.41112.1.11.1.5.1]'
+          key: af60Orientation.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: 26b73980ccc645bd931ee5195b0b212c
+              name: 'af60OrientationRoll {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.11.1.5.2.{#SNMPINDEX}'
+              key: 'af60OrientationRoll[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: af60Orientation
+            - uuid: 9290d43eb6f64785a724f2e9980c7ce1
+              name: 'af60OrientationTilt {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.11.1.5.1.{#SNMPINDEX}'
+              key: 'af60OrientationTilt[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: af60Orientation
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 1146e9eabc334caeaf8bb7867d266a16
+          name: af60Status
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.41112.1.11.1.2.1]'
+          key: af60Status.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: 3dd9707b829342ab8f208eed630e68d3
+              name: 'af60CpuUsage {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.11.1.2.6.{#SNMPINDEX}'
+              key: 'af60CpuUsage[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: af60Status
+            - uuid: 2f1913159dc44eceb34b7fafc2781820
+              name: 'af60DevModel {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.11.1.2.2.{#SNMPINDEX}'
+              key: 'af60DevModel[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: af60Status
+            - uuid: 2a76b91908e748cdb3d76f1a506eba5d
+              name: 'af60DevName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.11.1.2.3.{#SNMPINDEX}'
+              key: 'af60DevName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: af60Status
+            - uuid: be57afc5b3244b05a93896784b3e6af2
+              name: 'af60FirmwareVersion {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.11.1.2.4.{#SNMPINDEX}'
+              key: 'af60FirmwareVersion[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: af60Status
+            - uuid: 1ff3570830664c7183fa04555aae148b
+              name: 'af60Mac {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.11.1.2.1.{#SNMPINDEX}'
+              key: 'af60Mac[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: af60Status
+            - uuid: 221ae5097f7c423c8fec461115ec62a5
+              name: 'af60MemoryUsage {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.11.1.2.5.{#SNMPINDEX}'
+              key: 'af60MemoryUsage[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: af60Status
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 0bbb79a70de047659cc9522a45c29e61
+          name: if
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.2.1.2.2.1.1]'
+          key: if.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: 69a4603de95b42e5a1000531e52e9b96
+              name: 'ifAdminStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.7.{#SNMPINDEX}'
+              key: 'ifAdminStatus[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 586c93e666674b55b86e280efc3a70c0
+              name: 'ifDescr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.2.{#SNMPINDEX}'
+              key: 'ifDescr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: d62666be28874da4803ac9a5f232db23
+              name: 'ifIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.1.{#SNMPINDEX}'
+              key: 'ifIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 8a6e5d2e0bd0461fa870f1ba49c1474f
+              name: 'ifInDiscards {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.13.{#SNMPINDEX}'
+              key: 'ifInDiscards[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 5e3ee09d60e64e1bad42645c14da5123
+              name: 'ifInErrors {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.14.{#SNMPINDEX}'
+              key: 'ifInErrors[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: df3c6f7132904ef9ad418458df825919
+              name: 'ifInOctets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.10.{#SNMPINDEX}'
+              key: 'ifInOctets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 375aac40f0cc49d7829aa846535aee5a
+              name: 'ifInUcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.11.{#SNMPINDEX}'
+              key: 'ifInUcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 32a22a04b80442ad951b5dbb683de24e
+              name: 'ifLastChange {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.9.{#SNMPINDEX}'
+              key: 'ifLastChange[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 0143d540b75a474cabf03ac100846713
+              name: 'ifMtu {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.4.{#SNMPINDEX}'
+              key: 'ifMtu[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: ff32801554dc441694eded2bf40fb901
+              name: 'ifOperStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.8.{#SNMPINDEX}'
+              key: 'ifOperStatus[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: cce1f882d5484b5eaaf3a2cb378d45dc
+              name: 'ifOutDiscards {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.19.{#SNMPINDEX}'
+              key: 'ifOutDiscards[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: c13906ba8e844ea1867640e2cc7cc6bc
+              name: 'ifOutErrors {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.20.{#SNMPINDEX}'
+              key: 'ifOutErrors[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: feb30368eee3475e87f960dd3896fdd8
+              name: 'ifOutOctets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.16.{#SNMPINDEX}'
+              key: 'ifOutOctets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 205e7224e96d46b38f079ad0c92b0574
+              name: 'ifOutUcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.17.{#SNMPINDEX}'
+              key: 'ifOutUcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 1119ff3fec0848a3ba3581ef8fb892bd
+              name: 'ifPhysAddress {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.6.{#SNMPINDEX}'
+              key: 'ifPhysAddress[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 6b40c5eaed5b46a68242692b54ab07f8
+              name: 'ifSpeed {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.5.{#SNMPINDEX}'
+              key: 'ifSpeed[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: b22af8bf3e6449d2862b271e1d67dbac
+              name: 'ifType {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.3.{#SNMPINDEX}'
+              key: 'ifType[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h

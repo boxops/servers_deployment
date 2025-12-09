@@ -1,0 +1,18 @@
+$TTL {{ item.default_ttl }}
+@   IN  SOA {{ item.soa_mname.name }} {{ item.soa_rname }} (
+        {{ item.soa_serial }} ; serial
+        {{ item.soa_refresh }}
+        {{ item.soa_retry }}
+        {{ item.soa_expire }}
+        {{ item.soa_minimum }}
+)
+
+{% for ns in item.nameservers %}
+@   IN  NS  {{ ns.name }}.
+{% endfor %}
+
+{% for record in item.records %}
+{% if record.type != 'SOA' and record.type != 'NS' %}
+{{ record.name }}.    IN    {{ record.type }}    {{ record.value }}
+{% endif %}
+{% endfor %}

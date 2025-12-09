@@ -1,0 +1,5 @@
+---
+- name: restart oxidized
+  systemd:
+    name: oxidized
+    state: restarted

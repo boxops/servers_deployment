@@ -1,0 +1,3836 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: ed8b8d16b49849a68710cebebabf9305
+      name: Custom
+    - uuid: 919a8a3de4a54c6ab44688fbb8f5f464
+      name: 'Templates/Network devices'
+  templates:
+    - uuid: 21c00f8a1f0441b29b180259c9c035e3
+      template: 'MikroTik All CCR Types by SNMP'
+      name: 'MikroTik All CCR Types by SNMP'
+      description: |
+        The template for monitoring all Ethernet router MikroTik CCR Device Types.
+        
+        1U rackmount, 7x Gigabit Ethernet, 1x Combo port (SFP or Gigabit Ethernet),
+        1xSFP+ cage, 9 cores x 1.2GHz CPU, 2GB RAM, LCD panel, Dual Power supplies,
+        SmartCard slot, RouterOS L6
+        
+        MIBs used:
+        HOST-RESOURCES-MIB
+        SNMPv2-MIB
+        MIKROTIK-MIB
+        IF-MIB
+      vendor:
+        name: Zabbix
+        version: 7.2-2
+      groups:
+        - name: Custom
+        - name: 'Templates/Network devices'
+      items:
+        - uuid: dc7c6cf481964301a3ac7f2da1e75a94
+          name: 'Build Time'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.7.6.0
+          key: mtxrBuildTime.0
+          delay: 12h
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          tags:
+            - tag: component
+              value: build
+        - uuid: 1d86a3d35c1840439619c51c1b508b06
+          name: 'DHCP Lease Count'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.14988.1.1.6.1.0
+          key: mtxrDHCPLeaseCount.0
+          delay: 2m
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: component
+              value: dhcp
+        - uuid: 5014ce4e787949689b9d13680adb8fbd
+          name: Current
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.14988.1.1.3.13.0
+          key: mtxrHlCurrent.0
+          delay: 2m
+          history: 7d
+          trends: '0'
+          units: mA
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: component
+              value: current
+        - uuid: dd76d848b9b94781afb9e1f852af9306
+          name: Power
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.14988.1.1.3.12.0
+          key: mtxrHlPower.0
+          delay: 2m
+          history: 7d
+          trends: '0'
+          units: Watts
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: component
+              value: power
+        - uuid: b7c6664a37014e1c805139f4ef0c469c
+          name: Voltage
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.3.8.0
+          key: mtxrHlVoltage.0
+          delay: 2m
+          history: 7d
+          trends: '0'
+          units: V
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: component
+              value: voltage
+        - uuid: 471ed7db0f1846f2aaedf20c017f261d
+          name: 'Licence Level'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.14988.1.1.4.3.0
+          key: mtxrLicLevel.0
+          delay: 12h
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: component
+              value: licence
+        - uuid: 8de8e21fb4294d6394d1be1ca0d5a9bd
+          name: 'Licence Software ID'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.4.1.0
+          key: mtxrLicSoftwareId.0
+          delay: 12h
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: component
+              value: licence
+        - uuid: 2b730beadbe6458b9c8a42bdc6a0fd13
+          name: 'Licence Upgradable To'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.4.5.0
+          key: mtxrLicUpgradableTo.0
+          delay: 12h
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: component
+              value: licence
+        - uuid: e447a8365405461d9927c187cba8f5c6
+          name: 'Licence Upgrade Until'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.4.2.0
+          key: mtxrLicUpgrUntil.0
+          delay: 12h
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: component
+              value: licence
+        - uuid: 89bb2ed232d545578e295069bc7b410a
+          name: 'Licence Version'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.4.4.0
+          key: mtxrLicVersion.0
+          delay: 12h
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: component
+              value: licence
+        - uuid: d4c91791c26143babbfb2c42228902d0
+          name: 'Mikrotik: SNMP walk network interfaces'
+          type: SNMP_AGENT
+          snmp_oid: 'walk[1.3.6.1.2.1.2.2.1.8,1.3.6.1.2.1.2.2.1.7,1.3.6.1.2.1.31.1.1.1.18,1.3.6.1.2.1.31.1.1.1.1,1.3.6.1.2.1.2.2.1.2,1.3.6.1.2.1.2.2.1.3,1.3.6.1.2.1.31.1.1.1.6,1.3.6.1.2.1.31.1.1.1.10,1.3.6.1.2.1.2.2.1.14,1.3.6.1.2.1.2.2.1.20,1.3.6.1.2.1.2.2.1.19,1.3.6.1.2.1.2.2.1.13,1.3.6.1.2.1.31.1.1.1.15]'
+          key: net.if.walk
+          delay: 2m
+          history: '0'
+          value_type: TEXT
+          description: 'Discovering interfaces from IF-MIB.'
+          tags:
+            - tag: component
+              value: raw
+        - uuid: 2197ae122df542b0abd47dd06fb44c60
+          name: 'SNMP walk wireless interfaces'
+          type: SNMP_AGENT
+          snmp_oid: 'walk[1.3.6.1.4.1.14988.1.1.14.1.1.2,1.3.6.1.2.1.31.1.1.1.18,1.3.6.1.2.1.2.2.1.3,1.3.6.1.2.1.2.2.1.7,1.3.6.1.4.1.14988.1.1.16.1.1.2,1.3.6.1.4.1.14988.1.1.16.1.1.4,1.3.6.1.4.1.14988.1.1.16.1.1.3,1.3.6.1.4.1.14988.1.1.16.1.1.7,1.3.6.1.4.1.14988.1.1.1.3.1.4,1.3.6.1.4.1.14988.1.1.1.3.1.8,1.3.6.1.4.1.14988.1.1.1.3.1.9,1.3.6.1.4.1.14988.1.1.1.3.1.6,1.3.6.1.4.1.14988.1.1.1.3.1.11,1.3.6.1.4.1.14988.1.1.1.7.1.5,1.3.6.1.4.1.14988.1.1.1.7.1.4,1.3.6.1.4.1.14988.1.1.1.7.1.2,1.3.6.1.4.1.14988.1.1.1.7.1.3]'
+          key: net.if.wireless.walk
+          delay: 5m
+          history: '0'
+          value_type: TEXT
+          tags:
+            - tag: component
+              value: raw
+        - uuid: 79ea3c5e29f24eab8955a0ab27070e2f
+          name: 'SNMP walk system CPUs'
+          type: SNMP_AGENT
+          snmp_oid: 'walk[1.3.6.1.2.1.25.3.3.1.1,1.3.6.1.2.1.25.3.3.1.2]'
+          key: system.cpu.walk
+          delay: 5m
+          history: '0'
+          value_type: TEXT
+          description: |
+            MIB: HOST-RESOURCES-MIB
+            Discovering system CPUs.
+          tags:
+            - tag: component
+              value: raw
+        - uuid: fa7e3251fc044417b51e608be60490a8
+          name: 'Firmware version'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.7.4.0
+          key: system.hw.firmware
+          delay: 1h
+          value_type: CHAR
+          description: |
+            MIB: MIKROTIK-MIB
+            Current firmware version.
+          inventory_link: SOFTWARE
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          tags:
+            - tag: component
+              value: system
+          triggers:
+            - uuid: 03dcf949b919454b937c2c107baf361c
+              expression: 'last(/MikroTik All CCR Types by SNMP/system.hw.firmware,#1)<>last(/MikroTik All CCR Types by SNMP/system.hw.firmware,#2) and length(last(/MikroTik All CCR Types by SNMP/system.hw.firmware))>0'
+              name: 'MikroTik: Firmware has changed'
+              opdata: 'Current value: {ITEM.LASTVALUE1}'
+              priority: INFO
+              description: 'Firmware version has changed. Acknowledge to close the problem manually.'
+              manual_close: 'YES'
+              tags:
+                - tag: scope
+                  value: notice
+        - uuid: 1e026ab3c5bc495bb540b73739de9784
+          name: 'Hardware model name'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.1.1.0
+          key: system.hw.model
+          delay: 1h
+          value_type: CHAR
+          inventory_link: MODEL
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          tags:
+            - tag: component
+              value: system
+        - uuid: af038fe957ed4fa584143a582faebc96
+          name: 'Hardware serial number'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.7.3.0
+          key: system.hw.serialnumber
+          delay: 1h
+          value_type: CHAR
+          description: |
+            MIB: MIKROTIK-MIB
+            RouterBOARD serial number.
+          inventory_link: SERIALNO_A
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          tags:
+            - tag: component
+              value: system
+          triggers:
+            - uuid: c6f7e039ecc642668338e4712f851055
+              expression: 'last(/MikroTik All CCR Types by SNMP/system.hw.serialnumber,#1)<>last(/MikroTik All CCR Types by SNMP/system.hw.serialnumber,#2) and length(last(/MikroTik All CCR Types by SNMP/system.hw.serialnumber))>0'
+              name: 'MikroTik: Device has been replaced'
+              event_name: 'MikroTik: Device has been replaced (new serial number received)'
+              priority: INFO
+              description: 'Device serial number has changed. Acknowledge to close the problem manually.'
+              manual_close: 'YES'
+              tags:
+                - tag: scope
+                  value: notice
+        - uuid: c9344608e0c04f67ba00a8a5f6a5a398
+          name: 'Active PPPoE Sessions'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.9.150.1.1.1.0
+          key: system.pppoe.sessions
+          delay: 2m
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          tags:
+            - tag: component
+              value: ppoe
+          triggers:
+            - uuid: fa771c4e6f0344c5a3e0eeb65bb8a6c6
+              expression: '(avg(/MikroTik All CCR Types by SNMP/system.pppoe.sessions,5m) - last(/MikroTik All CCR Types by SNMP/system.pppoe.sessions)) > 10'
+              name: 'MikroTik: Sudden PPPoE sessions drop'
+              priority: WARNING
+              description: |
+                Expression explanation: 
+                Alert if the 5 minute average is lower than the last recorded value by 10
+        - uuid: 082cb448b9734cb59c8fea56f8d7afa5
+          name: 'Operating system'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.4.4.0
+          key: 'system.sw.os[mtxrLicVersion.0]'
+          delay: 1h
+          value_type: CHAR
+          description: |
+            MIB: MIKROTIK-MIB
+            Software version.
+          inventory_link: OS_FULL
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          tags:
+            - tag: component
+              value: os
+          triggers:
+            - uuid: e69fb884e821482e87fe2e4a315ab112
+              expression: 'last(/MikroTik All CCR Types by SNMP/system.sw.os[mtxrLicVersion.0],#1)<>last(/MikroTik All CCR Types by SNMP/system.sw.os[mtxrLicVersion.0],#2) and length(last(/MikroTik All CCR Types by SNMP/system.sw.os[mtxrLicVersion.0]))>0'
+              name: 'MikroTik: Operating system description has changed'
+              priority: INFO
+              description: 'The description of the operating system has changed. Possible reasons are that the system has been updated or replaced. Acknowledge to close the problem manually.'
+              manual_close: 'YES'
+              tags:
+                - tag: scope
+                  value: notice
+        - uuid: 91c6f366300d4b9fadeb366a83447bdc
+          name: 'SNMP walk mounted filesystems'
+          type: SNMP_AGENT
+          snmp_oid: 'walk[1.3.6.1.2.1.25.2.3.1.3,1.3.6.1.2.1.25.2.3.1.4,1.3.6.1.2.1.25.2.3.1.2,1.3.6.1.2.1.25.2.3.1.6,1.3.6.1.2.1.25.2.3.1.5]'
+          key: vfs.fs.walk
+          delay: 5m
+          history: '0'
+          value_type: TEXT
+          description: |
+            MIB: HOST-RESOURCES-MIB
+            Discovering mounted filesystems.
+          tags:
+            - tag: component
+              value: raw
+        - uuid: d103aa8aedfe40b0968e8d346cc132b1
+          name: 'Total memory'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.25.2.3.1.5.65536
+          key: 'vm.memory.total[hrStorageSize.Memory]'
+          delay: 2m
+          units: B
+          description: |
+            MIB: HOST-RESOURCES-MIB
+            The size of the storage represented by this entry, in
+            units of hrStorageAllocationUnits. This object is
+            writable to allow remote configuration of the size of
+            the storage area in those cases where such an
+            operation makes sense and is possible on the
+            underlying system. For example, the amount of main
+            memory allocated to a buffer pool might be modified or
+            the amount of disk space allocated to virtual memory
+            might be modified.
+          preprocessing:
+            - type: MULTIPLIER
+              parameters:
+                - '1024'
+          tags:
+            - tag: component
+              value: memory
+        - uuid: fa6a5681272b4b9c85c2ef2599a6f658
+          name: 'Used memory'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.25.2.3.1.6.65536
+          key: 'vm.memory.used[hrStorageUsed.Memory]'
+          delay: 2m
+          units: B
+          description: |
+            MIB: HOST-RESOURCES-MIB
+            The amount of the storage represented by this entry that is allocated, in units of hrStorageAllocationUnits.
+          preprocessing:
+            - type: MULTIPLIER
+              parameters:
+                - '1024'
+          tags:
+            - tag: component
+              value: memory
+        - uuid: 264fbd191a8b407193c201d6a72b2768
+          name: 'Memory utilization'
+          type: CALCULATED
+          key: 'vm.memory.util[memoryUsedPercentage.Memory]'
+          delay: 2m
+          value_type: FLOAT
+          units: '%'
+          params: 'last(//vm.memory.used[hrStorageUsed.Memory])/last(//vm.memory.total[hrStorageSize.Memory])*100'
+          description: 'Memory utilization in %.'
+          tags:
+            - tag: component
+              value: memory
+          triggers:
+            - uuid: 018c008785d64b42a207b2a4530907df
+              expression: 'min(/MikroTik All CCR Types by SNMP/vm.memory.util[memoryUsedPercentage.Memory],5m)>{$MEMORY.UTIL.MAX}'
+              name: 'MikroTik: High memory utilization'
+              event_name: 'MikroTik: High memory utilization (>{$MEMORY.UTIL.MAX}% for 5m)'
+              priority: AVERAGE
+              description: 'The system is running out of free memory.'
+              tags:
+                - tag: scope
+                  value: capacity
+                - tag: scope
+                  value: performance
+      discovery_rules:
+        - uuid: d5dbda9e67be4c21b108ed039c7f9903
+          name: 'CPU discovery'
+          type: DEPENDENT
+          key: hrProcessorLoad.discovery
+          description: 'HOST-RESOURCES-MIB::hrProcessorTable discovery.'
+          item_prototypes:
+            - uuid: 52b7f555abbb479aa936ae1f00333da0
+              name: '#{#SNMPINDEX}: CPU utilization'
+              type: DEPENDENT
+              key: 'system.cpu.util[hrProcessorLoad.{#SNMPINDEX}]'
+              value_type: FLOAT
+              units: '%'
+              description: |
+                MIB: HOST-RESOURCES-MIB
+                The average, over the last minute, of the percentage of time that this processor was not idle. Implementations may approximate this one minute smoothing period if necessary.
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.2.1.25.3.3.1.2.{#SNMPINDEX}'
+                    - '0'
+              master_item:
+                key: system.cpu.walk
+              tags:
+                - tag: component
+                  value: cpu
+              trigger_prototypes:
+                - uuid: 5859076532e9407d9a35e759c030c8a4
+                  expression: 'min(/MikroTik All CCR Types by SNMP/system.cpu.util[hrProcessorLoad.{#SNMPINDEX}],5m)>{$CPU.UTIL.CRIT}'
+                  name: 'MikroTik: #{#SNMPINDEX}: High CPU utilization'
+                  event_name: 'MikroTik: #{#SNMPINDEX}: High CPU utilization (over {$CPU.UTIL.CRIT}% for 5m)'
+                  opdata: 'Current utilization: {ITEM.LASTVALUE1}'
+                  priority: WARNING
+                  description: 'CPU utilization is too high. The system might be slow to respond.'
+                  tags:
+                    - tag: scope
+                      value: performance
+          graph_prototypes:
+            - uuid: 784bb3db6f1440bab3b43795211eb86b
+              name: '#{#SNMPINDEX}: CPU utilization'
+              ymin_type_1: FIXED
+              ymax_type_1: FIXED
+              graph_items:
+                - drawtype: GRADIENT_LINE
+                  color: 199C0D
+                  item:
+                    host: 'MikroTik All CCR Types by SNMP'
+                    key: 'system.cpu.util[hrProcessorLoad.{#SNMPINDEX}]'
+          master_item:
+            key: system.cpu.walk
+          preprocessing:
+            - type: SNMP_WALK_TO_JSON
+              parameters:
+                - '{#SNMPVALUE}'
+                - 1.3.6.1.2.1.25.3.3.1.1
+                - '0'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 8d93c3fec3cd42b9b4762c4eeea855be
+          name: 'Temperature CPU discovery'
+          type: SNMP_AGENT
+          snmp_oid: 'walk[1.3.6.1.4.1.14988.1.1.3.10]'
+          key: mtxrHlProcessorTemperature.discovery
+          delay: 1h
+          description: |
+            MIKROTIK-MIB::mtxrHlProcessorTemperature
+            Since temperature of CPU is not available on all Mikrotik hardware, this is done to avoid unsupported items.
+          item_prototypes:
+            - uuid: 6fcc54bc09ff488d8e1f5cb29808be6f
+              name: 'CPU: Temperature'
+              type: SNMP_AGENT
+              snmp_oid: 'get[1.3.6.1.4.1.14988.1.1.3.11.{#SNMPINDEX}]'
+              key: 'sensor.temp.value[mtxrHlProcessorTemperature.{#SNMPINDEX}]'
+              value_type: FLOAT
+              units: °C
+              description: |
+                MIB: MIKROTIK-MIB
+                mtxrHlProcessorTemperature Processor temperature in Celsius (degrees C).
+                Might be missing in entry models (RB750, RB450G..).
+              preprocessing:
+                - type: MULTIPLIER
+                  parameters:
+                    - '0.1'
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 3m
+              tags:
+                - tag: component
+                  value: temperature
+              trigger_prototypes:
+                - uuid: 54ccb37ff01a4820b33348c45c2a84f3
+                  expression: 'avg(/MikroTik All CCR Types by SNMP/sensor.temp.value[mtxrHlProcessorTemperature.{#SNMPINDEX}],5m)>{$TEMP_CRIT:"CPU"}'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'max(/MikroTik All CCR Types by SNMP/sensor.temp.value[mtxrHlProcessorTemperature.{#SNMPINDEX}],5m)<{$TEMP_CRIT:"CPU"}-3'
+                  name: 'MikroTik: CPU: Temperature is above critical threshold'
+                  event_name: 'MikroTik: CPU: Temperature is above critical threshold: >{$TEMP_CRIT:"CPU"}'
+                  opdata: 'Current value: {ITEM.LASTVALUE1}'
+                  priority: HIGH
+                  description: 'This trigger uses temperature sensor values as well as temperature sensor status if available.'
+                  tags:
+                    - tag: scope
+                      value: availability
+                    - tag: scope
+                      value: performance
+                - uuid: c86e5c48535d43b0945a2960fb19b89c
+                  expression: 'avg(/MikroTik All CCR Types by SNMP/sensor.temp.value[mtxrHlProcessorTemperature.{#SNMPINDEX}],5m)>{$TEMP_WARN:"CPU"}'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'max(/MikroTik All CCR Types by SNMP/sensor.temp.value[mtxrHlProcessorTemperature.{#SNMPINDEX}],5m)<{$TEMP_WARN:"CPU"}-3'
+                  name: 'MikroTik: CPU: Temperature is above warning threshold'
+                  event_name: 'MikroTik: CPU: Temperature is above warning threshold: >{$TEMP_WARN:"CPU"}'
+                  opdata: 'Current value: {ITEM.LASTVALUE1}'
+                  priority: WARNING
+                  description: 'This trigger uses temperature sensor values as well as temperature sensor status if available.'
+                  dependencies:
+                    - name: 'MikroTik: CPU: Temperature is above critical threshold'
+                      expression: 'avg(/MikroTik All CCR Types by SNMP/sensor.temp.value[mtxrHlProcessorTemperature.{#SNMPINDEX}],5m)>{$TEMP_CRIT:"CPU"}'
+                      recovery_expression: 'max(/MikroTik All CCR Types by SNMP/sensor.temp.value[mtxrHlProcessorTemperature.{#SNMPINDEX}],5m)<{$TEMP_CRIT:"CPU"}-3'
+                  tags:
+                    - tag: scope
+                      value: availability
+                    - tag: scope
+                      value: performance
+                - uuid: 2df9450399444da094489ea51964f8a1
+                  expression: 'avg(/MikroTik All CCR Types by SNMP/sensor.temp.value[mtxrHlProcessorTemperature.{#SNMPINDEX}],5m)<{$TEMP_CRIT_LOW:"CPU"}'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'min(/MikroTik All CCR Types by SNMP/sensor.temp.value[mtxrHlProcessorTemperature.{#SNMPINDEX}],5m)>{$TEMP_CRIT_LOW:"CPU"}+3'
+                  name: 'MikroTik: CPU: Temperature is too low'
+                  event_name: 'MikroTik: CPU: Temperature is too low: <{$TEMP_CRIT_LOW:"CPU"}'
+                  opdata: 'Current value: {ITEM.LASTVALUE1}'
+                  priority: AVERAGE
+                  tags:
+                    - tag: scope
+                      value: availability
+                    - tag: scope
+                      value: performance
+          preprocessing:
+            - type: SNMP_WALK_TO_JSON
+              parameters:
+                - '{#SNMPVALUE}'
+                - 1.3.6.1.4.1.14988.1.1.3.11
+                - '0'
+              error_handler: DISCARD_VALUE
+        - uuid: e7857dd41aa84664aa3c3a47024ddf82
+          name: 'Temperature sensor discovery'
+          type: SNMP_AGENT
+          snmp_oid: 'walk[1.3.6.1.4.1.14988.1.1.3.10]'
+          key: mtxrHlTemperature.discovery
+          delay: 1h
+          description: |
+            MIKROTIK-MIB::mtxrHlTemperature
+            Since temperature sensor is not available on all Mikrotik hardware, this is done to avoid unsupported items.
+          item_prototypes:
+            - uuid: 327fa0ed9c48402aa8d4b07999455b41
+              name: 'Device: Temperature'
+              type: SNMP_AGENT
+              snmp_oid: 'get[1.3.6.1.4.1.14988.1.1.3.10.{#SNMPINDEX}]'
+              key: 'sensor.temp.value[mtxrHlTemperature.{#SNMPINDEX}]'
+              value_type: FLOAT
+              units: °C
+              description: |
+                MIB: MIKROTIK-MIB
+                mtxrHlTemperature Device temperature in Celsius (degrees C).
+                Might be missing in entry models (RB750, RB450G..).
+                
+                Reference: http://wiki.mikrotik.com/wiki/Manual:SNMP
+              preprocessing:
+                - type: MULTIPLIER
+                  parameters:
+                    - '0.1'
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 3m
+              tags:
+                - tag: component
+                  value: temperature
+              trigger_prototypes:
+                - uuid: d06dbeab3fbc45408a51815add507056
+                  expression: 'avg(/MikroTik All CCR Types by SNMP/sensor.temp.value[mtxrHlTemperature.{#SNMPINDEX}],5m)>{$TEMP_CRIT:"Device"}'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'max(/MikroTik All CCR Types by SNMP/sensor.temp.value[mtxrHlTemperature.{#SNMPINDEX}],5m)<{$TEMP_CRIT:"Device"}-3'
+                  name: 'MikroTik: Device: Temperature is above critical threshold'
+                  event_name: 'MikroTik: Device: Temperature is above critical threshold: >{$TEMP_CRIT:"Device"}'
+                  opdata: 'Current value: {ITEM.LASTVALUE1}'
+                  priority: HIGH
+                  description: 'This trigger uses temperature sensor values as well as temperature sensor status if available.'
+                  tags:
+                    - tag: scope
+                      value: availability
+                    - tag: scope
+                      value: performance
+                - uuid: 55ac81c4f81b4efc809d5058b79df847
+                  expression: 'avg(/MikroTik All CCR Types by SNMP/sensor.temp.value[mtxrHlTemperature.{#SNMPINDEX}],5m)>{$TEMP_WARN:"Device"}'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'max(/MikroTik All CCR Types by SNMP/sensor.temp.value[mtxrHlTemperature.{#SNMPINDEX}],5m)<{$TEMP_WARN:"Device"}-3'
+                  name: 'MikroTik: Device: Temperature is above warning threshold'
+                  event_name: 'MikroTik: Device: Temperature is above warning threshold: >{$TEMP_WARN:"Device"}'
+                  opdata: 'Current value: {ITEM.LASTVALUE1}'
+                  priority: WARNING
+                  description: 'This trigger uses temperature sensor values as well as temperature sensor status if available.'
+                  dependencies:
+                    - name: 'MikroTik: Device: Temperature is above critical threshold'
+                      expression: 'avg(/MikroTik All CCR Types by SNMP/sensor.temp.value[mtxrHlTemperature.{#SNMPINDEX}],5m)>{$TEMP_CRIT:"Device"}'
+                      recovery_expression: 'max(/MikroTik All CCR Types by SNMP/sensor.temp.value[mtxrHlTemperature.{#SNMPINDEX}],5m)<{$TEMP_CRIT:"Device"}-3'
+                  tags:
+                    - tag: scope
+                      value: availability
+                    - tag: scope
+                      value: performance
+                - uuid: 38a7962abad74c6cb84de1b7c93e1e91
+                  expression: 'avg(/MikroTik All CCR Types by SNMP/sensor.temp.value[mtxrHlTemperature.{#SNMPINDEX}],5m)<{$TEMP_CRIT_LOW:"Device"}'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'min(/MikroTik All CCR Types by SNMP/sensor.temp.value[mtxrHlTemperature.{#SNMPINDEX}],5m)>{$TEMP_CRIT_LOW:"Device"}+3'
+                  name: 'MikroTik: Device: Temperature is too low'
+                  event_name: 'MikroTik: Device: Temperature is too low: <{$TEMP_CRIT_LOW:"Device"}'
+                  opdata: 'Current value: {ITEM.LASTVALUE1}'
+                  priority: AVERAGE
+                  tags:
+                    - tag: scope
+                      value: availability
+                    - tag: scope
+                      value: performance
+          preprocessing:
+            - type: SNMP_WALK_TO_JSON
+              parameters:
+                - '{#SNMPVALUE}'
+                - 1.3.6.1.4.1.14988.1.1.3.10
+                - '0'
+              error_handler: DISCARD_VALUE
+        - uuid: e22820d55b1b4cbfbc83a99c1befbe44
+          name: mtxrInterfaceStats
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.14988.1.1.14.1.1.2]'
+          key: mtxrInterfaceStats.discovery
+          delay: 24h
+          item_prototypes:
+            - uuid: bedb638356d040719e7615cb8b6317f5
+              name: 'mtxrInterfaceStatsDriverRxBytes {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.11.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsDriverRxBytes[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 4d13e078db1442f6909868a29f7a287c
+              name: 'mtxrInterfaceStatsDriverRxPackets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.12.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsDriverRxPackets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: ac5cc73b07c74cd4aa50c5cdcd77519a
+              name: 'mtxrInterfaceStatsDriverTxBytes {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.13.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsDriverTxBytes[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: b07b131a3d7f4b198de16ce3ecb1a686
+              name: 'mtxrInterfaceStatsDriverTxPackets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.14.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsDriverTxPackets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 8fc2aeeee8444104a2bad14da89b8b4f
+              name: 'mtxrInterfaceStatsIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.1.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: f889336ba06147f1ac1c566024c53f0d
+              name: 'mtxrInterfaceStatsName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.2.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 444b7027916a4727bc462ee45438faf4
+              name: 'mtxrInterfaceStatsRx64 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.34.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRx64[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: c4857d9766014bcea8e524d4e56a121b
+              name: 'mtxrInterfaceStatsRx65To127 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.35.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRx65To127[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: f8f71085b82a4c048aa474847fff3f29
+              name: 'mtxrInterfaceStatsRx128To255 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.36.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRx128To255[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 20376dd695a740a495efdf135e119bd8
+              name: 'mtxrInterfaceStatsRx256To511 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.37.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRx256To511[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: f08e76134e84486080ab6ce628b3832a
+              name: 'mtxrInterfaceStatsRx512To1023 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.38.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRx512To1023[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: b3f43054f9f14e2890ecfbaf7cad349d
+              name: 'mtxrInterfaceStatsRx1024To1518 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.39.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRx1024To1518[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 0f6ccaf9521d44089f326e14cd0c3da7
+              name: 'mtxrInterfaceStatsRx1519ToMax {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.40.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRx1519ToMax[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 3e3b5848d9c944aeb7aa12e4fe709998
+              name: 'mtxrInterfaceStatsRxAlignError {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.46.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxAlignError[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 1bc694f08db94d4683a38ac403927610
+              name: 'mtxrInterfaceStatsRxBroadcast {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.42.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxBroadcast[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 00468193c030478db1f0072f5ee02af3
+              name: 'mtxrInterfaceStatsRxBytes {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.31.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxBytes[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 919413872c27417aa0b148caf3a218f7
+              name: 'mtxrInterfaceStatsRxCarrierError {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.53.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxCarrierError[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 91c37d6b30f64b6994e9d47b27bdad86
+              name: 'mtxrInterfaceStatsRxCodeError {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.52.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxCodeError[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 2776687ce6eb41e884c28780a51da2fc
+              name: 'mtxrInterfaceStatsRxControl {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.49.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxControl[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: e54cddc1cfa74aa991808ad112066677
+              name: 'mtxrInterfaceStatsRxDrop {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.55.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxDrop[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 69d61c6c127b424ca847ebaaef18d2be
+              name: 'mtxrInterfaceStatsRxFCSError {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.45.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxFCSError[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+              trigger_prototypes:
+                - uuid: 5f6827dd8ee943cba8113664c3a645d3
+                  expression: 'last(/MikroTik All CCR Types by SNMP/mtxrInterfaceStatsRxFCSError[{#SNMPVALUE}])<>0'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/MikroTik All CCR Types by SNMP/mtxrInterfaceStatsRxFCSError[{#SNMPVALUE}])=0'
+                  name: 'FCS Errors On RX Interface {#SNMPVALUE}'
+                  priority: WARNING
+                  manual_close: 'YES'
+            - uuid: 0947287e299c4a9d970185091fd05126
+              name: 'mtxrInterfaceStatsRxFragment {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.47.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxFragment[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 378105153b514809a86352cb08a3798c
+              name: 'mtxrInterfaceStatsRxJabber {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.54.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxJabber[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 6d33f5cee5be44ac86889ad3c8afa9bb
+              name: 'mtxrInterfaceStatsRxLengthError {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.51.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxLengthError[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 161295a28b9b463aa3bf38638b764f8f
+              name: 'mtxrInterfaceStatsRxMulticast {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.44.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxMulticast[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 25d36f8483474975b0104536f27cd5a8
+              name: 'mtxrInterfaceStatsRxOverflow {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.48.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxOverflow[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 9723474fa02d4a3787df3096a2938100
+              name: 'mtxrInterfaceStatsRxPackets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.32.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxPackets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 92f5a82bea7c44dfb35a414656c5656d
+              name: 'mtxrInterfaceStatsRxPause {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.43.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxPause[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 3ebe109a783c4c56bfd8c0477161c18f
+              name: 'mtxrInterfaceStatsRxTooLong {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.41.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxTooLong[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 3a14b7205a2b45fab1f4ad20b04a1605
+              name: 'mtxrInterfaceStatsRxTooShort {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.33.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxTooShort[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: a97a9dbd53544215a8dac1b9a4f648fc
+              name: 'mtxrInterfaceStatsRxUnknownOp {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.50.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxUnknownOp[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: cb532532c0454630b4561f96a9e7a7d7
+              name: 'mtxrInterfaceStatsTx64 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.64.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTx64[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: a0927f6327714528a8cf7703a88db281
+              name: 'mtxrInterfaceStatsTx65To127 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.65.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTx65To127[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 0a7d3ab62bc44d7eacd08176360b9838
+              name: 'mtxrInterfaceStatsTx128To255 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.66.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTx128To255[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: e768e15ff3304febb22d785c269e6f8a
+              name: 'mtxrInterfaceStatsTx256To511 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.67.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTx256To511[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 5dcc2787bc864162bf6a3d602af784e2
+              name: 'mtxrInterfaceStatsTx512To1023 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.68.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTx512To1023[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 7f9a074dec624ed9928bc2d11fb1a875
+              name: 'mtxrInterfaceStatsTx1024To1518 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.69.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTx1024To1518[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 8211c745408f4e839ccf596c17e7a55e
+              name: 'mtxrInterfaceStatsTx1519ToMax {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.70.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTx1519ToMax[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: df02024eb59b4fda83d7c546a501ec4e
+              name: 'mtxrInterfaceStatsTxBroadcast {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.72.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxBroadcast[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 33d060795e8348ab9806d396aaf1b959
+              name: 'mtxrInterfaceStatsTxBytes {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.61.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxBytes[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: a4f314a8a91b41bfbe6451bd8c2fd484
+              name: 'mtxrInterfaceStatsTxCollision {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.76.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxCollision[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 7f4d0aa8ced044049eb3001926cd4178
+              name: 'mtxrInterfaceStatsTxControl {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.88.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxControl[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 6c4a572cd245488787f82a6a791a5bb9
+              name: 'mtxrInterfaceStatsTxDeferred {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.81.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxDeferred[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 39c10aa533fb4f8381cd96f82d459a73
+              name: 'mtxrInterfaceStatsTxDrop {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.85.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxDrop[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 1cc9a1e983c6424b9542f818bc5cd8b4
+              name: 'mtxrInterfaceStatsTxExcessiveCollision {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.77.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxExcessiveCollision[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 2ccea0dd57d24811865b8ee8353364b7
+              name: 'mtxrInterfaceStatsTxExcessiveDeferred {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.80.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxExcessiveDeferred[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 0a6e62820e6a45dca6f4995418c5819e
+              name: 'mtxrInterfaceStatsTxFCSError {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.87.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxFCSError[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+              trigger_prototypes:
+                - uuid: b40ced38c0d344799e72deb4a9967b29
+                  expression: 'last(/MikroTik All CCR Types by SNMP/mtxrInterfaceStatsTxFCSError[{#SNMPVALUE}])<>0'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/MikroTik All CCR Types by SNMP/mtxrInterfaceStatsTxFCSError[{#SNMPVALUE}])=0'
+                  name: 'FCS Errors On TX Interface {#SNMPVALUE}'
+                  priority: WARNING
+                  manual_close: 'YES'
+            - uuid: 0a5c6601a5ae473e9753f45c480bd05d
+              name: 'mtxrInterfaceStatsTxFragment {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.89.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxFragment[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 28bc2a06d55b4f48a451181919f49821
+              name: 'mtxrInterfaceStatsTxJabber {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.86.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxJabber[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 0893a936561d4b8eb02ad73adea15fc9
+              name: 'mtxrInterfaceStatsTxLateCollision {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.82.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxLateCollision[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: e99b2e7b5441424ca1ca27f60f6a7e16
+              name: 'mtxrInterfaceStatsTxMulticast {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.74.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxMulticast[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: dfa4bc6d43c64020935e763787a30b55
+              name: 'mtxrInterfaceStatsTxMultipleCollision {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.78.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxMultipleCollision[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 2413ba1f150d427a868426febd6a63c5
+              name: 'mtxrInterfaceStatsTxPackets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.62.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxPackets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: f8f5d12f64dc4399b6dd6642f68dee06
+              name: 'mtxrInterfaceStatsTxPauseHonored {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.84.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxPauseHonored[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: dc1209f4bfd4436cb2c4c617ff7bf189
+              name: 'mtxrInterfaceStatsTxPause {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.73.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxPause[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 2f3ce037c3fd4fbc923fea5ba0b24da3
+              name: 'mtxrInterfaceStatsTxRx64 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.15.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxRx64[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 3d6e47beba004a25bf9b936eb77cf4c2
+              name: 'mtxrInterfaceStatsTxRx65To127 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.16.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxRx65To127[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 436b3e7f127a4dfeb5da408d9a9462a9
+              name: 'mtxrInterfaceStatsTxRx128To255 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.17.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxRx128To255[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 0f6d0b59a767407c9c50013888362199
+              name: 'mtxrInterfaceStatsTxRx256To511 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.18.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxRx256To511[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: ab0ffd6b875a461a8a69fbcf9bb431d7
+              name: 'mtxrInterfaceStatsTxRx512To1023 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.19.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxRx512To1023[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: cc7b02b69127490695ce915fe5a85eac
+              name: 'mtxrInterfaceStatsTxRx1024To1518 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.20.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxRx1024To1518[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 7a570f1e567e4d6693139dd2d5ae9745
+              name: 'mtxrInterfaceStatsTxRx1519ToMax {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.21.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxRx1519ToMax[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 45b3bf949ed44c2cab95e1ecf1e0a188
+              name: 'mtxrInterfaceStatsTxSingleCollision {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.79.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxSingleCollision[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 0bfb3113851f4ace89fb278e969152a0
+              name: 'mtxrInterfaceStatsTxTooLong {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.71.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxTooLong[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 331d7c796fae488a8ed9b3912e8bf9d6
+              name: 'mtxrInterfaceStatsTxTooShort {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.63.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxTooShort[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: dd2a5fe8aaa94217928abdb184207146
+              name: 'mtxrInterfaceStatsTxTotalCollision {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.83.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxTotalCollision[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 8a25e6d6582e451fbc76d4eaa09ac204
+              name: 'mtxrInterfaceStatsTxUnderrun {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.75.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxUnderrun[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+          graph_prototypes:
+            - uuid: d8f1a85304914e83a85452c642375467
+              name: 'FCS Errors'
+              graph_items:
+                - color: 00BFFF
+                  item:
+                    host: 'MikroTik All CCR Types by SNMP'
+                    key: 'mtxrInterfaceStatsRxFCSError[{#SNMPVALUE}]'
+                - sortorder: '1'
+                  color: '274482'
+                  item:
+                    host: 'MikroTik All CCR Types by SNMP'
+                    key: 'mtxrInterfaceStatsTxFCSError[{#SNMPVALUE}]'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: bb5d997c5ca4472e8c5ce529e8573847
+          name: 'LTE modem discovery'
+          type: DEPENDENT
+          key: mtxrLTEModem.discovery
+          filter:
+            evaltype: AND
+            conditions:
+              - macro: '{#IFNAME}'
+                value: '{$IFNAME.LTEMODEM.MATCHES}'
+              - macro: '{#IFTYPE}'
+                value: ^1$
+          description: 'MIKROTIK-MIB::mtxrLTEModemInterfaceIndex.'
+          item_prototypes:
+            - uuid: c48447ce77594a8fbfaa7b0e41c574c2
+              name: 'Interface {#IFNAME}({#IFALIAS}): LTE modem RSRP'
+              type: DEPENDENT
+              key: 'lte.modem.rsrp[mtxrLTEModemSignalRSRP.{#SNMPINDEX}]'
+              value_type: FLOAT
+              units: dbm
+              description: |
+                MIB: MIKROTIK-MIB
+                mtxrLTEModemSignalRSRP Reference Signal Received Power.
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.4.1.14988.1.1.16.1.1.4.{#SNMPINDEX}'
+                    - '0'
+              master_item:
+                key: net.if.wireless.walk
+              tags:
+                - tag: component
+                  value: interface
+                - tag: component
+                  value: network
+                - tag: interface
+                  value: '{#IFNAME}'
+              trigger_prototypes:
+                - uuid: d94e6a460ba647d4adfc5e5c7443689f
+                  expression: 'max(/MikroTik All CCR Types by SNMP/lte.modem.rsrp[mtxrLTEModemSignalRSRP.{#SNMPINDEX}],5m) < {$LTEMODEM.RSRP.MIN.WARN}'
+                  name: 'MikroTik: Interface {#IFNAME}({#IFALIAS}): LTE modem RSRP is low'
+                  event_name: 'MikroTik: Interface {#IFNAME}({#IFALIAS}): LTE modem RSRP is low (below {$LTEMODEM.RSRP.MIN.WARN}dbm for 5m)'
+                  priority: WARNING
+                  tags:
+                    - tag: scope
+                      value: availability
+                    - tag: scope
+                      value: performance
+            - uuid: 95c584eb4aec478ebe7da99c5b319e44
+              name: 'Interface {#IFNAME}({#IFALIAS}): LTE modem RSRQ'
+              type: DEPENDENT
+              key: 'lte.modem.rsrq[mtxrLTEModemSignalRSRQ.{#SNMPINDEX}]'
+              value_type: FLOAT
+              units: db
+              description: |
+                MIB: MIKROTIK-MIB
+                mtxrLTEModemSignalRSRQ Reference Signal Received Quality.
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.4.1.14988.1.1.16.1.1.3.{#SNMPINDEX}'
+                    - '0'
+              master_item:
+                key: net.if.wireless.walk
+              tags:
+                - tag: component
+                  value: interface
+                - tag: component
+                  value: network
+                - tag: interface
+                  value: '{#IFNAME}'
+              trigger_prototypes:
+                - uuid: 12da6031a3124665bdbbc93b95505240
+                  expression: 'max(/MikroTik All CCR Types by SNMP/lte.modem.rsrq[mtxrLTEModemSignalRSRQ.{#SNMPINDEX}],5m) < {$LTEMODEM.RSRQ.MIN.WARN}'
+                  name: 'MikroTik: Interface {#IFNAME}({#IFALIAS}): LTE modem RSRQ is low'
+                  event_name: 'MikroTik: Interface {#IFNAME}({#IFALIAS}): LTE modem RSRQ is low (below {$LTEMODEM.RSRQ.MIN.WARN}db for 5m)'
+                  priority: WARNING
+                  tags:
+                    - tag: scope
+                      value: availability
+                    - tag: scope
+                      value: performance
+            - uuid: aca5a37c3a2e4325b509b56dd529afef
+              name: 'Interface {#IFNAME}({#IFALIAS}): LTE modem RSSI'
+              type: DEPENDENT
+              key: 'lte.modem.rssi[mtxrLTEModemSignalRSSI.{#SNMPINDEX}]'
+              value_type: FLOAT
+              units: dbm
+              description: |
+                MIB: MIKROTIK-MIB
+                mtxrLTEModemSignalRSSI Received Signal Strength Indicator.
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.4.1.14988.1.1.16.1.1.2.{#SNMPINDEX}'
+                    - '0'
+              master_item:
+                key: net.if.wireless.walk
+              tags:
+                - tag: component
+                  value: interface
+                - tag: component
+                  value: network
+                - tag: interface
+                  value: '{#IFNAME}'
+              trigger_prototypes:
+                - uuid: 794be251314c4fabb8ad077a2bb9fd92
+                  expression: 'max(/MikroTik All CCR Types by SNMP/lte.modem.rssi[mtxrLTEModemSignalRSSI.{#SNMPINDEX}],5m) < {$LTEMODEM.RSSI.MIN.WARN}'
+                  name: 'MikroTik: Interface {#IFNAME}({#IFALIAS}): LTE modem RSSI is low'
+                  event_name: 'MikroTik: Interface {#IFNAME}({#IFALIAS}): LTE modem RSSI is low (below {$LTEMODEM.RSSI.MIN.WARN}dbm for 5m)'
+                  priority: WARNING
+                  tags:
+                    - tag: scope
+                      value: availability
+                    - tag: scope
+                      value: performance
+            - uuid: dce9084bf49d4ebc968673b4f33d797a
+              name: 'Interface {#IFNAME}({#IFALIAS}): LTE modem SINR'
+              type: DEPENDENT
+              key: 'lte.modem.sinr[mtxrLTEModemSignalSINR.{#SNMPINDEX}]'
+              value_type: FLOAT
+              units: db
+              description: |
+                MIB: MIKROTIK-MIB
+                mtxrLTEModemSignalSINR Signal to Interference & Noise Ratio.
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.4.1.14988.1.1.16.1.1.7.{#SNMPINDEX}'
+                    - '0'
+              master_item:
+                key: net.if.wireless.walk
+              tags:
+                - tag: component
+                  value: interface
+                - tag: component
+                  value: network
+                - tag: interface
+                  value: '{#IFNAME}'
+              trigger_prototypes:
+                - uuid: 30095c61a9af44b5a8bf3ef8140f9d29
+                  expression: 'max(/MikroTik All CCR Types by SNMP/lte.modem.sinr[mtxrLTEModemSignalSINR.{#SNMPINDEX}],5m) < {$LTEMODEM.SINR.MIN.WARN}'
+                  name: 'MikroTik: Interface {#IFNAME}({#IFALIAS}): LTE modem SINR is low'
+                  event_name: 'MikroTik: Interface {#IFNAME}({#IFALIAS}): LTE modem SINR is low (below {$LTEMODEM.SINR.MIN.WARN}db for 5m)'
+                  priority: WARNING
+                  tags:
+                    - tag: scope
+                      value: availability
+                    - tag: scope
+                      value: performance
+          graph_prototypes:
+            - uuid: b548dbde9387484b8e1b6648d448cab7
+              name: 'Interface {#IFNAME}({#IFALIAS}): Modem Signal. {#SNMPINDEX}'
+              graph_items:
+                - color: 199C0D
+                  item:
+                    host: 'MikroTik All CCR Types by SNMP'
+                    key: 'lte.modem.sinr[mtxrLTEModemSignalSINR.{#SNMPINDEX}]'
+                - sortorder: '1'
+                  color: F63100
+                  item:
+                    host: 'MikroTik All CCR Types by SNMP'
+                    key: 'lte.modem.rsrq[mtxrLTEModemSignalRSRQ.{#SNMPINDEX}]'
+                - sortorder: '2'
+                  color: 00611C
+                  item:
+                    host: 'MikroTik All CCR Types by SNMP'
+                    key: 'lte.modem.rsrp[mtxrLTEModemSignalRSRP.{#SNMPINDEX}]'
+                - sortorder: '3'
+                  color: F7941D
+                  item:
+                    host: 'MikroTik All CCR Types by SNMP'
+                    key: 'lte.modem.rssi[mtxrLTEModemSignalRSSI.{#SNMPINDEX}]'
+          master_item:
+            key: net.if.wireless.walk
+          preprocessing:
+            - type: SNMP_WALK_TO_JSON
+              parameters:
+                - '{#IFNAME}'
+                - 1.3.6.1.4.1.14988.1.1.14.1.1.2
+                - '0'
+                - '{#IFALIAS}'
+                - 1.3.6.1.2.1.31.1.1.1.18
+                - '0'
+                - '{#IFTYPE}'
+                - 1.3.6.1.2.1.2.2.1.3
+                - '0'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 6eef66084e6a4d08a0b6879efdff9a2b
+          name: 'AP channel discovery'
+          type: DEPENDENT
+          key: mtxrWlAp.discovery
+          filter:
+            evaltype: AND
+            conditions:
+              - macro: '{#IFADMINSTATUS}'
+                value: ^1$
+              - macro: '{#IFTYPE}'
+                value: ^71$
+          description: 'MIKROTIK-MIB::mtxrWlAp.'
+          item_prototypes:
+            - uuid: 0911f77f07eb467a8d6182b8f586e201
+              name: 'Interface {#IFNAME}({#IFALIAS}): AP authenticated clients'
+              type: DEPENDENT
+              key: 'ssid.authclient[mtxrWlApAuthClientCount.{#SNMPINDEX}]'
+              description: |
+                MIB: MIKROTIK-MIB
+                mtxrWlApAuthClientCount Number of authentication clients.
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.4.1.14988.1.1.1.3.1.11.{#SNMPINDEX}'
+                    - '0'
+              master_item:
+                key: net.if.wireless.walk
+              tags:
+                - tag: component
+                  value: interface
+                - tag: component
+                  value: network
+                - tag: interface
+                  value: '{#IFNAME}'
+            - uuid: b0a5f007981a4e998caa7b987c674571
+              name: 'Interface {#IFNAME}({#IFALIAS}): AP band'
+              type: DEPENDENT
+              key: 'ssid.band[mtxrWlApBand.{#SNMPINDEX}]'
+              value_type: CHAR
+              description: |
+                MIB: MIKROTIK-MIB
+                mtxrWlApBand
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.4.1.14988.1.1.1.3.1.8.{#SNMPINDEX}'
+                    - '0'
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              master_item:
+                key: net.if.wireless.walk
+              tags:
+                - tag: component
+                  value: interface
+                - tag: component
+                  value: network
+                - tag: interface
+                  value: '{#IFNAME}'
+            - uuid: 2d9f3a7df15248f69fba197f65c769cf
+              name: 'Interface {#IFNAME}({#IFALIAS}): SSID'
+              type: DEPENDENT
+              key: 'ssid.name[mtxrWlApSsid.{#SNMPINDEX}]'
+              value_type: CHAR
+              description: |
+                MIB: MIKROTIK-MIB
+                mtxrWlApSsid Service Set Identifier.
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.4.1.14988.1.1.1.3.1.4.{#SNMPINDEX}'
+                    - '0'
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              master_item:
+                key: net.if.wireless.walk
+              tags:
+                - tag: component
+                  value: interface
+                - tag: component
+                  value: network
+                - tag: interface
+                  value: '{#IFNAME}'
+            - uuid: 96e281bf4d7f49af8bb98246e8071036
+              name: 'Interface {#IFNAME}({#IFALIAS}): AP noise floor'
+              type: DEPENDENT
+              key: 'ssid.noise[mtxrWlApNoiseFloor.{#SNMPINDEX}]'
+              value_type: FLOAT
+              description: |
+                MIB: MIKROTIK-MIB
+                mtxrWlApNoiseFloor
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.4.1.14988.1.1.1.3.1.9.{#SNMPINDEX}'
+                    - '0'
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 15m
+              master_item:
+                key: net.if.wireless.walk
+              tags:
+                - tag: component
+                  value: interface
+                - tag: component
+                  value: network
+                - tag: interface
+                  value: '{#IFNAME}'
+            - uuid: dcb09a83cb20407883eb565baabba22e
+              name: 'Interface {#IFNAME}({#IFALIAS}): AP registered clients'
+              type: DEPENDENT
+              key: 'ssid.regclient[mtxrWlApClientCount.{#SNMPINDEX}]'
+              description: |
+                MIB: MIKROTIK-MIB
+                mtxrWlApClientCount Client established connection to AP, but didn't finish all authentication procedures for full connection.
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.4.1.14988.1.1.1.3.1.6.{#SNMPINDEX}'
+                    - '0'
+              master_item:
+                key: net.if.wireless.walk
+              tags:
+                - tag: component
+                  value: interface
+                - tag: component
+                  value: network
+                - tag: interface
+                  value: '{#IFNAME}'
+          master_item:
+            key: net.if.wireless.walk
+          preprocessing:
+            - type: SNMP_WALK_TO_JSON
+              parameters:
+                - '{#IFNAME}'
+                - 1.3.6.1.4.1.14988.1.1.14.1.1.2
+                - '0'
+                - '{#IFALIAS}'
+                - 1.3.6.1.2.1.31.1.1.1.18
+                - '0'
+                - '{#IFTYPE}'
+                - 1.3.6.1.2.1.2.2.1.3
+                - '0'
+                - '{#IFADMINSTATUS}'
+                - 1.3.6.1.2.1.2.2.1.7
+                - '0'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 82f6e940b42f49f6a70d39a7f22dc404
+          name: 'CAPsMAN AP channel discovery'
+          type: DEPENDENT
+          key: mtxrWlCMChannel.discovery
+          filter:
+            evaltype: AND
+            conditions:
+              - macro: '{#IFNAME}'
+                value: '{$IFNAME.WIFI.MATCHES}'
+              - macro: '{#IFTYPE}'
+                value: ^1$
+          description: 'MIKROTIK-MIB::mtxrWlCMChannel.'
+          item_prototypes:
+            - uuid: 8d327b7d75f14dabaaf6891df93067e1
+              name: 'Interface {#IFNAME}({#IFALIAS}): AP authenticated clients'
+              type: DEPENDENT
+              key: 'ssid.authclient[mtxrWlCMAuthClientCount.{#SNMPINDEX}]'
+              description: |
+                MIB: MIKROTIK-MIB
+                mtxrWlCMAuthClientCount Number of authentication clients.
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.4.1.14988.1.1.1.7.1.3.{#SNMPINDEX}'
+                    - '0'
+              master_item:
+                key: net.if.wireless.walk
+              tags:
+                - tag: component
+                  value: interface
+                - tag: component
+                  value: network
+                - tag: interface
+                  value: '{#IFNAME}'
+            - uuid: 849c934b4f4a47c89c285ee02a4795a7
+              name: 'Interface {#IFNAME}({#IFALIAS}): AP channel'
+              type: DEPENDENT
+              key: 'ssid.channel[mtxrWlCMChannel.{#SNMPINDEX}]'
+              value_type: CHAR
+              description: |
+                MIB: MIKROTIK-MIB
+                mtxrWlCMChannel
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.4.1.14988.1.1.1.7.1.5.{#SNMPINDEX}'
+                    - '0'
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              master_item:
+                key: net.if.wireless.walk
+              tags:
+                - tag: component
+                  value: interface
+                - tag: component
+                  value: network
+                - tag: interface
+                  value: '{#IFNAME}'
+            - uuid: da4f719b91f243df86d4a5f9d5e6294b
+              name: 'Interface {#IFNAME}({#IFALIAS}): AP registered clients'
+              type: DEPENDENT
+              key: 'ssid.regclient[mtxrWlCMRegClientCount.{#SNMPINDEX}]'
+              description: |
+                MIB: MIKROTIK-MIB
+                mtxrWlCMRegClientCount Client established connection to AP, but didn't finish all authentication procedures for full connection.
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.4.1.14988.1.1.1.7.1.2.{#SNMPINDEX}'
+                    - '0'
+              master_item:
+                key: net.if.wireless.walk
+              tags:
+                - tag: component
+                  value: interface
+                - tag: component
+                  value: network
+                - tag: interface
+                  value: '{#IFNAME}'
+            - uuid: 7f019c978f854830843fc9da254bd5f3
+              name: 'Interface {#IFNAME}({#IFALIAS}): AP state'
+              type: DEPENDENT
+              key: 'ssid.state[mtxrWlCMState.{#SNMPINDEX}]'
+              value_type: CHAR
+              description: |
+                MIB: MIKROTIK-MIB
+                mtxrWlCMState Wireless interface state.
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.4.1.14988.1.1.1.7.1.4.{#SNMPINDEX}'
+                    - '0'
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              master_item:
+                key: net.if.wireless.walk
+              tags:
+                - tag: component
+                  value: interface
+                - tag: component
+                  value: network
+                - tag: interface
+                  value: '{#IFNAME}'
+              trigger_prototypes:
+                - uuid: 9f23c7c1c8a04c099659bc2ffefc3136
+                  expression: 'last(/MikroTik All CCR Types by SNMP/ssid.state[mtxrWlCMState.{#SNMPINDEX}])<>"running-ap"'
+                  name: 'MikroTik: Interface {#IFNAME}({#IFALIAS}): AP interface {#IFNAME}({#IFALIAS}) is not running'
+                  priority: WARNING
+                  description: 'Access point interface can be not running by different reasons - disabled interface, power off, network link down.'
+                  tags:
+                    - tag: scope
+                      value: availability
+                    - tag: scope
+                      value: performance
+          master_item:
+            key: net.if.wireless.walk
+          preprocessing:
+            - type: SNMP_WALK_TO_JSON
+              parameters:
+                - '{#IFNAME}'
+                - 1.3.6.1.4.1.14988.1.1.14.1.1.2
+                - '0'
+                - '{#IFALIAS}'
+                - 1.3.6.1.2.1.31.1.1.1.18
+                - '0'
+                - '{#IFTYPE}'
+                - 1.3.6.1.2.1.2.2.1.3
+                - '0'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: a326f4156206454eac0bc8ab33809b26
+          name: 'Network interfaces discovery'
+          type: DEPENDENT
+          key: net.if.discovery
+          filter:
+            evaltype: AND
+            conditions:
+              - macro: '{#IFADMINSTATUS}'
+                value: '{$NET.IF.IFADMINSTATUS.MATCHES}'
+              - macro: '{#IFADMINSTATUS}'
+                value: '{$NET.IF.IFADMINSTATUS.NOT_MATCHES}'
+                operator: NOT_MATCHES_REGEX
+              - macro: '{#IFALIAS}'
+                value: '{$NET.IF.IFALIAS.MATCHES}'
+              - macro: '{#IFALIAS}'
+                value: '{$NET.IF.IFALIAS.NOT_MATCHES}'
+                operator: NOT_MATCHES_REGEX
+              - macro: '{#IFDESCR}'
+                value: '{$NET.IF.IFDESCR.MATCHES}'
+              - macro: '{#IFDESCR}'
+                value: '{$NET.IF.IFDESCR.NOT_MATCHES}'
+                operator: NOT_MATCHES_REGEX
+              - macro: '{#IFNAME}'
+                value: '{$NET.IF.IFNAME.MATCHES}'
+              - macro: '{#IFNAME}'
+                value: '{$NET.IF.IFNAME.NOT_MATCHES}'
+                operator: NOT_MATCHES_REGEX
+              - macro: '{#IFOPERSTATUS}'
+                value: '{$NET.IF.IFOPERSTATUS.MATCHES}'
+              - macro: '{#IFOPERSTATUS}'
+                value: '{$NET.IF.IFOPERSTATUS.NOT_MATCHES}'
+                operator: NOT_MATCHES_REGEX
+              - macro: '{#IFTYPE}'
+                value: '{$NET.IF.IFTYPE.MATCHES}'
+              - macro: '{#IFTYPE}'
+                value: '{$NET.IF.IFTYPE.NOT_MATCHES}'
+                operator: NOT_MATCHES_REGEX
+          description: 'Discovering interfaces from IF-MIB.'
+          item_prototypes:
+            - uuid: 94b40ef73d894ced83191b5502836164
+              name: 'Interface {#IFNAME}({#IFALIAS}): Inbound packets discarded'
+              type: DEPENDENT
+              key: 'net.if.in.discards[ifInDiscards.{#SNMPINDEX}]'
+              description: |
+                MIB: IF-MIB
+                The number of inbound packets which were chosen to be discarded
+                even though no errors had been detected to prevent their being deliverable to a higher-layer protocol.
+                One possible reason for discarding such a packet could be to free up buffer space.
+                Discontinuities in the value of this counter can occur at re-initialization of the management system,
+                and at other times as indicated by the value of ifCounterDiscontinuityTime.
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.2.1.2.2.1.13.{#SNMPINDEX}'
+                    - '0'
+                - type: CHANGE_PER_SECOND
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 3m
+              master_item:
+                key: net.if.walk
+              tags:
+                - tag: component
+                  value: network
+                - tag: description
+                  value: '{#IFALIAS}'
+                - tag: interface
+                  value: '{#IFNAME}'
+            - uuid: 37dc4d00dd9a48edbbe5fe275f45d5fd
+              name: 'Interface {#IFNAME}({#IFALIAS}): Inbound packets with errors'
+              type: DEPENDENT
+              key: 'net.if.in.errors[ifInErrors.{#SNMPINDEX}]'
+              description: |
+                MIB: IF-MIB
+                For packet-oriented interfaces, the number of inbound packets that contained errors preventing them from being deliverable to a higher-layer protocol.  For character-oriented or fixed-length interfaces, the number of inbound transmission units that contained errors preventing them from being deliverable to a higher-layer protocol. Discontinuities in the value of this counter can occur at re-initialization of the management system, and at other times as indicated by the value of ifCounterDiscontinuityTime.
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.2.1.2.2.1.14.{#SNMPINDEX}'
+                    - '0'
+                - type: CHANGE_PER_SECOND
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 3m
+              master_item:
+                key: net.if.walk
+              tags:
+                - tag: component
+                  value: network
+                - tag: description
+                  value: '{#IFALIAS}'
+                - tag: interface
+                  value: '{#IFNAME}'
+            - uuid: a99009db60d94a00be8ef5c8c3659319
+              name: 'Interface {#IFNAME}({#IFALIAS}): Bits received'
+              type: DEPENDENT
+              key: 'net.if.in[ifHCInOctets.{#SNMPINDEX}]'
+              units: bps
+              description: |
+                MIB: IF-MIB
+                The total number of octets received on the interface, including framing characters. This object is a 64-bit version of ifInOctets. Discontinuities in the value of this counter can occur at re-initialization of the management system, and at other times as indicated by the value of ifCounterDiscontinuityTime.
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.2.1.31.1.1.1.6.{#SNMPINDEX}'
+                    - '0'
+                - type: CHANGE_PER_SECOND
+                - type: MULTIPLIER
+                  parameters:
+                    - '8'
+              master_item:
+                key: net.if.walk
+              tags:
+                - tag: component
+                  value: network
+                - tag: description
+                  value: '{#IFALIAS}'
+                - tag: interface
+                  value: '{#IFNAME}'
+            - uuid: 66cad0884489482f897e7165c7c6b34d
+              name: 'Interface {#IFNAME}({#IFALIAS}): Outbound packets discarded'
+              type: DEPENDENT
+              key: 'net.if.out.discards[ifOutDiscards.{#SNMPINDEX}]'
+              description: |
+                MIB: IF-MIB
+                The number of outbound packets which were chosen to be discarded
+                even though no errors had been detected to prevent their being deliverable to a higher-layer protocol.
+                One possible reason for discarding such a packet could be to free up buffer space.
+                Discontinuities in the value of this counter can occur at re-initialization of the management system,
+                and at other times as indicated by the value of ifCounterDiscontinuityTime.
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.2.1.2.2.1.19.{#SNMPINDEX}'
+                    - '0'
+                - type: CHANGE_PER_SECOND
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 3m
+              master_item:
+                key: net.if.walk
+              tags:
+                - tag: component
+                  value: network
+                - tag: description
+                  value: '{#IFALIAS}'
+                - tag: interface
+                  value: '{#IFNAME}'
+            - uuid: 46f0c96bd6d84ae5a7c413614f102e66
+              name: 'Interface {#IFNAME}({#IFALIAS}): Outbound packets with errors'
+              type: DEPENDENT
+              key: 'net.if.out.errors[ifOutErrors.{#SNMPINDEX}]'
+              description: |
+                MIB: IF-MIB
+                For packet-oriented interfaces, the number of outbound packets that contained errors preventing them from being deliverable to a higher-layer protocol.  For character-oriented or fixed-length interfaces, the number of outbound transmission units that contained errors preventing them from being deliverable to a higher-layer protocol. Discontinuities in the value of this counter can occur at re-initialization of the management system, and at other times as indicated by the value of ifCounterDiscontinuityTime.
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.2.1.2.2.1.20.{#SNMPINDEX}'
+                    - '0'
+                - type: CHANGE_PER_SECOND
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 3m
+              master_item:
+                key: net.if.walk
+              tags:
+                - tag: component
+                  value: network
+                - tag: description
+                  value: '{#IFALIAS}'
+                - tag: interface
+                  value: '{#IFNAME}'
+            - uuid: 1fc43e06b77e49cc81b9d8a7a4673a0f
+              name: 'Interface {#IFNAME}({#IFALIAS}): Bits sent'
+              type: DEPENDENT
+              key: 'net.if.out[ifHCOutOctets.{#SNMPINDEX}]'
+              units: bps
+              description: |
+                MIB: IF-MIB
+                The total number of octets transmitted out of the interface, including framing characters. This object is a 64-bit version of ifOutOctets.Discontinuities in the value of this counter can occur at re-initialization of the management system, and at other times as indicated by the value of ifCounterDiscontinuityTime.
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.2.1.31.1.1.1.10.{#SNMPINDEX}'
+                    - '0'
+                - type: CHANGE_PER_SECOND
+                - type: MULTIPLIER
+                  parameters:
+                    - '8'
+              master_item:
+                key: net.if.walk
+              tags:
+                - tag: component
+                  value: network
+                - tag: description
+                  value: '{#IFALIAS}'
+                - tag: interface
+                  value: '{#IFNAME}'
+            - uuid: d06f007f17e44447903564454fe210ac
+              name: 'Interface {#IFNAME}({#IFALIAS}): Speed'
+              type: DEPENDENT
+              key: 'net.if.speed[ifHighSpeed.{#SNMPINDEX}]'
+              trends: '0'
+              units: bps
+              description: |
+                MIB: IF-MIB
+                An estimate of the interface's current bandwidth in units of 1,000,000 bits per second. If this object reports a value of `n`, then the speed of the interface is somewhere in the range of `n-500,000` to `n+499,999`.
+                For interfaces which do not vary in bandwidth or for those where no accurate estimation can be made, this object should contain the nominal bandwidth.
+                For a sub-layer which has no concept of bandwidth, this object should be zero.
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.2.1.31.1.1.1.15.{#SNMPINDEX}'
+                    - '0'
+                - type: MULTIPLIER
+                  parameters:
+                    - '1000000'
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              master_item:
+                key: net.if.walk
+              tags:
+                - tag: component
+                  value: network
+                - tag: description
+                  value: '{#IFALIAS}'
+                - tag: interface
+                  value: '{#IFNAME}'
+            - uuid: d5e0f7572a6a4085b98c406298490f74
+              name: 'Interface {#IFNAME}({#IFALIAS}): Operational status'
+              type: DEPENDENT
+              key: 'net.if.status[ifOperStatus.{#SNMPINDEX}]'
+              trends: '0'
+              description: |
+                MIB: IF-MIB
+                The current operational state of the interface.
+                - The testing(3) state indicates that no operational packet scan be passed
+                - If ifAdminStatus is down(2) then ifOperStatus should be down(2)
+                - If ifAdminStatus is changed to up(1) then ifOperStatus should change to up(1) if the interface is ready to transmit and receive network traffic
+                - It should change todormant(5) if the interface is waiting for external actions (such as a serial line waiting for an incoming connection)
+                - It should remain in the down(2) state if and only if there is a fault that prevents it from going to the up(1) state
+                - It should remain in the notPresent(6) state if the interface has missing(typically, hardware) components.
+              valuemap:
+                name: 'IF-MIB::ifOperStatus'
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.2.1.2.2.1.8.{#SNMPINDEX}'
+                    - '0'
+              master_item:
+                key: net.if.walk
+              tags:
+                - tag: component
+                  value: network
+                - tag: description
+                  value: '{#IFALIAS}'
+                - tag: interface
+                  value: '{#IFNAME}'
+              trigger_prototypes:
+                - uuid: 2bd7ed6469d04ba4b8e03d19b40d398f
+                  expression: '{$IFCONTROL:"{#IFNAME}"}=1 and last(/MikroTik All CCR Types by SNMP/net.if.status[ifOperStatus.{#SNMPINDEX}])=2 and (last(/MikroTik All CCR Types by SNMP/net.if.status[ifOperStatus.{#SNMPINDEX}],#1)<>last(/MikroTik All CCR Types by SNMP/net.if.status[ifOperStatus.{#SNMPINDEX}],#2))'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/MikroTik All CCR Types by SNMP/net.if.status[ifOperStatus.{#SNMPINDEX}])<>2 or {$IFCONTROL:"{#IFNAME}"}=0'
+                  name: 'MikroTik: Interface {#IFNAME}({#IFALIAS}): Link down'
+                  opdata: 'Current state: {ITEM.LASTVALUE1}'
+                  priority: AVERAGE
+                  description: |
+                    This trigger expression works as follows:
+                    1. It can be triggered if the operations status is down.
+                    2. `{$IFCONTROL:"{#IFNAME}"}=1` - a user can redefine the context macro to "0", marking this interface as not important. No new trigger will be fired if this interface is down.
+                    3. `last(/TEMPLATE_NAME/METRIC,#1)<>last(/TEMPLATE_NAME/METRIC,#2)` - the trigger fires only if the operational status was up to (1) sometime before (so, does not fire for "eternal off" interfaces.)
+                    
+                    WARNING: if closed manually - it will not fire again on the next poll, because of .diff.
+                  manual_close: 'YES'
+                  tags:
+                    - tag: scope
+                      value: availability
+            - uuid: 3a07fcfbfb0b4236837e116ae8a0961a
+              name: 'Interface {#IFNAME}({#IFALIAS}): Interface type'
+              type: DEPENDENT
+              key: 'net.if.type[ifType.{#SNMPINDEX}]'
+              trends: '0'
+              description: |
+                MIB: IF-MIB
+                The type of interface.
+                Additional values for ifType are assigned by the Internet Assigned Numbers Authority (IANA),
+                through updating the syntax of the IANAifType textual convention.
+              valuemap:
+                name: 'IF-MIB::ifType'
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.2.1.2.2.1.3.{#SNMPINDEX}'
+                    - '0'
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1d
+              master_item:
+                key: net.if.walk
+              tags:
+                - tag: component
+                  value: network
+                - tag: description
+                  value: '{#IFALIAS}'
+                - tag: interface
+                  value: '{#IFNAME}'
+          trigger_prototypes:
+            - uuid: 5bf2b9cde4ef44c0ac379ea73d479b7d
+              expression: |
+                change(/MikroTik All CCR Types by SNMP/net.if.speed[ifHighSpeed.{#SNMPINDEX}])<0 and last(/MikroTik All CCR Types by SNMP/net.if.speed[ifHighSpeed.{#SNMPINDEX}])>0
+                and (
+                last(/MikroTik All CCR Types by SNMP/net.if.type[ifType.{#SNMPINDEX}])=6 or
+                last(/MikroTik All CCR Types by SNMP/net.if.type[ifType.{#SNMPINDEX}])=7 or
+                last(/MikroTik All CCR Types by SNMP/net.if.type[ifType.{#SNMPINDEX}])=11 or
+                last(/MikroTik All CCR Types by SNMP/net.if.type[ifType.{#SNMPINDEX}])=62 or
+                last(/MikroTik All CCR Types by SNMP/net.if.type[ifType.{#SNMPINDEX}])=69 or
+                last(/MikroTik All CCR Types by SNMP/net.if.type[ifType.{#SNMPINDEX}])=117
+                )
+                and
+                (last(/MikroTik All CCR Types by SNMP/net.if.status[ifOperStatus.{#SNMPINDEX}])<>2)
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: |
+                (change(/MikroTik All CCR Types by SNMP/net.if.speed[ifHighSpeed.{#SNMPINDEX}])>0 and last(/MikroTik All CCR Types by SNMP/net.if.speed[ifHighSpeed.{#SNMPINDEX}],#2)>0) or
+                (last(/MikroTik All CCR Types by SNMP/net.if.status[ifOperStatus.{#SNMPINDEX}])=2)
+              name: 'MikroTik: Interface {#IFNAME}({#IFALIAS}): Ethernet has changed to lower speed than it was before'
+              opdata: 'Current reported speed: {ITEM.LASTVALUE1}'
+              priority: INFO
+              description: 'This Ethernet connection has transitioned down from its known maximum speed. This might be a sign of autonegotiation issues. Acknowledge to close the problem manually.'
+              manual_close: 'YES'
+              dependencies:
+                - name: 'MikroTik: Interface {#IFNAME}({#IFALIAS}): Link down'
+                  expression: '{$IFCONTROL:"{#IFNAME}"}=1 and last(/MikroTik All CCR Types by SNMP/net.if.status[ifOperStatus.{#SNMPINDEX}])=2 and (last(/MikroTik All CCR Types by SNMP/net.if.status[ifOperStatus.{#SNMPINDEX}],#1)<>last(/MikroTik All CCR Types by SNMP/net.if.status[ifOperStatus.{#SNMPINDEX}],#2))'
+                  recovery_expression: 'last(/MikroTik All CCR Types by SNMP/net.if.status[ifOperStatus.{#SNMPINDEX}])<>2 or {$IFCONTROL:"{#IFNAME}"}=0'
+              tags:
+                - tag: scope
+                  value: performance
+            - uuid: a93785105115493599a2f8dc3ef856b1
+              expression: |
+                (avg(/MikroTik All CCR Types by SNMP/net.if.in[ifHCInOctets.{#SNMPINDEX}],15m)>({$IF.UTIL.MAX:"{#IFNAME}"}/100)*last(/MikroTik All CCR Types by SNMP/net.if.speed[ifHighSpeed.{#SNMPINDEX}]) or
+                avg(/MikroTik All CCR Types by SNMP/net.if.out[ifHCOutOctets.{#SNMPINDEX}],15m)>({$IF.UTIL.MAX:"{#IFNAME}"}/100)*last(/MikroTik All CCR Types by SNMP/net.if.speed[ifHighSpeed.{#SNMPINDEX}])) and
+                last(/MikroTik All CCR Types by SNMP/net.if.speed[ifHighSpeed.{#SNMPINDEX}])>0
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: |
+                avg(/MikroTik All CCR Types by SNMP/net.if.in[ifHCInOctets.{#SNMPINDEX}],15m)<(({$IF.UTIL.MAX:"{#IFNAME}"}-3)/100)*last(/MikroTik All CCR Types by SNMP/net.if.speed[ifHighSpeed.{#SNMPINDEX}]) and
+                avg(/MikroTik All CCR Types by SNMP/net.if.out[ifHCOutOctets.{#SNMPINDEX}],15m)<(({$IF.UTIL.MAX:"{#IFNAME}"}-3)/100)*last(/MikroTik All CCR Types by SNMP/net.if.speed[ifHighSpeed.{#SNMPINDEX}])
+              name: 'MikroTik: Interface {#IFNAME}({#IFALIAS}): High bandwidth usage'
+              event_name: 'MikroTik: Interface {#IFNAME}({#IFALIAS}): High bandwidth usage (>{$IF.UTIL.MAX:"{#IFNAME}"}%)'
+              opdata: 'In: {ITEM.LASTVALUE1}, out: {ITEM.LASTVALUE3}, speed: {ITEM.LASTVALUE2}'
+              priority: WARNING
+              description: 'The utilization of the network interface is close to its estimated maximum bandwidth.'
+              manual_close: 'YES'
+              dependencies:
+                - name: 'MikroTik: Interface {#IFNAME}({#IFALIAS}): Link down'
+                  expression: '{$IFCONTROL:"{#IFNAME}"}=1 and last(/MikroTik All CCR Types by SNMP/net.if.status[ifOperStatus.{#SNMPINDEX}])=2 and (last(/MikroTik All CCR Types by SNMP/net.if.status[ifOperStatus.{#SNMPINDEX}],#1)<>last(/MikroTik All CCR Types by SNMP/net.if.status[ifOperStatus.{#SNMPINDEX}],#2))'
+                  recovery_expression: 'last(/MikroTik All CCR Types by SNMP/net.if.status[ifOperStatus.{#SNMPINDEX}])<>2 or {$IFCONTROL:"{#IFNAME}"}=0'
+              tags:
+                - tag: scope
+                  value: performance
+            - uuid: 0455afcc5f4548238b2bb54c78fe8a18
+              expression: |
+                min(/MikroTik All CCR Types by SNMP/net.if.in.errors[ifInErrors.{#SNMPINDEX}],5m)>{$IF.ERRORS.WARN:"{#IFNAME}"}
+                or min(/MikroTik All CCR Types by SNMP/net.if.out.errors[ifOutErrors.{#SNMPINDEX}],5m)>{$IF.ERRORS.WARN:"{#IFNAME}"}
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: |
+                max(/MikroTik All CCR Types by SNMP/net.if.in.errors[ifInErrors.{#SNMPINDEX}],5m)<{$IF.ERRORS.WARN:"{#IFNAME}"}*0.8
+                and max(/MikroTik All CCR Types by SNMP/net.if.out.errors[ifOutErrors.{#SNMPINDEX}],5m)<{$IF.ERRORS.WARN:"{#IFNAME}"}*0.8
+              name: 'MikroTik: Interface {#IFNAME}({#IFALIAS}): High error rate'
+              event_name: 'MikroTik: Interface {#IFNAME}({#IFALIAS}): High error rate (>{$IF.ERRORS.WARN:"{#IFNAME}"} for 5m)'
+              opdata: 'errors in: {ITEM.LASTVALUE1}, errors out: {ITEM.LASTVALUE2}'
+              priority: WARNING
+              description: 'It recovers when it is below 80% of the `{$IF.ERRORS.WARN:"{#IFNAME}"}` threshold.'
+              manual_close: 'YES'
+              dependencies:
+                - name: 'MikroTik: Interface {#IFNAME}({#IFALIAS}): Link down'
+                  expression: '{$IFCONTROL:"{#IFNAME}"}=1 and last(/MikroTik All CCR Types by SNMP/net.if.status[ifOperStatus.{#SNMPINDEX}])=2 and (last(/MikroTik All CCR Types by SNMP/net.if.status[ifOperStatus.{#SNMPINDEX}],#1)<>last(/MikroTik All CCR Types by SNMP/net.if.status[ifOperStatus.{#SNMPINDEX}],#2))'
+                  recovery_expression: 'last(/MikroTik All CCR Types by SNMP/net.if.status[ifOperStatus.{#SNMPINDEX}])<>2 or {$IFCONTROL:"{#IFNAME}"}=0'
+              tags:
+                - tag: scope
+                  value: availability
+                - tag: scope
+                  value: performance
+          graph_prototypes:
+            - uuid: 1b9ecb1d0010404cba62dce4c616561f
+              name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
+              graph_items:
+                - drawtype: GRADIENT_LINE
+                  color: 199C0D
+                  item:
+                    host: 'MikroTik All CCR Types by SNMP'
+                    key: 'net.if.in[ifHCInOctets.{#SNMPINDEX}]'
+                - sortorder: '1'
+                  drawtype: BOLD_LINE
+                  color: F63100
+                  item:
+                    host: 'MikroTik All CCR Types by SNMP'
+                    key: 'net.if.out[ifHCOutOctets.{#SNMPINDEX}]'
+                - sortorder: '2'
+                  color: 00611C
+                  yaxisside: RIGHT
+                  item:
+                    host: 'MikroTik All CCR Types by SNMP'
+                    key: 'net.if.out.errors[ifOutErrors.{#SNMPINDEX}]'
+                - sortorder: '3'
+                  color: F7941D
+                  yaxisside: RIGHT
+                  item:
+                    host: 'MikroTik All CCR Types by SNMP'
+                    key: 'net.if.in.errors[ifInErrors.{#SNMPINDEX}]'
+                - sortorder: '4'
+                  color: FC6EA3
+                  yaxisside: RIGHT
+                  item:
+                    host: 'MikroTik All CCR Types by SNMP'
+                    key: 'net.if.out.discards[ifOutDiscards.{#SNMPINDEX}]'
+                - sortorder: '5'
+                  color: 6C59DC
+                  yaxisside: RIGHT
+                  item:
+                    host: 'MikroTik All CCR Types by SNMP'
+                    key: 'net.if.in.discards[ifInDiscards.{#SNMPINDEX}]'
+          master_item:
+            key: net.if.walk
+          preprocessing:
+            - type: SNMP_WALK_TO_JSON
+              parameters:
+                - '{#IFOPERSTATUS}'
+                - 1.3.6.1.2.1.2.2.1.8
+                - '0'
+                - '{#IFADMINSTATUS}'
+                - 1.3.6.1.2.1.2.2.1.7
+                - '0'
+                - '{#IFALIAS}'
+                - 1.3.6.1.2.1.31.1.1.1.18
+                - '0'
+                - '{#IFNAME}'
+                - 1.3.6.1.2.1.31.1.1.1.1
+                - '0'
+                - '{#IFDESCR}'
+                - 1.3.6.1.2.1.2.2.1.2
+                - '0'
+                - '{#IFTYPE}'
+                - 1.3.6.1.2.1.2.2.1.3
+                - '0'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: c4fc19c6e56d4fa9bf66c554aae24ecb
+          name: 'Storage discovery'
+          type: DEPENDENT
+          key: storage.discovery
+          filter:
+            evaltype: OR
+            conditions:
+              - macro: '{#STORAGE_TYPE}'
+                value: .+4$
+              - macro: '{#STORAGE_TYPE}'
+                value: .+hrStorageFixedDisk
+          description: 'HOST-RESOURCES-MIB::hrStorage discovery with storage filter.'
+          item_prototypes:
+            - uuid: 14e8722e6814420a84e55f371037dfae
+              name: 'Disk-{#SNMPINDEX}: Space utilization'
+              type: CALCULATED
+              key: 'vfs.fs.pused[hrStorageSize.{#SNMPINDEX}]'
+              value_type: FLOAT
+              units: '%'
+              params: '(last(//vfs.fs.used[hrStorageSize.{#SNMPINDEX}])/last(//vfs.fs.total[hrStorageSize.{#SNMPINDEX}]))*100'
+              description: 'The space utilization expressed in % for Disk-{#SNMPINDEX}.'
+              tags:
+                - tag: component
+                  value: storage
+                - tag: filesystem
+                  value: '{#FSNAME}'
+            - uuid: d95c14a57eaa4960bed475f7dbf791c7
+              name: 'Disk-{#SNMPINDEX}: Total space'
+              type: DEPENDENT
+              key: 'vfs.fs.total[hrStorageSize.{#SNMPINDEX}]'
+              units: B
+              description: |
+                MIB: HOST-RESOURCES-MIB
+                The size of the storage represented by this entry, in
+                units of hrStorageAllocationUnits. This object is
+                writable to allow remote configuration of the size of
+                the storage area in those cases where such an
+                operation makes sense and is possible on the
+                underlying system. For example, the amount of main
+                memory allocated to a buffer pool might be modified or
+                the amount of disk space allocated to virtual memory
+                might be modified.
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.2.1.25.2.3.1.5.{#SNMPINDEX}'
+                    - '0'
+                - type: MULTIPLIER
+                  parameters:
+                    - '1024'
+              master_item:
+                key: vfs.fs.walk
+              tags:
+                - tag: component
+                  value: storage
+                - tag: filesystem
+                  value: '{#FSNAME}'
+            - uuid: 611b22cdef7e4ba3891716089b660c96
+              name: 'Disk-{#SNMPINDEX}: Used space'
+              type: DEPENDENT
+              key: 'vfs.fs.used[hrStorageSize.{#SNMPINDEX}]'
+              units: B
+              description: |
+                MIB: HOST-RESOURCES-MIB
+                The amount of the storage represented by this entry that is allocated, in units of hrStorageAllocationUnits.
+              preprocessing:
+                - type: SNMP_WALK_VALUE
+                  parameters:
+                    - '1.3.6.1.2.1.25.2.3.1.6.{#SNMPINDEX}'
+                    - '0'
+                - type: MULTIPLIER
+                  parameters:
+                    - '1024'
+              master_item:
+                key: vfs.fs.walk
+              tags:
+                - tag: component
+                  value: storage
+                - tag: filesystem
+                  value: '{#FSNAME}'
+          trigger_prototypes:
+            - uuid: 799bd057076142919813b0def2024aa6
+              expression: |
+                last(/MikroTik All CCR Types by SNMP/vfs.fs.pused[hrStorageSize.{#SNMPINDEX}])>{$VFS.FS.PUSED.MAX.CRIT:"Disk-{#SNMPINDEX}"} and
+                ((last(/MikroTik All CCR Types by SNMP/vfs.fs.total[hrStorageSize.{#SNMPINDEX}])-last(/MikroTik All CCR Types by SNMP/vfs.fs.used[hrStorageSize.{#SNMPINDEX}]))<{$VFS.FS.FREE.MIN.CRIT:"Disk-{#SNMPINDEX}"} or timeleft(/MikroTik All CCR Types by SNMP/vfs.fs.pused[hrStorageSize.{#SNMPINDEX}],1h,100)<1d)
+              name: 'MikroTik: Disk-{#SNMPINDEX}: Disk space is critically low'
+              event_name: 'MikroTik: Disk-{#SNMPINDEX}: Disk space is critically low (used > {$VFS.FS.PUSED.MAX.CRIT:"Disk-{#SNMPINDEX}"}%)'
+              opdata: 'Space used: {ITEM.LASTVALUE3} of {ITEM.LASTVALUE2} ({ITEM.LASTVALUE1})'
+              priority: AVERAGE
+              description: |
+                Two conditions should match: First, space utilization should be above {$VFS.FS.PUSED.MAX.CRIT:"Disk-{#SNMPINDEX}"}.
+                 Second condition should be one of the following:
+                 - The disk free space is less than {$VFS.FS.FREE.MIN.CRIT:"Disk-{#SNMPINDEX}"}.
+                 - The disk will be full in less than 24 hours.
+              manual_close: 'YES'
+              tags:
+                - tag: scope
+                  value: availability
+                - tag: scope
+                  value: capacity
+            - uuid: cff5e7f0502846a1b87ef10b6d28dbe5
+              expression: |
+                last(/MikroTik All CCR Types by SNMP/vfs.fs.pused[hrStorageSize.{#SNMPINDEX}])>{$VFS.FS.PUSED.MAX.WARN:"Disk-{#SNMPINDEX}"} and
+                ((last(/MikroTik All CCR Types by SNMP/vfs.fs.total[hrStorageSize.{#SNMPINDEX}])-last(/MikroTik All CCR Types by SNMP/vfs.fs.used[hrStorageSize.{#SNMPINDEX}]))<{$VFS.FS.FREE.MIN.WARN:"Disk-{#SNMPINDEX}"} or timeleft(/MikroTik All CCR Types by SNMP/vfs.fs.pused[hrStorageSize.{#SNMPINDEX}],1h,100)<1d)
+              name: 'MikroTik: Disk-{#SNMPINDEX}: Disk space is low'
+              event_name: 'MikroTik: Disk-{#SNMPINDEX}: Disk space is low (used > {$VFS.FS.PUSED.MAX.WARN:"Disk-{#SNMPINDEX}"}%)'
+              opdata: 'Space used: {ITEM.LASTVALUE3} of {ITEM.LASTVALUE2} ({ITEM.LASTVALUE1})'
+              priority: WARNING
+              description: |
+                Two conditions should match: First, space utilization should be above {$VFS.FS.PUSED.MAX.WARN:"Disk-{#SNMPINDEX}"}.
+                 Second condition should be one of the following:
+                 - The disk free space is less than {$VFS.FS.FREE.MIN.WARN:"Disk-{#SNMPINDEX}"}.
+                 - The disk will be full in less than 24 hours.
+              manual_close: 'YES'
+              dependencies:
+                - name: 'MikroTik: Disk-{#SNMPINDEX}: Disk space is critically low'
+                  expression: |
+                    last(/MikroTik All CCR Types by SNMP/vfs.fs.pused[hrStorageSize.{#SNMPINDEX}])>{$VFS.FS.PUSED.MAX.CRIT:"Disk-{#SNMPINDEX}"} and
+                    ((last(/MikroTik All CCR Types by SNMP/vfs.fs.total[hrStorageSize.{#SNMPINDEX}])-last(/MikroTik All CCR Types by SNMP/vfs.fs.used[hrStorageSize.{#SNMPINDEX}]))<{$VFS.FS.FREE.MIN.CRIT:"Disk-{#SNMPINDEX}"} or timeleft(/MikroTik All CCR Types by SNMP/vfs.fs.pused[hrStorageSize.{#SNMPINDEX}],1h,100)<1d)
+              tags:
+                - tag: scope
+                  value: availability
+                - tag: scope
+                  value: capacity
+          graph_prototypes:
+            - uuid: af6469dc0bce475fb4e101f692abddd1
+              name: 'Disk-{#SNMPINDEX}: Disk space usage'
+              width: '600'
+              height: '340'
+              show_work_period: 'NO'
+              show_triggers: 'NO'
+              graph_items:
+                - color: '969696'
+                  calc_fnc: MIN
+                  item:
+                    host: 'MikroTik All CCR Types by SNMP'
+                    key: 'vfs.fs.total[hrStorageSize.{#SNMPINDEX}]'
+                - sortorder: '1'
+                  color: C80000
+                  calc_fnc: MIN
+                  item:
+                    host: 'MikroTik All CCR Types by SNMP'
+                    key: 'vfs.fs.used[hrStorageSize.{#SNMPINDEX}]'
+          master_item:
+            key: vfs.fs.walk
+          preprocessing:
+            - type: SNMP_WALK_TO_JSON
+              parameters:
+                - '{#FSNAME}'
+                - 1.3.6.1.2.1.25.2.3.1.3
+                - '0'
+                - '{#ALLOC_UNITS}'
+                - 1.3.6.1.2.1.25.2.3.1.4
+                - '0'
+                - '{#STORAGE_TYPE}'
+                - 1.3.6.1.2.1.25.2.3.1.2
+                - '0'
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+      tags:
+        - tag: build
+          value: custom
+        - tag: class
+          value: network
+        - tag: target
+          value: ccr1009-7g-1c-1splus
+        - tag: target
+          value: mikrotik
+      macros:
+        - macro: '{$CPU.UTIL.CRIT}'
+          value: '90'
+        - macro: '{$ICMP_LOSS_WARN}'
+          value: '20'
+          description: 'Warning threshold of ICMP packet loss in %.'
+        - macro: '{$ICMP_RESPONSE_TIME_WARN}'
+          value: '0.15'
+          description: 'Warning threshold of the average ICMP response time in seconds.'
+        - macro: '{$IF.ERRORS.WARN}'
+          value: '2'
+          description: 'Warning threshold of error packet rate. Can be used with interface name as context.'
+        - macro: '{$IF.UTIL.MAX}'
+          value: '90'
+          description: 'Used as a threshold in the interface utilization trigger.'
+        - macro: '{$IFCONTROL}'
+          value: '1'
+          description: 'Link status trigger will be fired only for interfaces where the context macro equals "1".'
+        - macro: '{$IFNAME.LTEMODEM.MATCHES}'
+          value: ^lte
+          description: 'This macro is used in LTE modem discovery. It can be overridden on the host.'
+        - macro: '{$IFNAME.WIFI.MATCHES}'
+          value: WIFI
+          description: 'This macro is used in CAPsMAN AP channel discovery. It can be overridden on the host level.'
+        - macro: '{$LTEMODEM.RSRP.MIN.WARN}'
+          value: '-100'
+          description: 'The LTE modem RSRP minimum value for warning trigger expression.'
+        - macro: '{$LTEMODEM.RSRQ.MIN.WARN}'
+          value: '-20'
+          description: 'The LTE modem RSRQ minimum value for warning trigger expression.'
+        - macro: '{$LTEMODEM.RSSI.MIN.WARN}'
+          value: '-100'
+          description: 'The LTE modem RSSI minimum value for warning trigger expression.'
+        - macro: '{$LTEMODEM.SINR.MIN.WARN}'
+          value: '0'
+          description: 'The LTE modem SINR minimum value for warning trigger expression.'
+        - macro: '{$MEMORY.UTIL.MAX}'
+          value: '90'
+        - macro: '{$NET.IF.IFADMINSTATUS.MATCHES}'
+          value: '^.*'
+          description: 'Used in network interface discovery rule filters.'
+        - macro: '{$NET.IF.IFADMINSTATUS.NOT_MATCHES}'
+          value: ^2$
+          description: 'Ignore `down(2)` administrative status'
+        - macro: '{$NET.IF.IFALIAS.MATCHES}'
+          value: '.*'
+          description: 'Used in network interface discovery rule filters.'
+        - macro: '{$NET.IF.IFALIAS.NOT_MATCHES}'
+          value: CHANGE_IF_NEEDED
+          description: 'Used in network interface discovery rule filters.'
+        - macro: '{$NET.IF.IFDESCR.MATCHES}'
+          value: '.*'
+          description: 'Used in network interface discovery rule filters.'
+        - macro: '{$NET.IF.IFDESCR.NOT_MATCHES}'
+          value: CHANGE_IF_NEEDED
+          description: 'Used in network interface discovery rule filters.'
+        - macro: '{$NET.IF.IFNAME.MATCHES}'
+          value: '^.*$'
+          description: 'Used for network interface discovery. Can be overridden on the host or linked template level.'
+        - macro: '{$NET.IF.IFNAME.NOT_MATCHES}'
+          value: '(^Software Loopback Interface|^NULL[0-9.]*$|^[Ll]o[0-9.]*$|^[Ss]ystem$|^Nu[0-9.]*$|^veth[0-9a-z]+$|docker[0-9]+|br-[a-z0-9]{12})'
+          description: 'Filters out `loopbacks`, `nulls`, docker `veth` links and `docker0 bridge` by default.'
+        - macro: '{$NET.IF.IFOPERSTATUS.MATCHES}'
+          value: '^.*$'
+          description: 'Used for network interface discovery. Can be overridden on the host or linked template level.'
+        - macro: '{$NET.IF.IFOPERSTATUS.NOT_MATCHES}'
+          value: ^6$
+          description: 'Ignore `notPresent(6)`'
+        - macro: '{$NET.IF.IFTYPE.MATCHES}'
+          value: '.*'
+          description: 'Used in network interface discovery rule filters.'
+        - macro: '{$NET.IF.IFTYPE.NOT_MATCHES}'
+          value: CHANGE_IF_NEEDED
+          description: 'Used in network interface discovery rule filters.'
+        - macro: '{$SNMP.TIMEOUT}'
+          value: 5m
+          description: 'Time interval for the SNMP availability trigger.'
+        - macro: '{$TEMP_CRIT}'
+          value: '60'
+        - macro: '{$TEMP_CRIT:"CPU"}'
+          value: '75'
+        - macro: '{$TEMP_CRIT_LOW}'
+          value: '5'
+        - macro: '{$TEMP_WARN}'
+          value: '50'
+        - macro: '{$TEMP_WARN:"CPU"}'
+          value: '70'
+        - macro: '{$VFS.FS.PUSED.MAX.CRIT}'
+          value: '90'
+        - macro: '{$VFS.FS.PUSED.MAX.WARN}'
+          value: '80'
+      dashboards:
+        - uuid: 27304f7834b44d859190ad134ac99682
+          name: 'FCS Errors'
+          auto_start: 'NO'
+          pages:
+            - widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: GRAPH_PROTOTYPE
+                      name: graphid.0
+                      value:
+                        host: 'MikroTik All CCR Types by SNMP'
+                        name: 'FCS Errors'
+                    - type: STRING
+                      name: reference
+                      value: ORMPT
+        - uuid: 179c26a00a97486a97b3a865b851a826
+          name: Interfaces
+          pages:
+            - widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '60'
+                  fields:
+                    - type: GRAPH_PROTOTYPE
+                      name: graphid.0
+                      value:
+                        host: 'MikroTik All CCR Types by SNMP'
+                        name: 'Interface {#IFNAME}({#IFALIAS}): Network traffic'
+                    - type: STRING
+                      name: reference
+                      value: AAAAA
+                    - type: INTEGER
+                      name: rows
+                      value: '10'
+        - uuid: 0e7ceeca629a448eb99a15f709a22d06
+          name: 'PPPoE Sessions'
+          pages:
+            - widgets:
+                - type: svggraph
+                  name: 'PPPoE Sessions'
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: 'Active PPPoE Sessions'
+                    - type: STRING
+                      name: reference
+                      value: NDQTJ
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+        - uuid: fb7bf9d95e8640088cfa2178bcacf74a
+          name: 'System Health'
+          auto_start: 'NO'
+          pages:
+            - name: CPU
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'MikroTik All CCR Types by SNMP'
+                        key: 'system.cpu.util[hrProcessorLoad.{#SNMPINDEX}]'
+                    - type: STRING
+                      name: reference
+                      value: ZYPSP
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+            - name: Memory
+              widgets:
+                - type: svggraph
+                  name: 'Memory Utilisation'
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: 'Memory utilization'
+                    - type: STRING
+                      name: reference
+                      value: ZVZRO
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+            - name: Disk
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'MikroTik All CCR Types by SNMP'
+                        key: 'vfs.fs.pused[hrStorageSize.{#SNMPINDEX}]'
+                    - type: STRING
+                      name: reference
+                      value: HPBAU
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+            - name: Temperature
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'MikroTik All CCR Types by SNMP'
+                        key: 'sensor.temp.value[mtxrHlTemperature.{#SNMPINDEX}]'
+                    - type: STRING
+                      name: reference
+                      value: PYYEQ
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+            - name: Voltage
+              widgets:
+                - type: svggraph
+                  name: Voltage
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: Voltage
+                    - type: STRING
+                      name: reference
+                      value: IXSGX
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+            - name: Current
+              widgets:
+                - type: svggraph
+                  name: Current
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: Voltage
+                    - type: STRING
+                      name: ds.0.items.1
+                      value: Current
+                    - type: STRING
+                      name: reference
+                      value: MGPXQ
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+            - name: Power
+              widgets:
+                - type: svggraph
+                  name: Power
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: Power
+                    - type: STRING
+                      name: reference
+                      value: JNMHR
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+      valuemaps:
+        - uuid: f00507b3049a457f860546b489d237e0
+          name: 'IF-MIB::ifOperStatus'
+          mappings:
+            - value: '1'
+              newvalue: up
+            - value: '2'
+              newvalue: down
+            - value: '4'
+              newvalue: unknown
+            - value: '5'
+              newvalue: dormant
+            - value: '6'
+              newvalue: notPresent
+            - value: '7'
+              newvalue: lowerLayerDown
+        - uuid: e9895fda529047a4a21f9c20d26e2dc0
+          name: 'IF-MIB::ifType'
+          mappings:
+            - value: '1'
+              newvalue: other
+            - value: '2'
+              newvalue: regular1822
+            - value: '3'
+              newvalue: hdh1822
+            - value: '4'
+              newvalue: ddnX25
+            - value: '5'
+              newvalue: rfc877x25
+            - value: '6'
+              newvalue: ethernetCsmacd
+            - value: '7'
+              newvalue: iso88023Csmacd
+            - value: '8'
+              newvalue: iso88024TokenBus
+            - value: '9'
+              newvalue: iso88025TokenRing
+            - value: '10'
+              newvalue: iso88026Man
+            - value: '11'
+              newvalue: starLan
+            - value: '12'
+              newvalue: proteon10Mbit
+            - value: '13'
+              newvalue: proteon80Mbit
+            - value: '14'
+              newvalue: hyperchannel
+            - value: '15'
+              newvalue: fddi
+            - value: '16'
+              newvalue: lapb
+            - value: '17'
+              newvalue: sdlc
+            - value: '18'
+              newvalue: ds1
+            - value: '19'
+              newvalue: e1
+            - value: '20'
+              newvalue: basicISDN
+            - value: '21'
+              newvalue: primaryISDN
+            - value: '22'
+              newvalue: propPointToPointSerial
+            - value: '23'
+              newvalue: ppp
+            - value: '24'
+              newvalue: softwareLoopback
+            - value: '25'
+              newvalue: eon
+            - value: '26'
+              newvalue: ethernet3Mbit
+            - value: '27'
+              newvalue: nsip
+            - value: '28'
+              newvalue: slip
+            - value: '29'
+              newvalue: ultra
+            - value: '30'
+              newvalue: ds3
+            - value: '31'
+              newvalue: sip
+            - value: '32'
+              newvalue: frameRelay
+            - value: '33'
+              newvalue: rs232
+            - value: '34'
+              newvalue: para
+            - value: '35'
+              newvalue: arcnet
+            - value: '36'
+              newvalue: arcnetPlus
+            - value: '37'
+              newvalue: atm
+            - value: '38'
+              newvalue: miox25
+            - value: '39'
+              newvalue: sonet
+            - value: '40'
+              newvalue: x25ple
+            - value: '41'
+              newvalue: iso88022llc
+            - value: '42'
+              newvalue: localTalk
+            - value: '43'
+              newvalue: smdsDxi
+            - value: '44'
+              newvalue: frameRelayService
+            - value: '45'
+              newvalue: v35
+            - value: '46'
+              newvalue: hssi
+            - value: '47'
+              newvalue: hippi
+            - value: '48'
+              newvalue: modem
+            - value: '49'
+              newvalue: aal5
+            - value: '50'
+              newvalue: sonetPath
+            - value: '51'
+              newvalue: sonetVT
+            - value: '52'
+              newvalue: smdsIcip
+            - value: '53'
+              newvalue: propVirtual
+            - value: '54'
+              newvalue: propMultiplexor
+            - value: '55'
+              newvalue: ieee80212
+            - value: '56'
+              newvalue: fibreChannel
+            - value: '57'
+              newvalue: hippiInterface
+            - value: '58'
+              newvalue: frameRelayInterconnect
+            - value: '59'
+              newvalue: aflane8023
+            - value: '60'
+              newvalue: aflane8025
+            - value: '61'
+              newvalue: cctEmul
+            - value: '62'
+              newvalue: fastEther
+            - value: '63'
+              newvalue: isdn
+            - value: '64'
+              newvalue: v11
+            - value: '65'
+              newvalue: v36
+            - value: '66'
+              newvalue: g703at64k
+            - value: '67'
+              newvalue: g703at2mb
+            - value: '68'
+              newvalue: qllc
+            - value: '69'
+              newvalue: fastEtherFX
+            - value: '70'
+              newvalue: channel
+            - value: '71'
+              newvalue: ieee80211
+            - value: '72'
+              newvalue: ibm370parChan
+            - value: '73'
+              newvalue: escon
+            - value: '74'
+              newvalue: dlsw
+            - value: '75'
+              newvalue: isdns
+            - value: '76'
+              newvalue: isdnu
+            - value: '77'
+              newvalue: lapd
+            - value: '78'
+              newvalue: ipSwitch
+            - value: '79'
+              newvalue: rsrb
+            - value: '80'
+              newvalue: atmLogical
+            - value: '81'
+              newvalue: ds0
+            - value: '82'
+              newvalue: ds0Bundle
+            - value: '83'
+              newvalue: bsc
+            - value: '84'
+              newvalue: async
+            - value: '85'
+              newvalue: cnr
+            - value: '86'
+              newvalue: iso88025Dtr
+            - value: '87'
+              newvalue: eplrs
+            - value: '88'
+              newvalue: arap
+            - value: '89'
+              newvalue: propCnls
+            - value: '90'
+              newvalue: hostPad
+            - value: '91'
+              newvalue: termPad
+            - value: '92'
+              newvalue: frameRelayMPI
+            - value: '93'
+              newvalue: x213
+            - value: '94'
+              newvalue: adsl
+            - value: '95'
+              newvalue: radsl
+            - value: '96'
+              newvalue: sdsl
+            - value: '97'
+              newvalue: vdsl
+            - value: '98'
+              newvalue: iso88025CRFPInt
+            - value: '99'
+              newvalue: myrinet
+            - value: '100'
+              newvalue: voiceEM
+            - value: '101'
+              newvalue: voiceFXO
+            - value: '102'
+              newvalue: voiceFXS
+            - value: '103'
+              newvalue: voiceEncap
+            - value: '104'
+              newvalue: voiceOverIp
+            - value: '105'
+              newvalue: atmDxi
+            - value: '106'
+              newvalue: atmFuni
+            - value: '107'
+              newvalue: atmIma
+            - value: '108'
+              newvalue: pppMultilinkBundle
+            - value: '109'
+              newvalue: ipOverCdlc
+            - value: '110'
+              newvalue: ipOverClaw
+            - value: '111'
+              newvalue: stackToStack
+            - value: '112'
+              newvalue: virtualIpAddress
+            - value: '113'
+              newvalue: mpc
+            - value: '114'
+              newvalue: ipOverAtm
+            - value: '115'
+              newvalue: iso88025Fiber
+            - value: '116'
+              newvalue: tdlc
+            - value: '117'
+              newvalue: gigabitEthernet
+            - value: '118'
+              newvalue: hdlc
+            - value: '119'
+              newvalue: lapf
+            - value: '120'
+              newvalue: v37
+            - value: '121'
+              newvalue: x25mlp
+            - value: '122'
+              newvalue: x25huntGroup
+            - value: '123'
+              newvalue: trasnpHdlc
+            - value: '124'
+              newvalue: interleave
+            - value: '125'
+              newvalue: fast
+            - value: '126'
+              newvalue: ip
+            - value: '127'
+              newvalue: docsCableMaclayer
+            - value: '128'
+              newvalue: docsCableDownstream
+            - value: '129'
+              newvalue: docsCableUpstream
+            - value: '130'
+              newvalue: a12MppSwitch
+            - value: '131'
+              newvalue: tunnel
+            - value: '132'
+              newvalue: coffee
+            - value: '133'
+              newvalue: ces
+            - value: '134'
+              newvalue: atmSubInterface
+            - value: '135'
+              newvalue: l2vlan
+            - value: '136'
+              newvalue: l3ipvlan
+            - value: '137'
+              newvalue: l3ipxvlan
+            - value: '138'
+              newvalue: digitalPowerline
+            - value: '139'
+              newvalue: mediaMailOverIp
+            - value: '140'
+              newvalue: dtm
+            - value: '141'
+              newvalue: dcn
+            - value: '142'
+              newvalue: ipForward
+            - value: '143'
+              newvalue: msdsl
+            - value: '144'
+              newvalue: ieee1394
+            - value: '145'
+              newvalue: if-gsn
+            - value: '146'
+              newvalue: dvbRccMacLayer
+            - value: '147'
+              newvalue: dvbRccDownstream
+            - value: '148'
+              newvalue: dvbRccUpstream
+            - value: '149'
+              newvalue: atmVirtual
+            - value: '150'
+              newvalue: mplsTunnel
+            - value: '151'
+              newvalue: srp
+            - value: '152'
+              newvalue: voiceOverAtm
+            - value: '153'
+              newvalue: voiceOverFrameRelay
+            - value: '154'
+              newvalue: idsl
+            - value: '155'
+              newvalue: compositeLink
+            - value: '156'
+              newvalue: ss7SigLink
+            - value: '157'
+              newvalue: propWirelessP2P
+            - value: '158'
+              newvalue: frForward
+            - value: '159'
+              newvalue: rfc1483
+            - value: '160'
+              newvalue: usb
+            - value: '161'
+              newvalue: ieee8023adLag
+            - value: '162'
+              newvalue: bgppolicyaccounting
+            - value: '163'
+              newvalue: frf16MfrBundle
+            - value: '164'
+              newvalue: h323Gatekeeper
+            - value: '165'
+              newvalue: h323Proxy
+            - value: '166'
+              newvalue: mpls
+            - value: '167'
+              newvalue: mfSigLink
+            - value: '168'
+              newvalue: hdsl2
+            - value: '169'
+              newvalue: shdsl
+            - value: '170'
+              newvalue: ds1FDL
+            - value: '171'
+              newvalue: pos
+            - value: '172'
+              newvalue: dvbAsiIn
+            - value: '173'
+              newvalue: dvbAsiOut
+            - value: '174'
+              newvalue: plc
+            - value: '175'
+              newvalue: nfas
+            - value: '176'
+              newvalue: tr008
+            - value: '177'
+              newvalue: gr303RDT
+            - value: '178'
+              newvalue: gr303IDT
+            - value: '179'
+              newvalue: isup
+            - value: '180'
+              newvalue: propDocsWirelessMaclayer
+            - value: '181'
+              newvalue: propDocsWirelessDownstream
+            - value: '182'
+              newvalue: propDocsWirelessUpstream
+            - value: '183'
+              newvalue: hiperlan2
+            - value: '184'
+              newvalue: propBWAp2Mp
+            - value: '185'
+              newvalue: sonetOverheadChannel
+            - value: '186'
+              newvalue: digitalWrapperOverheadChannel
+            - value: '187'
+              newvalue: aal2
+            - value: '188'
+              newvalue: radioMAC
+            - value: '189'
+              newvalue: atmRadio
+            - value: '190'
+              newvalue: imt
+            - value: '191'
+              newvalue: mvl
+            - value: '192'
+              newvalue: reachDSL
+            - value: '193'
+              newvalue: frDlciEndPt
+            - value: '194'
+              newvalue: atmVciEndPt
+            - value: '195'
+              newvalue: opticalChannel
+            - value: '196'
+              newvalue: opticalTransport
+            - value: '197'
+              newvalue: propAtm
+            - value: '198'
+              newvalue: voiceOverCable
+            - value: '199'
+              newvalue: infiniband
+            - value: '200'
+              newvalue: teLink
+            - value: '201'
+              newvalue: q2931
+            - value: '202'
+              newvalue: virtualTg
+            - value: '203'
+              newvalue: sipTg
+            - value: '204'
+              newvalue: sipSig
+            - value: '205'
+              newvalue: docsCableUpstreamChannel
+            - value: '206'
+              newvalue: econet
+            - value: '207'
+              newvalue: pon155
+            - value: '208'
+              newvalue: pon622
+            - value: '209'
+              newvalue: bridge
+            - value: '210'
+              newvalue: linegroup
+            - value: '211'
+              newvalue: voiceEMFGD
+            - value: '212'
+              newvalue: voiceFGDEANA
+            - value: '213'
+              newvalue: voiceDID
+            - value: '214'
+              newvalue: mpegTransport
+            - value: '215'
+              newvalue: sixToFour
+            - value: '216'
+              newvalue: gtp
+            - value: '217'
+              newvalue: pdnEtherLoop1
+            - value: '218'
+              newvalue: pdnEtherLoop2
+            - value: '219'
+              newvalue: opticalChannelGroup
+            - value: '220'
+              newvalue: homepna
+            - value: '221'
+              newvalue: gfp
+            - value: '222'
+              newvalue: ciscoISLvlan
+            - value: '223'
+              newvalue: actelisMetaLOOP
+            - value: '224'
+              newvalue: fcipLink
+            - value: '225'
+              newvalue: rpr
+            - value: '226'
+              newvalue: qam
+            - value: '227'
+              newvalue: lmp
+            - value: '228'
+              newvalue: cblVectaStar
+            - value: '229'
+              newvalue: docsCableMCmtsDownstream
+            - value: '230'
+              newvalue: adsl2
+            - value: '231'
+              newvalue: macSecControlledIF
+            - value: '232'
+              newvalue: macSecUncontrolledIF
+            - value: '233'
+              newvalue: aviciOpticalEther
+            - value: '234'
+              newvalue: atmbond
+            - value: '235'
+              newvalue: voiceFGDOS
+            - value: '236'
+              newvalue: mocaVersion1
+            - value: '237'
+              newvalue: ieee80216WMAN
+            - value: '238'
+              newvalue: adsl2plus
+            - value: '239'
+              newvalue: dvbRcsMacLayer
+            - value: '240'
+              newvalue: dvbTdm
+            - value: '241'
+              newvalue: dvbRcsTdma
+            - value: '242'
+              newvalue: x86Laps
+            - value: '243'
+              newvalue: wwanPP
+            - value: '244'
+              newvalue: wwanPP2
+            - value: '245'
+              newvalue: voiceEBS
+            - value: '246'
+              newvalue: ifPwType
+            - value: '247'
+              newvalue: ilan
+            - value: '248'
+              newvalue: pip
+            - value: '249'
+              newvalue: aluELP
+            - value: '250'
+              newvalue: gpon
+            - value: '251'
+              newvalue: vdsl2
+            - value: '252'
+              newvalue: capwapDot11Profile
+            - value: '253'
+              newvalue: capwapDot11Bss
+            - value: '254'
+              newvalue: capwapWtpVirtualRadio
+            - value: '255'
+              newvalue: bits
+            - value: '256'
+              newvalue: docsCableUpstreamRfPort
+            - value: '257'
+              newvalue: cableDownstreamRfPort
+            - value: '258'
+              newvalue: vmwareVirtualNic
+            - value: '259'
+              newvalue: ieee802154
+            - value: '260'
+              newvalue: otnOdu
+            - value: '261'
+              newvalue: otnOtu
+            - value: '262'
+              newvalue: ifVfiType
+            - value: '263'
+              newvalue: g9981
+            - value: '264'
+              newvalue: g9982
+            - value: '265'
+              newvalue: g9983
+            - value: '266'
+              newvalue: aluEpon
+            - value: '267'
+              newvalue: aluEponOnu
+            - value: '268'
+              newvalue: aluEponPhysicalUni
+            - value: '269'
+              newvalue: aluEponLogicalLink
+            - value: '270'
+              newvalue: aluGponOnu
+            - value: '271'
+              newvalue: aluGponPhysicalUni
+            - value: '272'
+              newvalue: vmwareNicTeam
+            - value: '277'
+              newvalue: docsOfdmDownstream
+            - value: '278'
+              newvalue: docsOfdmaUpstream
+            - value: '279'
+              newvalue: gfast
+            - value: '280'
+              newvalue: sdci
+            - value: '281'
+              newvalue: xboxWireless
+            - value: '282'
+              newvalue: fastdsl
+            - value: '283'
+              newvalue: docsCableScte55d1FwdOob
+            - value: '284'
+              newvalue: docsCableScte55d1RetOob
+            - value: '285'
+              newvalue: docsCableScte55d2DsOob
+            - value: '286'
+              newvalue: docsCableScte55d2UsOob
+            - value: '287'
+              newvalue: docsCableNdf
+            - value: '288'
+              newvalue: docsCableNdr
+            - value: '289'
+              newvalue: ptm
+            - value: '290'
+              newvalue: ghn
+        - uuid: 533ea7f6ee0742bea32ae5e053916157
+          name: 'Service state'
+          mappings:
+            - value: '0'
+              newvalue: Down
+            - value: '1'
+              newvalue: Up
+        - uuid: a09403e6e9ab48acaad6960044fa5ba4
+          name: zabbix.host.available
+          mappings:
+            - value: '0'
+              newvalue: 'not available'
+            - value: '1'
+              newvalue: available
+            - value: '2'
+              newvalue: unknown
+  graphs:
+    - uuid: 610c73346176466f872fbbde0def948a
+      name: 'MikroTik: Active PPPoE Sessions'
+      graph_items:
+        - drawtype: BOLD_LINE
+          color: 00BFFF
+          item:
+            host: 'MikroTik All CCR Types by SNMP'
+            key: system.pppoe.sessions
+    - uuid: fb491a1150bd418cbd5cbcdcec9752bf
+      name: 'Mikrotik: Memory utilization'
+      ymin_type_1: FIXED
+      ymax_type_1: FIXED
+      graph_items:
+        - drawtype: GRADIENT_LINE
+          color: 199C0D
+          item:
+            host: 'MikroTik All CCR Types by SNMP'
+            key: 'vm.memory.util[memoryUsedPercentage.Memory]'

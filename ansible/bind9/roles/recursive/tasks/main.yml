@@ -1,0 +1,12 @@
+---
+- name: Install Bind9 packages
+  apt:
+    name: "{{ bind9_packages }}"
+    state: present
+  become: yes
+
+- name: Configure bind as recursor/forwarder
+  template:
+    src: named.conf.options.j2
+    dest: /etc/bind/named.conf.options
+  notify: Reload bind9

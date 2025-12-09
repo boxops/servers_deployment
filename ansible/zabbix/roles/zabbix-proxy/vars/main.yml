@@ -1,0 +1,15 @@
+---
+zabbix_version: "7.2"
+
+# Zabbix proxy database configuration
+zabbix_proxy_dbhost: "localhost"
+zabbix_proxy_dbname: "zabbix_proxy"
+zabbix_proxy_dbuser: "zabbix_proxy"
+zabbix_proxy_dbpassword: "Tp93nIj0"
+
+# Zabbix server connection
+zabbix_proxy_server: "172.22.2.5"  # IP of the Zabbix server
+
+# MySQL configuration (should match mysql role)
+mysql_root_user: "root"
+mysql_root_password: "cEUlI9G3"

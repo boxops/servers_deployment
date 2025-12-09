@@ -1,0 +1,27 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: ed8b8d16b49849a68710cebebabf9305
+      name: Custom
+  templates:
+    - uuid: d06d9f2fac6e4dfaa587cdf5b4823311
+      template: 'Tachyon TNA-303X by HTTP'
+      name: 'Tachyon TNA-303X by HTTP'
+      description: 'REST API polling'
+      groups:
+        - name: Custom
+      items:
+        - uuid: fe78ddf03d134e719ea05e8771fa3386
+          name: 'Get Stats'
+          type: HTTP_AGENT
+          key: stats.get
+          value_type: TEXT
+          url: 'https://{HOST.IP}/cgi.lua/apiv1/stats'
+          query_fields:
+            - name: type
+              value: 'system,wireless,network,ethernet'
+          headers:
+            - name: Content-Type
+              value: application/json
+            - name: Cookie
+              value: token=BCEG3E3IAAAAAAHZ2BVNFBQMMVLW2STZLNL5TARRJURXU4I%3D

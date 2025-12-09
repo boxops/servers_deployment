@@ -1,0 +1,75 @@
+---
+- name: Load configuration to Tachyon device
+  hosts: devices
+  gather_facts: no
+  connection: local
+  vars:
+    dry_run: false
+
+  tasks:
+    - name: Login to device and get token
+      uri:
+        url: "https://{{ ansible_host }}/cgi.lua/apiv1/login"
+        method: POST
+        body_format: json
+        body:
+          username: "{{ ansible_user }}"
+          password: "{{ ansible_become_password }}"
+        validate_certs: no
+        return_content: yes
+        status_code: 200
+      register: login_response
+
+    - name: Normalize login response to JSON
+      set_fact:
+        login_json: >-
+          {{ login_response.json if (login_response.json is defined) else (login_response.content | default('{}') | from_json) }}
+      failed_when: false
+
+    - name: Set token fact
+      set_fact:
+        auth_token: "{{ (login_json.token | default('')) | urlencode }}"
+
+    - name: Fail if login did not return a token
+      fail:
+        msg: "Login did not return a token. Full response: {{ login_response }}"
+      when: auth_token == ''
+
+    - name: Load config file into variable
+      set_fact:
+        new_config: "{{ lookup('file', 'actual_configs/' + inventory_hostname + '.json') | from_json }}"
+      failed_when: false
+
+    - name: Determine payload config (handle 'config' wrapper or raw file)
+      set_fact:
+        payload_config: "{{ new_config.config if (new_config.config is defined) else new_config }}"
+
+    - name: Load configuration to device
+      uri:
+        url: "https://{{ ansible_host }}/cgi.lua/apiv1/config"
+        method: POST
+        body_format: json
+        body:
+          dry_run: "{{ dry_run }}"
+          config: "{{ payload_config }}"
+        headers:
+          Cookie: "api_token={{ auth_token }}; token={{ auth_token }}"
+        validate_certs: no
+        return_content: yes
+        status_code: 200
+      register: config_response
+
+    - name: Print configuration response for debugging in JSON pretty
+      debug:
+        msg: "{{ config_response.content | from_json | to_nice_json }}"
+
+    - name: Logout from device
+      uri:
+        url: "https://{{ ansible_host }}/cgi.lua/apiv1/login"
+        method: DELETE
+        headers:
+          Cookie: "api_token={{ auth_token }}; token={{ auth_token }}"
+        validate_certs: no
+        return_content: yes
+        status_code: 200
+      register: logout_response

@@ -1,0 +1,2436 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: ed8b8d16b49849a68710cebebabf9305
+      name: Custom
+    - uuid: 919a8a3de4a54c6ab44688fbb8f5f464
+      name: 'Templates/Network devices'
+  templates:
+    - uuid: b7dd8d3dca074a70848d62200e011e05
+      template: 'Dasan V5800 by SNMP'
+      name: 'Dasan V5800 by SNMP'
+      description: 'Dasan (Keymile) OLT - V5808 and V5816 series'
+      groups:
+        - name: Custom
+        - name: 'Templates/Network devices'
+      items:
+        - uuid: dbfcecb2ec014f9eaf91248280ed6822
+          name: 'CPU Load Avg 1 Min'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.6296.9.1.1.1.9.0
+          key: dsCpuLoad1m
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: '%'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: source
+              value: cpu
+          triggers:
+            - uuid: d5b642a74e8342f0b7f76678a2e23aee
+              expression: 'last(/Dasan V5800 by SNMP/dsCpuLoad1m)>80'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Dasan V5800 by SNMP/dsCpuLoad1m)<80'
+              name: 'CPU Load (1min) Is Above 80%'
+              priority: HIGH
+              tags:
+                - tag: source
+                  value: health
+        - uuid: 582a45a59cad4ba3b201f02c306b40ca
+          name: 'CPU Load Avg 5 Sec'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.6296.9.1.1.1.8.0
+          key: dsCpuLoad5s
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          status: DISABLED
+          units: '%'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: source
+              value: cpu
+          triggers:
+            - uuid: cfbc889fdc6c43d99538a14e5a0d189a
+              expression: 'last(/Dasan V5800 by SNMP/dsCpuLoad5s)>80'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Dasan V5800 by SNMP/dsCpuLoad5s)<80'
+              name: 'CPU Load (5sec) Is Above 80%'
+              priority: HIGH
+              tags:
+                - tag: source
+                  value: health
+        - uuid: ad70c7e9d3a946ba99ee16431b8ff15c
+          name: 'CPU Load Avg 10 Min'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.6296.9.1.1.1.10.0
+          key: dsCpuLoad10m
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: '%'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: source
+              value: cpu
+          triggers:
+            - uuid: c9727f5d4c534168a0bc1a8792ce4789
+              expression: 'last(/Dasan V5800 by SNMP/dsCpuLoad10m)>80'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Dasan V5800 by SNMP/dsCpuLoad10m)<80'
+              name: 'CPU Load (10min) Is Above 80%'
+              priority: HIGH
+              tags:
+                - tag: source
+                  value: health
+        - uuid: 9bb6c6d8e26d4f73a4d34356cb173ff4
+          name: 'Device Temperature'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.6296.9.1.1.2.5.1.3.1.1
+          key: dsTemperatureStatus
+          delay: 5m
+          history: 7d
+          trends: '0'
+          units: C
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: source
+              value: temperature
+          triggers:
+            - uuid: bc15c69016e348d4a63d38ead2d372ef
+              expression: 'last(/Dasan V5800 by SNMP/dsTemperatureStatus)>60 and last(/Dasan V5800 by SNMP/dsTemperatureStatus)<80'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Dasan V5800 by SNMP/dsTemperatureStatus)<60'
+              name: 'Device Temperature Over 60 Degrees'
+              priority: WARNING
+              manual_close: 'YES'
+              tags:
+                - tag: source
+                  value: health
+            - uuid: aa8e43b905cb49c8ad3e046f12d3ac40
+              expression: 'last(/Dasan V5800 by SNMP/dsTemperatureStatus)>80 and last(/Dasan V5800 by SNMP/dsTemperatureStatus)<100'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Dasan V5800 by SNMP/dsTemperatureStatus)<80'
+              name: 'Device Temperature Over 80 Degrees'
+              priority: AVERAGE
+              manual_close: 'YES'
+              tags:
+                - tag: source
+                  value: health
+            - uuid: 607cd8c0d107473fa8a0aaa8df9abeb1
+              expression: 'last(/Dasan V5800 by SNMP/dsTemperatureStatus)>100'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Dasan V5800 by SNMP/dsTemperatureStatus)<100'
+              name: 'Device Temperature Over 100 Degrees'
+              priority: HIGH
+              manual_close: 'YES'
+              tags:
+                - tag: source
+                  value: health
+        - uuid: 21cefa21493d474794b45bc926deeb50
+          name: 'Firmware Version'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.6296.101.1.1.1.4.0
+          key: sleSystemBLVersion
+          delay: 12h
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: source
+              value: firmware
+        - uuid: d47ca4bc06d44f8a855e6f5c4169e512
+          name: 'System Flash Config Size'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.6296.101.1.1.1.29.0
+          key: sleSystemFlashConfigSize
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: source
+              value: flash
+        - uuid: 9b7d5db52558480f8dc8c35a6312f0b8
+          name: 'System Flash Config Size Utilisation'
+          type: CALCULATED
+          key: sleSystemFlashConfigSizeUtil
+          delay: 2m
+          history: 7d
+          trends: '0'
+          units: '%'
+          params: 'last(//sleSystemFlashConfigUsedSize) / last(//sleSystemFlashConfigSize) * 100'
+        - uuid: e720dec486014009a11f2a2998d1f386
+          name: 'System Flash Config Used Size'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.6296.101.1.1.1.31.0
+          key: sleSystemFlashConfigUsedSize
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: source
+              value: flash
+        - uuid: 04822b9817494762b7e579b7ebe0ac88
+          name: 'System Flash OS Size'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.6296.101.1.1.1.28.0
+          key: sleSystemFlashOSSize
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: source
+              value: flash
+        - uuid: be6ba04f1c5c4dd99d943a4859a54e23
+          name: 'System Flash OS Size Utilisation'
+          type: CALCULATED
+          key: sleSystemFlashOSSizeUtil
+          delay: 2m
+          history: 7d
+          trends: '0'
+          units: '%'
+          params: 'last(//sleSystemFlashOSUsedSize) / last(//sleSystemFlashOSSize) * 100'
+        - uuid: 473d8bd6facb4246b0c6306bb812f59f
+          name: 'System Flash OS Used Size'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.6296.101.1.1.1.30.0
+          key: sleSystemFlashOSUsedSize
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: source
+              value: flash
+        - uuid: 1f747b9e598a433b9a7f0f1ae1c5c670
+          name: 'System Flash Total Size'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.6296.101.1.1.1.27.0
+          key: sleSystemFlashTotalSize
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: source
+              value: flash
+        - uuid: 13360d2bdff64050b6b1a5089debeda4
+          name: 'Hardware Version'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.6296.101.1.1.1.3.0
+          key: sleSystemHWVersion
+          delay: 12h
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: source
+              value: hardware
+        - uuid: 178f780519a84509a2f353d514cdb225
+          name: 'MAC Address'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.6296.101.1.1.1.7.0
+          key: sleSystemMacAddress
+          delay: 12h
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: souce
+              value: mac
+        - uuid: 89109917e8b74452af8dd23a6565360b
+          name: 'Free Memory'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.6296.101.1.1.1.14.0
+          key: sleSystemMemoryFree
+          delay: 2m
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: source
+              value: memory
+        - uuid: 71d5f38af42a4d59832f9a13fc1f4ff0
+          name: 'Free Memory Swap'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.6296.101.1.1.1.19.0
+          key: sleSystemMemorySwapFree
+          delay: 2m
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: source
+              value: memory
+        - uuid: a210a4f8672d4a30af6b58430d147081
+          name: 'Total Memory Swap'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.6296.101.1.1.1.18.0
+          key: sleSystemMemorySwapTotal
+          delay: 2m
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: source
+              value: memory
+        - uuid: e552626842df4ee987ac9d4786552162
+          name: 'Memory Swap Utilisation'
+          type: CALCULATED
+          key: sleSystemMemorySwapUtil
+          delay: 2m
+          history: 7d
+          trends: '0'
+          units: '%'
+          params: 'last(//sleSystemMemorySwapFree) / last(//sleSystemMemorySwapTotal) * 100'
+        - uuid: 6f0b93e24282419aba1859a04e4b6c22
+          name: 'Total Memory'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.6296.101.1.1.1.13.0
+          key: sleSystemMemoryTotal
+          delay: 2m
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: source
+              value: memory
+        - uuid: 8da58cc369c546568766b567fb732405
+          name: 'Memory Utilisation'
+          type: CALCULATED
+          key: sleSystemMemoryUtil
+          delay: 2m
+          history: 7d
+          trends: '0'
+          units: '%'
+          params: 'last(//sleSystemMemoryFree) / last(//sleSystemMemoryTotal) * 100'
+          triggers:
+            - uuid: bcf7951d7aec47569900714381e31f6d
+              expression: 'last(/Dasan V5800 by SNMP/sleSystemMemoryUtil)>80'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Dasan V5800 by SNMP/sleSystemMemoryUtil)<80'
+              name: 'Memory Utilisation Is Over 80%'
+              priority: HIGH
+              tags:
+                - tag: source
+                  value: health
+        - uuid: 0b479af941134d9ca32e3cee8cae89ab
+          name: 'Device Model'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.6296.101.1.1.1.1.0
+          key: sleSystemModelName
+          delay: 12h
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: source
+              value: model
+        - uuid: 2f036072c16b4ff8a482307be34658b1
+          name: 'OS 1 Version'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.6296.101.1.1.1.21.0
+          key: sleSystemOS1Version
+          delay: 12h
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: source
+              value: version
+        - uuid: 6273df8c5d944a5bb3c1a7bc63d44750
+          name: 'OS 2 Version'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.6296.101.1.1.1.24.0
+          key: sleSystemOS2Version
+          delay: 12h
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: source
+              value: version
+        - uuid: 50128bbeb57a403196f29d35d5f949c1
+          name: 'Running OS Version'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.6296.101.1.1.1.6.0
+          key: sleSystemOSVersion
+          delay: 12h
+          history: 7d
+          value_type: TEXT
+          inventory_link: OS
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: source
+              value: version
+          triggers:
+            - uuid: 9875f3ea443143aaa7db844eee977919
+              expression: 'change(/Dasan V5800 by SNMP/sleSystemOSVersion) and length(last(/Dasan V5800 by SNMP/sleSystemOSVersion))>0'
+              name: 'Device OS Version Has Changed'
+              priority: INFO
+              description: 'The OS version of the system has changed. Acknowledge to close the problem manually.'
+              manual_close: 'YES'
+        - uuid: 360d1e88db5044caa0428b0a596b97f0
+          name: 'Serial Number'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.6296.101.1.1.1.2.0
+          key: sleSystemSerialNumber
+          delay: 12h
+          history: 7d
+          value_type: TEXT
+          inventory_link: SERIALNO_A
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: source
+              value: serial
+          triggers:
+            - uuid: 809374ef5c6844e7a2fa62edf39a3125
+              expression: 'change(/Dasan V5800 by SNMP/sleSystemSerialNumber) and length(last(/Dasan V5800 by SNMP/sleSystemSerialNumber))>0'
+              name: 'Device Serial Number Has Changed'
+              opdata: '{#SNMPVALUE}'
+              priority: INFO
+              description: 'The serial number of the system has changed. The device was probably replaced. Acknowledge to close the problem manually.'
+              manual_close: 'YES'
+      discovery_rules:
+        - uuid: 76d73c2d94394a77bfc824de28a8a4d4
+          name: 'Fan Table Discovery'
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},.1.3.6.1.4.1.6296.9.1.1.2.7.1.2]'
+          key: dsFanTable.discovery
+          delay: 24h
+          enabled_lifetime_type: DISABLE_NEVER
+          description: |
+            Defaults:
+            FanStartTemperature = 30
+            FanStopTemperature = 0
+          item_prototypes:
+            - uuid: 5a17b8ba231b48ecb019dcf502b04975
+              name: 'Fan Installed {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.6296.9.1.1.2.7.1.4.{#SNMPINDEX}'
+              key: 'dsFaninstalled[{#SNMPVALUE}]'
+              delay: 10m
+              trends: '0'
+              valuemap:
+                name: dsFaninstalled
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: dsFanTable
+            - uuid: 3d0309410a4f4d0181e3ded38fc45021
+              name: 'Fan Status {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.6296.9.1.1.2.7.1.3.{#SNMPINDEX}'
+              key: 'dsFanstatus[{#SNMPVALUE}]'
+              delay: 10m
+              trends: '0'
+              valuemap:
+                name: dsFanstatus
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: dsFanTable
+          trigger_prototypes:
+            - uuid: 435ad9d98f774b2d81afbfe950573830
+              expression: 'last(/Dasan V5800 by SNMP/dsFaninstalled[{#SNMPVALUE}])=1 and last(/Dasan V5800 by SNMP/dsFanstatus[{#SNMPVALUE}])=2'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Dasan V5800 by SNMP/dsFaninstalled[{#SNMPVALUE}])=1 and last(/Dasan V5800 by SNMP/dsFanstatus[{#SNMPVALUE}])=1'
+              name: 'Faulty Fan At Position {#SNMPVALUE}'
+              priority: INFO
+              manual_close: 'YES'
+          graph_prototypes:
+            - uuid: 1a66662eb2734553a599c55da5e7d0c2
+              name: 'Fans Status / Installed'
+              graph_items:
+                - drawtype: BOLD_LINE
+                  color: 1A7C11
+                  item:
+                    host: 'Dasan V5800 by SNMP'
+                    key: 'dsFaninstalled[{#SNMPVALUE}]'
+                - sortorder: '1'
+                  drawtype: BOLD_LINE
+                  color: '274482'
+                  item:
+                    host: 'Dasan V5800 by SNMP'
+                    key: 'dsFanstatus[{#SNMPVALUE}]'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 7e6a3090ff434c06a839633011c1a22a
+          name: 'Power Table Discovery'
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},.1.3.6.1.4.1.6296.9.1.1.2.6.1.2]'
+          key: dsPowerTable.discovery
+          delay: 24h
+          enabled_lifetime_type: DISABLE_NEVER
+          item_prototypes:
+            - uuid: edccb320ff834e8c95ff65ae64dc36e1
+              name: 'Power Installed {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.6296.9.1.1.2.6.1.4.{#SNMPINDEX}'
+              key: 'dsPowerinstalled[{#SNMPVALUE}]'
+              delay: 10m
+              trends: '0'
+              valuemap:
+                name: dsPowerinstalled
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: dsPower
+            - uuid: 567c381194cd46cbab1066afe48b3ba9
+              name: 'Power Status {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.6296.9.1.1.2.6.1.3.{#SNMPINDEX}'
+              key: 'dsPowerstatus[{#SNMPVALUE}]'
+              delay: 10m
+              trends: '0'
+              valuemap:
+                name: dsPowerstatus
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: dsPower
+          trigger_prototypes:
+            - uuid: 622e2b4d5d3f475b82b1dbd0c98ba84c
+              expression: 'last(/Dasan V5800 by SNMP/dsPowerinstalled[{#SNMPVALUE}])=1 and last(/Dasan V5800 by SNMP/dsPowerstatus[{#SNMPVALUE}])=2'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Dasan V5800 by SNMP/dsPowerinstalled[{#SNMPVALUE}])=1 and last(/Dasan V5800 by SNMP/dsPowerstatus[{#SNMPVALUE}])=1'
+              name: 'Faulty PSU At Position {#SNMPVALUE}'
+              priority: WARNING
+              manual_close: 'YES'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 83350b926dea42569f00de0651444fae
+          name: 'Temperature Table Discovery'
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},.1.3.6.1.4.1.6296.9.1.1.2.5.1.2]'
+          key: dsTemperatureTable.discovery
+          delay: 24h
+          enabled_lifetime_type: DISABLE_NEVER
+          item_prototypes:
+            - uuid: 861d44919d814ff99fb0b26511a96799
+              name: 'Temperature Status {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.6296.9.1.1.2.5.1.3.{#SNMPINDEX}'
+              key: 'dsTemperatureStatus[{#SNMPVALUE}]'
+              delay: 10m
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: dsTemperature
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: f10f85eb5afe45ffabdc714cfd21515b
+          name: sleEthernetPort
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.6296.101.2.2.1.1.1]'
+          key: sleEthernetPort.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: 3719304e466e4164bb98fa71083f969f
+              name: 'sleEthernetPortAdminFlowControl {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.1.1.27.{#SNMPINDEX}'
+              key: 'sleEthernetPortAdminFlowControl[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPort
+            - uuid: 968c875331b44787b86a681d45b5ecb7
+              name: 'sleEthernetPortAdminStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.1.1.4.{#SNMPINDEX}'
+              key: 'sleEthernetPortAdminStatus[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPort
+            - uuid: 2e6221a67f45401ebba7238bf368b032
+              name: 'sleEthernetPortDuplexMode {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.1.1.7.{#SNMPINDEX}'
+              key: 'sleEthernetPortDuplexMode[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPort
+            - uuid: 12d1cb7f7e8c449e855e7a55e125229c
+              name: 'sleEthernetPortFlowControl {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.1.1.8.{#SNMPINDEX}'
+              key: 'sleEthernetPortFlowControl[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPort
+            - uuid: 40efc8c106f646f6a6201269ace9d8f2
+              name: 'sleEthernetPortIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.1.1.1.{#SNMPINDEX}'
+              key: 'sleEthernetPortIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPort
+            - uuid: 1df04bed607141e9992772964a58e536
+              name: 'sleEthernetPortJumboFrameSize {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.1.1.10.{#SNMPINDEX}'
+              key: 'sleEthernetPortJumboFrameSize[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPort
+            - uuid: 5d9c3c2af3f547e6a74ebc93120914d0
+              name: 'sleEthernetPortNegotiationMode {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.1.1.9.{#SNMPINDEX}'
+              key: 'sleEthernetPortNegotiationMode[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPort
+            - uuid: a1d43c95733d496f8823795394d404c0
+              name: 'sleEthernetPortOperStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.1.1.5.{#SNMPINDEX}'
+              key: 'sleEthernetPortOperStatus[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPort
+            - uuid: 6db163f2f4d74d778077812a6bbf6b81
+              name: 'sleEthernetPortPhyIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.1.1.2.{#SNMPINDEX}'
+              key: 'sleEthernetPortPhyIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPort
+            - uuid: 691181bd7ded4847af703cbc50ab97fc
+              name: 'sleEthernetPortPhysicalLinkDiscoveryMode {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.1.1.20.{#SNMPINDEX}'
+              key: 'sleEthernetPortPhysicalLinkDiscoveryMode[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPort
+            - uuid: e5e2d21171944b7dadac9b88a147070c
+              name: 'sleEthernetPortPhysicalRemoteChassis {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.1.1.17.{#SNMPINDEX}'
+              key: 'sleEthernetPortPhysicalRemoteChassis[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPort
+            - uuid: e29f6d347525492f86d5a9b79aae81d8
+              name: 'sleEthernetPortPhysicalRemotePort {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.1.1.19.{#SNMPINDEX}'
+              key: 'sleEthernetPortPhysicalRemotePort[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPort
+            - uuid: a0093fa2d933453484c0e6a9185fd35b
+              name: 'sleEthernetPortPhysicalRemoteSlot {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.1.1.18.{#SNMPINDEX}'
+              key: 'sleEthernetPortPhysicalRemoteSlot[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPort
+            - uuid: 553f2a1718da4409965ea890e83baee8
+              name: 'sleEthernetPortSfpDateCode {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.1.1.16.{#SNMPINDEX}'
+              key: 'sleEthernetPortSfpDateCode[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPort
+            - uuid: 4380f7a646e64378b72972a543344d21
+              name: 'sleEthernetPortSfpTransceiver {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.1.1.11.{#SNMPINDEX}'
+              key: 'sleEthernetPortSfpTransceiver[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPort
+            - uuid: e7aaa46dae6c4b8f8a02144aff7d5e33
+              name: 'sleEthernetPortSfpVendorName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.1.1.12.{#SNMPINDEX}'
+              key: 'sleEthernetPortSfpVendorName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPort
+            - uuid: c913463a680349eb923a07d62dad455f
+              name: 'sleEthernetPortSfpVendorPartNumber {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.1.1.13.{#SNMPINDEX}'
+              key: 'sleEthernetPortSfpVendorPartNumber[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPort
+            - uuid: 79dc5b1166c6430a8088649f7a27ea21
+              name: 'sleEthernetPortSfpVendorRevision {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.1.1.14.{#SNMPINDEX}'
+              key: 'sleEthernetPortSfpVendorRevision[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPort
+            - uuid: 17e78201938d436e80b2cac2cf70db3e
+              name: 'sleEthernetPortSfpVendorSerialNumber {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.1.1.15.{#SNMPINDEX}'
+              key: 'sleEthernetPortSfpVendorSerialNumber[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPort
+            - uuid: 707f9d1d972245b3b01531755d93b16f
+              name: 'sleEthernetPortTransmissionRate {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.1.1.6.{#SNMPINDEX}'
+              key: 'sleEthernetPortTransmissionRate[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPort
+            - uuid: e85ecd30df164c7f97e8f1c578181b64
+              name: 'sleEthernetPortType {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.1.1.3.{#SNMPINDEX}'
+              key: 'sleEthernetPortType[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPort
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: ee649a4720374f56a1f9266fef2e46be
+          name: sleEthernetPortDMI
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.6296.101.2.2.4.1.1]'
+          key: sleEthernetPortDMI.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: d5e9fa9917e347cf81337e941c72b418
+              name: 'sleEthernetPortDMIIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.4.1.1.{#SNMPINDEX}'
+              key: 'sleEthernetPortDMIIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPortDMI
+            - uuid: ba8663258b174b8285a023ed596813fc
+              name: 'sleEthernetPortDMIRxPower {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.4.1.6.{#SNMPINDEX}'
+              key: 'sleEthernetPortDMIRxPower[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPortDMI
+              trigger_prototypes:
+                - uuid: 64231c9cf6ff4ca5bbd5115c5b2ae1f7
+                  expression: '(last(/Dasan V5800 by SNMP/sleEthernetPortDMIRxPower[{#SNMPVALUE}],#1) - last(/Dasan V5800 by SNMP/sleEthernetPortDMIRxPower[{#SNMPVALUE}],#2)) > 3'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: '(last(/Dasan V5800 by SNMP/sleEthernetPortDMIRxPower[{#SNMPVALUE}],#1) - last(/Dasan V5800 by SNMP/sleEthernetPortDMIRxPower[{#SNMPVALUE}],#2)) <= 3'
+                  name: 'Port {#SNMPVALUE}: RX Power Sudden Drop (>3dBm in 5m)'
+                  priority: HIGH
+                  manual_close: 'YES'
+                - uuid: a8f54f330396423bbf14d3b59ed3931a
+                  expression: 'last(/Dasan V5800 by SNMP/sleEthernetPortDMIRxPower[{#SNMPVALUE}])>-8'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Dasan V5800 by SNMP/sleEthernetPortDMIRxPower[{#SNMPVALUE}])<=-8'
+                  name: 'Port {#SNMPVALUE}: RX Power Too High (>{-8} dBm)'
+                  status: DISABLED
+                  discover: NO_DISCOVER
+                  priority: HIGH
+                  manual_close: 'YES'
+                - uuid: 006494e839c7416caf04ea46808875f6
+                  expression: 'last(/Dasan V5800 by SNMP/sleEthernetPortDMIRxPower[{#SNMPVALUE}]) < -27'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Dasan V5800 by SNMP/sleEthernetPortDMIRxPower[{#SNMPVALUE}]) >= -27'
+                  name: 'Port {#SNMPVALUE}: RX Power Too Low (<{-27} dBm)'
+                  status: DISABLED
+                  discover: NO_DISCOVER
+                  priority: HIGH
+                  manual_close: 'YES'
+            - uuid: 51ca6db63cb44395b0ff84181ce85ea2
+              name: 'sleEthernetPortDMITemper {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.4.1.2.{#SNMPINDEX}'
+              key: 'sleEthernetPortDMITemper[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPortDMI
+              trigger_prototypes:
+                - uuid: fe43dbd45aa747c8abd396bb1dc3d55f
+                  expression: 'last(/Dasan V5800 by SNMP/sleEthernetPortDMITemper[{#SNMPVALUE}]) > 65'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Dasan V5800 by SNMP/sleEthernetPortDMITemper[{#SNMPVALUE}]) <= 65'
+                  name: 'Port {#SNMPVALUE}: SFP Temperature Critical (>{65}°C)'
+                  priority: HIGH
+                  manual_close: 'YES'
+            - uuid: ad80d0cf685a4366a61190bd0e1442c9
+              name: 'sleEthernetPortDMITxBias {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.4.1.4.{#SNMPINDEX}'
+              key: 'sleEthernetPortDMITxBias[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPortDMI
+              trigger_prototypes:
+                - uuid: d1286b69fc0d4df9a85c10822f235eac
+                  expression: 'last(/Dasan V5800 by SNMP/sleEthernetPortDMITxBias[{#SNMPVALUE}]) < 5 or last(/Dasan V5800 by SNMP/sleEthernetPortDMITxBias[{#SNMPVALUE}]) > 45'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Dasan V5800 by SNMP/sleEthernetPortDMITxBias[{#SNMPVALUE}]) >= 5 and last(/Dasan V5800 by SNMP/sleEthernetPortDMITxBias[{#SNMPVALUE}]) <= 45'
+                  name: 'Port {#SNMPVALUE}: TX Bias Current Abnormal (<{5}mA or >{45}mA)'
+                  priority: HIGH
+                  manual_close: 'YES'
+            - uuid: 72968909eed441139724611cdc112e1e
+              name: 'sleEthernetPortDMITxPower {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.4.1.5.{#SNMPINDEX}'
+              key: 'sleEthernetPortDMITxPower[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPortDMI
+              trigger_prototypes:
+                - uuid: c89df50944234c018e82d91dd7832659
+                  expression: 'last(/Dasan V5800 by SNMP/sleEthernetPortDMITxPower[{#SNMPVALUE}]) > 6'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Dasan V5800 by SNMP/sleEthernetPortDMITxPower[{#SNMPVALUE}]) <= 6'
+                  name: 'Port {#SNMPVALUE}: TX Power Too High (>{+6} dBm)'
+                  status: DISABLED
+                  discover: NO_DISCOVER
+                  priority: HIGH
+                  manual_close: 'YES'
+                - uuid: 66917c77965f4f109ec4d5342ec7c12f
+                  expression: 'last(/Dasan V5800 by SNMP/sleEthernetPortDMITxPower[{#SNMPVALUE}]) < 1'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Dasan V5800 by SNMP/sleEthernetPortDMITxPower[{#SNMPVALUE}]) >= 1'
+                  name: 'Port {#SNMPVALUE}: TX Power Too Low (<{+1} dBm)'
+                  status: DISABLED
+                  discover: NO_DISCOVER
+                  priority: HIGH
+                  manual_close: 'YES'
+            - uuid: c53644e618a0482a80595b97d3d4c29f
+              name: 'sleEthernetPortDMIVoltage {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.4.1.3.{#SNMPINDEX}'
+              key: 'sleEthernetPortDMIVoltage[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetPortDMI
+              trigger_prototypes:
+                - uuid: 372b2241c71442778743d454b6d20987
+                  expression: 'last(/Dasan V5800 by SNMP/sleEthernetPortDMIVoltage[{#SNMPVALUE}])<>0 and (last(/Dasan V5800 by SNMP/sleEthernetPortDMIVoltage[{#SNMPVALUE}]) < 3.0 or last(/Dasan V5800 by SNMP/sleEthernetPortDMIVoltage[{#SNMPVALUE}]) > 3.6)'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Dasan V5800 by SNMP/sleEthernetPortDMIVoltage[{#SNMPVALUE}]) >= 3.0 and last(/Dasan V5800 by SNMP/sleEthernetPortDMIVoltage[{#SNMPVALUE}]) <= 3.6'
+                  name: 'Port {#SNMPVALUE}: SFP Voltage Out of Range (<{3.0}V or >{3.6}V)'
+                  priority: DISASTER
+                  manual_close: 'YES'
+          trigger_prototypes:
+            - uuid: c026aa6916eb46efab985e3ec74db40e
+              expression: 'last(/Dasan V5800 by SNMP/sleEthernetPortDMITemper[{#SNMPVALUE}]) > 60 and last(/Dasan V5800 by SNMP/sleEthernetPortDMITxBias[{#SNMPVALUE}]) > 40'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Dasan V5800 by SNMP/sleEthernetPortDMITemper[{#SNMPVALUE}]) <= 60 or last(/Dasan V5800 by SNMP/sleEthernetPortDMITxBias[{#SNMPVALUE}]) <= 40'
+              name: 'Port {#SNMPVALUE}: SFP Overheating with High Bias (>60°C & >40mA)'
+              priority: DISASTER
+              manual_close: 'YES'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 8d10e0cccf3c454087965332c333733a
+          name: sleEthernetSfp
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.6296.101.2.2.5.1.1]'
+          key: sleEthernetSfp.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: 0e047783f5ad4fa4b395be4966c74e99
+              name: 'sleEthernetSfpConnectorType {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.5.1.20.{#SNMPINDEX}'
+              key: 'sleEthernetSfpConnectorType[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetSfp
+            - uuid: 0e20c3c354b3424497d24809dd84e041
+              name: 'sleEthernetSfpDateCode {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.5.1.7.{#SNMPINDEX}'
+              key: 'sleEthernetSfpDateCode[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetSfp
+            - uuid: 31e55cf172ac42369a5e482fee2fcf23
+              name: 'sleEthernetSfpIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.5.1.1.{#SNMPINDEX}'
+              key: 'sleEthernetSfpIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetSfp
+            - uuid: f66f19ff8b2143d78da22674ff8bbeaf
+              name: 'sleEthernetSfpSpeed {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.5.1.11.{#SNMPINDEX}'
+              key: 'sleEthernetSfpSpeed[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetSfp
+            - uuid: b586248e0b824e99ab85a8ba85163088
+              name: 'sleEthernetSfpTransceiverCodes {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.5.1.10.{#SNMPINDEX}'
+              key: 'sleEthernetSfpTransceiverCodes[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetSfp
+            - uuid: fa83458e7d134fc9a1036777001a2740
+              name: 'sleEthernetSfpTransceiverDetailTypeStr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.5.1.17.{#SNMPINDEX}'
+              key: 'sleEthernetSfpTransceiverDetailTypeStr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetSfp
+            - uuid: 5da31a6106974286bdf4185e9b5a99af
+              name: 'sleEthernetSfpTransceiverDetailType {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.5.1.9.{#SNMPINDEX}'
+              key: 'sleEthernetSfpTransceiverDetailType[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetSfp
+            - uuid: c5f0b97848c24b94b16fc606ef97b9f5
+              name: 'sleEthernetSfpTransceiverLengthStr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.5.1.18.{#SNMPINDEX}'
+              key: 'sleEthernetSfpTransceiverLengthStr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetSfp
+            - uuid: 956eddea6bb04c10b3abae96563f16a0
+              name: 'sleEthernetSfpTransceiverType {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.5.1.8.{#SNMPINDEX}'
+              key: 'sleEthernetSfpTransceiverType[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetSfp
+            - uuid: fd470d69ac254ebbb593476bceeeab8d
+              name: 'sleEthernetSfpTransceiver {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.5.1.2.{#SNMPINDEX}'
+              key: 'sleEthernetSfpTransceiver[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetSfp
+            - uuid: 6a4df446d8bf4a43916c817f3ae291e5
+              name: 'sleEthernetSfpVendorName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.5.1.3.{#SNMPINDEX}'
+              key: 'sleEthernetSfpVendorName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetSfp
+            - uuid: 278ce6bcdc514e6298543c30234dc32b
+              name: 'sleEthernetSfpVendorPartNumber {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.5.1.4.{#SNMPINDEX}'
+              key: 'sleEthernetSfpVendorPartNumber[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetSfp
+            - uuid: 866487bc013743df9a7a826084df512c
+              name: 'sleEthernetSfpVendorRevision {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.5.1.5.{#SNMPINDEX}'
+              key: 'sleEthernetSfpVendorRevision[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetSfp
+            - uuid: ee2174f8a89b49669d35e775e9f24f52
+              name: 'sleEthernetSfpVendorSerialNumber {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.5.1.6.{#SNMPINDEX}'
+              key: 'sleEthernetSfpVendorSerialNumber[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetSfp
+            - uuid: 8f1c08a64bcf4e5e9723527c7e52a21c
+              name: 'sleEthernetSfpWaveLengthStr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.2.2.5.1.19.{#SNMPINDEX}'
+              key: 'sleEthernetSfpWaveLengthStr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleEthernetSfp
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 6c9051be1aa04a839b52ad82ecf00e6b
+          name: 'GPON OLT Discovery'
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},.1.3.6.1.4.1.6296.101.23.2.1.1.21]'
+          key: sleGponOltId.discovery
+          delay: 24h
+          enabled_lifetime_type: DISABLE_NEVER
+          item_prototypes:
+            - uuid: 1390761977734f75ba2c48cde7f08fe0
+              name: 'OLT Active ONU Count {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.23.2.1.1.21.{#SNMPINDEX}'
+              key: 'sleGponOltActiveOnuCount[{#SNMPVALUE}]'
+              delay: 10m
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleGponOlt
+            - uuid: d481149967194671ad0c557cb600fde7
+              name: 'OLT Inactive ONU Count {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.6296.101.23.2.1.1.22.{#SNMPINDEX}'
+              key: 'sleGponOltInactiveOnuCount[{#SNMPVALUE}]'
+              delay: 10m
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleGponOlt
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 5338fcc214fc41308403c13bb894ae49
+          name: 'GPON ONU Discovery'
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},.1.3.6.1.4.1.6296.101.23.3.1.1.4]'
+          key: sleGponOnu.discovery
+          delay: 24h
+          lifetime: 30d
+          enabled_lifetime_type: DISABLE_NEVER
+          item_prototypes:
+            - uuid: 3999e1c6314a449fbb5a5ee63deaf535
+              name: 'ONU Boot Reason {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.6296.101.23.3.1.1.97.{#SNMPINDEX}'
+              key: 'sleGponOnuBootReason[{#SNMPVALUE}]'
+              delay: 10m
+              trends: '0'
+              valuemap:
+                name: sleGponOnuBootReason
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleGponOnu
+              trigger_prototypes:
+                - uuid: 3487a573ad87471a809bd4c16baefd36
+                  expression: 'last(/Dasan V5800 by SNMP/sleGponOnuBootReason[{#SNMPVALUE}])=9 or last(/Dasan V5800 by SNMP/sleGponOnuBootReason[{#SNMPVALUE}])=10 or last(/Dasan V5800 by SNMP/sleGponOnuBootReason[{#SNMPVALUE}])=11 or last(/Dasan V5800 by SNMP/sleGponOnuBootReason[{#SNMPVALUE}])=12 or last(/Dasan V5800 by SNMP/sleGponOnuBootReason[{#SNMPVALUE}])=13 or last(/Dasan V5800 by SNMP/sleGponOnuBootReason[{#SNMPVALUE}])=14'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Dasan V5800 by SNMP/sleGponOnuBootReason[{#SNMPVALUE}]) = 2'
+                  name: 'ONU {#SNMPVALUE} Unstable (Boot Reason: {VALUE})'
+                  priority: WARNING
+                  manual_close: 'YES'
+            - uuid: d61fdbe5170b4e24aa692c944cbc801d
+              name: 'ONU Deactivation Reason {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.6296.101.23.3.1.1.45.{#SNMPINDEX}'
+              key: 'sleGponOnuDeactiveReason[{#SNMPVALUE}]'
+              delay: 10m
+              trends: '0'
+              valuemap:
+                name: sleGponOnuDeactiveReason
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleGponOnu
+            - uuid: d823121cdc6144b4bec851c887f67b23
+              name: 'ONU Name {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.6296.101.23.3.1.1.18.{#SNMPINDEX}'
+              key: 'sleGponOnuDescription[{#SNMPVALUE}]'
+              delay: 1h
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleGponOnu
+              trigger_prototypes:
+                - uuid: bf1aee88cab145f0a43855221e756ca1
+                  expression: 'last(/Dasan V5800 by SNMP/sleGponOnuDescription[{#SNMPVALUE}])=""'
+                  name: 'ONU Name Missing {#SNMPVALUE}. Please Update Radius Attribute: Dasan-Gpon-Onu-Description'
+                  priority: INFO
+                  manual_close: 'YES'
+            - uuid: 3924b04e37634bd5b48c534f28f0edaf
+              name: 'ONU Distance {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.6296.101.23.3.1.1.10.{#SNMPINDEX}'
+              key: 'sleGponOnuDistance[{#SNMPVALUE}]'
+              delay: 10m
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleGponOnu
+            - uuid: 33d6441e8b05479eb2ec7767674fb43d
+              name: 'ONU Down Count {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.6296.101.23.3.1.1.52.{#SNMPINDEX}'
+              key: 'sleGponOnuDownCount[{#SNMPVALUE}]'
+              delay: 10m
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleGponOnu
+            - uuid: e57fc02d6cae4472bd73e6be1fb1789c
+              name: 'ONU ID {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.6296.101.23.3.1.1.1.{#SNMPINDEX}'
+              key: 'sleGponOnuId[{#SNMPVALUE}]'
+              delay: 1h
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleGponOnu
+            - uuid: 885259ddac6f49229a8c9c18cb65c7b6
+              name: 'ONU Inactive Time {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.6296.101.23.3.1.1.85.{#SNMPINDEX}'
+              key: 'sleGponOnuInactiveTime[{#SNMPVALUE}]'
+              delay: 10m
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleGponOnu
+            - uuid: a5e656826ec44c85a7cd51ce0ee6536a
+              name: 'ONU Uptime {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.6296.101.23.3.1.1.23.{#SNMPINDEX}'
+              key: 'sleGponOnuLinkUpTime[{#SNMPVALUE}]'
+              delay: 10m
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleGponOnu
+            - uuid: 8143a85db9be41fe9a4f443e1fda2c65
+              name: 'ONU NOS Active Version {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.6296.101.23.3.1.1.12.{#SNMPINDEX}'
+              key: 'sleGponOnuNosActiveVersion[{#SNMPVALUE}]'
+              delay: 10m
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleGponOnu
+            - uuid: d652a8091a12453cbc75f5fd9390b74d
+              name: 'OLT RX {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.6296.101.23.3.1.1.21.{#SNMPINDEX}'
+              key: 'sleGponOnuOltRxPower[{#SNMPVALUE}]'
+              delay: 10m
+              value_type: FLOAT
+              trends: '0'
+              description: 'Rx Optical power of olt-side.'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleGponOnu
+            - uuid: eec377e62a3d4ceda7923fd1f3405da0
+              name: 'ONU Profile {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.6296.101.23.3.1.1.8.{#SNMPINDEX}'
+              key: 'sleGponOnuProfile[{#SNMPVALUE}]'
+              delay: 1h
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleGponOnu
+            - uuid: 5f83bbba887f462cb0954b75a00ce940
+              name: 'ONU Radius Auth Status {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.6296.101.23.3.1.1.86.{#SNMPINDEX}'
+              key: 'sleGponOnuRadiusAuthStatus[{#SNMPVALUE}]'
+              delay: 10m
+              trends: '0'
+              valuemap:
+                name: sleGponOnuRadiusAuthStatus
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleGponOnu
+              trigger_prototypes:
+                - uuid: 277e7852c8d04409a6a49f5beaba3159
+                  expression: 'last(/Dasan V5800 by SNMP/sleGponOnuRadiusAuthStatus[{#SNMPVALUE}])=3 or last(/Dasan V5800 by SNMP/sleGponOnuRadiusAuthStatus[{#SNMPVALUE}])=4'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Dasan V5800 by SNMP/sleGponOnuRadiusAuthStatus[{#SNMPVALUE}]) = 2'
+                  name: 'ONU {#SNMPVALUE} RADIUS Auth Failed (Status: {VALUE})'
+                  priority: HIGH
+                  manual_close: 'YES'
+            - uuid: 939a5a977c1a4ac8a572cfa7d25b2161
+              name: 'ONU RX {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.6296.101.23.3.1.1.16.{#SNMPINDEX}'
+              key: 'sleGponOnuRxPower[{#SNMPVALUE}]'
+              delay: 10m
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleGponOnu
+              trigger_prototypes:
+                - uuid: 4e6b7e88a9d54d168cbc1c4a8155ef74
+                  expression: 'last(/Dasan V5800 by SNMP/sleGponOnuRxPower[{#SNMPVALUE}]) > -8'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Dasan V5800 by SNMP/sleGponOnuRxPower[{#SNMPVALUE}]) <= -8'
+                  name: 'ONU {#SNMPVALUE} RX Power Too High (> -8 dBm)'
+                  priority: AVERAGE
+                  manual_close: 'YES'
+                - uuid: d4d8fd0e75714d31a11d974765bc8cdf
+                  expression: 'last(/Dasan V5800 by SNMP/sleGponOnuRxPower[{#SNMPVALUE}])<>-400 and last(/Dasan V5800 by SNMP/sleGponOnuRxPower[{#SNMPVALUE}]) < -28'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Dasan V5800 by SNMP/sleGponOnuRxPower[{#SNMPVALUE}]) >= -28'
+                  name: 'ONU {#SNMPVALUE} RX Power Too Low (< -28 dBm) TEST'
+                  status: DISABLED
+                  discover: NO_DISCOVER
+                  priority: AVERAGE
+                  manual_close: 'YES'
+            - uuid: 5751e474cd934c349d5c855a43d17f51
+              name: 'ONU Serial {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.6296.101.23.3.1.1.4.{#SNMPINDEX}'
+              key: 'sleGponOnuSerial[{#SNMPVALUE}]'
+              delay: 1h
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleGponOnu
+            - uuid: f2e3ac9ce18049f588d6c18a2bc9b22e
+              name: 'ONU Status {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.6296.101.23.3.1.1.2.{#SNMPINDEX}'
+              key: 'sleGponOnuStatus[{#SNMPVALUE}]'
+              delay: 10m
+              trends: '0'
+              valuemap:
+                name: sleGponOnuStatus
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleGponOnu
+              trigger_prototypes:
+                - uuid: 841a5d92a781402589f528a89e24625e
+                  expression: 'last(/Dasan V5800 by SNMP/sleGponOnuStatus[{#SNMPVALUE}])=4'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Dasan V5800 by SNMP/sleGponOnuStatus[{#SNMPVALUE}])=2'
+                  name: 'ONU Status is Active-Pending: {#SNMPVALUE}'
+                  priority: WARNING
+                  manual_close: 'YES'
+                - uuid: e7ebcc751ec84729b8405d52302358e0
+                  expression: 'last(/Dasan V5800 by SNMP/sleGponOnuStatus[{#SNMPVALUE}])=5'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Dasan V5800 by SNMP/sleGponOnuStatus[{#SNMPVALUE}])=2'
+                  name: 'ONU Status is Deactive-Pending: {#SNMPVALUE}'
+                  priority: WARNING
+                  manual_close: 'YES'
+                - uuid: a4cf6fee0eb64937b03f96b1050b2d4b
+                  expression: 'last(/Dasan V5800 by SNMP/sleGponOnuStatus[{#SNMPVALUE}])=6'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Dasan V5800 by SNMP/sleGponOnuStatus[{#SNMPVALUE}])=2'
+                  name: 'ONU Status is Disable-Pending: {#SNMPVALUE}'
+                  priority: WARNING
+                  manual_close: 'YES'
+                - uuid: 7de1ce4cdf64437d99dcd6ad7105d1cb
+                  expression: 'last(/Dasan V5800 by SNMP/sleGponOnuStatus[{#SNMPVALUE}])=7'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Dasan V5800 by SNMP/sleGponOnuStatus[{#SNMPVALUE}])=2'
+                  name: 'ONU Status is Disable: {#SNMPVALUE}'
+                  priority: WARNING
+                  manual_close: 'YES'
+                - uuid: b42e16fd684847bd9e7b3d997e23de81
+                  expression: 'last(/Dasan V5800 by SNMP/sleGponOnuStatus[{#SNMPVALUE}])=0'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Dasan V5800 by SNMP/sleGponOnuStatus[{#SNMPVALUE}])=2'
+                  name: 'ONU Status is Invalid: {#SNMPVALUE}'
+                  priority: HIGH
+                  manual_close: 'YES'
+                - uuid: 9f5cf95f64ea45ac8fbb53ea82520c42
+                  expression: 'last(/Dasan V5800 by SNMP/sleGponOnuStatus[{#SNMPVALUE}])=0 or last(/Dasan V5800 by SNMP/sleGponOnuStatus[{#SNMPVALUE}])=7'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Dasan V5800 by SNMP/sleGponOnuStatus[{#SNMPVALUE}]) = 2'
+                  name: 'ONU {#SNMPVALUE} is OFFLINE (Status: Invalid/Disable)'
+                  priority: HIGH
+                  manual_close: 'YES'
+            - uuid: 678a61f4f6ed4bad973dd49121885e4d
+              name: 'ONU Up Count {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.6296.101.23.3.1.1.51.{#SNMPINDEX}'
+              key: 'sleGponOnuUpCount[{#SNMPVALUE}]'
+              delay: 10m
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: sleGponOnu
+              trigger_prototypes:
+                - uuid: 809b97e4796f4496be6b9afaef56e58b
+                  expression: '(last(/Dasan V5800 by SNMP/sleGponOnuUpCount[{#SNMPVALUE}],#1) - last(/Dasan V5800 by SNMP/sleGponOnuUpCount[{#SNMPVALUE}],#2)) > 5'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: '(last(/Dasan V5800 by SNMP/sleGponOnuUpCount[{#SNMPVALUE}],#1) - last(/Dasan V5800 by SNMP/sleGponOnuUpCount[{#SNMPVALUE}],#2)) <= 1'
+                  name: 'ONU {#SNMPVALUE} Flapping (Up/Down Count > 5 in 1h)'
+                  priority: AVERAGE
+                  manual_close: 'YES'
+          trigger_prototypes:
+            - uuid: fb384d47cc0e4748b941f07c2ed2afe3
+              expression: '(last(/Dasan V5800 by SNMP/sleGponOnuStatus[{#SNMPVALUE}])=1 and last(/Dasan V5800 by SNMP/sleGponOnuDeactiveReason[{#SNMPVALUE}])=3) and last(/Dasan V5800 by SNMP/sleGponOnuRadiusAuthStatus[{#SNMPVALUE}])=2'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Dasan V5800 by SNMP/sleGponOnuStatus[{#SNMPVALUE}])=2'
+              name: 'ONU Is Inactive with Deactivation Reason LOSi: {#SNMPVALUE}'
+              priority: HIGH
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+      tags:
+        - tag: build
+          value: custom
+      dashboards:
+        - uuid: 6c09894879bd4655ae8322387c44a3e5
+          name: Subscribers
+          pages:
+            - widgets:
+                - type: graphprototype
+                  width: '36'
+                  height: '50'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Dasan V5800 by SNMP'
+                        key: 'sleGponOnuUpCount[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: LCFEG
+                    - type: INTEGER
+                      name: rows
+                      value: '10'
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  x: '36'
+                  width: '36'
+                  height: '50'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Dasan V5800 by SNMP'
+                        key: 'sleGponOnuDownCount[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: AQEXZ
+                    - type: INTEGER
+                      name: rows
+                      value: '10'
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+        - uuid: 150c9ba3cd06462ab0900b26ce1d5c50
+          name: 'System Health'
+          auto_start: 'NO'
+          pages:
+            - name: CPU
+              widgets:
+                - type: gauge
+                  width: '18'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Dasan V5800 by SNMP'
+                        key: dsCpuLoad1m
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: gauge
+                  'y': '5'
+                  width: '18'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Dasan V5800 by SNMP'
+                        key: dsCpuLoad10m
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: svggraph
+                  name: 'CPU Load 1 Min'
+                  x: '18'
+                  width: '54'
+                  height: '5'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: 'CPU Load Avg 1 Min'
+                    - type: STRING
+                      name: reference
+                      value: UOAZI
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'CPU Load 10 Mins'
+                  x: '18'
+                  'y': '5'
+                  width: '54'
+                  height: '5'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: 'CPU Load Avg 10 Min'
+                    - type: STRING
+                      name: reference
+                      value: FAGTI
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+            - name: Memory
+              widgets:
+                - type: gauge
+                  width: '18'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Dasan V5800 by SNMP'
+                        key: sleSystemMemoryUtil
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: gauge
+                  'y': '5'
+                  width: '18'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Dasan V5800 by SNMP'
+                        key: sleSystemMemorySwapUtil
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: svggraph
+                  name: 'Memory Utilisation'
+                  x: '18'
+                  width: '54'
+                  height: '5'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: 'Memory Utilisation'
+                    - type: STRING
+                      name: reference
+                      value: MKOGE
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'Memory Swap Utilisation'
+                  x: '18'
+                  'y': '5'
+                  width: '54'
+                  height: '5'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: 'Memory Utilisation'
+                    - type: STRING
+                      name: ds.0.items.1
+                      value: 'Memory Swap Utilisation'
+                    - type: STRING
+                      name: reference
+                      value: PJEYI
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+            - name: Flash
+              widgets:
+                - type: gauge
+                  width: '18'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Dasan V5800 by SNMP'
+                        key: sleSystemFlashOSSizeUtil
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: gauge
+                  'y': '5'
+                  width: '18'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Dasan V5800 by SNMP'
+                        key: sleSystemFlashConfigSizeUtil
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: svggraph
+                  name: 'Flash OS Size Utilisation'
+                  x: '18'
+                  width: '54'
+                  height: '5'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: 'System Flash OS Size Utilisation'
+                    - type: STRING
+                      name: reference
+                      value: MOKUT
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'Flash Config Size Utilisation'
+                  x: '18'
+                  'y': '5'
+                  width: '54'
+                  height: '5'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: 'System Flash Config Size Utilisation'
+                    - type: STRING
+                      name: reference
+                      value: FBIIT
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+            - name: Temperature
+              widgets:
+                - type: gauge
+                  width: '18'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Dasan V5800 by SNMP'
+                        key: dsTemperatureStatus
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: svggraph
+                  name: 'Device Temperature'
+                  x: '18'
+                  width: '54'
+                  height: '5'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: 'Device Temperature'
+                    - type: STRING
+                      name: reference
+                      value: DVCYW
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+            - name: Fans
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Dasan V5800 by SNMP'
+                        key: 'dsFanstatus[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: NTCOI
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+            - name: Power
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Dasan V5800 by SNMP'
+                        key: 'dsPowerstatus[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: UHDKO
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  'y': '5'
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Dasan V5800 by SNMP'
+                        key: 'dsPowerinstalled[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: KRZFN
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+      valuemaps:
+        - uuid: b83a511412c64d60bd744c8f2e723a38
+          name: dsFaninstalled
+          mappings:
+            - value: '0'
+              newvalue: removed
+            - value: '1'
+              newvalue: installed
+            - value: '2'
+              newvalue: uninstalled
+        - uuid: 412e596f023a429bb811fa23dc877765
+          name: dsFanstatus
+          mappings:
+            - value: '1'
+              newvalue: ok
+            - value: '2'
+              newvalue: fail
+            - value: '3'
+              newvalue: other
+        - uuid: 45317eea0b4b423eac0aae5099ca052b
+          name: dsPowerinstalled
+          mappings:
+            - value: '0'
+              newvalue: removed
+            - value: '1'
+              newvalue: installed
+            - value: '2'
+              newvalue: uninstalled
+        - uuid: c1f54c4020ec4ae687b6015348897b56
+          name: dsPowerstatus
+          mappings:
+            - value: '1'
+              newvalue: ok
+            - value: '2'
+              newvalue: fail
+            - value: '3'
+              newvalue: other
+        - uuid: 0d513c5abffe416d9edaf6dd710a6f58
+          name: sleGponOnuAuthenticationStatus
+          mappings:
+            - value: '1'
+              newvalue: normal
+            - value: '2'
+              newvalue: rangingFail
+            - value: '3'
+              newvalue: passwdInconsistencyFail
+            - value: '4'
+              newvalue: passwdMismatchFail
+            - value: '5'
+              newvalue: passwdTimeoutFail
+            - value: '6'
+              newvalue: passwdONUAlarmFail
+            - value: '7'
+              newvalue: passwdDisableEventFail
+            - value: '8'
+              newvalue: passwdLosFail
+            - value: '255'
+              newvalue: unknown
+        - uuid: 66837f3c5eba4725affb29eb5fad33ee
+          name: sleGponOnuBootReason
+          mappings:
+            - value: '1'
+              newvalue: newLabel
+            - value: '2'
+              newvalue: powerRebootByLocal
+            - value: '3'
+              newvalue: swReboot
+            - value: '4'
+              newvalue: swRebootByLocal
+            - value: '5'
+              newvalue: swRebootByOlt
+            - value: '6'
+              newvalue: swRebootByOnuApplication
+            - value: '7'
+              newvalue: swRebootByActiveImageChange
+            - value: '8'
+              newvalue: swRebootByTcont
+            - value: '9'
+              newvalue: swRebootByPanic
+            - value: '10'
+              newvalue: watchdog
+            - value: '11'
+              newvalue: watchdogByLocal
+            - value: '12'
+              newvalue: swWatchdog
+            - value: '13'
+              newvalue: swWatchdogByCpuOver
+            - value: '14'
+              newvalue: swWatchdogByMemLow
+            - value: '15'
+              newvalue: autoProvision
+            - value: '16'
+              newvalue: applyWebConfig
+            - value: '17'
+              newvalue: webSystemReboot
+            - value: '18'
+              newvalue: adminPortChange
+            - value: '19'
+              newvalue: factoryRestore
+            - value: '20'
+              newvalue: userFactoryRestore
+            - value: '21'
+              newvalue: wifiOnOffChange
+            - value: '255'
+              newvalue: unknown
+        - uuid: 2cf502afeb8047d691c3285f1c3d8f05
+          name: sleGponOnuDeactiveReason
+          mappings:
+            - value: '1'
+              newvalue: none
+            - value: '2'
+              newvalue: dgi
+            - value: '3'
+              newvalue: losi
+            - value: '4'
+              newvalue: lofi
+            - value: '5'
+              newvalue: sfi
+            - value: '6'
+              newvalue: sufi
+            - value: '7'
+              newvalue: loai
+            - value: '8'
+              newvalue: loami
+            - value: '9'
+              newvalue: loki
+            - value: '10'
+              newvalue: adminReset
+            - value: '11'
+              newvalue: adminActiveChange
+            - value: '12'
+              newvalue: adminOltConfiguration
+            - value: '13'
+              newvalue: adminSlotRestart
+            - value: '14'
+              newvalue: adminSlotRemove
+            - value: '15'
+              newvalue: adminRogueOnuCandidate
+            - value: '16'
+              newvalue: adminRogueOnu
+            - value: '17'
+              newvalue: adminRogueOnuSelfDetectBlock
+            - value: '18'
+              newvalue: adminTxOffOptic
+            - value: '19'
+              newvalue: adminDeactivate
+            - value: '20'
+              newvalue: adminOltDeactivate
+            - value: '21'
+              newvalue: adminOmccDown
+            - value: '22'
+              newvalue: adminSetRedundancy
+            - value: '23'
+              newvalue: adminRemoveOnu
+            - value: '24'
+              newvalue: adminServiceMode
+            - value: '25'
+              newvalue: adminManualPowerOff
+            - value: '100'
+              newvalue: los
+            - value: '101'
+              newvalue: onuDeactReasonRanging
+            - value: '102'
+              newvalue: onuDeactReasonPasswdAuthentication
+            - value: '103'
+              newvalue: onuDeactReasonPasswdInconsistency
+            - value: '104'
+              newvalue: onuDeactReasonPasswdMismatch
+            - value: '105'
+              newvalue: onuDeactReasonPasswdTimeout
+            - value: '106'
+              newvalue: onuDeactReasonPasswdOnuAlarm
+            - value: '107'
+              newvalue: onuDeactReasonPasswdDisableEvent
+            - value: '255'
+              newvalue: unknown
+        - uuid: 2fda34053302443c9d361fc1af26447e
+          name: sleGponOnuRadiusAuthStatus
+          mappings:
+            - value: '0'
+              newvalue: none
+            - value: '1'
+              newvalue: try
+            - value: '2'
+              newvalue: success
+            - value: '3'
+              newvalue: noOnuProfile
+            - value: '4'
+              newvalue: fail
+            - value: '255'
+              newvalue: unknown
+        - uuid: c968aa7b0b2a47a689511f39af6857b4
+          name: sleGponOnuStatus
+          mappings:
+            - value: '0'
+              newvalue: invalid
+            - value: '1'
+              newvalue: inactive
+            - value: '2'
+              newvalue: active
+            - value: '3'
+              newvalue: running
+            - value: '4'
+              newvalue: activePending
+            - value: '5'
+              newvalue: deactivePending
+            - value: '6'
+              newvalue: disablePending
+            - value: '7'
+              newvalue: disable
+            - value: '255'
+              newvalue: unknown

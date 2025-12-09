@@ -1,0 +1,14 @@
+options {
+    directory "/var/cache/bind";
+    recursion yes;
+    allow-query { any; };
+    listen-on { any; };
+    forwarders {
+        {% for srv in bind9_forward_servers %}
+        {{ srv }};
+        {% endfor %}
+    };
+    dnssec-validation auto;
+    auth-nxdomain no;
+    listen-on-v6 { any; };
+};

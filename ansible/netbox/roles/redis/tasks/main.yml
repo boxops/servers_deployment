@@ -1,0 +1,29 @@
+---
+# sudo apt install -y redis-server
+- name: Install Redis
+  apt:
+    name:
+      - redis-server
+    state: present
+  tags:
+    - redis
+
+# - name: Configure Redis
+#   template:
+#     src: redis.conf.j2
+#     dest: /etc/redis/redis.conf
+#     owner: redis
+#     group: redis
+#     mode: 0644
+#   notify: Restart Redis
+#   tags:
+#     - redis
+
+# redis-server -v
+- name: Ensure Redis is running
+  service:
+    name: redis-server
+    state: started
+    enabled: true
+  tags:
+    - redis

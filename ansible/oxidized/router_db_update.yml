@@ -1,0 +1,58 @@
+---
+- name: Generate and update Oxidized router.db from Netbox
+  hosts: localhost
+  gather_facts: false
+  # vars_files:
+  #   - inventories/lab/group_vars/vars.yml
+  tasks:
+
+    - name: Fetch devices from Netbox
+      uri:
+        url: "{{ api_url }}/dcim/devices/?limit=1000"
+        method: GET
+        headers:
+          Authorization: "Token {{ api_token }}"
+        validate_certs: "{{ validate_certs }}"
+        return_content: yes
+      register: netbox_devices
+
+    - name: Build router.db content
+      set_fact:
+        router_db_lines: |
+          {% for device in netbox_devices.json.results %}
+          {{ device.primary_ip4.address.split('/')[0] if device.primary_ip4 }}:ios:{{ device.name }}
+          {% endfor %}
+
+    - name: Write router.db file locally
+      copy:
+        content: "{{ router_db_lines }}"
+        dest: /tmp/router.db
+
+    - name: Transfer router.db to Oxidized server
+      become: true
+      copy:
+        src: /tmp/router.db
+        dest: "{{ oxidized_home }}/.config/oxidized/router.db"
+        owner: oxidized
+        group: oxidized
+        mode: '0644'
+      delegate_to: "{{ item }}"
+      with_items: "{{ groups['oxidized_servers'] }}"
+
+    - name: Reload Oxidized service
+      become: true
+      systemd:
+        name: oxidized
+        state: restarted
+        enabled: yes
+      delegate_to: "{{ item }}"
+      with_items: "{{ groups['oxidized_servers'] }}"
+
+    - name: Check Oxidized service status
+      become: true
+      systemd:
+        name: oxidized
+        state: started
+      register: oxidized_service_status
+      delegate_to: "{{ item }}"
+      with_items: "{{ groups['oxidized_servers'] }}"

@@ -1,0 +1,114 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: ed8b8d16b49849a68710cebebabf9305
+      name: Custom
+  templates:
+    - uuid: fd57dc44b0cb4971a057aee9b4f0f552
+      template: UbiquitiSwitch
+      name: UbiquitiSwitch
+      groups:
+        - name: Custom
+      items:
+        - uuid: 4dfaa49233734162af79bb0a7a946dde
+          name: SwitchSerialNumber
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.2.1.67.1.2.1.1.2.0
+          key: SerialNumber
+          value_type: CHAR
+        - uuid: 00f267736a7e49cd83043cba2e07918f
+          name: SystemModelFirmwareLinuxVersion
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.2.1.1.1.0
+          key: sysDescr
+          history: 7d
+          value_type: TEXT
+        - uuid: ec765f2c5ef64f6fa6302810541b87ee
+          name: SystemName
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.2.1.1.5.0
+          key: sysName
+          delay: 60m
+          history: 7d
+          value_type: CHAR
+        - uuid: 40ce6cc362104d57bfcaee27bda27415
+          name: SystemUpTime
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.2.1.1.3.0
+          key: sysUpTime
+          history: 7d
+          value_type: CHAR
+      discovery_rules:
+        - uuid: 32fc2893022440e8a08b5032393bbb13
+          name: SwitchInterfacesDiscoveryRule
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},.1.3.6.1.2.1.2.2.1.2]'
+          key: ifIndex.discovery
+          delay: 1h
+          item_prototypes:
+            - uuid: d8abb2e493da4a62b06a19cacdeaac0a
+              name: 'ifAdminStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.2.1.2.2.1.7.{#SNMPINDEX}'
+              key: 'ifAdminStatus[{#SNMPVALUE}]'
+              history: 7d
+              trends: '0'
+              valuemap:
+                name: ifAdminStatus
+              tags:
+                - tag: source
+                  value: interfaces
+            - uuid: ef566a8db5374594869dbfc239465561
+              name: 'SwitchItemPrototypeInterface {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.2.1.2.2.1.1.{#SNMPINDEX}'
+              key: 'ifIndex[{#SNMPVALUE}]'
+              history: 7d
+              trends: '0'
+              tags:
+                - tag: source
+                  value: interfaces
+            - uuid: ae2a392c8d614e8bbccfaa2ba52df2ce
+              name: 'ifOperStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.2.1.2.2.1.8.{#SNMPINDEX}'
+              key: 'ifOperStatus[{#SNMPVALUE}]'
+              history: 7d
+              trends: '0'
+              tags:
+                - tag: source
+                  value: ifOperStatus
+                - tag: source
+                  value: interfaces
+          trigger_prototypes:
+            - uuid: f0f23c3a5604474a8c2a159e687b3bd3
+              expression: 'last(/UbiquitiSwitch/ifAdminStatus[{#SNMPVALUE}])=1 and last(/UbiquitiSwitch/ifOperStatus[{#SNMPVALUE}])<>1'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/UbiquitiSwitch/ifAdminStatus[{#SNMPVALUE}])=1 and last(/UbiquitiSwitch/ifOperStatus[{#SNMPVALUE}])=1'
+              name: 'Interface {#SNMPVALUE} Admin Status != Operational Status'
+              priority: AVERAGE
+              manual_close: 'YES'
+        - uuid: 48d2263e42b14137aa602b188241710d
+          name: ipAddrTable
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},.1.3.6.1.2.1.4.20.1.1]'
+          key: ipAddrTable.discovery
+          delay: 1h
+          item_prototypes:
+            - uuid: f4de314859aa462088fb491fc7194d46
+              name: 'ipAdEntAddr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.2.1.4.20.1.1.{#SNMPINDEX}'
+              key: 'ipAdEntAddr[{#SNMPVALUE}]'
+              history: 7d
+              value_type: TEXT
+      valuemaps:
+        - uuid: a933bc60d8724b4fa74e2f6aed8aea22
+          name: ifAdminStatus
+          mappings:
+            - value: '0'
+              newvalue: up
+            - value: '1'
+              newvalue: down
+            - value: '2'
+              newvalue: testing

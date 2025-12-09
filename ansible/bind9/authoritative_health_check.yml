@@ -1,0 +1,75 @@
+---
+- name: Check Bind9 servers service health
+  hosts: all
+  become: true
+  vars:
+    zones_to_check:
+      - nxg.whint
+
+  tasks:
+    - name: Ensure bind9 service is running and enabled
+      service:
+        name: bind9
+        state: started
+        enabled: true
+
+    - name: Check bind9 service status via --check mode
+      ansible.builtin.command: systemctl is-active bind9
+      register: service_check
+      changed_when: false
+      failed_when: service_check.rc != 0
+
+    - name: Validate named.conf syntax
+      command: named-checkconf
+      register: conf_check
+      failed_when: conf_check.rc != 0
+
+    - name: Show named.conf syntax result
+      debug:
+        msg: "{{ conf_check.stdout if conf_check.stdout else 'Syntax OK' }}"
+
+    - name: Run named-checkzone for each zone
+      command: named-checkzone "{{ item }}" "/etc/bind/zones/db.{{ item }}"
+      register: zone_check
+      failed_when: zone_check.rc != 0
+      loop: "{{ zones_to_check }}"
+
+    - name: Show zone check output for each zone
+      debug:
+        msg: "{{ item.stdout }}"
+      loop: "{{ zone_check.results }}"
+
+    - name: Assert that all zones are valid
+      assert:
+        that:
+          - zone_check is defined
+          - zone_check.results | map(attribute='rc') | list | select('equalto', 0) | length == (zone_check.results | length)
+        fail_msg: "Zone validation failed for one or more zones"
+
+    - name: Test local DNS resolution for zone "{{ zones_to_check[0] }}"
+      command: dig +short www.{{ zones_to_check[0] }} @localhost
+      register: dig_local
+    - debug:
+        msg: "Dig local result: {{ dig_local.stdout }}"
+
+    - name: Test external DNS resolution (e.g., google.com)
+      command: dig +short google.com @localhost
+      register: dig_external
+    - debug:
+        msg: "External DNS resolution result: {{ dig_external.stdout }}"
+
+    - name: Validate resolv.conf points to localhost
+      ansible.builtin.slurp:
+        path: /etc/resolv.conf
+      register: resolv
+    - debug:
+        msg: "{{ resolv.content | b64decode }}"
+
+    - name: Summarize health check
+      debug:
+        msg: |
+          Bind9 service: {{ 'running' if service_check is defined else 'unknown' }}
+          Config syntax: {{ 'valid' if conf_check.rc == 0 else 'invalid' }}
+          Zones tested: {{ zones_to_check | join(', ') }}
+          Local lookup: {{ dig_local.stdout }}
+          External lookup: {{ dig_external.stdout }}

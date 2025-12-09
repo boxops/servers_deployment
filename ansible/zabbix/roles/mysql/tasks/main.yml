@@ -1,0 +1,82 @@
+---
+- name: Install MySQL server
+  apt:
+    name:
+      - mysql-server
+      - mysql-client
+      - python3-pymysql
+    state: present
+  tags: mysql
+
+- name: Start MySQL service
+  systemd:
+    name: mysql
+    state: started
+    enabled: true
+  tags: mysql
+
+- name: Set MySQL root password
+  mysql_user:
+    name: root
+    password: "{{ mysql_root_password }}"
+    host: localhost
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  ignore_errors: true
+  tags: mysql
+
+- name: Set MySQL binary logging setting for function creators
+  mysql_variables:
+    variable: log_bin_trust_function_creators
+    value: 1
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  tags: mysql
+
+- name: Create Zabbix database (Server) with proper charset
+  mysql_db:
+    name: "{{ zabbix_server_dbname | default('zabbix') }}"
+    state: present
+    encoding: utf8mb4
+    collation: utf8mb4_bin
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: inventory_hostname in groups['zabbix_servers']
+  tags: mysql
+
+- name: Create Zabbix database user (Server)
+  mysql_user:
+    name: "{{ zabbix_server_dbuser | default('zabbix') }}"
+    password: "{{ zabbix_server_dbpassword | default('zabbix_password') }}"
+    priv: "{{ zabbix_server_dbname | default('zabbix') }}.*:ALL"
+    host: localhost
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: inventory_hostname in groups['zabbix_servers']
+  tags: mysql
+
+- name: Create Zabbix database (Proxy)
+  mysql_db:
+    name: "{{ zabbix_proxy_dbname | default('zabbix_proxy') }}"
+    state: present
+    encoding: utf8mb4
+    collation: utf8mb4_bin
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: inventory_hostname in groups['zabbix_proxies']
+  tags: mysql
+
+- name: Create Zabbix database user (Proxy)
+  mysql_user:
+    name: "{{ zabbix_proxy_dbuser | default('zabbix_proxy') }}"
+    password: "{{ zabbix_proxy_dbpassword | default('zabbix_proxy_password') }}"
+    priv: "{{ zabbix_proxy_dbname | default('zabbix_proxy') }}.*:ALL"
+    host: localhost
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: inventory_hostname in groups['zabbix_proxies']
+  tags: mysql

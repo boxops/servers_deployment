@@ -1,0 +1,39 @@
+---
+# sudo -i
+
+# apt-get update -y
+
+# apt-get install ca-certificates curl -y
+
+# curl -sO https://get.glennr.nl/unifi/install/unifi-9.3.45.sh
+# bash unifi-9.3.45.sh --skip
+
+- name: Install required system packages
+  apt:
+    name:
+      - build-essential
+      - ca-certificates
+      - curl
+    state: present
+    update_cache: true
+  tags:
+    - unifi
+
+- name: Download UniFi
+  shell: |
+    curl -sO https://get.glennr.nl/unifi/install/unifi-{{ unifi_version }}.sh
+    bash unifi-{{ unifi_version }}.sh --skip
+
+- name: Ensure UniFi service is running
+  service:
+    name: unifi
+    state: started
+    enabled: true
+
+# https://glennr.nl/s/unifi-lets-encrypt
+# curl -sO https://get.glennr.nl/unifi/extra/unifi-easy-encrypt.sh && bash unifi-easy-encrypt.sh
+
+# - name: Setup Let's Encrypt
+#   shell: |
+#     curl -sO https://get.glennr.nl/unifi/extra/unifi-easy-encrypt.sh
+#     bash unifi-easy-encrypt.sh --skip

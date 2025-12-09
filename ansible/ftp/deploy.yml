@@ -1,0 +1,7 @@
+---
+- name: Deploy FTP servers
+  hosts: servers
+  become: true
+  gather_facts: true
+  roles:
+    - role: vsftpd

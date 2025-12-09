@@ -1,0 +1,17 @@
+---
+- name: Upgrade Zabbix Infrastructure
+  hosts: all
+  become: true
+  gather_facts: true
+
+- name: Upgrade Zabbix Servers
+  hosts: zabbix_servers
+  become: true
+  roles:
+    - server-upgrade
+
+- name: Upgrade Zabbix Proxies
+  hosts: zabbix_proxies
+  become: true
+  roles:
+    - proxy-upgrade

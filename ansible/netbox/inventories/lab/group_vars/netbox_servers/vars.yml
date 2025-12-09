@@ -1,0 +1,42 @@
+---
+# System settings
+netbox_user: netbox
+netbox_group: netbox
+netbox_home: /opt/netbox
+
+# Netbox settings
+netbox_repo: https://github.com/netbox-community/netbox.git
+netbox_version: "v4.3.5"
+netbox_allowed_hosts: ["*"]
+netbox_secret_key: "pA$&Ck^Y_zi(oEQyJBCyWS5D0uI5^=lrzRt!yB13IEK($yXSxl"
+netbox_superuser_name: "admin"
+netbox_superuser_email: "admin@example.com"
+netbox_superuser_password: "Obn4wfC4kRpm4Lqbamya"
+
+# PostgreSQL settings
+# postgresql_version: 16
+postgresql_original_user: "postgres"
+postgresql_user: "netbox"
+postgresql_password: "CVbPKJwTDmxXXkGAslhJ"
+postgresql_db: "netbox"
+postgresql_host: "localhost"
+postgresql_port: 5432
+
+# Redis settings
+redis_bind: "127.0.0.1"
+redis_port: 6379
+redis_password: "lX1NdZMxb4P2wHfHCf5W"
+
+# Nginx settings
+nginx_server_name: "netbox.example.local"
+nginx_listen_port: 80
+nginx_ssl_certificate: "/etc/ssl/certs/nginx.crt"  # For HTTPS
+nginx_ssl_certificate_key: "/etc/ssl/private/nginx.key"  # For HTTPS
+
+ssl_country_name: "GB"
+ssl_state_or_province_name: "Worcestershire"
+ssl_locality_name: "Droitwich"
+ssl_organization_name: "Example Organization"
+ssl_organizational_unit_name: "IT Department"
+ssl_common_name: "netbox.example.local"
+ssl_email_address: "admin@example.com"

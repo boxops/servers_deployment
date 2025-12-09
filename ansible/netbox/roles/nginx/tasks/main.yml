@@ -1,0 +1,80 @@
+---
+### Self signed certificate
+
+# root@ab-thn-nbox01:~# sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+# -keyout /etc/ssl/private/netbox.key \
+# -out /etc/ssl/certs/netbox.crt
+
+# Country Name (2 letter code) [AU]:GB
+# State or Province Name (full name) [Some-State]:Worcestershire
+# Locality Name (eg, city) []:Droitwich
+# Organization Name (eg, company) [Internet Widgits Pty Ltd]:Example Org
+# Organizational Unit Name (eg, section) []:IT Department
+# Common Name (e.g. server FQDN or YOUR name) []:netbox.example.local
+# Email Address []:admin@example.com
+
+- name: Generate self-signed certificate for NetBox
+  ansible.builtin.command:
+    cmd: >
+      openssl req -x509 -nodes -days 365 -newkey rsa:2048
+      -keyout /etc/ssl/private/netbox.key
+      -out /etc/ssl/certs/netbox.crt
+      -subj "/C={{ ssl_country_name }}/ST={{ ssl_state_or_province_name }}/L={{ ssl_locality_name }}/O={{ ssl_organization_name }}/OU={{ ssl_organizational_unit_name }}/CN={{ ssl_common_name }}/emailAddress={{ ssl_email_address }}"
+  args:
+    creates: /etc/ssl/certs/netbox.crt
+  become: true
+  tags:
+    - nginx
+
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+  tags:
+    - nginx
+
+# - name: Configure Nginx
+#   template:
+#     src: nginx.conf.j2
+#     dest: /etc/nginx/sites-available/netbox.conf
+#     mode: 0644
+#   notify: Restart Nginx
+#   tags:
+#     - nginx
+
+# sudo cp /opt/netbox/contrib/nginx.conf /etc/nginx/sites-available/netbox
+- name: Copy Nginx configuration
+  copy:
+    src: /opt/netbox/contrib/nginx.conf
+    dest: /etc/nginx/sites-available/netbox.conf
+    remote_src: yes
+  become: true
+  tags:
+    - nginx
+
+# sudo rm /etc/nginx/sites-enabled/default
+- name: Remove default Nginx site
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  become: true
+  tags:
+    - nginx
+
+# sudo ln -s /etc/nginx/sites-available/netbox /etc/nginx/sites-enabled/netbox
+- name: Create a symbolic link for the Nginx site
+  file:
+    src: /etc/nginx/sites-available/netbox.conf
+    dest: /etc/nginx/sites-enabled/netbox.conf
+    state: link
+  notify: Restart Nginx
+  tags:
+    - nginx
+
+- name: Ensure Nginx is running
+  service:
+    name: nginx
+    state: started
+    enabled: true
+  tags:
+    - nginx

@@ -1,0 +1,29 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: ed8b8d16b49849a68710cebebabf9305
+      name: Custom
+  templates:
+    - uuid: 00fdc1545f104e85be6cea3e7d09b6f5
+      template: 'NetworkRadius by HTTP'
+      name: 'NetworkRadius by HTTP'
+      description: 'Server is running FreeRadius created by NetworkRadius'
+      groups:
+        - name: Custom
+      items:
+        - uuid: 49bc4960ad3e4076bd94d2e41e8fc343
+          name: 'Radius Get Users'
+          type: HTTP_AGENT
+          key: radius.get.users
+          delay: 5m
+          value_type: TEXT
+          url: 'https://{$URL}/api/user_data'
+          headers:
+            - name: Content-Type
+              value: application/json
+          tags:
+            - tag: source
+              value: radius
+      macros:
+        - macro: '{$URL}'
+          value: radius-server.example.local

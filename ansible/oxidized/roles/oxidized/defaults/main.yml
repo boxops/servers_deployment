@@ -1,0 +1,23 @@
+---
+oxidized_user: oxidized
+oxidized_home: "/home/{{ oxidized_user }}"
+oxidized_config_path: "{{ oxidized_home }}/.config/oxidized/config"
+oxidized_packages:
+  - ruby
+  - ruby-dev
+  - libsqlite3-dev
+  - libssl-dev
+  - pkg-config
+  - cmake
+  - libssh2-1-dev
+  - libicu-dev
+  - zlib1g-dev
+  - g++
+  - libyaml-dev
+oxidized_gems:
+  - oxidized
+  - oxidized-web
+  - oxidized-script
+oxidized_web_port: 8888
+oxidized_rest_bind: "0.0.0.0:8888"
+oxidized_enable_web: true

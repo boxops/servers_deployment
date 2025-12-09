@@ -1,0 +1,42 @@
+hostname,os_version,kernel_version
+AB-DEV-NBOX01,Ubuntu 22.04.4 LTS,5.15.0-122-generic
+AB-DEV-POTS01,Ubuntu 22.04.3 LTS,5.15.0-92-generic
+AB-JLH-BAST01,Debian GNU/Linux 12 (bookworm),6.1.0-27-amd64
+AB-JLH-DHCPMGMT01,Ubuntu 22.04.5 LTS,5.15.0-131-generic
+AB-JLH-JUMP01,Debian GNU/Linux 12 (bookworm),6.1.0-30-amd64
+AB-JLH-IPA01,Rocky Linux 9.5 (Blue Onyx),5.14.0-503.23.2.el9_5.x86_64
+AB-JLH-DATAOPS01,Ubuntu 22.04.4 LTS,5.15.0-131-generic
+AB-JLH-DHCPPRI01,Ubuntu 22.04.3 LTS,5.15.0-135-generic
+AB-JLH-DBRIC01,Ubuntu 22.04.4 LTS,5.15.0-133-generic
+AB-JLH-NBOX01,Ubuntu 22.04.5 LTS,5.15.0-127-generic
+AB-JLH-GRAF01,Ubuntu 24.04.1 LTS,6.8.0-79-generic
+AB-JLH-OOKLA01,Ubuntu 22.04.4 LTS,5.15.0-133-generic
+AB-JLH-RADP01,Ubuntu 22.04.4 LTS,5.15.0-133-generic
+AB-JLH-RADR01,Ubuntu 22.04.4 LTS,5.15.0-133-generic
+AB-JLH-STWS01,Ubuntu 22.04.3 LTS,5.15.0-133-generic
+AB-JLH-SAMK01,Ubuntu 22.04.5 LTS,6.8.0-45-generic
+AB-JLH-WBCACHE01,Ubuntu 20.04.6 LTS,5.4.0-208-generic
+AB-JLH-WEEZ01,Ubuntu 22.04.3 LTS,5.15.0-141-generic
+AB-THN-ADTILL01,Ubuntu 22.04.4 LTS,6.5.0-15-generic
+AB-THN-ALTI01,Ubuntu 20.04.6 LTS,5.4.0-205-generic
+AB-THN-ANSI01,Ubuntu 22.04.5 LTS,5.15.0-139-generic
+AB-THN-BAST01,Debian GNU/Linux 12 (bookworm),6.1.0-28-amd64
+AB-THN-DHCPSEC01,Ubuntu 22.04.5 LTS,5.15.0-135-generic
+AB-THN-NBOT01,Ubuntu 22.04.5 LTS,5.15.0-144-generic
+AB-THN-FTP01,Ubuntu 20.04.6 LTS,5.4.0-208-generic
+AB-THN-GLOG01,Ubuntu 24.04.2 LTS,6.8.0-52-generic
+AB-THN-OBSERV01,Ubuntu 20.04.6 LTS,5.4.0-214-generic
+AB-THN-OOKLA01,Ubuntu 22.04.4 LTS,5.15.0-139-generic
+AB-THN-JUMP01,Debian GNU/Linux 12 (bookworm),6.1.0-31-amd64
+AB-THN-POTS01,Ubuntu 22.04.5 LTS,5.15.0-139-generic
+AB-THN-RADP01,Ubuntu 22.04.4 LTS,5.15.0-133-generic
+AB-THN-RADO01,Ubuntu 22.04.4 LTS,5.15.0-133-generic
+AB-THN-RADR01,Ubuntu 22.04.4 LTS,5.15.0-133-generic
+AB-THN-SAMK01,Ubuntu 22.04.5 LTS,6.8.0-52-generic
+AB-THN-STWS01,Ubuntu 22.04.3 LTS,5.15.0-112-generic
+AB-THN-WBCACHE01,Ubuntu 20.04.6 LTS,5.4.0-208-generic
+AB-THN-Zabbix-Standalone,Ubuntu 24.10,6.11.0-29-generic
+AB-THN-Zabbix-Standalone-DB1,Ubuntu 24.04.2 LTS,6.8.0-60-generic
+AB-JLH-AAA01,Ubuntu 16.04.7 LTS,4.4.0-210-generic
+AB-THN-AAA01,Ubuntu 16.04.7 LTS,4.4.0-210-generic
+AB-THN-DTILL01,Ubuntu 18.04.6 LTS,4.15.0-213-generic

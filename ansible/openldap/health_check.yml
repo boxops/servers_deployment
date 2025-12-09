@@ -1,0 +1,27 @@
+---
+- name: OpenLDAP Health Check
+  hosts: openldap
+  become: true
+  tasks:
+    - name: Check if slapd service is running
+      service:
+        name: slapd
+        state: started
+      register: slapd_status
+
+    - name: Assert slapd is running
+      assert:
+        that:
+          - slapd_status.state == 'started'
+
+    - name: Test LDAP port (389) is open
+      wait_for:
+        port: 389
+        host: 127.0.0.1
+        timeout: 5
+      register: ldap_port
+
+    - name: Assert LDAP port is open
+      assert:
+        that:
+          - ldap_port.elapsed < 5

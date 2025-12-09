@@ -1,0 +1,210 @@
+# This is the Zabbix server configuration file
+
+### Option: LogFile
+LogFile=/var/log/zabbix/zabbix_server.log
+
+### Option: LogFileSize
+LogFileSize=0
+
+### Option: PidFile
+PidFile=/run/zabbix/zabbix_server.pid
+
+### Option: SocketDir
+SocketDir=/run/zabbix
+
+### Option: DBHost
+DBHost={{ zabbix_server_dbhost }}
+
+### Option: DBName
+DBName={{ zabbix_server_dbname }}
+
+### Option: DBUser
+DBUser={{ zabbix_server_dbuser }}
+
+### Option: DBPassword
+DBPassword={{ zabbix_server_dbpassword }}
+
+### Option: DBSocket
+# DBSocket=
+
+### Option: DBPort
+# DBPort=3306
+
+### Option: HistoryStorageURL
+# HistoryStorageURL=
+
+### Option: HistoryStorageTypes
+# HistoryStorageTypes=uint,dbl,str,log,text
+
+### Option: ExportDir
+# ExportDir=
+
+### Option: ExportFileSize
+# ExportFileSize=1G
+
+### Option: StartPollers
+# StartPollers=5
+
+### Option: StartIPMIPollers
+# StartIPMIPollers=0
+
+### Option: StartPreprocessors
+# StartPreprocessors=3
+
+### Option: StartPollersUnreachable
+# StartPollersUnreachable=1
+
+### Option: StartTrappers
+# StartTrappers=5
+
+### Option: StartPingers
+# StartPingers=1
+
+### Option: StartDiscoverers
+# StartDiscoverers=1
+
+### Option: StartHTTPPollers
+# StartHTTPPollers=1
+
+### Option: StartTimers
+# StartTimers=1
+
+### Option: StartEscalators
+# StartEscalators=1
+
+### Option: StartAlerters
+# StartAlerters=3
+
+### Option: JavaGateway
+# JavaGateway=
+
+### Option: JavaGatewayPort
+# JavaGatewayPort=10052
+
+### Option: StartJavaPollers
+# StartJavaPollers=0
+
+### Option: StartVMwareCollectors
+# StartVMwareCollectors=0
+
+### Option: VMwareFrequency
+# VMwareFrequency=60
+
+### Option: VMwarePerfFrequency
+# VMwarePerfFrequency=60
+
+### Option: VMwareCacheSize
+# VMwareCacheSize=8M
+
+### Option: VMwareTimeout
+# VMwareTimeout=10
+
+### Option: SNMPTrapperFile
+# SNMPTrapperFile=/tmp/zabbix_traps.tmp
+
+### Option: StartSNMPTrapper
+# StartSNMPTrapper=0
+
+### Option: ListenIP
+# ListenIP=0.0.0.0
+
+### Option: ListenPort
+ListenPort=10051
+
+### Option: HousekeepingFrequency
+# HousekeepingFrequency=1
+
+### Option: MaxHousekeeperDelete
+# MaxHousekeeperDelete=5000
+
+### Option: ProblemHousekeepingFrequency
+# ProblemHousekeepingFrequency=1
+
+### Option: CacheSize
+# CacheSize=8M
+
+### Option: CacheUpdateFrequency
+# CacheUpdateFrequency=60
+
+### Option: StartDBSyncers
+# StartDBSyncers=4
+
+### Option: HistoryCacheSize
+# HistoryCacheSize=16M
+
+### Option: HistoryIndexCacheSize
+# HistoryIndexCacheSize=4M
+
+### Option: TrendCacheSize
+# TrendCacheSize=4M
+
+### Option: ValueCacheSize
+# ValueCacheSize=8M
+
+### Option: Timeout
+# Timeout=3
+
+### Option: TrapperTimeout
+# TrapperTimeout=300
+
+### Option: UnreachablePeriod
+# UnreachablePeriod=45
+
+### Option: UnavailableDelay
+# UnavailableDelay=60
+
+### Option: UnreachableDelay
+# UnreachableDelay=15
+
+### Option: AlertScriptsPath
+AlertScriptsPath=/usr/lib/zabbix/alertscripts
+
+### Option: ExternalScripts
+ExternalScripts=/usr/lib/zabbix/externalscripts
+
+### Option: FpingLocation
+FpingLocation=/usr/bin/fping
+
+### Option: Fping6Location
+Fping6Location=/usr/bin/fping6
+
+### Option: SSHKeyLocation
+# SSHKeyLocation=
+
+### Option: LogSlowQueries
+# LogSlowQueries=3000
+
+### Option: TmpDir
+# TmpDir=/tmp
+
+### Option: StartProxyPollers
+# StartProxyPollers=1
+
+### Option: ProxyConfigFrequency
+# ProxyConfigFrequency=3600
+
+### Option: ProxyDataFrequency
+# ProxyDataFrequency=1
+
+### Option: AllowRoot
+# AllowRoot=0
+
+### Option: User
+User=zabbix
+
+### Option: Include
+# Include=/usr/local/etc/zabbix_server.general.conf
+# Include=/usr/local/etc/zabbix_server.conf.d/
+# Include=/usr/local/etc/zabbix_server.conf.d/*.conf
+
+### Option: SSLCertLocation
+# SSLCertLocation=${datadir}/zabbix/ssl/certs
+
+### Option: SSLKeyLocation
+# SSLKeyLocation=${datadir}/zabbix/ssl/keys
+
+### Option: SSLCALocation
+# SSLCALocation=
+
+### Option: StatsAllowedIP
+# StatsAllowedIP=

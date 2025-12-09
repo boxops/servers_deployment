@@ -1,0 +1,70 @@
+---
+- name: Power cycle a port on a Tachyon TNS Switch
+  hosts: devices
+  gather_facts: no
+  connection: local
+  vars:
+    ports:
+      - "eth0"
+
+  tasks:
+    - name: Login to device and get token
+      uri:
+        url: "https://{{ ansible_host }}/cgi.lua/apiv1/login"
+        method: POST
+        body_format: json
+        body:
+          username: "{{ ansible_user }}"
+          password: "{{ ansible_become_password }}"
+        validate_certs: no
+        return_content: yes
+        status_code: 200
+      register: login_response
+
+    - name: Normalize login response to JSON
+      set_fact:
+        login_json: >-
+          {{ login_response.json if (login_response.json is defined) else (login_response.content | default('{}') | from_json) }}
+      failed_when: false
+
+    - name: Set token fact
+      set_fact:
+        auth_token: "{{ (login_json.token | default('')) | urlencode }}"
+
+    - name: Fail if login did not return a token
+      fail:
+        msg: "Login did not return a token. Full response: {{ login_response }}"
+      when: auth_token == ''
+
+    - name: Perform PoE reset on specified ports
+      uri:
+        url: "https://{{ ansible_host }}/cgi.lua/apiv1/poe_reset"
+        method: POST
+        headers:
+          Cookie: "api_token={{ auth_token }}; token={{ auth_token }}"
+        body_format: json
+        body:
+          port: "{{ item }}"
+        validate_certs: no
+        return_content: yes
+        status_code: 200
+      register: poe_reset_results
+      loop: "{{ ports }}"
+      loop_control:
+        label: "{{ item }}"
+
+    - name: Print per-port PoE reset responses
+      debug:
+        msg: "Port {{ item.item }} => {{ item.content | from_json | to_nice_json }}"
+      loop: "{{ poe_reset_results.results }}"
+
+    - name: Logout from device
+      uri:
+        url: "https://{{ ansible_host }}/cgi.lua/apiv1/login"
+        method: DELETE
+        headers:
+          Cookie: "api_token={{ auth_token }}; token={{ auth_token }}"
+        validate_certs: no
+        return_content: yes
+        status_code: 200
+      register: logout_response

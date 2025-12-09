@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+command = '{{ netbox_home }}/venv/bin/gunicorn'
+pythonpath = '{{ netbox_home }}/netbox'
+bind = '127.0.0.1:8001'
+workers = 5
+worker_class = 'sync'
+user = '{{ netbox_user }}'
+group = '{{ netbox_group }}'
+max_requests = 5000
+max_requests_jitter = 500
+timeout = 300

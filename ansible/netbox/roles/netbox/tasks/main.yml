@@ -1,0 +1,185 @@
+---
+- name: Check if there is an existing installation
+  ansible.builtin.stat:
+    path: "{{ netbox_home }}"
+  register: netbox_installed
+  tags:
+    - netbox
+
+- name: Create Netbox group
+  group:
+    name: "{{ netbox_group }}"
+    state: present
+  tags:
+    - netbox
+
+# sudo adduser --system --group netbox
+- name: Create Netbox user
+  user:
+    name: "{{ netbox_user }}"
+    group: "{{ netbox_group }}"
+    shell: /bin/bash
+    create_home: true
+    home: "/home/{{ netbox_user }}"
+    state: present
+  tags:
+    - netbox
+
+- name: Create Netbox install directory
+  file:
+    path: "{{ netbox_home }}"
+    owner: "{{ netbox_user }}"
+    group: "{{ netbox_group }}"
+    state: directory
+    mode: "0755"
+  tags:
+    - netbox
+
+# sudo mkdir -p /opt/netbox/
+- name: Create the install directory
+  ansible.builtin.file:
+    path: "{{ netbox_home }}"
+    owner: "{{ netbox_user }}"
+    group: "{{ netbox_group }}"
+    state: directory
+    mode: "755"
+  become: true
+  when: not netbox_installed.stat.exists
+  tags:
+    - netbox
+
+- name: Add Netbox directory to git safe.directory
+  command: git config --global --add safe.directory /opt/netbox
+  become: true
+  tags:
+    - netbox
+
+# sudo git clone https://github.com/netbox-community/netbox.git .
+- name: Clone Netbox repository
+  git:
+    repo: "{{ netbox_repo }}"
+    dest: "{{ netbox_home }}"
+    version: "v{{ netbox_version }}"
+  register: netbox_downloaded
+  # when: not netbox_installed.stat.exists
+  tags:
+    - netbox
+
+# sudo git checkout vX.Y.Z
+- name: Checkout to the right netbox_version
+  command: "git checkout v{{ netbox_version }}"
+  args:
+    chdir: "{{ netbox_home }}"
+  when: netbox_downloaded.changed
+  tags:
+    - netbox
+
+# sudo chown --recursive netbox /opt/netbox/netbox/media/
+# sudo chown --recursive netbox /opt/netbox/netbox/reports/
+# sudo chown --recursive netbox /opt/netbox/netbox/scripts/
+- name: Change ownership of Netbox directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    owner: "{{ netbox_user }}"
+    group: "{{ netbox_group }}"
+    recurse: yes
+  loop:
+    - "{{ netbox_home }}/netbox/media"
+    - "{{ netbox_home }}/netbox/reports"
+    - "{{ netbox_home }}/netbox/scripts"
+  when: netbox_downloaded.changed
+  tags:
+    - netbox
+
+- name: Copy configuration file
+  template:
+    src: configuration.py.j2
+    dest: "{{ netbox_home }}/netbox/netbox/configuration.py"
+    owner: "{{ netbox_user }}"
+    group: "{{ netbox_group }}"
+    mode: 0640
+  tags:
+    - netbox
+
+# sudo /opt/netbox/upgrade.sh
+- name: Run the Upgrade script
+  command: "{{ netbox_home }}/upgrade.sh"
+  become: true
+  tags:
+    - netbox
+
+- name: Create superuser (non-interactive)
+  command: "{{ netbox_home }}/venv/bin/python3 {{ netbox_home }}/netbox/manage.py createsuperuser --noinput --username {{ netbox_superuser_name }} --email {{ netbox_superuser_email }}"
+  become_user: "{{ netbox_user }}"
+  environment:
+    DJANGO_SUPERUSER_PASSWORD: "{{ netbox_superuser_password }}"
+  when: netbox_superuser_password is defined
+  ignore_errors: true
+  tags:
+    - netbox
+
+# sudo ln -s /opt/netbox/contrib/netbox-housekeeping.sh /etc/cron.daily/netbox-housekeeping
+- name: Schedule the Housekeeping Task
+  cron:
+    name: "Netbox Housekeeping"
+    minute: "0"
+    hour: "0"
+    job: "/opt/netbox/contrib/netbox-housekeeping.sh"
+    user: "{{ netbox_user }}"
+  tags:
+    - netbox
+
+# - name: Copy Gunicorn configuration (optional)
+#   template:
+#     src: gunicorn.py.j2
+#     dest: "{{ netbox_home }}/gunicorn.py"
+#     owner: "{{ netbox_user }}"
+#     group: "{{ netbox_group }}"
+#     mode: 0640
+#   tags:
+#     - netbox
+
+# sudo cp /opt/netbox/contrib/gunicorn.py /opt/netbox/gunicorn.py
+- name: Copy Gunicorn configuration
+  command: cp {{ netbox_home }}/contrib/gunicorn.py {{ netbox_home }}/gunicorn.py
+  become: true
+  tags:
+    - netbox
+
+# systemd Setup
+# sudo cp -v /opt/netbox/contrib/*.service /etc/systemd/system/
+- name: Copy systemd service files
+  copy:
+    src: "{{ netbox_home }}/contrib/"
+    dest: "/etc/systemd/system/"
+    remote_src: yes
+  become: true
+  tags:
+    - netbox
+
+# sudo systemctl daemon-reload
+- name: Reload systemd
+  command: systemctl daemon-reload
+  become: true
+  tags:
+    - netbox
+
+# sudo systemctl enable --now netbox netbox-rq
+- name: Enable Netbox and Netbox RQ services
+  systemd:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+  loop:
+    - netbox
+    - netbox-rq
+  tags:
+    - netbox
+
+# systemctl status netbox.service
+- name: Ensure Netbox service is running
+  systemd:
+    name: netbox
+    state: started
+  tags:
+    - netbox

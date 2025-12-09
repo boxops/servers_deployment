@@ -1,0 +1,78 @@
+---
+username: {{ oxidized_username | default('admin') }}
+password: {{ oxidized_password | default('your-device-password') }}
+vars:
+  enable: {{ oxidized_enable_password | default('your-enable-password') }}
+model: ios
+resolve_dns: false
+interval: 3600
+use_syslog: false
+debug: false
+run_once: false
+threads: 60
+use_max_threads: true
+timeout: 20
+retries: 3
+prompt: !ruby/regexp /^([\w.@-]+[#>]\s?)$/
+rest: {{ oxidized_rest_bind }}
+extensions:
+  oxidized-web:
+    load: true
+next_adds_job: false
+groups: {}
+group_map: {}
+models: {}
+pid: "/home/oxidized/.config/oxidized/pid"
+crash:
+  directory: "/home/oxidized/.config/oxidized/crashes"
+  hostnames: false
+stats:
+  history_size: 10
+input:
+  default: ssh, telnet
+  debug: false
+  ssh:
+    secure: false
+  ftp:
+    passive: true
+  utf8_encoded: true
+output:
+  default: git
+  git:
+    user: oxidized
+    email: netdev@example.com
+    repo: "/home/oxidized/.config/oxidized/devices.git"
+#output:
+#  default: file
+#  file:
+#    directory: "/home/oxidized/.config/oxidized/configs"
+source:
+  default: csv
+  csv:
+    file: "/home/oxidized/.config/oxidized/router.db"
+    delimiter: !ruby/regexp /:/
+    map:
+      ip: 0
+      name: 1
+      model: 2
+      username: 3
+      password: 4
+    vars_map:
+      enable: 5
+    gpg: false
+model_map:
+  juniper_junos: junos
+  cisco_ios: ios
+  cisco_xr: iosxr
+  cisco_xe: iosxe
+  cisco_nxos: nxos
+  cisco_s300: ciscosmb
+  mikrotik_routeros: routeros
+  keymile_nos: dasan
+  fiberstore_fsos: fsos
+  netonix_os: netonix
+  siklu_os: siklu
+  fortinet: fortios
+  ubiquiti_airos: airos
+  ubiquiti_edge: edgeos
+  ubiquiti_edgeswitch: edgeswitch

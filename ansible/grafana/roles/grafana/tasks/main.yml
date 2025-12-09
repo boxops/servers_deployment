@@ -1,0 +1,55 @@
+---
+- name: Ensure prerequisite packages are installed
+  apt:
+    name:
+      - apt-transport-https
+      - software-properties-common
+      - wget
+    state: present
+    update_cache: yes
+
+- name: Create keyring directory
+  file:
+    path: "{{ grafana_key_path | dirname }}"
+    state: directory
+    mode: '0755'
+
+- name: Download and install Grafana GPG key
+  ansible.builtin.get_url:
+    url: "{{ grafana_repo_url }}/gpg.key"
+    dest: /tmp/grafana.gpg.key
+    mode: '0644'
+
+- name: Dearmor and place the Grafana GPG key
+  ansible.builtin.shell: |
+    wget -q -O - https://apt.grafana.com/gpg.key \
+      | gpg --dearmor \
+      | tee {{ grafana_key_path }} > /dev/null
+  args:
+    creates: "{{ grafana_key_path }}"
+
+- name: Add Grafana APT repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by={{ grafana_key_path }}] {{ grafana_repo_url }} {{ grafana_repo_dist }} {{ grafana_repo_comp }}"
+    state: present
+    filename: grafana
+    update_cache: yes
+
+- name: Install Grafana (OSS or Enterprise)
+  apt:
+    name: "{{ grafana_edition }}"
+    state: present
+    update_cache: yes
+
+- name: Enable and start Grafana service
+  systemd:
+    name: grafana-server
+    enabled: yes
+    state: started
+
+# - name: Open firewall port 3000 (if UFW is enabled)
+#   ufw:
+#     rule: allow
+#     port: 3000
+#     proto: tcp
+#   when: ansible_facts.services['ufw'] is defined and ansible_facts.services['ufw'].state == 'running'

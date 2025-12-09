@@ -1,0 +1,68 @@
+---
+- name: Check Oxidized service health
+  hosts: oxidized_servers
+  become: true
+  tasks:
+
+    - name: Ensure oxidized service is active and running
+      ansible.builtin.systemd:
+        name: oxidized
+        state: started
+      register: oxidized_service
+
+    - name: Fail if oxidized service is not running
+      ansible.builtin.fail:
+        msg: "Oxidized service is not running!"
+      when: not oxidized_service.status.ActiveState == "active"
+
+    - name: Check Oxidized web interface availability
+      ansible.builtin.uri:
+        url: "http://{{ ansible_host }}:8888"
+        method: GET
+        return_content: yes
+        status_code: 200
+      register: web_response
+
+    - name: Output Oxidized web response
+      ansible.builtin.debug:
+        msg: "Oxidized web UI is reachable at http://{{ ansible_host }}:8888"
+
+    - name: Check Oxidized API availability
+      ansible.builtin.uri:
+        url: "http://{{ ansible_host }}:8888/nodes"
+        method: GET
+        status_code: 200
+      register: api_response
+
+    - name: Output API status
+      ansible.builtin.debug:
+        msg: "Oxidized API is responding with status {{ api_response.status }}"
+
+    # --- Log scanning with failure on errors ---
+    - name: Check Oxidized logs for recent errors (last 50 lines)
+      ansible.builtin.shell: |
+        journalctl -u oxidized -n 50 --no-pager | grep -i "error" || true
+      register: oxidized_errors
+      changed_when: false
+
+    - name: Fail if recent errors found in logs
+      ansible.builtin.fail:
+        msg: |
+          Recent errors found in Oxidized logs:
+          {{ oxidized_errors.stdout }}
+      when: oxidized_errors.stdout != ""
+
+    # --- Device list verification ---
+    - name: Verify Oxidized device list is not empty
+      ansible.builtin.command: oxidized-script list
+      register: device_list
+      changed_when: false
+
+    - name: Fail if no devices are configured
+      ansible.builtin.fail:
+        msg: "No devices found in Oxidized device list!"
+      when: device_list.stdout_lines | length == 0
+
+    - name: Output configured devices
+      ansible.builtin.debug:
+        msg: "{{ device_list.stdout_lines }}"

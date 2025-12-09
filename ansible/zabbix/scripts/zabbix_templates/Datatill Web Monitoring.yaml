@@ -1,0 +1,25 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: ed8b8d16b49849a68710cebebabf9305
+      name: Custom
+    - uuid: 7df96b18c230490a9a0a9e2307226338
+      name: Templates
+  templates:
+    - uuid: 77668fe9e83c4a9b99dbfc427e6dad56
+      template: 'Datatill Web Monitoring'
+      name: 'Datatill Web Monitoring'
+      groups:
+        - name: Custom
+        - name: Templates
+      httptests:
+        - uuid: be2c795bb1ed435594f1594d5543a825
+          name: 'Availability of Datatill'
+          agent: 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:73.0) Gecko/20100101 Firefox/73.0'
+          steps:
+            - name: 'Site Availability'
+              url: 'https://portal.example.com/'
+              follow_redirects: 'NO'
+      tags:
+        - tag: build
+          value: custom

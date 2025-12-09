@@ -1,0 +1,57 @@
+---
+- name: Deploy Kea DHCP4 configurations from intended_configs
+  hosts: all
+  become: true
+  vars:
+    kea_dhcp4_config_path: "/etc/kea/kea-dhcp4.conf"
+
+  tasks:
+    - name: Ensure Kea configuration directory exists
+      ansible.builtin.file:
+        path: "{{ kea_dhcp4_config_path | dirname }}"
+        state: directory
+        mode: '0755'
+
+    # DHCP4
+    - name: Deploy Kea DHCP4 configuration
+      ansible.builtin.copy:
+        src: "intended_configs/{{ inventory_hostname }}.kea-dhcp4.conf"
+        dest: "{{ kea_dhcp4_config_path }}"
+        owner: _kea
+        group: _kea
+        mode: '0644'
+      # notify: Restart kea-dhcp4
+      tags:
+        - kea_dhcp4
+
+    - name: Validate Kea DHCP4 config
+      ansible.builtin.command: "kea-dhcp4 -t {{ kea_dhcp4_config_path }}"
+      register: kea_config_check
+      changed_when: false
+      failed_when: kea_config_check.rc != 0
+      notify:
+        - Restart kea-dhcp4
+      tags:
+        - kea_dhcp4
+
+    # Control Agent
+    - name: Deploy Kea Control Agent configuration
+      ansible.builtin.copy:
+        src: "intended_configs/{{ inventory_hostname }}.kea-ctrl-agent.conf"
+        dest: "/etc/kea/kea-ctrl-agent.conf"
+        owner: _kea
+        group: _kea
+        mode: '0644'
+      # notify: Restart kea-ctrl-agent
+      tags:
+        - kea_ctrl_agent
+
+    - name: Validate Kea Control Agent config
+      ansible.builtin.command: "kea-ctrl-agent -t /etc/kea/kea-ctrl-agent.conf"
+      register: kea_ctrl_config_check
+      changed_when: false
+      failed_when: kea_ctrl_config_check.rc != 0
+      notify:
+        - Restart kea-ctrl-agent
+      tags:
+        - kea_ctrl_agent

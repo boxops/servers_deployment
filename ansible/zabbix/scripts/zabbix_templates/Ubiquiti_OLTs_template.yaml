@@ -1,0 +1,446 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: ed8b8d16b49849a68710cebebabf9305
+      name: Custom
+  templates:
+    - uuid: 1d3bb951f0e04e7f8adfedd7b040df1c
+      template: Ubiquiti_OLTs_template
+      name: Ubiquiti_OLTs_template
+      groups:
+        - name: Custom
+      items:
+        - uuid: 342e728828024f83a063b3534692789e
+          name: OSversion
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.2.1.1.1.0
+          key: sysDescr
+          delay: 60m
+          history: 1d
+          value_type: TEXT
+        - uuid: 40f893c2601a40cba7c60667bf70652c
+          name: OLTsysName
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.2.1.1.5
+          key: sysName
+          history: 7d
+          value_type: CHAR
+        - uuid: db73f3ddbe0b49cb913aa8e841434d00
+          name: SysUpTime
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.2.1.1.3.0
+          key: sysUpTime
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: MULTIPLIER
+              parameters:
+                - '0.01'
+        - uuid: ea76de41fc2c4971aa3d3856f8a4bb36
+          name: FANSpeed
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.41112.1.5.5.2.1.3.0
+          key: ubntFanRpm
+          history: 7d
+          trends: '0'
+          units: RPM
+          triggers:
+            - uuid: 87e7c68959234e2f96a0dc79aa31849e
+              expression: last(/Ubiquiti_OLTs_template/ubntFanRpm)=0
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: last(/Ubiquiti_OLTs_template/ubntFanRpm)<>0
+              name: FanFailure
+              priority: DISASTER
+        - uuid: 309bf37ac6304ee1b72091ae4b01542f
+          name: FANcount
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.41112.1.5.5.1.0
+          key: ubntFansCount
+          history: 7d
+          trends: '0'
+          units: numbers
+      discovery_rules:
+        - uuid: 04a413d08b934dcdb930bcf2b8cf692a
+          name: ubntOnuPortsTable
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},.1.3.6.1.4.1.41112.1.5.8.1.1.1]'
+          key: ubntOnuPortsTable.discovery
+          delay: 1h
+          item_prototypes:
+            - uuid: 8d522a5dc4314eae8d19b9dd28344817
+              name: ubntOnuPortIfSpeed
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.8.1.1.3.{#SNMPINDEX}'
+              key: 'ubntOnuPortIfSpeed[{#SNMPVALUE}]'
+              history: 7d
+              trends: '0'
+            - uuid: 6089016bc5e240b3b94d0ad155e4bf97
+              name: ubntOnuPortIndex
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.8.1.1.2.{#SNMPINDEX}'
+              key: 'ubntOnuPortIndex[{#SNMPVALUE}]'
+              history: 7d
+              trends: '0'
+            - uuid: 69ac31453dd24d47b88582848d68c6f4
+              name: ubntOnuPortSN
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.8.1.1.1.{#SNMPINDEX}'
+              key: 'ubntOnuPortSN[{#SNMPVALUE}]'
+              history: 7d
+              value_type: TEXT
+        - uuid: 8846672b18a64940ac2db067d26aacd8
+          name: ONUDetails
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},.1.3.6.1.4.1.41112.1.5.6.2.1.1]'
+          key: ubntOnusTable.discovery
+          item_prototypes:
+            - uuid: 015a9994c01d4841bb65c7d43eb3855f
+              name: ubntOnuConnectedTime
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.6.2.1.6.{#SNMPINDEX}'
+              key: 'ubntOnuConnectedTime[{#SNMPVALUE}]'
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+            - uuid: fc3c413b55cd41a09022ab586135600c
+              name: ubntOnuModel
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.6.2.1.4.{#SNMPINDEX}'
+              key: 'ubntOnuModel[{#SNMPVALUE}]'
+              history: 7d
+              value_type: CHAR
+            - uuid: c3823d7b46cb40f1b7caad659821c368
+              name: ubntOnuName
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.6.2.1.2.{#SNMPINDEX}'
+              key: 'ubntOnuName[{#SNMPVALUE}]'
+              history: 7d
+              value_type: CHAR
+            - uuid: 42c24f0d93be405fbaf36d40961bffa6
+              name: ubntOnuOltPort
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.6.2.1.5.{#SNMPINDEX}'
+              key: 'ubntOnuOltPort[{#SNMPVALUE}]'
+              history: 7d
+              trends: '0'
+            - uuid: 4d28c4b365964ebd8cededd34bc784c2
+              name: ubntOnuOnlineOfflineStatus
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.6.2.1.3.{#SNMPINDEX}'
+              key: 'ubntOnuOnline[{#SNMPVALUE}]'
+              history: 7d
+              trends: '0'
+              valuemap:
+                name: ubntOnuOnline
+            - uuid: dce5bc9bea504dfc933fc92679b46941
+              name: ubntOnuRxBytes
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.6.2.1.11.{#SNMPINDEX}'
+              key: 'ubntOnuRxBytes[{#SNMPVALUE}]'
+              history: 7d
+              trends: '0'
+            - uuid: 05cbfe3a8aaf46c889503b1688d18c23
+              name: ubntOnuRxPower
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.6.2.1.9.{#SNMPINDEX}'
+              key: 'ubntOnuRxPower[{#SNMPVALUE}]'
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: MULTIPLIER
+                  parameters:
+                    - '0.01'
+            - uuid: 06f984a7ce9848bdaef0aad2a091146c
+              name: ubntOnuSN
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.6.2.1.1.{#SNMPINDEX}'
+              key: 'ubntOnuSN[{#SNMPVALUE}]'
+              history: 7d
+              value_type: CHAR
+            - uuid: 3508a88c8e704e3cbe8e83919243c3b0
+              name: ubntOnuTxBytes
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.6.2.1.10.{#SNMPINDEX}'
+              key: 'ubntOnuTxBytes[{#SNMPVALUE}]'
+              history: 7d
+              trends: '0'
+            - uuid: 3ba3198186cf4702829d8821e3880148
+              name: ubntOnuTxPower
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.6.2.1.8.{#SNMPINDEX}'
+              key: 'ubntOnuTxPower[{#SNMPVALUE}]'
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: MULTIPLIER
+                  parameters:
+                    - '0.01'
+            - uuid: 4e14e726171345f0ab41c89eb356103d
+              name: ubntOnuUpTime
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.6.2.1.7.{#SNMPINDEX}'
+              key: 'ubntOnuUpTime[{#SNMPVALUE}]'
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+          graph_prototypes:
+            - uuid: eea35832ec9d42009e0ad2a3b9205b41
+              name: 'Ubiquiti OLT ONU up down'
+              graph_items:
+                - color: 199C0D
+                  calc_fnc: ALL
+                  item:
+                    host: Ubiquiti_OLTs_template
+                    key: 'ubntOnuOnline[{#SNMPVALUE}]'
+        - uuid: 2b5451b41b7a4dd2adc5ca1a5d89c3f9
+          name: UbiquitiPowerSupply
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},.1.3.6.1.4.1.41112.1.5.3.2.1.1]'
+          key: ubntPsuTable.discovery
+          delay: 2m
+          item_prototypes:
+            - uuid: 41d85e2e61f34f1e9be2b1f1b18334d9
+              name: 'PsuType {#SNMPVALUE} [{"o=unknown,1=ac,2=dc,3=poe", ubntPsuStatus[x]=1 means ON}]'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.3.2.1.2.{#SNMPINDEX}'
+              key: 'PsuType[{#SNMPVALUE}]'
+              history: 7d
+              trends: '0'
+              valuemap:
+                name: ubntPsuType
+            - uuid: 00411d003c474150a3a15ec0afb1bbe7
+              name: ThermometerTable
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.4.2.1.3.{#SNMPINDEX}'
+              key: 'ThermsTable[{#SNMPVALUE}]'
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              units: Celsius
+              preprocessing:
+                - type: MULTIPLIER
+                  parameters:
+                    - '0.001'
+            - uuid: f1a289c1d2c440f5a13f2d8a0d487e28
+              name: 'ubntPsuStatus{#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.3.2.1.3.{#SNMPINDEX}'
+              key: 'ubntPsuStatus[{#SNMPVALUE}]'
+              history: 7d
+              trends: '0'
+              valuemap:
+                name: ubntPsuStatus
+            - uuid: 019dcd25af0441f9bf10a4d07df3b385
+              name: 'ubntPsuVoltage {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.3.2.1.5.{#SNMPINDEX}'
+              key: 'ubntPsuVoltage[{#SNMPVALUE}]'
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              units: mV
+              trigger_prototypes:
+                - uuid: 8db2449e3d1148efb02839af2cc0b71d
+                  expression: 'last(/Ubiquiti_OLTs_template/ubntPsuVoltage[{#SNMPVALUE}])>-45'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Ubiquiti_OLTs_template/ubntPsuVoltage[{#SNMPVALUE}])<-45'
+                  name: LowDCVoltage
+                  priority: HIGH
+            - uuid: 8f381a6d0dd54a3fa389015304eb699d
+              name: ThermometerTableCalculated
+              type: CALCULATED
+              key: 'ubntThermsTable[{#SNMPVALUE}]'
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              units: Celsius
+              params: '0.001*last(//ThermsTable[{#SNMPVALUE}])'
+        - uuid: f26de8856dfe4eecbe1f2b80b6450873
+          name: ubntSfpsTable
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE}, .1.3.6.1.4.1.41112.1.5.7.2.1.1]'
+          key: ubntSfpsTableIndex.discovery
+          item_prototypes:
+            - uuid: b32b42f2199449e0817b285f1d071368
+              name: ubntSfpIndex
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.7.2.1.1.{#SNMPINDEX}'
+              key: 'ubntSfpIndex[{#SNMPVALUE}]'
+              history: 7d
+              trends: '0'
+            - uuid: df060bf42e1e449993d78ffa047723a1
+              name: ubntSfpName
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.7.2.1.2.{#SNMPINDEX}'
+              key: 'ubntSfpName[{#SNMPVALUE}]'
+              history: 7d
+              value_type: CHAR
+            - uuid: ad388a46126146ada14397ec6f2c378a
+              name: ubntSfpRxBytes
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.7.2.1.7.{#SNMPINDEX}'
+              key: 'ubntSfpRxBytes[{#SNMPVALUE}]'
+              history: 7d
+              trends: '0'
+            - uuid: bfa321b1d7b547e98694446d12501902
+              name: ubntSfpTxBytes
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.7.2.1.6.{#SNMPINDEX}'
+              key: 'ubntSfpTxBytes[{#SNMPVALUE}]'
+              history: 7d
+              trends: '0'
+            - uuid: b6eabb3260f14bf5998217b03b4dc6ec
+              name: ubntSfpUp
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.7.2.1.3.{#SNMPINDEX}'
+              key: 'ubntSfpUp[{#SNMPVALUE}]'
+              history: 7d
+              trends: '0'
+              valuemap:
+                name: SFPupdown
+            - uuid: 5a1f6c7641994411857f2eebd0ae8752
+              name: ubntSfpVendorPn
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.7.2.1.5.{#SNMPINDEX}'
+              key: 'ubntSfpVendorPn[{#SNMPVALUE}]'
+              history: 7d
+              value_type: CHAR
+            - uuid: ab45576a719d46b787ee99a81ce697cc
+              name: ubntSfpVendor
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.5.7.2.1.4.{#SNMPINDEX}'
+              key: 'ubntSfpVendor[{#SNMPVALUE}]'
+              history: 7d
+              value_type: CHAR
+      tags:
+        - tag: vendor
+          value: Ubiquiti
+      dashboards:
+        - uuid: fe9e1ffef4f045ab8619f8929e11555e
+          name: Ubiquiti
+          pages:
+            - widgets:
+                - type: item
+                  name: 'Ubiquiti OLT System Uptime'
+                  width: '25'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: Ubiquiti_OLTs_template
+                        key: sysUpTime
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+                - type: item
+                  name: OSversion
+                  'y': '3'
+                  width: '12'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: Ubiquiti_OLTs_template
+                        key: sysDescr
+                - type: item
+                  name: 'Ubiquiti OLT FANspeed'
+                  x: '25'
+                  width: '22'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: Ubiquiti_OLTs_template
+                        key: ubntFanRpm
+                - type: item
+                  name: 'Ubiquiti OLT Fan Count'
+                  x: '47'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: Ubiquiti_OLTs_template
+                        key: ubntFansCount
+                - type: item
+                  name: OLTsysName
+                  x: '65'
+                  width: '7'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: Ubiquiti_OLTs_template
+                        key: sysName
+      valuemaps:
+        - uuid: a91e3c7f251544dd8525d5434d4bffa1
+          name: SFPupdown
+          mappings:
+            - value: '1'
+              newvalue: sfpUp
+            - value: '2'
+              newvalue: sfpDown
+        - uuid: 0265c24ac0044b8b9b2b9df7f31e4b65
+          name: ThermometerTable
+          mappings:
+            - type: DEFAULT
+              newvalue: /1000
+        - uuid: 84f7c002c0734ebd8bd3e88cd1d36173
+          name: ubntOnuOnline
+          mappings:
+            - value: '1'
+              newvalue: Up/Online
+            - value: '2'
+              newvalue: Down/Offline
+        - uuid: 5e9e2bb4a8ca4e299005d1ad8feea3e8
+          name: ubntPsuStatus
+          mappings:
+            - value: '0'
+              newvalue: unknown
+            - value: '1'
+              newvalue: 'on'
+            - value: '2'
+              newvalue: 'off'
+            - value: '3'
+              newvalue: standby
+        - uuid: c82c7003acfa477d83f0b9003edc7df3
+          name: ubntPsuType
+          mappings:
+            - value: '0'
+              newvalue: unknown
+            - value: '1'
+              newvalue: ac
+            - value: '2'
+              newvalue: dc
+            - value: '3'
+              newvalue: poe
+  graphs:
+    - uuid: afd2867535954191972620f0b086b4be
+      name: UbiquitiFANcount
+      graph_items:
+        - color: 199C0D
+          calc_fnc: ALL
+          item:
+            host: Ubiquiti_OLTs_template
+            key: ubntFansCount
+    - uuid: 3c47abc03dfd43749e7fdc83cc5c8d3c
+      name: UbiquitiFANSpeed
+      graph_items:
+        - color: 199C0D
+          calc_fnc: ALL
+          item:
+            host: Ubiquiti_OLTs_template
+            key: ubntFanRpm

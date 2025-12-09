@@ -1,0 +1,49 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: ed8b8d16b49849a68710cebebabf9305
+      name: Custom
+  templates:
+    - uuid: eae94d77662c41229254badc449bdc1f
+      template: 'Tarana RN'
+      name: 'Tarana RN'
+      description: |
+        For mapping Tarana Remote Node calls to web API
+        
+        NOTE: TARANA TAKES 15 MIN TO POLL DOWN DEVICES.
+      groups:
+        - name: Custom
+      items:
+        - uuid: dbb7cb2a9ed7442581a207cda1c10920
+          name: 'BN Connected Status'
+          type: HTTP_AGENT
+          key: tarana.bn.connected.status
+          trends: '0'
+          status: DISABLED
+          inventory_link: TYPE
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.data.items[0].data.connected'
+            - type: JAVASCRIPT
+              parameters:
+                - 'return value === ''true'' ? 1 :0;'
+          url: 'https://api.tcs.taranawireless.com/v2/network/radios'
+          query_fields:
+            - name: serialNumber
+              value: '{HOST.HOST}'
+          headers:
+            - name: Content-Type
+              value: application/json
+            - name: x-api-key
+              value: yItSOA3kdT9OuQffQhtYU8cFkHSKGDB57KT7zfMg
+          triggers:
+            - uuid: d8d115efe67d498498dcf10f4b3f0822
+              expression: 'last(/Tarana RN/tarana.bn.connected.status)=0'
+              name: '{HOST.HOST} Connected Status to Tarana Cloud'
+              priority: HIGH
+      tags:
+        - tag: role
+          value: AP
+        - tag: vendor
+          value: Tarana

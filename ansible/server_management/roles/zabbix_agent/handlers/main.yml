@@ -1,0 +1,7 @@
+---
+- name: Restart zabbix-agent
+  systemd:
+    name: zabbix-agent
+    state: restarted
+    daemon_reload: no
+  listen: "Restart zabbix-agent"

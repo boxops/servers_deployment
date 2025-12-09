@@ -1,0 +1,23 @@
+# Saves actual configs to intended configs
+---
+- name: Save actual configs to intended configs
+  hosts: all
+  gather_facts: no
+  tasks:
+    # kea-dhcp4.conf
+    - name: Copy actual kea-dhcp4.conf to intended configs
+      ansible.builtin.copy:
+        src: actual_configs/{{ inventory_hostname }}.kea-dhcp4.conf
+        dest: intended_configs/{{ inventory_hostname }}.kea-dhcp4.conf
+        remote_src: no
+      delegate_to: localhost
+      become: false
+
+    # kea-ctrl-agent.conf
+    - name: Copy actual kea-ctrl-agent.conf to intended configs
+      ansible.builtin.copy:
+        src: actual_configs/{{ inventory_hostname }}.kea-ctrl-agent.conf
+        dest: intended_configs/{{ inventory_hostname }}.kea-ctrl-agent.conf
+        remote_src: no
+      delegate_to: localhost
+      become: false

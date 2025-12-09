@@ -1,0 +1,2863 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: ed8b8d16b49849a68710cebebabf9305
+      name: Custom
+  templates:
+    - uuid: 31fc9c37c9614ee48192a364d41ae190
+      template: 'MikroTik CCR1009-7G-1C-1S OLD'
+      name: 'MikroTik CCR1009-7G-1C-1S+ OLD'
+      description: 'Template created with Zabbix Template Generator from SNMP walk data using iReasoning MIB browser'
+      groups:
+        - name: Custom
+      items:
+        - uuid: 6ee4efc3c3c140208e4ad10208d73c69
+          name: casnActiveTableEntries.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.9.150.1.1.1.0
+          key: casnActiveTableEntries.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: casnActiveTableEntries.0
+        - uuid: 448c4b158d8e446aacad9865d3cce816
+          name: dot1dBaseBridgeAddress.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.17.1.1.0
+          key: dot1dBaseBridgeAddress.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: dot1dBaseBridgeAddress.0
+        - uuid: f6be9a97888948b9a5a5a56335f71fea
+          name: dot1dStpPriority.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.17.2.2.0
+          key: dot1dStpPriority.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: dot1dStpPriority.0
+        - uuid: 152b105d6c684197ab7f359be4bab774
+          name: dot1dStpProtocolSpecification.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.17.2.1.0
+          key: dot1dStpProtocolSpecification.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: dot1dStpProtocolSpecification.0
+        - uuid: 133e150e491c497989f269510e914bc7
+          name: hrMemorySize.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.25.2.2.0
+          key: hrMemorySize.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: hrMemorySize.0
+        - uuid: 8568edb183964f2f9dbd91285839fc70
+          name: hrSystemDate.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.25.1.2.0
+          key: hrSystemDate.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: hrSystemDate.0
+        - uuid: b055553acbec44fd89b84e3992cef609
+          name: hrSystemUptime.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.25.1.1.0
+          key: hrSystemUptime.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: hrSystemUptime.0
+        - uuid: ccfc4e2d46744fe2a6bb15dbd6f06b70
+          name: ifNumber.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.2.1.0
+          key: ifNumber.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: ifNumber.0
+        - uuid: 8c2c6ba031834be5aab4552d54ef1d0f
+          name: ipDefaultTTL.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.4.2.0
+          key: ipDefaultTTL.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: ipDefaultTTL.0
+        - uuid: cba00a1cb468438faeba716e3769e22c
+          name: ipForwarding.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.4.1.0
+          key: ipForwarding.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: ipForwarding.0
+        - uuid: 2569c14570234302b949857d75c94f0c
+          name: ipv6Interfaces.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.55.1.3.0
+          key: ipv6Interfaces.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: ipv6Interfaces.0
+        - uuid: a36f8f871cbf4b77bc4109a5434869f5
+          name: mtxrBuildTime.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.7.6.0
+          key: mtxrBuildTime.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: mtxrBuildTime.0
+        - uuid: 62f8bf3688d04cb1b5c4b6f30369bb5b
+          name: mtxrDHCPLeaseCount.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.6.1.0
+          key: mtxrDHCPLeaseCount.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: mtxrDHCPLeaseCount.0
+        - uuid: c6675cfa1c9542a39b9ecb9f9e6c6e81
+          name: mtxrFirmwareUpgradeVersion.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.7.7.0
+          key: mtxrFirmwareUpgradeVersion.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: mtxrFirmwareUpgradeVersion.0
+        - uuid: 3995e69c6040405aa6521da846d6d4a6
+          name: mtxrFirmwareVersion.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.7.4.0
+          key: mtxrFirmwareVersion.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: mtxrFirmwareVersion.0
+        - uuid: 1527537d18024f4bbd0db7142b1ea8eb
+          name: mtxrHlActiveFan.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.3.9.0
+          key: mtxrHlActiveFan.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: mtxrHlActiveFan.0
+        - uuid: 8a9d304183d94018962f4b890b5f35e8
+          name: mtxrHlCurrent.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.3.13.0
+          key: mtxrHlCurrent.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: mtxrHlCurrent.0
+        - uuid: df21230767f0465fa80165091bdb89bf
+          name: mtxrHlPower.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.3.12.0
+          key: mtxrHlPower.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: mtxrHlPower.0
+        - uuid: ff2cc1dcf05e42379f619791e83e538b
+          name: mtxrHlProcessorFrequency.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.3.14.0
+          key: mtxrHlProcessorFrequency.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: mtxrHlProcessorFrequency.0
+        - uuid: 7ab67e1b617a4fb5963241cf203a159b
+          name: mtxrHlProcessorTemperature.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.3.11.0
+          key: mtxrHlProcessorTemperature.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: mtxrHlProcessorTemperature.0
+        - uuid: c2137623923c4ec6b046045f17cfd953
+          name: mtxrHlTemperature.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.3.10.0
+          key: mtxrHlTemperature.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: mtxrHlTemperature.0
+        - uuid: 25fe7ddaa31b4372a6b47ab9ec3b88b6
+          name: mtxrHlVoltage.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.3.8.0
+          key: mtxrHlVoltage.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: mtxrHlVoltage.0
+        - uuid: d54096cf78cf46afbdae3959e401dd19
+          name: mtxrLicLevel.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.4.3.0
+          key: mtxrLicLevel.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: mtxrLicLevel.0
+        - uuid: 398b601b1b204a99bbb3125b0cd53c30
+          name: mtxrLicSoftwareId.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.4.1.0
+          key: mtxrLicSoftwareId.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: mtxrLicSoftwareId.0
+        - uuid: 940ff42197cc4e5792221b13a08035f9
+          name: mtxrLicUpgradableTo.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.4.5.0
+          key: mtxrLicUpgradableTo.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: mtxrLicUpgradableTo.0
+        - uuid: 4301feae76494c608634f2e13d61c5f9
+          name: mtxrLicUpgrUntil.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.4.2.0
+          key: mtxrLicUpgrUntil.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: mtxrLicUpgrUntil.0
+        - uuid: 98f6fc814a8b49d6a226195e6c2eaef0
+          name: mtxrLicVersion.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.4.4.0
+          key: mtxrLicVersion.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: mtxrLicVersion.0
+        - uuid: 7a2ce83fcad8445c9165b616686d11ab
+          name: mtxrNote.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.7.5.0
+          key: mtxrNote.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: mtxrNote.0
+        - uuid: 6fa682db922645ea9d65371945ecac2b
+          name: mtxrSerialNumber.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.7.3.0
+          key: mtxrSerialNumber.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: mtxrSerialNumber.0
+        - uuid: 96180c76731847908796f3dcc73dc94d
+          name: mtxrSystemReboot.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.7.1.0
+          key: mtxrSystemReboot.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: mtxrSystemReboot.0
+        - uuid: 3faf5c856ead40e3b200fc81699e3a35
+          name: mtxrUSBPowerReset.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.7.2.0
+          key: mtxrUSBPowerReset.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: mtxrUSBPowerReset.0
+        - uuid: e459aab828784a48a23d151d1f9ae631
+          name: mtxrWirelessModemSignalECIO.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.13.2.0
+          key: mtxrWirelessModemSignalECIO.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: mtxrWirelessModemSignalECIO.0
+        - uuid: 34d6194392bf4648815bcee3861240e7
+          name: mtxrWirelessModemSignalStrength.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.14988.1.1.13.1.0
+          key: mtxrWirelessModemSignalStrength.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: mtxrWirelessModemSignalStrength.0
+      discovery_rules:
+        - uuid: 00ba2a8c906143e386d64b83ed391ac2
+          name: casn
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.9.9.150.1.1.3.1.1]'
+          key: casn.discovery
+          delay: 24h
+          status: DISABLED
+          item_prototypes:
+            - uuid: b0160987b43345ee849434d464e8a83f
+              name: 'casnIpAddr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.9.150.1.1.3.1.3.{#SNMPINDEX}'
+              key: 'casnIpAddr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: casn
+            - uuid: cb838f1c4a6348ffbeb92cb6773af41e
+              name: 'casnUserId {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.9.150.1.1.3.1.2.{#SNMPINDEX}'
+              key: 'casnUserId[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: casn
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: a68545df8f574dab90a8dfa2f0290adb
+          name: dot1dTpFdbAddress
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.2.1.17.4.3.1.1.218.1.10.190.1]'
+          key: dot1dTpFdbAddress.discovery
+          delay: 10m
+          status: DISABLED
+          item_prototypes:
+            - uuid: f9fbce3fd8b74983b3ee6dbec2b913a7
+              name: 'dot1dTpFdbAddress {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.17.4.3.1.1.218.1.10.190.19.{#SNMPINDEX}'
+              key: 'dot1dTpFdbAddress[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: dot1dTpFdbAddress
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 8db178dc662f4ff5b5c98f5eeb5b85c9
+          name: dot1dTpFdbPort
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.2.1.17.4.3.1.2.218.1.10.190.1]'
+          key: dot1dTpFdbPort.discovery
+          delay: 10m
+          status: DISABLED
+          item_prototypes:
+            - uuid: 33cc462b90f54f44bb5067e6c3f8cfe5
+              name: 'dot1dTpFdbPort {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.17.4.3.1.2.218.1.10.190.19.{#SNMPINDEX}'
+              key: 'dot1dTpFdbPort[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: dot1dTpFdbPort
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 06c621c315c34182a2a75b5c5bee03e2
+          name: dot1dTpFdbStatus
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.2.1.17.4.3.1.3.218.1.10.190.1]'
+          key: dot1dTpFdbStatus.discovery
+          delay: 10m
+          status: DISABLED
+          item_prototypes:
+            - uuid: c5932f5cff624d9e86993266bb9f6355
+              name: 'dot1dTpFdbStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.17.4.3.1.3.218.1.10.190.19.{#SNMPINDEX}'
+              key: 'dot1dTpFdbStatus[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: dot1dTpFdbStatus
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 4741629f134a40abb72ec4c37edbdef9
+          name: entPhysical
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.2.1.47.1.1.1.1.1]'
+          key: entPhysical.discovery
+          delay: 24h
+          item_prototypes:
+            - uuid: f907a354c7d14b82865eebb93f475449
+              name: 'entPhysicalAlias {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.47.1.1.1.1.14.{#SNMPINDEX}'
+              key: 'entPhysicalAlias[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: entPhysical
+            - uuid: 6675343619774006b68d2ada93a51d47
+              name: 'entPhysicalAssetID {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.47.1.1.1.1.15.{#SNMPINDEX}'
+              key: 'entPhysicalAssetID[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: entPhysical
+            - uuid: e45f7f5b67bf4bb0aa5f1fe6c03b9214
+              name: 'entPhysicalClass {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.47.1.1.1.1.5.{#SNMPINDEX}'
+              key: 'entPhysicalClass[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: entPhysical
+            - uuid: b1f30d1edbc04ec982e2cc4b747f88f8
+              name: 'entPhysicalContainedIn {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.47.1.1.1.1.4.{#SNMPINDEX}'
+              key: 'entPhysicalContainedIn[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: entPhysical
+            - uuid: 79ed0d0dc08a4393bbd75e64aac600ce
+              name: 'entPhysicalDescr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.47.1.1.1.1.2.{#SNMPINDEX}'
+              key: 'entPhysicalDescr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: entPhysical
+            - uuid: 8ce3bcd177764b7c8bcd11d2ff865695
+              name: 'entPhysicalFirmwareRev {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.47.1.1.1.1.9.{#SNMPINDEX}'
+              key: 'entPhysicalFirmwareRev[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: entPhysical
+            - uuid: a43501f77e4240b3977140d53dea6f22
+              name: 'entPhysicalHardwareRev {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.47.1.1.1.1.8.{#SNMPINDEX}'
+              key: 'entPhysicalHardwareRev[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: entPhysical
+            - uuid: 0e5501c7001c458f82c21879fd5a7408
+              name: 'entPhysicalIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.47.1.1.1.1.1.{#SNMPINDEX}'
+              key: 'entPhysicalIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: entPhysical
+            - uuid: 764624f8552b42258bc212e391329acd
+              name: 'entPhysicalIsFRU {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.47.1.1.1.1.16.{#SNMPINDEX}'
+              key: 'entPhysicalIsFRU[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: entPhysical
+            - uuid: 2002796d19ee4694a25276cde4c7538c
+              name: 'entPhysicalMfgName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.47.1.1.1.1.12.{#SNMPINDEX}'
+              key: 'entPhysicalMfgName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: entPhysical
+            - uuid: 568c6c2ee4754068acb400cc6dc3f82d
+              name: 'entPhysicalModelName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.47.1.1.1.1.13.{#SNMPINDEX}'
+              key: 'entPhysicalModelName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: entPhysical
+            - uuid: 9703bc7e1cff43efa7568a14daa0aa33
+              name: 'entPhysicalName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.47.1.1.1.1.7.{#SNMPINDEX}'
+              key: 'entPhysicalName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: entPhysical
+            - uuid: 4a922c82b35e421eb56a8f6e0fe3ddd2
+              name: 'entPhysicalParentRelPos {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.47.1.1.1.1.6.{#SNMPINDEX}'
+              key: 'entPhysicalParentRelPos[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: entPhysical
+            - uuid: 72159245ea364afd86cd7faf594662af
+              name: 'entPhysicalSerialNum {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.47.1.1.1.1.11.{#SNMPINDEX}'
+              key: 'entPhysicalSerialNum[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: entPhysical
+            - uuid: 8fee487d8ddb41a698185b602335509a
+              name: 'entPhysicalSoftwareRev {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.47.1.1.1.1.10.{#SNMPINDEX}'
+              key: 'entPhysicalSoftwareRev[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: entPhysical
+            - uuid: c2e5faa8862043648ce08a393b2b4a55
+              name: 'entPhysicalVendorType {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.47.1.1.1.1.3.{#SNMPINDEX}'
+              key: 'entPhysicalVendorType[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: CHAR
+              tags:
+                - tag: source
+                  value: entPhysical
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 55824d581e60472ab28fcacddb81f0e7
+          name: hrDevice
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.2.1.25.3.2.1.1]'
+          key: hrDevice.discovery
+          delay: 10m
+          status: DISABLED
+          item_prototypes:
+            - uuid: 0813e69ec218458b9ac07efaf8c46259
+              name: 'hrDeviceDescr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.25.3.2.1.3.{#SNMPINDEX}'
+              key: 'hrDeviceDescr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: hrDevice
+            - uuid: 09248bbc6ea64fd88293b6fe6df903f9
+              name: 'hrDeviceErrors {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.25.3.2.1.6.{#SNMPINDEX}'
+              key: 'hrDeviceErrors[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: hrDevice
+            - uuid: a18410e3c1d640d58d32a1a781394836
+              name: 'hrDeviceID {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.25.3.2.1.4.{#SNMPINDEX}'
+              key: 'hrDeviceID[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: CHAR
+              tags:
+                - tag: source
+                  value: hrDevice
+            - uuid: ffcd91cb45ed495a8db27a6f59f3f6ec
+              name: 'hrDeviceIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.25.3.2.1.1.{#SNMPINDEX}'
+              key: 'hrDeviceIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: hrDevice
+            - uuid: 196a262871b240dbbd7da1bd660d8098
+              name: 'hrDeviceStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.25.3.2.1.5.{#SNMPINDEX}'
+              key: 'hrDeviceStatus[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: hrDevice
+            - uuid: 9ee4364f02e54707a2730680da2739ef
+              name: 'hrDeviceType {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.25.3.2.1.2.{#SNMPINDEX}'
+              key: 'hrDeviceType[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: CHAR
+              tags:
+                - tag: source
+                  value: hrDevice
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 480d6ee3eb49492c867d1e73b72778b7
+          name: hrProcessor
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.2.1.25.3.3.1.1]'
+          key: hrProcessor.discovery
+          delay: 24h
+          item_prototypes:
+            - uuid: 71b7b29e3c854b3197836209aa3dee48
+              name: 'hrProcessorFrwID {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.25.3.3.1.1.{#SNMPINDEX}'
+              key: 'hrProcessorFrwID[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: CHAR
+              tags:
+                - tag: source
+                  value: hrProcessor
+            - uuid: a638deef1372491e80a0dde60a10e694
+              name: 'hrProcessorLoad {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.25.3.3.1.2.{#SNMPINDEX}'
+              key: 'hrProcessorLoad[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: hrProcessor
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 6a29d96593984748a4a16cbc59679a24
+          name: hrStorage
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.2.1.25.2.3.1.1]'
+          key: hrStorage.discovery
+          delay: 24h
+          item_prototypes:
+            - uuid: 34d7ee500793431b99260d67033df1df
+              name: 'hrStorageAllocationFailures {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.25.2.3.1.7.{#SNMPINDEX}'
+              key: 'hrStorageAllocationFailures[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: hrStorage
+            - uuid: 4b7f21f01055403c9093913d8e6a76f8
+              name: 'hrStorageAllocationUnits {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.25.2.3.1.4.{#SNMPINDEX}'
+              key: 'hrStorageAllocationUnits[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: hrStorage
+            - uuid: dab6cbda956e4031a27fd023c6c165e6
+              name: 'hrStorageDescr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.25.2.3.1.3.{#SNMPINDEX}'
+              key: 'hrStorageDescr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: hrStorage
+            - uuid: 096a9b1ff7434519b6a334ffba12ebf8
+              name: 'hrStorageIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.25.2.3.1.1.{#SNMPINDEX}'
+              key: 'hrStorageIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: hrStorage
+            - uuid: fbe0682988354d3a93a97c024a25455f
+              name: 'hrStorageSize {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.25.2.3.1.5.{#SNMPINDEX}'
+              key: 'hrStorageSize[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: hrStorage
+            - uuid: 6eca926e08154429b177e5e8253c3e79
+              name: 'hrStorageType {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.25.2.3.1.2.{#SNMPINDEX}'
+              key: 'hrStorageType[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: CHAR
+              tags:
+                - tag: source
+                  value: hrStorage
+            - uuid: 45c1f336a8674dbfac9957c991f7286f
+              name: 'hrStorageUsed {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.25.2.3.1.6.{#SNMPINDEX}'
+              key: 'hrStorageUsed[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: hrStorage
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 473d390bb77042108bc8bf665f0e6b76
+          name: if
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.2.1.31.1.1.1.1]'
+          key: if.discovery
+          delay: 1h
+          item_prototypes:
+            - uuid: 1516965847254f3485dcf75732eb1b6d
+              name: 'ifAlias {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.18.{#SNMPINDEX}'
+              key: 'ifAlias[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 74c0b34ed71d4a958a2ae44173aac024
+              name: 'ifHCInBroadcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.9.{#SNMPINDEX}'
+              key: 'ifHCInBroadcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: b94ef6717b094b09a6d0f7f34d115198
+              name: 'ifHCInMulticastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.8.{#SNMPINDEX}'
+              key: 'ifHCInMulticastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 24180a8db46f4998af7f87543948d80b
+              name: 'ifHCInOctets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.6.{#SNMPINDEX}'
+              key: 'ifHCInOctets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 6d6ebe3a46574696be8ecc95259aa691
+              name: 'ifHCInUcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.7.{#SNMPINDEX}'
+              key: 'ifHCInUcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 684d1e038aeb468187b7035ea5b674f5
+              name: 'ifHCOutBroadcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.13.{#SNMPINDEX}'
+              key: 'ifHCOutBroadcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 3eba68046c9c4854aa9f5a6bcf56128a
+              name: 'ifHCOutMulticastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.12.{#SNMPINDEX}'
+              key: 'ifHCOutMulticastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 3d255dcd44a44fa995389643e81dd64d
+              name: 'ifHCOutOctets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.10.{#SNMPINDEX}'
+              key: 'ifHCOutOctets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 63fc489378e848e6b934c06edcaf03fa
+              name: 'ifHCOutUcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.11.{#SNMPINDEX}'
+              key: 'ifHCOutUcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 1578208a70e94dd8bd6f81c510b6ef17
+              name: 'ifHighSpeed {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.15.{#SNMPINDEX}'
+              key: 'ifHighSpeed[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 064845dd3cd94033be7d02d09df37466
+              name: 'ifInBroadcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.3.{#SNMPINDEX}'
+              key: 'ifInBroadcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: e616b03a8f054439a1d283f9b49063a7
+              name: 'ifInMulticastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.2.{#SNMPINDEX}'
+              key: 'ifInMulticastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: a461c5bea7bf4d41a7908b0df80d0314
+              name: 'ifName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.1.{#SNMPINDEX}'
+              key: 'ifName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: e732f5eeeccc4fc8a600681cf4d2eb71
+              name: 'ifOutBroadcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.5.{#SNMPINDEX}'
+              key: 'ifOutBroadcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: b73fc1c9530e46689b2c6244fb271484
+              name: 'ifOutMulticastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.4.{#SNMPINDEX}'
+              key: 'ifOutMulticastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: c69a9fb4ba294a3281ca1258b4ea858f
+          name: ipv6If
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.2.1.55.1.5.1.1]'
+          key: ipv6If.discovery
+          delay: 1h
+          item_prototypes:
+            - uuid: 26ef0ef99b8943879d5c9c71cd4c237c
+              name: 'ipv6IfAdminStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.55.1.5.1.9.{#SNMPINDEX}'
+              key: 'ipv6IfAdminStatus[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: ipv6If
+            - uuid: 666ba5aadf5343288fb615246932926e
+              name: 'ipv6IfDescr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.55.1.5.1.2.{#SNMPINDEX}'
+              key: 'ipv6IfDescr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: ipv6If
+            - uuid: b8e6a512ece44949af7b4bbcaf991771
+              name: 'ipv6IfEffectiveMtu {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.55.1.5.1.4.{#SNMPINDEX}'
+              key: 'ipv6IfEffectiveMtu[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: ipv6If
+            - uuid: 2c5d166ea4464e7583663fdffa736520
+              name: 'ipv6IfIdentifierLength {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.55.1.5.1.7.{#SNMPINDEX}'
+              key: 'ipv6IfIdentifierLength[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: ipv6If
+            - uuid: 98410e87f5fd49daa0473a52ed24b183
+              name: 'ipv6IfIdentifier {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.55.1.5.1.6.{#SNMPINDEX}'
+              key: 'ipv6IfIdentifier[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: ipv6If
+            - uuid: 497becfa58934b6d942c5ad58fb96524
+              name: 'ipv6IfLastChange {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.55.1.5.1.11.{#SNMPINDEX}'
+              key: 'ipv6IfLastChange[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: ipv6If
+            - uuid: 3001274e3dac4eafb9b59ef620fe6d70
+              name: 'ipv6IfLowerLayer {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.55.1.5.1.3.{#SNMPINDEX}'
+              key: 'ipv6IfLowerLayer[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: CHAR
+              tags:
+                - tag: source
+                  value: ipv6If
+            - uuid: 4ffa5990707c47769d59fcee436f40ec
+              name: 'ipv6IfOperStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.55.1.5.1.10.{#SNMPINDEX}'
+              key: 'ipv6IfOperStatus[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: ipv6If
+            - uuid: 8231879224844f5a9e40414277ee7d62
+              name: 'ipv6IfPhysicalAddress {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.55.1.5.1.8.{#SNMPINDEX}'
+              key: 'ipv6IfPhysicalAddress[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: ipv6If
+            - uuid: 6da7606aa0c54eaebd9188b75f714eb8
+              name: 'ipv6IfReasmMaxSize {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.55.1.5.1.5.{#SNMPINDEX}'
+              key: 'ipv6IfReasmMaxSize[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: ipv6If
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 441084b82e794af9a416468cf770645b
+          name: mtxrInterfaceStats
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.14988.1.1.14.1.1.1]'
+          key: mtxrInterfaceStats.discovery
+          delay: 24h
+          item_prototypes:
+            - uuid: 9f2b8666b2ec4bbda78cd900e6020c62
+              name: 'mtxrInterfaceStatsDriverRxBytes {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.11.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsDriverRxBytes[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: bc5d3ebf88a84637b5c4e1afcdcd9cc2
+              name: 'mtxrInterfaceStatsDriverRxPackets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.12.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsDriverRxPackets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: c61d4ccae43e476da73baaab365ddcd4
+              name: 'mtxrInterfaceStatsDriverTxBytes {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.13.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsDriverTxBytes[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 950d19a9fb6d4f598bdb0b2fa1915a74
+              name: 'mtxrInterfaceStatsDriverTxPackets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.14.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsDriverTxPackets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: ca322c322a754686996474761d4c2c84
+              name: 'mtxrInterfaceStatsIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.1.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 468b2d17d70744168238c8ecc9e2f445
+              name: 'mtxrInterfaceStatsName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.2.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 8a745f57cdec4ed98367736d21f2f8cd
+              name: 'mtxrInterfaceStatsRx64 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.34.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRx64[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 635cb91272844ac09f5aed98fd31a359
+              name: 'mtxrInterfaceStatsRx65To127 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.35.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRx65To127[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 2d12c6c4b61940e8adf3fa9ca2da65dc
+              name: 'mtxrInterfaceStatsRx128To255 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.36.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRx128To255[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 52a15fdd289b4bc89654f10e41cd2906
+              name: 'mtxrInterfaceStatsRx256To511 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.37.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRx256To511[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: a07c5fbe02d147b494ec930d90e6bd6b
+              name: 'mtxrInterfaceStatsRx512To1023 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.38.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRx512To1023[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 466b522a8d604a1da590866ca3d99722
+              name: 'mtxrInterfaceStatsRx1024To1518 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.39.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRx1024To1518[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 49b6a2c39361427280a084a2be1c510c
+              name: 'mtxrInterfaceStatsRx1519ToMax {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.40.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRx1519ToMax[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 5183c938f8ff4632bb32741324f9898c
+              name: 'mtxrInterfaceStatsRxAlignError {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.46.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxAlignError[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 8450cea5929f4c25a849d315ebe5305a
+              name: 'mtxrInterfaceStatsRxBroadcast {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.42.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxBroadcast[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 5498e933f7a14898b8d9d3b21b49833a
+              name: 'mtxrInterfaceStatsRxBytes {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.31.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxBytes[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: e84bfb57f19943a1815c0ef44fa5478c
+              name: 'mtxrInterfaceStatsRxCarrierError {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.53.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxCarrierError[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: f6ea2a688f014147bac9870654cca6de
+              name: 'mtxrInterfaceStatsRxCodeError {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.52.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxCodeError[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: ab317247951f4fb4af208fa072ef64e3
+              name: 'mtxrInterfaceStatsRxControl {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.49.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxControl[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: e8c578732130442c90296492a3c6190b
+              name: 'mtxrInterfaceStatsRxDrop {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.55.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxDrop[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 823712baedc54fd8bdf03f9b42ebdc80
+              name: 'mtxrInterfaceStatsRxFCSError {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.45.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxFCSError[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 7843b8d6d4b34606a78ddbe93865570d
+              name: 'mtxrInterfaceStatsRxFragment {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.47.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxFragment[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: c95a4d54a4b6405391212e7a4662838e
+              name: 'mtxrInterfaceStatsRxJabber {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.54.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxJabber[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 7c92a864ccf24d2380627232f45d64ed
+              name: 'mtxrInterfaceStatsRxLengthError {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.51.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxLengthError[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 7a4014a5ceab4d7490ed9fd7698dc834
+              name: 'mtxrInterfaceStatsRxMulticast {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.44.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxMulticast[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: decd5f6e706c49feaa478de8f834aad0
+              name: 'mtxrInterfaceStatsRxOverflow {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.48.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxOverflow[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: d42cc07b80c844e69bbbafffa3c7f5ff
+              name: 'mtxrInterfaceStatsRxPackets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.32.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxPackets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 1ec4058f69e84c018fc1b4ec2efffbb3
+              name: 'mtxrInterfaceStatsRxPause {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.43.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxPause[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: d87e52fbd7bd46d7be4a3250900a0faa
+              name: 'mtxrInterfaceStatsRxTooLong {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.41.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxTooLong[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 3c667a14be524651b0582d448537da90
+              name: 'mtxrInterfaceStatsRxTooShort {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.33.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxTooShort[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 14bbd2cc3c8c429bbee832699bb8cc33
+              name: 'mtxrInterfaceStatsRxUnknownOp {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.50.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsRxUnknownOp[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 2e3aada58e084673b69578299c2c56c5
+              name: 'mtxrInterfaceStatsTx64 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.64.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTx64[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 1f303428a8b449e38f7ded604c6ca200
+              name: 'mtxrInterfaceStatsTx65To127 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.65.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTx65To127[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: a5806487ac364f5c8a5366dcfded2166
+              name: 'mtxrInterfaceStatsTx128To255 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.66.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTx128To255[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 961d414d82f84c1dbdbd559bf9a4cac1
+              name: 'mtxrInterfaceStatsTx256To511 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.67.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTx256To511[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: d656864a30b940d4ad67398f38f6a917
+              name: 'mtxrInterfaceStatsTx512To1023 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.68.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTx512To1023[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 21632d0ee3cf453c8349861e935e3891
+              name: 'mtxrInterfaceStatsTx1024To1518 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.69.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTx1024To1518[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: ef4316b6f3554a18a688c31eed364fa9
+              name: 'mtxrInterfaceStatsTx1519ToMax {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.70.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTx1519ToMax[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 0b64e4ddc58d4d9e819b11b5605ea8c3
+              name: 'mtxrInterfaceStatsTxBroadcast {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.72.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxBroadcast[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 40763cf03c30429aa2a6f7f6cbd861fe
+              name: 'mtxrInterfaceStatsTxBytes {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.61.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxBytes[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 848632fce4e3477c964cfcaf073e2a1f
+              name: 'mtxrInterfaceStatsTxCollision {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.76.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxCollision[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: b1b7c37e663c48ef83929ebc3b5fcce9
+              name: 'mtxrInterfaceStatsTxControl {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.88.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxControl[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 49afb714b78b43ca932e1b47c65b725b
+              name: 'mtxrInterfaceStatsTxDeferred {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.81.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxDeferred[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 1677ce4c965a437cb59fc7476872b9c5
+              name: 'mtxrInterfaceStatsTxDrop {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.85.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxDrop[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 10bfce4baea9405da7981d9e34530be5
+              name: 'mtxrInterfaceStatsTxExcessiveCollision {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.77.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxExcessiveCollision[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 7333300b684f45e0aba0d868ef090b5c
+              name: 'mtxrInterfaceStatsTxExcessiveDeferred {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.80.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxExcessiveDeferred[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 65fa2549456e4a8095bde06815e711d3
+              name: 'mtxrInterfaceStatsTxFCSError {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.87.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxFCSError[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: f19a3c9f8b6347c08ad6ab4541a7fe0b
+              name: 'mtxrInterfaceStatsTxFragment {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.89.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxFragment[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: d52041a372f44c01895b5beef39d1dd6
+              name: 'mtxrInterfaceStatsTxJabber {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.86.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxJabber[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: c87dcabaa2dc4faa9b17ef78f7aece57
+              name: 'mtxrInterfaceStatsTxLateCollision {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.82.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxLateCollision[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 239e5fbd42984625af28056120de0678
+              name: 'mtxrInterfaceStatsTxMulticast {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.74.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxMulticast[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: d8524fcae78a4042bc9b80576cc44c71
+              name: 'mtxrInterfaceStatsTxMultipleCollision {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.78.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxMultipleCollision[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 8b1b8d803b6847b284faacca8c13f071
+              name: 'mtxrInterfaceStatsTxPackets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.62.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxPackets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: c547fe6137e648b2bc65d20d575e54b4
+              name: 'mtxrInterfaceStatsTxPauseHonored {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.84.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxPauseHonored[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: add2031872c34309a9816f01adcb845b
+              name: 'mtxrInterfaceStatsTxPause {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.73.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxPause[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 3be25edde4d744c8b11d3384e230a89b
+              name: 'mtxrInterfaceStatsTxRx64 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.15.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxRx64[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: af5a70ffae3045af9135d69f68e4c4d8
+              name: 'mtxrInterfaceStatsTxRx65To127 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.16.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxRx65To127[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 6824f2f7c535447287c74ed93074701e
+              name: 'mtxrInterfaceStatsTxRx128To255 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.17.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxRx128To255[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 5b104f23e32b49fc81919af342b29fc7
+              name: 'mtxrInterfaceStatsTxRx256To511 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.18.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxRx256To511[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 73b59765f4514f50ae8fd03c2ca0e0b9
+              name: 'mtxrInterfaceStatsTxRx512To1023 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.19.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxRx512To1023[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 487b7f21f5fe4b38a6a90c0197324057
+              name: 'mtxrInterfaceStatsTxRx1024To1518 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.20.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxRx1024To1518[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 2765c27ee78a4099a5c130334c4b7abc
+              name: 'mtxrInterfaceStatsTxRx1519ToMax {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.21.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxRx1519ToMax[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 331d1e2091ab47d48ccb4ebd6ff83304
+              name: 'mtxrInterfaceStatsTxSingleCollision {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.79.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxSingleCollision[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 0a8fac1c281148b396b1761f653e675b
+              name: 'mtxrInterfaceStatsTxTooLong {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.71.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxTooLong[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 0d9e98e3ed034afcb7d787d865f48416
+              name: 'mtxrInterfaceStatsTxTooShort {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.63.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxTooShort[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: 0ba8a56ebdcb4e77bc069de3b9354ce4
+              name: 'mtxrInterfaceStatsTxTotalCollision {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.83.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxTotalCollision[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+            - uuid: b06a9e86e88c4ef7b6d8ef751f04cce4
+              name: 'mtxrInterfaceStatsTxUnderrun {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.14.1.1.75.{#SNMPINDEX}'
+              key: 'mtxrInterfaceStatsTxUnderrun[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: mtxrInterfaceStats
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: b9251d1f32a848749700358a30cca02e
+          name: mtxrNeighbor
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.14988.1.1.11.1.1.1]'
+          key: mtxrNeighbor.discovery
+          delay: 1h
+          item_prototypes:
+            - uuid: 50e8437d755044ef979e35c626b67854
+              name: 'mtxrNeighborIdentity {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.11.1.1.6.{#SNMPINDEX}'
+              key: 'mtxrNeighborIdentity[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: mtxrNeighbor
+            - uuid: 3b85a40fa6d34c8290e53bbb299c297e
+              name: 'mtxrNeighborInterfaceID {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.11.1.1.8.{#SNMPINDEX}'
+              key: 'mtxrNeighborInterfaceID[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: mtxrNeighbor
+            - uuid: f9e6ca008ff94cd4a841e78727063c10
+              name: 'mtxrNeighborIpAddress {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.11.1.1.2.{#SNMPINDEX}'
+              key: 'mtxrNeighborIpAddress[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: mtxrNeighbor
+            - uuid: 35847d8dc4a142fea572dac21aec2986
+              name: 'mtxrNeighborMacAddress {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.11.1.1.3.{#SNMPINDEX}'
+              key: 'mtxrNeighborMacAddress[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: mtxrNeighbor
+            - uuid: d5930cd36cda4ea2b8afeae14f28d1d7
+              name: 'mtxrNeighborPlatform {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.11.1.1.5.{#SNMPINDEX}'
+              key: 'mtxrNeighborPlatform[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: mtxrNeighbor
+            - uuid: c9a2b7f9c16d4fa681fc9a52f7eec0e0
+              name: 'mtxrNeighborSoftwareID {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.11.1.1.7.{#SNMPINDEX}'
+              key: 'mtxrNeighborSoftwareID[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: mtxrNeighbor
+            - uuid: 66ebfa3a285e4a39bb0313da4d1145a8
+              name: 'mtxrNeighborVersion {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.11.1.1.4.{#SNMPINDEX}'
+              key: 'mtxrNeighborVersion[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: mtxrNeighbor
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 38a85f13de2f4b44ae52f6840c81af29
+          name: mtxrPartition
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.14988.1.1.17.1.1.1]'
+          key: mtxrPartition.discovery
+          delay: 24h
+          item_prototypes:
+            - uuid: 4bd733be4c994c5bb9741a66580df1be
+              name: 'mtxrPartitionActive {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.17.1.1.5.{#SNMPINDEX}'
+              key: 'mtxrPartitionActive[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: mtxrPartition
+            - uuid: 45a14375b7044b5f8a0b82e9d0709890
+              name: 'mtxrPartitionName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.17.1.1.2.{#SNMPINDEX}'
+              key: 'mtxrPartitionName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: mtxrPartition
+            - uuid: 5de2d6e8b9314cee9e883e4c461035e0
+              name: 'mtxrPartitionRunning {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.17.1.1.6.{#SNMPINDEX}'
+              key: 'mtxrPartitionRunning[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: mtxrPartition
+            - uuid: 2333be9dbd304355b64142b06085d361
+              name: 'mtxrPartitionSize {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.17.1.1.3.{#SNMPINDEX}'
+              key: 'mtxrPartitionSize[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: mtxrPartition
+            - uuid: f7049667536d42f8bb4d15528e573e2a
+              name: 'mtxrPartitionVersion {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.17.1.1.4.{#SNMPINDEX}'
+              key: 'mtxrPartitionVersion[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: mtxrPartition
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 3422533e7920409a8a60ddef93b0eb21
+          name: mtxrQueueSimple
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.14988.1.1.2.1.1.1]'
+          key: mtxrQueueSimple.discovery
+          delay: 24h
+          item_prototypes:
+            - uuid: c70abfb3e12d4133953242b415e38aa3
+              name: 'mtxrQueueSimpleBytesIn {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.2.1.1.8.{#SNMPINDEX}'
+              key: 'mtxrQueueSimpleBytesIn[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: mtxrQueueSimple
+            - uuid: d6f628df09344f4b9470569e43aeefdb
+              name: 'mtxrQueueSimpleBytesOut {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.2.1.1.9.{#SNMPINDEX}'
+              key: 'mtxrQueueSimpleBytesOut[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: mtxrQueueSimple
+            - uuid: d747ba884c1b4938889d1ad96ecf703b
+              name: 'mtxrQueueSimpleDroppedIn {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.2.1.1.14.{#SNMPINDEX}'
+              key: 'mtxrQueueSimpleDroppedIn[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: mtxrQueueSimple
+            - uuid: b4c5d6deaf2144aead9fbf4f54f1e915
+              name: 'mtxrQueueSimpleDroppedOut {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.2.1.1.15.{#SNMPINDEX}'
+              key: 'mtxrQueueSimpleDroppedOut[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: mtxrQueueSimple
+            - uuid: 4187306142f7457181376b9eb029d6e3
+              name: 'mtxrQueueSimpleDstAddr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.2.1.1.5.{#SNMPINDEX}'
+              key: 'mtxrQueueSimpleDstAddr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: mtxrQueueSimple
+            - uuid: d9a41e1336f9403d9a9432343091aa53
+              name: 'mtxrQueueSimpleDstMask {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.2.1.1.6.{#SNMPINDEX}'
+              key: 'mtxrQueueSimpleDstMask[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: mtxrQueueSimple
+            - uuid: 4cbc7f1e9c584a7ba538b62e759235b7
+              name: 'mtxrQueueSimpleIface {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.2.1.1.7.{#SNMPINDEX}'
+              key: 'mtxrQueueSimpleIface[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: mtxrQueueSimple
+            - uuid: b8ab009b17a8434f9e592bbb818ec864
+              name: 'mtxrQueueSimpleName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.2.1.1.2.{#SNMPINDEX}'
+              key: 'mtxrQueueSimpleName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: mtxrQueueSimple
+            - uuid: 33cc84def2e64a18bff5f403e19ca7e7
+              name: 'mtxrQueueSimplePacketsIn {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.2.1.1.10.{#SNMPINDEX}'
+              key: 'mtxrQueueSimplePacketsIn[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: mtxrQueueSimple
+            - uuid: 264c4807ec4f4c26870e2efcf6a8fe6f
+              name: 'mtxrQueueSimplePacketsOut {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.2.1.1.11.{#SNMPINDEX}'
+              key: 'mtxrQueueSimplePacketsOut[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: mtxrQueueSimple
+            - uuid: 84c03af082cb4db698c8b618669ad0c7
+              name: 'mtxrQueueSimplePCQQueuesIn {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.2.1.1.12.{#SNMPINDEX}'
+              key: 'mtxrQueueSimplePCQQueuesIn[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: mtxrQueueSimple
+            - uuid: e228a6ccd1894e2b9680314e56d267b9
+              name: 'mtxrQueueSimplePCQQueuesOut {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.2.1.1.13.{#SNMPINDEX}'
+              key: 'mtxrQueueSimplePCQQueuesOut[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: mtxrQueueSimple
+            - uuid: b607c95a9ab3411d8c9d4966a391a7e9
+              name: 'mtxrQueueSimpleSrcAddr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.2.1.1.3.{#SNMPINDEX}'
+              key: 'mtxrQueueSimpleSrcAddr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: mtxrQueueSimple
+            - uuid: c932f9e66ffb42e0939aa0745bb68f48
+              name: 'mtxrQueueSimpleSrcMask {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.14988.1.1.2.1.1.4.{#SNMPINDEX}'
+              key: 'mtxrQueueSimpleSrcMask[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: mtxrQueueSimple
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h

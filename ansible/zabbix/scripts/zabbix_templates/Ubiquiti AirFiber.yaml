@@ -1,0 +1,3253 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: ed8b8d16b49849a68710cebebabf9305
+      name: Custom
+  templates:
+    - uuid: e88f6e7465104b359d3571bb23e01175
+      template: 'Ubiquiti AirFiber'
+      name: 'Ubiquiti AirFiber'
+      description: 'Template created with Zabbix Template Generator from SNMP walk data using iReasoning MIB browser'
+      groups:
+        - name: Custom
+      items:
+        - uuid: 7ae4c7d0955a4927a4804cd00f3ed97a
+          name: '1 Minute CPU Load'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.10002.1.1.1.4.2.1.3.1
+          key: 1MinLoad
+          delay: 2m
+          history: 7d
+          trends: '0'
+          status: DISABLED
+          units: '%'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: load
+        - uuid: 6c6c731f265a4339b0079e33295de0bb
+          name: '5 Minute CPU Load'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.10002.1.1.1.4.2.1.3.2
+          key: 5MinLoad
+          delay: 2m
+          history: 7d
+          trends: '0'
+          units: '%'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: load
+        - uuid: 093d27aef8c04598a29e79cb23afd4fd
+          name: '15 Minute CPU Load'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.10002.1.1.1.4.2.1.3.3
+          key: 15MinLoad
+          delay: 2m
+          history: 7d
+          trends: '0'
+          units: '%'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: load
+        - uuid: 3de3c0d41c2448a7bedcf11aee151c12
+          name: loadNumber
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.10002.1.1.1.4.1.0
+          key: loadNumber
+          delay: 10m
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: loadNumber
+        - uuid: 548c2697a77747f2b6ea3d4f21ca89c2
+          name: memBuffer
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.10002.1.1.1.1.3.0
+          key: memBuffer
+          delay: 10m
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: memBuffer
+        - uuid: 64a7601a37434dd18f29de78f62b86f2
+          name: memCache
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.10002.1.1.1.1.4.0
+          key: memCache
+          delay: 10m
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: memCache
+        - uuid: 61556c1742a54bc58d0541c1e4e185bd
+          name: memFree
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.10002.1.1.1.1.2.0
+          key: memFree
+          delay: 10m
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: memFree
+        - uuid: 21b65675db7a4005be1d7ee569539227
+          name: memTotal
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.10002.1.1.1.1.1.0
+          key: memTotal
+          delay: 10m
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: memTotal
+        - uuid: cf7a285af5464437809ac305f0e24a11
+          name: 'Memory Utilisation'
+          type: CALCULATED
+          key: memUtil
+          delay: 10m
+          history: 7d
+          trends: '0'
+          units: '%'
+          params: 'last(//memFree) / last(//memTotal) * 100'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: memTotal
+        - uuid: 66c1fc4b7e6048e79126b3f204b196bc
+          name: swapFree
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.10002.1.1.1.2.2.0
+          key: swapFree
+          delay: 10m
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: swapFree
+        - uuid: 6ea0c0a1b39d4486bffe20332a3e9ab9
+          name: swapTotal
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.10002.1.1.1.2.1.0
+          key: swapTotal
+          delay: 10m
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: swapTotal
+        - uuid: 0709dffb2d1b462db6880574bb21dbc3
+          name: 'Swap Space Utilisation'
+          type: CALCULATED
+          key: swapUtil
+          delay: 10m
+          history: 7d
+          trends: '0'
+          units: '%'
+          params: 'last(//swapFree) / last(//swapTotal) * 100'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: memTotal
+      discovery_rules:
+        - uuid: fea2db25d06448728af85c5a2d5e8a09
+          name: airFiberConfig
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.41112.1.3.1.1.1]'
+          key: airFiberConfig.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: 130b60b65c78452ca5bd99603dfbaac2
+              name: 'airFiberConfigIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.1.{#SNMPINDEX}'
+              key: 'airFiberConfigIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: e0e3c60c1e454b8d80cf787f5ef2cd03
+              name: 'ethDPortLinkSpeed {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.13.{#SNMPINDEX}'
+              key: 'ethDPortLinkSpeed[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: 18590b7d277a443391c27cd020afb3bf
+              name: 'ethFlowControl {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.16.{#SNMPINDEX}'
+              key: 'ethFlowControl[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: 0718069269b3478b81bed37a6fd64ecb
+              name: 'ethLinkOffDuration {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.19.{#SNMPINDEX}'
+              key: 'ethLinkOffDuration[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: 52444c591717465d9b687c6ed7b545e3
+              name: 'ethLinkOffSpacing {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.20.{#SNMPINDEX}'
+              key: 'ethLinkOffSpacing[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: e67537d167114d8b8f80cffd3884e615
+              name: 'ethMcastFilter {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.17.{#SNMPINDEX}'
+              key: 'ethMcastFilter[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: abd19ec4e30641b7ad3479e8c0f1619e
+              name: 'ethTrackRFLink {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.18.{#SNMPINDEX}'
+              key: 'ethTrackRFLink[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: 0a27aa45ef7c4eebaaca93f022fb9e35
+              name: 'gpsSync {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.8.{#SNMPINDEX}'
+              key: 'gpsSync[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: 28995f2c470f457c931662d7e4483796
+              name: 'linkName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.14.{#SNMPINDEX}'
+              key: 'linkName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: 6274d06d49364b538b859ba28eeb58eb
+              name: 'maxTxModRate {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.11.{#SNMPINDEX}'
+              key: 'maxTxModRate[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: a7fe561f66af4fae82bfb83462eb0943
+              name: 'modRateControl {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.12.{#SNMPINDEX}'
+              key: 'modRateControl[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: c1e271c22c0147539571e73840fcd475
+              name: 'radioDuplex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.4.{#SNMPINDEX}'
+              key: 'radioDuplex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: 6225e2b7c8274bcfa57f0ad7d46400e3
+              name: 'radioEnable {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.2.{#SNMPINDEX}'
+              key: 'radioEnable[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: b9c9892cfbff44f39b3b06b73e3df924
+              name: 'radioLinkMode {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.3.{#SNMPINDEX}'
+              key: 'radioLinkMode[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: c7bd375ec3bb4fecb15f7b85374f14d3
+              name: 'regDomain {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.7.{#SNMPINDEX}'
+              key: 'regDomain[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: 13792ed26c4a4356849497b83d8914e6
+              name: 'rxChannelWidth {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.29.{#SNMPINDEX}'
+              key: 'rxChannelWidth[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: 8af1b54040d14daca6089476669315e5
+              name: 'rxFrequency1 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.22.{#SNMPINDEX}'
+              key: 'rxFrequency1[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: 349b449cba264fa0bd337a29d1624521
+              name: 'rxFrequency2 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.24.{#SNMPINDEX}'
+              key: 'rxFrequency2[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: 3d4bc14eef504787ab38dd968589f62a
+              name: 'rxFrequency3 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.26.{#SNMPINDEX}'
+              key: 'rxFrequency3[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: af4a7eaa323f4b22b095dab7f748057d
+              name: 'rxFrequency {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.6.{#SNMPINDEX}'
+              key: 'rxFrequency[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: 9904b4101a6347ca97a2611245091036
+              name: 'rxGain {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.10.{#SNMPINDEX}'
+              key: 'rxGain[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: 96551ca4cd93470392d1a1babf89afee
+              name: 'txChannelWidth {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.28.{#SNMPINDEX}'
+              key: 'txChannelWidth[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: 3ee2bf6c864141789d3cfe818dd18e09
+              name: 'txFrequency1 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.21.{#SNMPINDEX}'
+              key: 'txFrequency1[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: c81467fba5ee4de591a98f7b823faa49
+              name: 'txFrequency2 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.23.{#SNMPINDEX}'
+              key: 'txFrequency2[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: 8ec616bf99994b209a6cf8397bef520d
+              name: 'txFrequency3 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.25.{#SNMPINDEX}'
+              key: 'txFrequency3[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: 8adc061448f543a79dbd3b45e826b8ab
+              name: 'txFrequency {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.5.{#SNMPINDEX}'
+              key: 'txFrequency[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+            - uuid: 7c342ec86c3a4a56859cefe729b0bc1a
+              name: 'txPower {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.1.1.9.{#SNMPINDEX}'
+              key: 'txPower[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberConfig
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: b6aeebe78e1f4bcd8d2a53206ae55fe0
+          name: airFiberLoad
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.10002.1.1.1.4.2.1.1]'
+          key: airFiberLoad.discovery
+          delay: 12h
+          status: DISABLED
+          item_prototypes:
+            - uuid: 28364624700b4cd0965f67a5602857ee
+              name: 'loadDescr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.10002.1.1.1.4.2.1.2.{#SNMPINDEX}'
+              key: 'loadDescr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberLoad
+            - uuid: c702329b0fcf49468ff33badc5e36103
+              name: 'loadIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.10002.1.1.1.4.2.1.1.{#SNMPINDEX}'
+              key: 'loadIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberLoad
+            - uuid: 1f390898c270439e990bb391ad0c85e0
+              name: 'loadValue {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.10002.1.1.1.4.2.1.3.{#SNMPINDEX}'
+              key: 'loadValue[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberLoad
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 7af8803106f3405eb7851929b7d429ad
+          name: airFiberStatistics
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.41112.1.3.3.1.1]'
+          key: airFiberStatistics.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: 9bcb3d140b2240b5bf70ea6cf378e0a7
+              name: 'airFiberStatisticsIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.1.{#SNMPINDEX}'
+              key: 'airFiberStatisticsIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: f8f6df41b7a14763a636c9d8e88bdb50
+              name: 'rx64BytePackets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.23.{#SNMPINDEX}'
+              key: 'rx64BytePackets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 78b0da416025466295fd1bf2f0310c65
+              name: 'rx65-127BytePackets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.24.{#SNMPINDEX}'
+              key: 'rx65-127BytePackets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: bba7908ca6614ac190d8ed14d60e56e8
+              name: 'rx128-255BytePackets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.25.{#SNMPINDEX}'
+              key: 'rx128-255BytePackets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: b01ed1b1b911457cb8eaa2ba5cc98688
+              name: 'rx256-511BytePackets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.26.{#SNMPINDEX}'
+              key: 'rx256-511BytePackets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 627d3ebc956b41fab4b29ac3f4acf6b6
+              name: 'rx512-1023BytePackets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.27.{#SNMPINDEX}'
+              key: 'rx512-1023BytePackets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 7410dbccf8544a7f9995cf0e1222ffe7
+              name: 'rx1024-1518BytesPackets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.28.{#SNMPINDEX}'
+              key: 'rx1024-1518BytesPackets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: e260d1e5581847f686116cb57f220eda
+              name: 'rx1519PlusBytePackets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.29.{#SNMPINDEX}'
+              key: 'rx1519PlusBytePackets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: f7674378530a48a3b29814e7ecbdccf9
+              name: 'rxAlignErr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.5.{#SNMPINDEX}'
+              key: 'rxAlignErr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: d9bd3669ff0c4a178a78f0a18c9f87a0
+              name: 'rxDroppedMacErrFrames {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.18.{#SNMPINDEX}'
+              key: 'rxDroppedMacErrFrames[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: fa58444b567f49afbcd942a506ffcb56
+              name: 'rxErroredFrames {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.10.{#SNMPINDEX}'
+              key: 'rxErroredFrames[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 7f4aea081bf1483ead501e834d4fd26e
+              name: 'rxFrameCrcErr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.4.{#SNMPINDEX}'
+              key: 'rxFrameCrcErr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 39c683028240432faaa2dff2011fda1c
+              name: 'rxFramesOK {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.3.{#SNMPINDEX}'
+              key: 'rxFramesOK[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 7f9bbb2f824b4b06b68fdcbd6cc92b00
+              name: 'rxLess64ByteFrames {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.21.{#SNMPINDEX}'
+              key: 'rxLess64ByteFrames[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 4c8e2e5448464b0588109041c52457f8
+              name: 'rxoctetsAll {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.66.{#SNMPINDEX}'
+              key: 'rxoctetsAll[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 69be3156380d486d868b1161bb4e757b
+              name: 'rxOctetsOK {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.7.{#SNMPINDEX}'
+              key: 'rxOctetsOK[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 960b6f9963c946d6a0f10191785acfbc
+              name: 'rxOverLengthFrames {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.22.{#SNMPINDEX}'
+              key: 'rxOverLengthFrames[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 3d7d27d577dd497483166816a1e6f26d
+              name: 'rxPauseFrames {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.9.{#SNMPINDEX}'
+              key: 'rxPauseFrames[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 3b5142db14b0494ba515f33c06b715c5
+              name: 'rxpktsAll {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.67.{#SNMPINDEX}'
+              key: 'rxpktsAll[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: ad00a9dfc8f84a358a2efab49bfb8f90
+              name: 'rxqosoct0 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.48.{#SNMPINDEX}'
+              key: 'rxqosoct0[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 67ec339306d84aea9a52446aa8d752a1
+              name: 'rxqosoct1 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.49.{#SNMPINDEX}'
+              key: 'rxqosoct1[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 8b1dfd92acbc414cb6cb1e561120ff60
+              name: 'rxqosoct2 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.50.{#SNMPINDEX}'
+              key: 'rxqosoct2[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 931269406c8c4b23a0e896e73da4ba1b
+              name: 'rxqosoct3 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.51.{#SNMPINDEX}'
+              key: 'rxqosoct3[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 0fd644d2ac8549eab6289bdc28faa7f2
+              name: 'rxqosoct4 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.52.{#SNMPINDEX}'
+              key: 'rxqosoct4[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 2341a62cf4654118adc006e81e801b25
+              name: 'rxqosoct5 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.53.{#SNMPINDEX}'
+              key: 'rxqosoct5[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: f6a10198970d4ec0849f1ca051401cbb
+              name: 'rxqosoct6 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.54.{#SNMPINDEX}'
+              key: 'rxqosoct6[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: c11b2819fe3b4123b66a36e2acaad778
+              name: 'rxqosoct7 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.55.{#SNMPINDEX}'
+              key: 'rxqosoct7[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 4ef1afbf027345e398936c59b60cebb7
+              name: 'rxqospkt0 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.56.{#SNMPINDEX}'
+              key: 'rxqospkt0[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 527811c3794d4d3b8571adde2eea8e6d
+              name: 'rxqospkt1 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.57.{#SNMPINDEX}'
+              key: 'rxqospkt1[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: fb83946f1f0443acae9bbb07ec0f3f21
+              name: 'rxqospkt2 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.58.{#SNMPINDEX}'
+              key: 'rxqospkt2[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 5ef324199910467d83c14cbc2e7c16df
+              name: 'rxqospkt3 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.59.{#SNMPINDEX}'
+              key: 'rxqospkt3[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: ff0fb5bd6f354eaa9de9c1a722a0ed2a
+              name: 'rxqospkt4 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.60.{#SNMPINDEX}'
+              key: 'rxqospkt4[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 1f85809b712044dfb918cda75c7603a2
+              name: 'rxqospkt5 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.61.{#SNMPINDEX}'
+              key: 'rxqospkt5[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: eaf413c7fe344613bb9e214327399664
+              name: 'rxqospkt6 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.62.{#SNMPINDEX}'
+              key: 'rxqospkt6[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 75e3fe03b8a84f4db88fdc949b6f868d
+              name: 'rxqospkt7 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.63.{#SNMPINDEX}'
+              key: 'rxqospkt7[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 9ec148da204d4b248781b9ffe37851e7
+              name: 'rxTooLongFrameCrcErr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.30.{#SNMPINDEX}'
+              key: 'rxTooLongFrameCrcErr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 90057f39b8074dfa85ba7b4044ad0619
+              name: 'rxTooShortFrameCrcErr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.31.{#SNMPINDEX}'
+              key: 'rxTooShortFrameCrcErr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 7ef31f24f430436db7aefb9bbe47711b
+              name: 'rxTotalFrames {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.20.{#SNMPINDEX}'
+              key: 'rxTotalFrames[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 6c8afab441104893a1c7c993c66ccc25
+              name: 'rxTotalOctets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.19.{#SNMPINDEX}'
+              key: 'rxTotalOctets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: accd9263b351498b9ec37c0b9d8ae9f5
+              name: 'rxValidBroadcastFrames {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.14.{#SNMPINDEX}'
+              key: 'rxValidBroadcastFrames[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 320d4e23f83444379f883f9ab76cd167
+              name: 'rxValidMulticastFrames {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.13.{#SNMPINDEX}'
+              key: 'rxValidMulticastFrames[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 48517351f3bb48b098d394edcec77be2
+              name: 'rxValidUnicastFrames {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.12.{#SNMPINDEX}'
+              key: 'rxValidUnicastFrames[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 760f7d80aff0464d9b7e1bd8c747a029
+              name: 'txErroredFrames {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.11.{#SNMPINDEX}'
+              key: 'txErroredFrames[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 0d726e91db8a4ddeb183f748a257ab43
+              name: 'txFramesOK {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.2.{#SNMPINDEX}'
+              key: 'txFramesOK[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: b882b767220e4e2b8554fb35fc926920
+              name: 'txoctetsAll {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.64.{#SNMPINDEX}'
+              key: 'txoctetsAll[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: f1cc91c4853a45bcbbe692b11a845e1d
+              name: 'txOctetsOK {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.6.{#SNMPINDEX}'
+              key: 'txOctetsOK[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 880b91476b124910a33fe426233e607f
+              name: 'txPauseFrames {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.8.{#SNMPINDEX}'
+              key: 'txPauseFrames[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: c74e123cf5744983b6406dbbe79f30a3
+              name: 'txpktsAll {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.65.{#SNMPINDEX}'
+              key: 'txpktsAll[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: a5b63cd09d93428087c7720b4f2f9984
+              name: 'txqosoct0 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.32.{#SNMPINDEX}'
+              key: 'txqosoct0[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 76466a570a4a45a8a60366c5c0075706
+              name: 'txqosoct1 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.33.{#SNMPINDEX}'
+              key: 'txqosoct1[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: b922e0ef42d2417984c3961f00e569d8
+              name: 'txqosoct2 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.34.{#SNMPINDEX}'
+              key: 'txqosoct2[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 26a6bfa51810406ba664ff7cd3c82843
+              name: 'txqosoct3 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.35.{#SNMPINDEX}'
+              key: 'txqosoct3[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 4b71da16f76a4dc2b0a3b04f9906241e
+              name: 'txqosoct4 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.36.{#SNMPINDEX}'
+              key: 'txqosoct4[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: fc3b97e6a5ad4d38af166f836793c32c
+              name: 'txqosoct5 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.37.{#SNMPINDEX}'
+              key: 'txqosoct5[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 2ecf5d02242647d09b90528fa4b195b1
+              name: 'txqosoct6 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.38.{#SNMPINDEX}'
+              key: 'txqosoct6[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: efb5874c120543f4ada7af57082d448d
+              name: 'txqosoct7 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.39.{#SNMPINDEX}'
+              key: 'txqosoct7[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 613aa377c17342b6aab092fccd1dd1f3
+              name: 'txqospkt0 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.40.{#SNMPINDEX}'
+              key: 'txqospkt0[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: e8b71c2b1b65485b8183103b9df4f6bf
+              name: 'txqospkt1 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.41.{#SNMPINDEX}'
+              key: 'txqospkt1[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 639a91a8610149638abb8f6d5dc9e7fa
+              name: 'txqospkt2 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.42.{#SNMPINDEX}'
+              key: 'txqospkt2[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 71f0e80ea66a44188a2b1901368f17ac
+              name: 'txqospkt3 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.43.{#SNMPINDEX}'
+              key: 'txqospkt3[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 7a236494c1a941bd92f9b0c99db84569
+              name: 'txqospkt4 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.44.{#SNMPINDEX}'
+              key: 'txqospkt4[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 1bfcb96f1a984d4f8f219c2e304d7016
+              name: 'txqospkt5 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.45.{#SNMPINDEX}'
+              key: 'txqospkt5[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: f935a58472364b35af725a286f700d17
+              name: 'txqospkt6 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.46.{#SNMPINDEX}'
+              key: 'txqospkt6[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 1f39f56e92ee4080a231abe78acee179
+              name: 'txqospkt7 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.47.{#SNMPINDEX}'
+              key: 'txqospkt7[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 3ab8d70483f7462bbf7f968324e7cb8d
+              name: 'txValidBroadcastFrames {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.17.{#SNMPINDEX}'
+              key: 'txValidBroadcastFrames[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 240b70ba0bb0404aa73b23c8af617599
+              name: 'txValidMulticastFrames {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.16.{#SNMPINDEX}'
+              key: 'txValidMulticastFrames[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+            - uuid: 49c13b3e6c2f4ee4996ff041136dbfa5
+              name: 'txValidUnicastFrames {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.3.1.15.{#SNMPINDEX}'
+              key: 'txValidUnicastFrames[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatistics
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: ae19d7897772497d939e82a80880be1f
+          name: airFiberStatus
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.41112.1.3.2.1.1]'
+          key: airFiberStatus.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: ed33ec625c314fed9d6c1cdd84275732
+              name: 'airFiberStatusIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.1.{#SNMPINDEX}'
+              key: 'airFiberStatusIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 05390acbf299494eb3433797b59caa86
+              name: 'countryCode {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.25.{#SNMPINDEX}'
+              key: 'countryCode[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 37b6e4dd027a464dbd8d91553d819321
+              name: 'curTXModRate {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.2.{#SNMPINDEX}'
+              key: 'curTXModRate[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 215276f5323144d5a7315891a93ca291
+              name: 'dateTime {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.39.{#SNMPINDEX}'
+              key: 'dateTime[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 308f421dd4b048018ed2b2b5d55f9f49
+              name: 'dfsDetections {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.47.{#SNMPINDEX}'
+              key: 'dfsDetections[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: dc88684ca41142a58a74f50ba907e7f6
+              name: 'dfsDomain {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.48.{#SNMPINDEX}'
+              key: 'dfsDomain[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 03c92350fd3541b9850f86a2610dbbf7
+              name: 'dfsStateTxFreq1 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.49.{#SNMPINDEX}'
+              key: 'dfsStateTxFreq1[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: e9435a47d15540a4ae8f8ef77f58792d
+              name: 'dfsStateTxFreq2 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.50.{#SNMPINDEX}'
+              key: 'dfsStateTxFreq2[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 1f4653e80dfc4fddaeca6ee1310d9fa9
+              name: 'dfsStateTxFreq3 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.51.{#SNMPINDEX}'
+              key: 'dfsStateTxFreq3[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 7107fec666b64b23a7f0d9520815b2d2
+              name: 'dfsState {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.37.{#SNMPINDEX}'
+              key: 'dfsState[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 1cd20ece832e4d8ea651cdda5ef80b82
+              name: 'dfsTimerTxFreq1 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.52.{#SNMPINDEX}'
+              key: 'dfsTimerTxFreq1[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 5f3ef162b8e84fe08b9775a4715efc83
+              name: 'dfsTimerTxFreq2 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.53.{#SNMPINDEX}'
+              key: 'dfsTimerTxFreq2[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: c29cbd0e1cbb482eaaa5f7f9951707a5
+              name: 'dfsTimerTxFreq3 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.54.{#SNMPINDEX}'
+              key: 'dfsTimerTxFreq3[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 5e642dea733647ac8b2d53229812ad31
+              name: 'ethDataPortInfo {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.43.{#SNMPINDEX}'
+              key: 'ethDataPortInfo[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 4d2cc79166e84bdb82636a00e6b85671
+              name: 'ethDataPortState {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.27.{#SNMPINDEX}'
+              key: 'ethDataPortState[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: b8ac00d52af64c9e849f2ab4de607cb3
+              name: 'fwVersion {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.40.{#SNMPINDEX}'
+              key: 'fwVersion[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: e59e18e2e6c94f81b2df5b0f049c3efe
+              name: 'gpsAltFeet {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.33.{#SNMPINDEX}'
+              key: 'gpsAltFeet[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 3fc7d468c28846c2addba414014cf6b9
+              name: 'gpsAltMeters {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.32.{#SNMPINDEX}'
+              key: 'gpsAltMeters[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 189c91fdb08d439b9b03a843aa0ef089
+              name: 'gpsFix {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.29.{#SNMPINDEX}'
+              key: 'gpsFix[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 73d70fb0aaf142929bbed8e37b8f9866
+              name: 'gpsHDOP {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.36.{#SNMPINDEX}'
+              key: 'gpsHDOP[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: fb1e4e14f0964f2e90000033de484fa3
+              name: 'gpsLat {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.30.{#SNMPINDEX}'
+              key: 'gpsLat[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 004b7eef72854492b86acffca6c2ccef
+              name: 'gpsLong {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.31.{#SNMPINDEX}'
+              key: 'gpsLong[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: a09b0ed130ab4658a4d409268df64cea
+              name: 'gpsPulse {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.28.{#SNMPINDEX}'
+              key: 'gpsPulse[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 4b92b83f8c244eb6b1a5b638dabbe156
+              name: 'gpsSatsTracked {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.35.{#SNMPINDEX}'
+              key: 'gpsSatsTracked[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 7ef5e48afa7f4828ba27839b0f488c38
+              name: 'gpsSatsVisible {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.34.{#SNMPINDEX}'
+              key: 'gpsSatsVisible[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 4b10f5a97819454d98728ae26c486ced
+              name: 'linkUpTime {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.44.{#SNMPINDEX}'
+              key: 'linkUpTime[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 8bbe337938eb4c7dbf930f4b7ab1f7e9
+              name: 'radio0TempC {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.8.{#SNMPINDEX}'
+              key: 'radio0TempC[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: da325a02da83494d82033cfaa94065a5
+              name: 'radio0TempF {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.7.{#SNMPINDEX}'
+              key: 'radio0TempF[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 115faf4a8dec409297f32241f5a7cc7a
+              name: 'radio1TempC {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.10.{#SNMPINDEX}'
+              key: 'radio1TempC[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: c50eab0e778f4d02833adf08cb2142b4
+              name: 'radio1TempF {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.9.{#SNMPINDEX}'
+              key: 'radio1TempF[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 76a9cd0a1bca4f3dab3d5a51bf74d44d
+              name: 'radioLinkDistFt {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.3.{#SNMPINDEX}'
+              key: 'radioLinkDistFt[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 1381776b68b6486b965ec2ea20394a8e
+              name: 'radioLinkDistM {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.4.{#SNMPINDEX}'
+              key: 'radioLinkDistM[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 89d96867133f442d9acaee14a26587e1
+              name: 'radioLinkInfo {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.42.{#SNMPINDEX}'
+              key: 'radioLinkInfo[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 31b8798612f34acbbf2cc5ea3e1310aa
+              name: 'radioLinkState {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.26.{#SNMPINDEX}'
+              key: 'radioLinkState[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: ad594edd5dc64a4981747d93be649eb8
+              name: 'remoteIP {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.46.{#SNMPINDEX}'
+              key: 'remoteIP[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: c69bf92d24bb41e09ce5a4e78eaf507d
+              name: 'remoteMAC {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.45.{#SNMPINDEX}'
+              key: 'remoteMAC[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 6c2397ce69e244ee8ce65c38c14da67b
+              name: 'remoteRXGain {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.41.{#SNMPINDEX}'
+              key: 'remoteRXGain[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: dd93895a76aa41d7843dce7e4fd5f13b
+              name: 'remoteRXPower0Overload {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.21.{#SNMPINDEX}'
+              key: 'remoteRXPower0Overload[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 1588b81f6e8e4679915d96b9eed3b809
+              name: 'remoteRXPower0Valid {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.20.{#SNMPINDEX}'
+              key: 'remoteRXPower0Valid[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 00e817738ca245bcb216422f467ec593
+              name: 'remoteRXPower0 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.19.{#SNMPINDEX}'
+              key: 'remoteRXPower0[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: cd6482cfef7849a1929ea23b2d4ce037
+              name: 'remoteRXPower1Overload {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.24.{#SNMPINDEX}'
+              key: 'remoteRXPower1Overload[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: c9015a20d29949798df7615b29502d19
+              name: 'remoteRXPower1Valid {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.23.{#SNMPINDEX}'
+              key: 'remoteRXPower1Valid[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: b2dea24b83ce440e8ab258871e02b692
+              name: 'remoteRXPower1 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.22.{#SNMPINDEX}'
+              key: 'remoteRXPower1[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 1ccdfb699d124c70a9a43ffb4c76375f
+              name: 'remoteTXModRate {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.18.{#SNMPINDEX}'
+              key: 'remoteTXModRate[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 2d3b8fd33f1b4ee298d3d2b872d14165
+              name: 'remoteTXPower {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.17.{#SNMPINDEX}'
+              key: 'remoteTXPower[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 7874a05c1e244348b63de80683f6c9f9
+              name: 'rxCapacity {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.5.{#SNMPINDEX}'
+              key: 'rxCapacity[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 7ba97d75849941238fc3fce87fa3f016
+              name: 'rxOverload0 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.13.{#SNMPINDEX}'
+              key: 'rxOverload0[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: af8fc5847f2443889533bceebd5fc4db
+              name: 'rxOverload1 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.16.{#SNMPINDEX}'
+              key: 'rxOverload1[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 1c15fc6d38864bada05fc24d5e952d78
+              name: 'rxPower0Valid {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.12.{#SNMPINDEX}'
+              key: 'rxPower0Valid[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 779ce7736c3c4f539d8130800f949346
+              name: 'rxPower0 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.11.{#SNMPINDEX}'
+              key: 'rxPower0[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 15da198efaf04bb0b9d617d743758725
+              name: 'rxPower1Valid {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.15.{#SNMPINDEX}'
+              key: 'rxPower1Valid[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: 0cf3f767451c4b17aa30554a25936faf
+              name: 'rxPower1 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.14.{#SNMPINDEX}'
+              key: 'rxPower1[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: aca736c1d0904264a5cd5441c96be66d
+              name: 'txCapacity {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.6.{#SNMPINDEX}'
+              key: 'txCapacity[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+            - uuid: f68c4d70b7044d02abe7b8588fc92a05
+              name: 'upTime {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.3.2.1.38.{#SNMPINDEX}'
+              key: 'upTime[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: airFiberStatus
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 8e85090749884c8eab5c824d6871750b
+          name: if
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.2.1.2.2.1.1]'
+          key: if.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: fc1f11fb7833465a8528d844f6e04d06
+              name: 'ifAdminStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.7.{#SNMPINDEX}'
+              key: 'ifAdminStatus[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: ed7c1295a23048249449f466edffbd52
+              name: 'ifDescr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.2.{#SNMPINDEX}'
+              key: 'ifDescr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 10a7584f315d437a8d24e382cd3d11c0
+              name: 'ifIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.1.{#SNMPINDEX}'
+              key: 'ifIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 8cbd251697684790ae1c607a05eeb63f
+              name: 'ifInDiscards {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.13.{#SNMPINDEX}'
+              key: 'ifInDiscards[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 5e989c9b58fa46f1bbc0398331082f2f
+              name: 'ifInErrors {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.14.{#SNMPINDEX}'
+              key: 'ifInErrors[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 51cd9d1fc0884d8a948b5774cbef0c58
+              name: 'ifInNUcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.12.{#SNMPINDEX}'
+              key: 'ifInNUcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: d61768a50e1149f39af7959dcaa5ae5a
+              name: 'ifInOctets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.10.{#SNMPINDEX}'
+              key: 'ifInOctets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 7a6111d975cc491baea825b806d750ec
+              name: 'ifInUcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.11.{#SNMPINDEX}'
+              key: 'ifInUcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 7b21287e4b1e4ff0bc7cc5d4b67dbf29
+              name: 'ifInUnknownProtos {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.15.{#SNMPINDEX}'
+              key: 'ifInUnknownProtos[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: d1029de6f3e246fe9445c9c9b845fe0d
+              name: 'ifLastChange {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.9.{#SNMPINDEX}'
+              key: 'ifLastChange[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: e90febabd7f84686b009c15004467b0a
+              name: 'ifMtu {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.4.{#SNMPINDEX}'
+              key: 'ifMtu[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 06487538e03147d7a97d049501af83cd
+              name: 'ifOperStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.8.{#SNMPINDEX}'
+              key: 'ifOperStatus[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 3cead9731458444a86357e6ad68c5e09
+              name: 'ifOutDiscards {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.19.{#SNMPINDEX}'
+              key: 'ifOutDiscards[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 5205260957134aa382685b35a383424e
+              name: 'ifOutErrors {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.20.{#SNMPINDEX}'
+              key: 'ifOutErrors[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 05f78543f5cc4089b6e270fa60442838
+              name: 'ifOutNUcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.18.{#SNMPINDEX}'
+              key: 'ifOutNUcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: db0e40666f7f483c890434eb115220fd
+              name: 'ifOutOctets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.16.{#SNMPINDEX}'
+              key: 'ifOutOctets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: ea014579fc234b08abf8a6a1d016b7b9
+              name: 'ifOutQLen {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.21.{#SNMPINDEX}'
+              key: 'ifOutQLen[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 52e56baadb1a4fdcb40a2a82538f2083
+              name: 'ifOutUcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.17.{#SNMPINDEX}'
+              key: 'ifOutUcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: a46d52d1a6ee44b2a43e13e5261b6166
+              name: 'ifPhysAddress {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.6.{#SNMPINDEX}'
+              key: 'ifPhysAddress[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 475bccb37713497aafc45aac0445de21
+              name: 'ifSpecific {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.22.{#SNMPINDEX}'
+              key: 'ifSpecific[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: CHAR
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 5302af9987414e6f90d6dcfa0784810a
+              name: 'ifSpeed {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.5.{#SNMPINDEX}'
+              key: 'ifSpeed[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 249f4722c5124cf4967534e3ab8548d2
+              name: 'ifType {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.3.{#SNMPINDEX}'
+              key: 'ifType[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 3dd8941e298d42cba24354699ca6b4ad
+          name: ubntOR
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.41112.1.1.1.1]'
+          key: ubntOR.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: 4a6e5a6453594bd28a38bcfaeaa0d884
+              name: 'ubntORDescr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.1.1.3.{#SNMPINDEX}'
+              key: 'ubntORDescr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: ubntOR
+            - uuid: 844a802cc16649a1a6882e0b0713cad9
+              name: 'ubntORID {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.1.1.2.{#SNMPINDEX}'
+              key: 'ubntORID[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: CHAR
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: ubntOR
+            - uuid: 6af4053bfe5d4147b8c0893a8cbf86d0
+              name: 'ubntORIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.41112.1.1.1.1.{#SNMPINDEX}'
+              key: 'ubntORIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: ubntOR
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+      dashboards:
+        - uuid: 1434235c4c5b44bcb94bb44c5856febc
+          name: 'System Health'
+          auto_start: 'NO'
+          pages:
+            - widgets:
+                - type: gauge
+                  name: 'Current 5 Minute CPU Load Utilisation'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AirFiber'
+                        key: 5MinLoad
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: gauge
+                  name: 'Current 15 Minute CPU Load Utilisation'
+                  'y': '3'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AirFiber'
+                        key: 15MinLoad
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: gauge
+                  name: 'Current Memory Utilisation'
+                  'y': '6'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AirFiber'
+                        key: memUtil
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: gauge
+                  name: 'Current Swap Space Utilisation'
+                  'y': '9'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AirFiber'
+                        key: swapUtil
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: svggraph
+                  name: '5 Minute CPU Load Utilisation'
+                  x: '18'
+                  width: '54'
+                  height: '3'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: '5 Minute CPU Load'
+                    - type: STRING
+                      name: reference
+                      value: LFRXB
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: '15 Minute CPU Load Utilisation'
+                  x: '18'
+                  'y': '3'
+                  width: '54'
+                  height: '3'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: '15 Minute CPU Load'
+                    - type: STRING
+                      name: reference
+                      value: AUZYY
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'Memory Utilisation'
+                  x: '18'
+                  'y': '6'
+                  width: '54'
+                  height: '3'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: 'Memory Utilisation'
+                    - type: STRING
+                      name: reference
+                      value: KUHAA
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'Swap Space Utilisation'
+                  x: '18'
+                  'y': '9'
+                  width: '54'
+                  height: '3'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: 'Swap Space Utilisation'
+                    - type: STRING
+                      name: reference
+                      value: JMUBI
+                    - type: INTEGER
+                      name: righty
+                      value: '0'

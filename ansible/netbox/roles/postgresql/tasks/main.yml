@@ -1,0 +1,60 @@
+---
+- name: Install PostgreSQL
+  apt:
+    name:
+      - postgresql
+    state: present
+  tags:
+    - postgresql
+
+- name: Ensure PostgreSQL is running
+  service:
+    name: postgresql
+    state: started
+    enabled: true
+  tags:
+    - postgresql
+
+# CREATE DATABASE netbox;
+- name: Create PostgreSQL database
+  community.postgresql.postgresql_db:
+    name: "{{ postgresql_db }}"
+  become: true
+  become_user: "{{ postgresql_original_user }}"
+  tags:
+    - postgresql
+
+# CREATE USER netbox WITH PASSWORD 'your_password';
+- name: Create PostgreSQL user
+  community.postgresql.postgresql_user:
+    name: "{{ postgresql_user }}"
+    password: "{{ postgresql_password }}"
+    encrypted: true
+    db: "{{ postgresql_db }}"
+  become: true
+  become_user: "{{ postgresql_original_user }}"
+  tags:
+    - postgresql
+
+# ALTER DATABASE netbox OWNER TO netbox;
+- name: Set PostgreSQL user as owner of database
+  community.postgresql.postgresql_owner:
+    db: "{{ postgresql_db }}"
+    new_owner: "{{ postgresql_user }}"
+  become: true
+  become_user: "{{ postgresql_original_user }}"
+  tags:
+    - postgresql
+
+# GRANT CREATE ON SCHEMA public TO netbox;
+- name: Grant CREATE privileges to PostgreSQL user
+  community.postgresql.postgresql_privs:
+    db: "{{ postgresql_db }}"
+    privs: CREATE
+    type: schema
+    objs: public
+    role: "{{ postgresql_user }}"
+  become: true
+  become_user: "{{ postgresql_original_user }}"
+  tags:
+    - postgresql

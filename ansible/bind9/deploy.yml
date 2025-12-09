@@ -1,0 +1,36 @@
+---
+- name: Deploy Bind9 Servers
+  hosts: all
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install basic packages
+      apt:
+        name:
+          - curl
+          - wget
+          - gnupg
+          - software-properties-common
+          - acl
+          - rcs
+          - qemu-guest-agent
+          # - firewalld
+        state: present
+
+- name: Deploy Authoritative Bind9 Servers
+  hosts: all
+  become: true
+  roles:
+    - authoritative
+
+- name: Deploy Recursive Bind9 Servers
+  hosts: all
+  become: true
+  roles:
+    - recursive

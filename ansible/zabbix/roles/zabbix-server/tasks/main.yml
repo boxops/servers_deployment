@@ -1,0 +1,131 @@
+---
+- name: Download Zabbix repository package
+  get_url:
+    url: "https://repo.zabbix.com/zabbix/7.4/release/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.4+ubuntu24.04_all.deb"
+    dest: /tmp/zabbix-release.deb
+  tags: zabbix
+
+- name: Install Zabbix repository
+  apt:
+    deb: /tmp/zabbix-release.deb
+    state: present
+  tags: zabbix
+
+- name: Update package cache after adding Zabbix repo
+  apt:
+    update_cache: true
+  tags: zabbix
+
+- name: Install Zabbix server and frontend
+  apt:
+    name:
+      - zabbix-server-mysql
+      - zabbix-frontend-php
+      - zabbix-apache-conf
+      - zabbix-sql-scripts
+      - zabbix-agent
+    state: present
+  tags: zabbix
+
+- name: Ensure Zabbix user home directory exists
+  file:
+    path: /var/lib/zabbix
+    state: directory
+    owner: zabbix
+    group: zabbix
+    mode: 0750
+  tags: zabbix
+
+- name: Verify Zabbix server configuration
+  become: yes
+  command: >
+    /usr/sbin/zabbix_server -c /etc/zabbix/zabbix_server.conf
+    -R config_cache_reload
+  register: zabbix_config_test
+  changed_when: false
+  ignore_errors: true
+
+- name: Show configuration test results if failed
+  debug:
+    var: zabbix_config_test
+  when: "'FAILED' in zabbix_config_test.stderr"
+  tags: zabbix
+
+- name: Check if Zabbix database is already populated
+  mysql_db:
+    name: "{{ zabbix_server_dbname }}"
+    state: dump
+    target: /tmp/zabbix_check.sql
+    login_user: "{{ zabbix_server_dbuser }}"
+    login_password: "{{ zabbix_server_dbpassword }}"
+    login_host: "{{ zabbix_server_dbhost }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    single_transaction: true
+    quick: true
+    lock_tables: false
+  register: db_dump
+  failed_when: false
+  changed_when: false
+  tags: database
+
+- name: Check if dbversion table exists
+  command: mysql -u {{ zabbix_server_dbuser }} -p{{ zabbix_server_dbpassword }} -h {{ zabbix_server_dbhost }} {{ zabbix_server_dbname }} -e "SELECT COUNT(*) FROM dbversion;"
+  register: dbversion_check
+  failed_when: false
+  changed_when: false
+  tags: database
+
+- name: Import Zabbix database schema
+  shell: |
+    zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql -u {{ zabbix_server_dbuser }} -p{{ zabbix_server_dbpassword }} -h {{ zabbix_server_dbhost }} {{ zabbix_server_dbname }}
+  when: dbversion_check.rc != 0
+  register: zabbix_schema_import
+  become: true
+  tags: database
+
+- name: Clean up temporary dump file
+  file:
+    path: /tmp/zabbix_check.sql
+    state: absent
+  when: db_dump is defined
+  tags: database
+
+- name: Configure Zabbix server
+  template:
+    src: zabbix_server.conf.j2
+    dest: /etc/zabbix/zabbix_server.conf
+    owner: zabbix
+    group: zabbix
+    mode: 0640
+    backup: true
+  notify: restart zabbix-server
+  tags: config
+
+- name: Configure Apache for Zabbix
+  template:
+    src: zabbix.conf.j2
+    dest: /etc/zabbix/apache.conf
+    backup: true
+  notify: restart apache2
+  tags: config
+
+- name: Start and enable Zabbix server
+  systemd:
+    name: zabbix-server
+    state: started
+    enabled: true
+  tags: service
+
+- name: Start and enable Zabbix agent
+  systemd:
+    name: zabbix-agent
+    state: started
+    enabled: true
+  tags: service
+
+- name: Start and enable Apache
+  systemd:
+    name: apache2
+    state: started
+    enabled: true
+  tags: service

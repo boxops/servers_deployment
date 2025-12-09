@@ -1,0 +1,77 @@
+---
+- name: Verify Zabbix proxies
+  hosts: zabbix_proxies
+  become: true
+
+  tasks:
+    - name: Verify Zabbix proxy configuration
+      command: >
+        sudo /usr/sbin/zabbix_proxy -c /etc/zabbix/zabbix_proxy.conf
+        -R config_cache_reload
+      register: proxy_config_test
+      changed_when: false
+      ignore_errors: true
+
+    - name: Show configuration test results
+      debug:
+        var: proxy_config_test
+      when: proxy_config_test.rc != 0
+
+    - name: Verify Zabbix proxy is running
+      systemd:
+        name: zabbix-proxy
+        state: started
+        enabled: true
+
+    - name: Check proxy config file permissions
+      stat:
+        path: /etc/zabbix/zabbix_proxy.conf
+      register: proxy_conf_stat
+
+    - name: Show proxy config permissions
+      debug:
+        msg: "Proxy config permissions: {{ proxy_conf_stat.stat.mode }}"
+
+    - name: Get proxy diagnostics via log parsing
+      shell: >
+        sudo tail -n 50 /var/log/zabbix/zabbix_proxy.log |
+        grep -A 5 "database is OK\|database is down"
+      register: proxy_db_status
+      changed_when: false
+      ignore_errors: true
+
+    - name: Show database connection status
+      debug:
+        msg: "Database connection status: {{ 'OK' if 'database is OK' in proxy_db_status.stdout else 'NOT OK' }}"
+      when: proxy_db_status.stdout != ''
+
+    - name: Check for recent proxy errors in log
+      shell: >
+        sudo grep -E 'error|fail|warning' /var/log/zabbix/zabbix_proxy.log | tail -n 10
+      register: proxy_log_errors
+      changed_when: false
+      ignore_errors: true
+
+    - name: Show recent proxy log errors if any
+      debug:
+        var: proxy_log_errors.stdout_lines
+      when: proxy_log_errors.stdout != ''
+
+    - name: Verify proxy version
+      command: /usr/sbin/zabbix_proxy -V
+      register: proxy_version
+      changed_when: false
+
+    - name: Show proxy version
+      debug:
+        var: proxy_version.stdout_lines
+
+    - name: Verify proxy process health
+      shell: >
+        ps -u zabbix -o pid,stat,start,time,cmd | grep zabbix_proxy
+      register: proxy_process
+      changed_when: false
+
+    - name: Show proxy process info
+      debug:
+        var: proxy_process.stdout_lines

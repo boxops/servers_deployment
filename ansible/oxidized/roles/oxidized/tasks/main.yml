@@ -1,0 +1,137 @@
+---
+- name: Ensure dependencies are installed
+  apt:
+    name: "{{ oxidized_packages }}"
+    state: present
+    update_cache: yes
+  tags:
+    - deploy
+
+- name: Install Oxidized gems
+  gem:
+    name: "{{ item }}"
+    state: present
+    user_install: false
+  loop: "{{ oxidized_gems }}"
+  become: true
+  tags:
+    - deploy
+
+- name: Ensure oxidized system user exists
+  user:
+    name: "{{ oxidized_user }}"
+    shell: /bin/bash
+    create_home: yes
+  tags:
+    - deploy
+
+- name: Create Oxidized config directory
+  file:
+    path: "{{ oxidized_home }}/.config/oxidized"
+    state: directory
+    owner: "{{ oxidized_user }}"
+    group: "{{ oxidized_user }}"
+    mode: '0755'
+  tags:
+    - deploy
+
+- name: Deploy router.db from template
+  template:
+    src: router.db.j2
+    dest: "{{ oxidized_home }}/.config/oxidized/router.db"
+    owner: "{{ oxidized_user }}"
+    group: "{{ oxidized_user }}"
+    mode: '0644'
+  tags:
+    - deploy
+    - config
+
+- name: Create model directory
+  file:
+    path: "{{ oxidized_home }}/.config/oxidized/model"
+    state: directory
+    owner: "{{ oxidized_user }}"
+    group: "{{ oxidized_user }}"
+    mode: '0755'
+  tags:
+    - deploy
+    - config
+
+- name: Copy Oxidized model files
+  become: true
+  copy:
+    src: "{{ item }}"
+    dest: "{{ oxidized_home }}/.config/oxidized/model/{{ item | basename }}"
+    owner: "{{ oxidized_user }}"
+    group: "{{ oxidized_user }}"
+    mode: '0755'
+  with_fileglob:
+    - "models/*"
+  tags:
+    - deploy
+    - config
+
+- name: Copy Oxidized script files
+  become: true
+  copy:
+    src: "{{ item }}"
+    dest: "/usr/local/bin/{{ item | basename }}"
+    owner: "{{ oxidized_user }}"
+    group: "{{ oxidized_user }}"
+    mode: '0755'
+  with_fileglob:
+    - "scripts/*"
+  tags:
+    - deploy
+    - config
+
+- name: Deploy Oxidized configuration file
+  template:
+    src: oxidized_config.j2
+    dest: "{{ oxidized_config_path }}"
+    owner: "{{ oxidized_user }}"
+    group: "{{ oxidized_user }}"
+    mode: '0644'
+  tags:
+    - deploy
+    - config
+
+- name: Deploy systemd service
+  template:
+    src: oxidized.service.j2
+    dest: /etc/systemd/system/oxidized.service
+    mode: '0644'
+  tags:
+    - deploy
+
+- name: Reload systemd daemon
+  systemd:
+    daemon_reload: yes
+  tags:
+    - deploy
+
+- name: Enable and start Oxidized service
+  systemd:
+    name: oxidized
+    state: started
+    enabled: yes
+  tags:
+    - deploy
+
+- name: Restart Oxidized service
+  systemd:
+    name: oxidized
+    state: restarted
+  tags:
+    - deploy
+    - config
+
+# # Reload list of nodes
+# # http://10.0.1.50:8888/reload
+# - name: Reload Oxidized nodes
+#   uri:
+#     url: "http://{{ ansible_host }}:{{ oxidized_web_port }}/reload"
+#     method: GET
+#     status_code: 200
+#   tags:
+#     - config

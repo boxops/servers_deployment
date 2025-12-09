@@ -1,0 +1,2072 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: ed8b8d16b49849a68710cebebabf9305
+      name: Custom
+  templates:
+    - uuid: 765b9e9b4d9a48a19087a8cc605afd8b
+      template: 'Cisco SG300'
+      name: 'Cisco SG300'
+      description: |
+        Template created with Zabbix Template Generator from SNMP walk data using iReasoning MIB browser
+        
+        Device types supported: All Cisco SG300 series
+      groups:
+        - name: Custom
+      items:
+        - uuid: 8daf08a658954f49a67f8d76cf42299d
+          name: genGroupHWVersion.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.2.11.1.0
+          key: genGroupHWVersion.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: genGroupHWVersion.0
+        - uuid: ee592c91270547799095c302470bd6e0
+          name: rlClearMib.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.1.14.0
+          key: rlClearMib.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rlClearMib.0
+        - uuid: 9857af8f28904d17bccd44915126cdca
+          name: rlCpuUtilDuringLast5Minutes.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.1.9.0
+          key: rlCpuUtilDuringLast5Minutes.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: '%'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rlCpuUtilDuringLast5Minutes.0
+        - uuid: a1c9d8467fc7436c8c3842f21d72471a
+          name: rlCpuUtilDuringLastMinute.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.1.8.0
+          key: rlCpuUtilDuringLastMinute.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: '%'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rlCpuUtilDuringLastMinute.0
+        - uuid: b2bf816b466148d7bf4799b7f243aff8
+          name: rlCpuUtilDuringLastSecond.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.1.7.0
+          key: rlCpuUtilDuringLastSecond.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          status: DISABLED
+          units: '%'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rlCpuUtilDuringLastSecond.0
+        - uuid: f94b7fc5c9d142e59bd687364936df4a
+          name: rlCpuUtilEnable.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.1.6.0
+          key: rlCpuUtilEnable.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rlCpuUtilEnable.0
+        - uuid: 2a3ef4e9de064cb899efff954048f67b
+          name: rlRebootDelay.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.1.10.0
+          key: rlRebootDelay.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rlRebootDelay.0
+        - uuid: 6d3cb887df88437384bf611fd04061f9
+          name: rlResetStatus.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.2.13.2.0
+          key: rlResetStatus.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rlResetStatus.0
+        - uuid: fed80b7c73324b60a87f24b481ceef7b
+          name: rlRunningCDBequalToStartupCDB.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.1.13.0
+          key: rlRunningCDBequalToStartupCDB.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rlRunningCDBequalToStartupCDB.0
+        - uuid: a3249381eda044ccaa4f0c7598b93ba7
+          name: rlScheduledReload.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.1.15.0
+          key: rlScheduledReload.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rlScheduledReload.0
+        - uuid: b774482d556a4afbb87b94946b55f787
+          name: rlScheduledReloadApprovedDate.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.1.17.0
+          key: rlScheduledReloadApprovedDate.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rlScheduledReloadApprovedDate.0
+        - uuid: 8fec2d50b592486ca61031d1d58e403f
+          name: rlScheduledReloadCommit.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.1.18.0
+          key: rlScheduledReloadCommit.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rlScheduledReloadCommit.0
+        - uuid: 622353a2296244988666dbd79643ee96
+          name: rlScheduledReloadPendingDate.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.1.16.0
+          key: rlScheduledReloadPendingDate.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rlScheduledReloadPendingDate.0
+        - uuid: 288b68945d3245ee9557343fc31506db
+          name: rlSnmpMibVersion.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.1.5.0
+          key: rlSnmpMibVersion.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rlSnmpMibVersion.0
+        - uuid: 59c0d783265048c8a3bdcc6e89374fa3
+          name: rlSnmpVersionSupported.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.1.4.0
+          key: rlSnmpVersionSupported.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rlSnmpVersionSupported.0
+        - uuid: 0df8563576b54a52afccdca085ee3abd
+          name: rndAction.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.1.2.0
+          key: rndAction.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rndAction.0
+        - uuid: ac95aa62a8754893b3c3f5ae1e54a8a8
+          name: rndBackupConfigurationEnabled.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.2.15.0
+          key: rndBackupConfigurationEnabled.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rndBackupConfigurationEnabled.0
+        - uuid: 3002512c94db4441b7651aa4effc9ff2
+          name: rndBaseBootVersion.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.2.10.0
+          key: rndBaseBootVersion.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rndBaseBootVersion.0
+        - uuid: a96b7b452bac4280ae2d2da38f635642
+          name: rndBasePhysicalAddress.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.2.12.0
+          key: rndBasePhysicalAddress.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rndBasePhysicalAddress.0
+        - uuid: f0dc66b8e9284a2ebfc0acd8af280837
+          name: rndBrgFeatures.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.2.5.0
+          key: rndBrgFeatures.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rndBrgFeatures.0
+        - uuid: 232d46ea15ff41dca22ae5b36f41a2ca
+          name: rndBrgVersion.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.2.4.0
+          key: rndBrgVersion.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rndBrgVersion.0
+        - uuid: e03fb5f3a42d4f078d73efa2e877bc08
+          name: rndIpHostManagementSupported.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.2.7.4.1.0
+          key: rndIpHostManagementSupported.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rndIpHostManagementSupported.0
+        - uuid: fbed67e6c14e41d4a83865b4a5e23f16
+          name: rndManagedDate.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.2.9.0
+          key: rndManagedDate.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rndManagedDate.0
+        - uuid: bee27c5fdbf1427e9325f9a7067f0e93
+          name: rndManagedTime.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.2.8.0
+          key: rndManagedTime.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rndManagedTime.0
+        - uuid: aaecdb6868fc433395ac45b33ca5be63
+          name: rndSysId.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.9.6.1.101.1.1.0
+          key: rndSysId.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: rndSysId.0
+      discovery_rules:
+        - uuid: 6bc1c7ed4cbe4fae82d4f043dedf657b
+          name: if
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.2.1.31.1.1.1.1]'
+          key: if.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: 9ebaa795ccb74e41a6906f936541106e
+              name: 'ifAlias {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.18.{#SNMPINDEX}'
+              key: 'ifAlias[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: eb3322e6d05c46ceb87d37f9f1cec1eb
+              name: 'ifConnectorPresent {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.17.{#SNMPINDEX}'
+              key: 'ifConnectorPresent[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 25b35f16d76a47dc92a4c3757269e5a7
+              name: 'ifCounterDiscontinuityTime {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.19.{#SNMPINDEX}'
+              key: 'ifCounterDiscontinuityTime[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: a668ccfea44040f1a0a9a0d71aded1e7
+              name: 'ifHCInBroadcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.9.{#SNMPINDEX}'
+              key: 'ifHCInBroadcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: dfddc33f2adf4cf58d72b002de9a1e6f
+              name: 'ifHCInMulticastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.8.{#SNMPINDEX}'
+              key: 'ifHCInMulticastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 0a9e92d08bed40f8b6b5dad4f2bd92df
+              name: 'ifHCInOctets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.6.{#SNMPINDEX}'
+              key: 'ifHCInOctets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 6dbee0d0b5ff414ca6b2b78338c09753
+              name: 'ifHCInUcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.7.{#SNMPINDEX}'
+              key: 'ifHCInUcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 66d5a7870baf459d8a9fd1ba90999d03
+              name: 'ifHCOutBroadcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.13.{#SNMPINDEX}'
+              key: 'ifHCOutBroadcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: a60d01546fba40589ee604a879bd620a
+              name: 'ifHCOutMulticastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.12.{#SNMPINDEX}'
+              key: 'ifHCOutMulticastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 8a790104666044f5a987d73ca1c037f5
+              name: 'ifHCOutOctets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.10.{#SNMPINDEX}'
+              key: 'ifHCOutOctets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: a509c4e90a2f4602a25ca3d2e4d74fc8
+              name: 'ifHCOutUcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.11.{#SNMPINDEX}'
+              key: 'ifHCOutUcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 8acc0ddc0e5040ff8817601ab6a6876d
+              name: 'ifHighSpeed {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.15.{#SNMPINDEX}'
+              key: 'ifHighSpeed[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: f935157405d4461ebddc87a38cc1ae1d
+              name: 'ifInBroadcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.3.{#SNMPINDEX}'
+              key: 'ifInBroadcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: ccdb4b2404ba4baa877877e7a67cee0f
+              name: 'ifInMulticastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.2.{#SNMPINDEX}'
+              key: 'ifInMulticastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: db45aebffbce4d56b7b749558c2b7809
+              name: 'ifLinkUpDownTrapEnable {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.14.{#SNMPINDEX}'
+              key: 'ifLinkUpDownTrapEnable[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 6dda6e96af2a45f4858391d97e014e78
+              name: 'ifName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.1.{#SNMPINDEX}'
+              key: 'ifName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 1952e9dcc0554cb09b6e1ee527cc1c5a
+              name: 'ifOutBroadcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.5.{#SNMPINDEX}'
+              key: 'ifOutBroadcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 441e7ba2095049ae8f86dbfa66a4e14f
+              name: 'ifOutMulticastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.4.{#SNMPINDEX}'
+              key: 'ifOutMulticastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: e710360d6705413785477c5d48aa7c2e
+              name: 'ifPromiscuousMode {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.16.{#SNMPINDEX}'
+              key: 'ifPromiscuousMode[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              status: DISABLED
+              discover: NO_DISCOVER
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+          graph_prototypes:
+            - uuid: f1632b2f11b248be8f43dfcf148e58e4
+              name: 'Interface {#SNMPVALUE}'
+              graph_items:
+                - color: 1A7C11
+                  item:
+                    host: 'Cisco SG300'
+                    key: 'ifConnectorPresent[{#SNMPVALUE}]'
+                - sortorder: '1'
+                  color: '274482'
+                  item:
+                    host: 'Cisco SG300'
+                    key: 'ifHCInOctets[{#SNMPVALUE}]'
+                - sortorder: '2'
+                  color: F63100
+                  item:
+                    host: 'Cisco SG300'
+                    key: 'ifHCOutOctets[{#SNMPVALUE}]'
+                - sortorder: '3'
+                  color: 2774A4
+                  item:
+                    host: 'Cisco SG300'
+                    key: 'ifHighSpeed[{#SNMPVALUE}]'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 60ff15a4d63e4b47b3585ce09126cf0f
+          name: rlEnvFanData
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.9.6.1.101.83.5.1.1.1]'
+          key: rlEnvFanData.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: 366811882c0546778fbf92d953325a08
+              name: 'rlEnvFanDataAdminLevel {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.83.5.1.1.5.{#SNMPINDEX}'
+              key: 'rlEnvFanDataAdminLevel[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlEnvFanData
+            - uuid: 5bc08c2550474900b4880e502e651a2e
+              name: 'rlEnvFanDataDirection {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.83.5.1.1.6.{#SNMPINDEX}'
+              key: 'rlEnvFanDataDirection[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlEnvFanData
+            - uuid: 441bad57cefe4285945f1fd2d50ac5e5
+              name: 'rlEnvFanDataOperLevel {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.83.5.1.1.4.{#SNMPINDEX}'
+              key: 'rlEnvFanDataOperLevel[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlEnvFanData
+            - uuid: 4b4247676fac47e38910f6532af44869
+              name: 'rlEnvFanDataSpeed {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.83.5.1.1.3.{#SNMPINDEX}'
+              key: 'rlEnvFanDataSpeed[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              units: Rpm
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlEnvFanData
+            - uuid: ce4b5b9e50274abcb8dc9a320618c301
+              name: 'rlEnvFanDataStackUnit {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.83.5.1.1.1.{#SNMPINDEX}'
+              key: 'rlEnvFanDataStackUnit[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlEnvFanData
+            - uuid: 2769ae23af204093bb31fed1eea4814d
+              name: 'rlEnvFanDataTemp {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.83.5.1.1.2.{#SNMPINDEX}'
+              key: 'rlEnvFanDataTemp[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlEnvFanData
+          graph_prototypes:
+            - uuid: db30e4f8c7704012939747c1dab1c242
+              name: 'Fan {#SNMPVALUE}'
+              graph_items:
+                - color: 1A7C11
+                  item:
+                    host: 'Cisco SG300'
+                    key: 'rlEnvFanDataOperLevel[{#SNMPVALUE}]'
+                - sortorder: '1'
+                  color: '274482'
+                  item:
+                    host: 'Cisco SG300'
+                    key: 'rlEnvFanDataSpeed[{#SNMPVALUE}]'
+                - sortorder: '2'
+                  color: F63100
+                  item:
+                    host: 'Cisco SG300'
+                    key: 'rlEnvFanDataTemp[{#SNMPVALUE}]'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: df2d7205b68f40cc8dacc5af904cac75
+          name: rlEnvMonFanStat
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.9.6.1.101.83.1.1.1.1]'
+          key: rlEnvMonFanStat.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: 3610ff3de12748aa90f88c62c3c6717d
+              name: 'rlEnvMonFanState {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.83.1.1.1.3.{#SNMPINDEX}'
+              key: 'rlEnvMonFanState[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlEnvMonFanStat
+            - uuid: 08801f21549f48e8bae7f5be278f4336
+              name: 'rlEnvMonFanStatusDescr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.83.1.1.1.2.{#SNMPINDEX}'
+              key: 'rlEnvMonFanStatusDescr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlEnvMonFanStat
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 094a64f989014ee594c20a293dffa44a
+          name: rlEnvMonSupply
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.9.6.1.101.83.1.2.1.1]'
+          key: rlEnvMonSupply.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: ead62117d11d4783996142618a2fbfce
+              name: 'rlEnvMonSupplyFanDirection {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.83.1.2.1.5.{#SNMPINDEX}'
+              key: 'rlEnvMonSupplyFanDirection[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlEnvMonSupply
+            - uuid: 10e0c173dac743f7804b66ce2729d6ac
+              name: 'rlEnvMonSupplySource {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.83.1.2.1.4.{#SNMPINDEX}'
+              key: 'rlEnvMonSupplySource[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlEnvMonSupply
+            - uuid: 96087f2a86c54bd798cc9d7ab1e6ccdf
+              name: 'rlEnvMonSupplyState {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.83.1.2.1.3.{#SNMPINDEX}'
+              key: 'rlEnvMonSupplyState[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlEnvMonSupply
+            - uuid: c3a3173ee8b74e19b784add0119479c8
+              name: 'rlEnvMonSupplyStatusDescr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.83.1.2.1.2.{#SNMPINDEX}'
+              key: 'rlEnvMonSupplyStatusDescr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlEnvMonSupply
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 4464c5aee1a44f3a903d79df6b0f2a38
+          name: rlPhdStack
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.9.6.1.101.53.4.1.1]'
+          key: rlPhdStack.discovery
+          delay: 12h
+          status: DISABLED
+          item_prototypes:
+            - uuid: 532033513b414ffdab0239465f01162e
+              name: 'rlPhdStackConnect1 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.4.1.3.{#SNMPINDEX}'
+              key: 'rlPhdStackConnect1[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdStack
+            - uuid: 4ab05d972035475ca8aaeb943d4594dc
+              name: 'rlPhdStackConnect2 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.4.1.4.{#SNMPINDEX}'
+              key: 'rlPhdStackConnect2[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdStack
+            - uuid: 20ecc65e04534cd7a0328c1b8a3b9164
+              name: 'rlPhdStackMacAddr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.4.1.7.{#SNMPINDEX}'
+              key: 'rlPhdStackMacAddr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdStack
+            - uuid: 9426bbcc267a4aa39aeb56e5318a912a
+              name: 'rlPhdStackProductID {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.4.1.6.{#SNMPINDEX}'
+              key: 'rlPhdStackProductID[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdStack
+            - uuid: aeb8ff28172e4c3b91baa66fbcf91072
+              name: 'rlPhdStackSofrwareVer {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.4.1.5.{#SNMPINDEX}'
+              key: 'rlPhdStackSofrwareVer[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdStack
+            - uuid: e3af69525d4644a0b013ef1b62a1cae7
+              name: 'rlPhdStackType {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.4.1.2.{#SNMPINDEX}'
+              key: 'rlPhdStackType[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdStack
+            - uuid: 8a6164dc646d4e2c90eef7e861fdacd5
+              name: 'rlPhdStackUnit {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.4.1.1.{#SNMPINDEX}'
+              key: 'rlPhdStackUnit[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdStack
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 7c54c573ed564e50b29f95b7f7228922
+          name: rlPhdUnitEnvParam
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.9.6.1.101.53.15.1.1]'
+          key: rlPhdUnitEnvParam.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: 23f3deec8d634d27a368c138bf492fc8
+              name: 'rlPhdUnitEnvParamFan1Status {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.15.1.4.{#SNMPINDEX}'
+              key: 'rlPhdUnitEnvParamFan1Status[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitEnvParam
+              trigger_prototypes:
+                - uuid: a7d8bae3cfb6401fb40838949546b093
+                  expression: 'last(/Cisco SG300/rlPhdUnitEnvParamFan1Status[{#SNMPVALUE}])<>1 and last(/Cisco SG300/rlPhdUnitEnvParamFan1Status[{#SNMPVALUE}])<>5'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Cisco SG300/rlPhdUnitEnvParamFan1Status[{#SNMPVALUE}])=1 or last(/Cisco SG300/rlPhdUnitEnvParamFan1Status[{#SNMPVALUE}])=5'
+                  name: 'Fan Error At Position 1'
+                  priority: HIGH
+                  manual_close: 'YES'
+            - uuid: 18646e7db3c0408bae44ec4d91ac4b1c
+              name: 'rlPhdUnitEnvParamFan2Status {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.15.1.5.{#SNMPINDEX}'
+              key: 'rlPhdUnitEnvParamFan2Status[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitEnvParam
+              trigger_prototypes:
+                - uuid: dddd3b4b9be1489a8b4eba6a5897566c
+                  expression: 'last(/Cisco SG300/rlPhdUnitEnvParamFan2Status[{#SNMPVALUE}])<>1 and last(/Cisco SG300/rlPhdUnitEnvParamFan2Status[{#SNMPVALUE}])<>5'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Cisco SG300/rlPhdUnitEnvParamFan2Status[{#SNMPVALUE}])=1 or last(/Cisco SG300/rlPhdUnitEnvParamFan2Status[{#SNMPVALUE}])=5'
+                  name: 'Fan Error At Position 2'
+                  priority: HIGH
+                  manual_close: 'YES'
+            - uuid: 6ca1a344c1734b6ab7e70dedaa291d75
+              name: 'rlPhdUnitEnvParamFan3Status {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.15.1.6.{#SNMPINDEX}'
+              key: 'rlPhdUnitEnvParamFan3Status[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitEnvParam
+              trigger_prototypes:
+                - uuid: 5c719432ff8a43339923dcf59ea9ba26
+                  expression: 'last(/Cisco SG300/rlPhdUnitEnvParamFan3Status[{#SNMPVALUE}])<>1 and last(/Cisco SG300/rlPhdUnitEnvParamFan3Status[{#SNMPVALUE}])<>5'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Cisco SG300/rlPhdUnitEnvParamFan3Status[{#SNMPVALUE}])=1 or last(/Cisco SG300/rlPhdUnitEnvParamFan3Status[{#SNMPVALUE}])=5'
+                  name: 'Fan Error At Position 3'
+                  priority: HIGH
+                  manual_close: 'YES'
+            - uuid: 328a5d8970324620bf5a1c37ae23a1bc
+              name: 'rlPhdUnitEnvParamFan4Status {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.15.1.7.{#SNMPINDEX}'
+              key: 'rlPhdUnitEnvParamFan4Status[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitEnvParam
+              trigger_prototypes:
+                - uuid: 93ee87b3128a45b9bed378adaaf2044c
+                  expression: 'last(/Cisco SG300/rlPhdUnitEnvParamFan4Status[{#SNMPVALUE}])<>1 and last(/Cisco SG300/rlPhdUnitEnvParamFan4Status[{#SNMPVALUE}])<>5'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Cisco SG300/rlPhdUnitEnvParamFan4Status[{#SNMPVALUE}])=1 or last(/Cisco SG300/rlPhdUnitEnvParamFan4Status[{#SNMPVALUE}])=5'
+                  name: 'Fan Error At Position 4'
+                  priority: HIGH
+                  manual_close: 'YES'
+            - uuid: 2ba08059576847b09897f1a839a1d7c7
+              name: 'rlPhdUnitEnvParamFan5Status {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.15.1.8.{#SNMPINDEX}'
+              key: 'rlPhdUnitEnvParamFan5Status[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitEnvParam
+              trigger_prototypes:
+                - uuid: 78f0c8805d384112862519409ca09fff
+                  expression: 'last(/Cisco SG300/rlPhdUnitEnvParamFan5Status[{#SNMPVALUE}])<>1 and last(/Cisco SG300/rlPhdUnitEnvParamFan5Status[{#SNMPVALUE}])<>5'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Cisco SG300/rlPhdUnitEnvParamFan5Status[{#SNMPVALUE}])=1 or last(/Cisco SG300/rlPhdUnitEnvParamFan5Status[{#SNMPVALUE}])=5'
+                  name: 'Fan Error At Position 5'
+                  priority: HIGH
+                  manual_close: 'YES'
+            - uuid: 822d7ee104bb4bd691797169030f2221
+              name: 'rlPhdUnitEnvParamMainPSStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.15.1.2.{#SNMPINDEX}'
+              key: 'rlPhdUnitEnvParamMainPSStatus[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitEnvParam
+              trigger_prototypes:
+                - uuid: 501c413e480f476bb18c77eacecd219b
+                  expression: 'last(/Cisco SG300/rlPhdUnitEnvParamMainPSStatus[{#SNMPVALUE}])<>1 and last(/Cisco SG300/rlPhdUnitEnvParamMainPSStatus[{#SNMPVALUE}])<>5'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Cisco SG300/rlPhdUnitEnvParamMainPSStatus[{#SNMPVALUE}])=1 or last(/Cisco SG300/rlPhdUnitEnvParamMainPSStatus[{#SNMPVALUE}])=5'
+                  name: 'Main Power Supply Failure'
+                  priority: HIGH
+                  manual_close: 'YES'
+            - uuid: 95d7ca3db5534f428650a1a5b2267b8e
+              name: 'rlPhdUnitEnvParamMonitorAutoRecoveryEnable {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.15.1.12.{#SNMPINDEX}'
+              key: 'rlPhdUnitEnvParamMonitorAutoRecoveryEnable[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitEnvParam
+            - uuid: 761fa3e3339b4a5d8d1d31bb66ccbf15
+              name: 'rlPhdUnitEnvParamMonitorOperStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.15.1.14.{#SNMPINDEX}'
+              key: 'rlPhdUnitEnvParamMonitorOperStatus[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitEnvParam
+            - uuid: c62a2b44cea74b5fbebe084ab302b6d2
+              name: 'rlPhdUnitEnvParamMonitorTemperatureStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.15.1.13.{#SNMPINDEX}'
+              key: 'rlPhdUnitEnvParamMonitorTemperatureStatus[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitEnvParam
+            - uuid: cc15e67343764339b91bb19c2de21a2d
+              name: 'rlPhdUnitEnvParamRedundantPSStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.15.1.3.{#SNMPINDEX}'
+              key: 'rlPhdUnitEnvParamRedundantPSStatus[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitEnvParam
+              trigger_prototypes:
+                - uuid: d325af9b52cc4c1abc36c10c8e49eb8e
+                  expression: 'last(/Cisco SG300/rlPhdUnitEnvParamRedundantPSStatus[{#SNMPVALUE}])<>1 and last(/Cisco SG300/rlPhdUnitEnvParamRedundantPSStatus[{#SNMPVALUE}])<>5'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Cisco SG300/rlPhdUnitEnvParamRedundantPSStatus[{#SNMPVALUE}])=1 or last(/Cisco SG300/rlPhdUnitEnvParamRedundantPSStatus[{#SNMPVALUE}])=5'
+                  name: 'Redundant Power Supply Failure'
+                  priority: HIGH
+                  manual_close: 'YES'
+            - uuid: b4d2e770accf49d187f5fcaa4e750d37
+              name: 'rlPhdUnitEnvParamStackUnit {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.15.1.1.{#SNMPINDEX}'
+              key: 'rlPhdUnitEnvParamStackUnit[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitEnvParam
+            - uuid: f43fa142c9954e399d9a81b92e4b66b8
+              name: 'rlPhdUnitEnvParamTempSensorStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.15.1.10.{#SNMPINDEX}'
+              key: 'rlPhdUnitEnvParamTempSensorStatus[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitEnvParam
+              trigger_prototypes:
+                - uuid: 120d59a408f24e31b95bda825a693ad7
+                  expression: 'last(/Cisco SG300/rlPhdUnitEnvParamTempSensorStatus[{#SNMPVALUE}])>60'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Cisco SG300/rlPhdUnitEnvParamTempSensorStatus[{#SNMPVALUE}])<60'
+                  name: 'Temperature Is Over 60 Degrees'
+                  priority: WARNING
+                  manual_close: 'YES'
+                - uuid: 7575cefc13e44feca40beda700982e2b
+                  expression: 'last(/Cisco SG300/rlPhdUnitEnvParamTempSensorStatus[{#SNMPVALUE}])>80'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Cisco SG300/rlPhdUnitEnvParamTempSensorStatus[{#SNMPVALUE}])<80'
+                  name: 'Temperature Is Over 80 Degrees'
+                  priority: HIGH
+                  manual_close: 'YES'
+            - uuid: f4cb1f95708b42b78e08008e3a78cb77
+              name: 'rlPhdUnitEnvParamTempSensorValue {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.15.1.9.{#SNMPINDEX}'
+              key: 'rlPhdUnitEnvParamTempSensorValue[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitEnvParam
+            - uuid: a3e61ec895304ead8d00dc9b02b5a367
+              name: 'rlPhdUnitEnvParamUpTime {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.15.1.11.{#SNMPINDEX}'
+              key: 'rlPhdUnitEnvParamUpTime[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitEnvParam
+          graph_prototypes:
+            - uuid: a380eeede99f4ad3960a17b281f79207
+              name: Temperature
+              graph_items:
+                - color: 00BFFF
+                  item:
+                    host: 'Cisco SG300'
+                    key: 'rlPhdUnitEnvParamMonitorTemperatureStatus[{#SNMPVALUE}]'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 98ffdad0a4bc45d6998d8471892521a0
+          name: rlPhdUnitGenParam
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.9.6.1.101.53.14.1.1]'
+          key: rlPhdUnitGenParam.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: 977ddf28735c4340891a7c67aa53bba8
+              name: 'rlPhdUnitGenParamAssetTag {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.14.1.6.{#SNMPINDEX}'
+              key: 'rlPhdUnitGenParamAssetTag[{#SNMPVALUE}]'
+              delay: 1h
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitGenParam
+            - uuid: 9af8f83b73d144088af7e1e5c8ff1109
+              name: 'rlPhdUnitGenParamFirmwareDate {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.14.1.9.{#SNMPINDEX}'
+              key: 'rlPhdUnitGenParamFirmwareDate[{#SNMPVALUE}]'
+              delay: 1h
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitGenParam
+            - uuid: a616a8b453c945059666025cdfb50617
+              name: 'rlPhdUnitGenParamFirmwareVersion {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.14.1.3.{#SNMPINDEX}'
+              key: 'rlPhdUnitGenParamFirmwareVersion[{#SNMPVALUE}]'
+              delay: 1h
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitGenParam
+            - uuid: 9268ab511b5848549ef338bb0356c6c3
+              name: 'rlPhdUnitGenParamHardwareVersion {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.14.1.4.{#SNMPINDEX}'
+              key: 'rlPhdUnitGenParamHardwareVersion[{#SNMPVALUE}]'
+              delay: 1h
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitGenParam
+            - uuid: 4fd8b5a96ce94feaa28ece3c8dcdf354
+              name: 'rlPhdUnitGenParamManufacturer {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.14.1.10.{#SNMPINDEX}'
+              key: 'rlPhdUnitGenParamManufacturer[{#SNMPVALUE}]'
+              delay: 1h
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitGenParam
+            - uuid: 710eb1bb32ed4370a566dfcc7f880786
+              name: 'rlPhdUnitGenParamMd5ChksumBoot {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.14.1.12.{#SNMPINDEX}'
+              key: 'rlPhdUnitGenParamMd5ChksumBoot[{#SNMPVALUE}]'
+              delay: 1h
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitGenParam
+            - uuid: abe1bf381538479992ddabfbcaa95a96
+              name: 'rlPhdUnitGenParamMd5ChksumImage1 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.14.1.13.{#SNMPINDEX}'
+              key: 'rlPhdUnitGenParamMd5ChksumImage1[{#SNMPVALUE}]'
+              delay: 1h
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitGenParam
+            - uuid: e298b263b781436196a9bb63fdfa3d68
+              name: 'rlPhdUnitGenParamMd5ChksumImage2 {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.14.1.14.{#SNMPINDEX}'
+              key: 'rlPhdUnitGenParamMd5ChksumImage2[{#SNMPVALUE}]'
+              delay: 1h
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitGenParam
+            - uuid: a7a1c74438554178bc18d20adda5d35d
+              name: 'rlPhdUnitGenParamModelName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.14.1.11.{#SNMPINDEX}'
+              key: 'rlPhdUnitGenParamModelName[{#SNMPVALUE}]'
+              delay: 1h
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitGenParam
+            - uuid: e5a9934089804bca98db6e74d4f5b3c9
+              name: 'rlPhdUnitGenParamRegistrationDone {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.14.1.15.{#SNMPINDEX}'
+              key: 'rlPhdUnitGenParamRegistrationDone[{#SNMPVALUE}]'
+              delay: 1h
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitGenParam
+            - uuid: 77ac960ae45c42d4a1f3a8eb8aca78c0
+              name: 'rlPhdUnitGenParamRegistrationSuppressed {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.14.1.16.{#SNMPINDEX}'
+              key: 'rlPhdUnitGenParamRegistrationSuppressed[{#SNMPVALUE}]'
+              delay: 1h
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitGenParam
+            - uuid: 5c3fb0b5b2754425b3fbcbf6a068a202
+              name: 'rlPhdUnitGenParamSerialNum {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.14.1.5.{#SNMPINDEX}'
+              key: 'rlPhdUnitGenParamSerialNum[{#SNMPVALUE}]'
+              delay: 1h
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitGenParam
+            - uuid: fa0feb0342cc4ae2af14b569dcea6969
+              name: 'rlPhdUnitGenParamServiceTag {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.14.1.7.{#SNMPINDEX}'
+              key: 'rlPhdUnitGenParamServiceTag[{#SNMPVALUE}]'
+              delay: 1h
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitGenParam
+            - uuid: be3180f4ae79416d937fd8200bac6391
+              name: 'rlPhdUnitGenParamSoftwareDate {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.14.1.8.{#SNMPINDEX}'
+              key: 'rlPhdUnitGenParamSoftwareDate[{#SNMPVALUE}]'
+              delay: 1h
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitGenParam
+            - uuid: 8cc310425e7b4636b4e71bf891505a02
+              name: 'rlPhdUnitGenParamSoftwareVersion {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.14.1.2.{#SNMPINDEX}'
+              key: 'rlPhdUnitGenParamSoftwareVersion[{#SNMPVALUE}]'
+              delay: 1h
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitGenParam
+            - uuid: 86780f3caa034cb4b6fba070490603f4
+              name: 'rlPhdUnitGenParamStackUnit {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.53.14.1.1.{#SNMPINDEX}'
+              key: 'rlPhdUnitGenParamStackUnit[{#SNMPVALUE}]'
+              delay: 1h
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rlPhdUnitGenParam
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: d82d3a84896f4b0984c30922a2c1a5f4
+          name: rnd
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.9.6.1.101.2.16.1.1.1]'
+          key: rnd.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: a718fc4e799140019a53dbab84bceeb0
+              name: 'rndImage1Date {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.2.16.1.1.6.{#SNMPINDEX}'
+              key: 'rndImage1Date[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rnd
+            - uuid: 8a5ca07e04834e8aa8d06bef8af8a314
+              name: 'rndImage1Description {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.2.16.1.1.10.{#SNMPINDEX}'
+              key: 'rndImage1Description[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rnd
+            - uuid: 43edfb0a1f2f4941b73eb9bc148d5311
+              name: 'rndImage1Name {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.2.16.1.1.2.{#SNMPINDEX}'
+              key: 'rndImage1Name[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rnd
+            - uuid: 0f010cd8f8364a05982882645a0fb532
+              name: 'rndImage1Time {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.2.16.1.1.8.{#SNMPINDEX}'
+              key: 'rndImage1Time[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rnd
+            - uuid: 33ba7bd57d554ae19537fe385ecc34ca
+              name: 'rndImage1Version {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.2.16.1.1.4.{#SNMPINDEX}'
+              key: 'rndImage1Version[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rnd
+            - uuid: 2f479018078849c1a9b57942d0f181b9
+              name: 'rndImage2Date {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.2.16.1.1.7.{#SNMPINDEX}'
+              key: 'rndImage2Date[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rnd
+            - uuid: 5b86aff52cd44fa7b4715d7e59461958
+              name: 'rndImage2Description {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.2.16.1.1.11.{#SNMPINDEX}'
+              key: 'rndImage2Description[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rnd
+            - uuid: 1d71049864074aefa8f4d928b69424a6
+              name: 'rndImage2Name {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.2.16.1.1.3.{#SNMPINDEX}'
+              key: 'rndImage2Name[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rnd
+            - uuid: 85f7a2089bf0493e8e123a2397fc0e9b
+              name: 'rndImage2Time {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.2.16.1.1.9.{#SNMPINDEX}'
+              key: 'rndImage2Time[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rnd
+            - uuid: de754276dac7468296b563003cb180d1
+              name: 'rndImage2Version {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.2.16.1.1.5.{#SNMPINDEX}'
+              key: 'rndImage2Version[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rnd
+            - uuid: b418a394b1ec4c23becf09c0ab0e4932
+              name: 'rndStackUnitNumber {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.9.6.1.101.2.16.1.1.1.{#SNMPINDEX}'
+              key: 'rndStackUnitNumber[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: rnd
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+      dashboards:
+        - uuid: 5795d9b6faa84e59949db596d68488e9
+          name: Interfaces
+          auto_start: 'NO'
+          pages:
+            - widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '44'
+                  fields:
+                    - type: GRAPH_PROTOTYPE
+                      name: graphid.0
+                      value:
+                        host: 'Cisco SG300'
+                        name: 'Interface {#SNMPVALUE}'
+                    - type: STRING
+                      name: reference
+                      value: HGNJV
+                    - type: INTEGER
+                      name: rows
+                      value: '10'
+        - uuid: 3d9ef76f730f4f7fbb2abef71659e4dd
+          name: 'System Health'
+          auto_start: 'NO'
+          pages:
+            - name: CPU
+              widgets:
+                - type: gauge
+                  name: 'Current 1 Minute CPU Utilisation'
+                  width: '18'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Cisco SG300'
+                        key: rlCpuUtilDuringLastMinute.0
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: gauge
+                  name: 'Current 5 Minute CPU Utilisation'
+                  'y': '5'
+                  width: '18'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Cisco SG300'
+                        key: rlCpuUtilDuringLast5Minutes.0
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: svggraph
+                  name: '1 Minute CPU Utilisation'
+                  x: '18'
+                  width: '54'
+                  height: '5'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: rlCpuUtilDuringLastMinute.0
+                    - type: STRING
+                      name: reference
+                      value: OFBAO
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: '5 Minute CPU Utilisation'
+                  x: '18'
+                  'y': '5'
+                  width: '54'
+                  height: '5'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: rlCpuUtilDuringLast5Minutes.0
+                    - type: STRING
+                      name: reference
+                      value: KAQDE
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+            - name: Fans
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: GRAPH_PROTOTYPE
+                      name: graphid.0
+                      value:
+                        host: 'Cisco SG300'
+                        name: 'Fan {#SNMPVALUE}'
+                    - type: STRING
+                      name: reference
+                      value: HQFHZ
+            - name: Temperature
+              widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: GRAPH_PROTOTYPE
+                      name: graphid.0
+                      value:
+                        host: 'Cisco SG300'
+                        name: Temperature
+                    - type: STRING
+                      name: reference
+                      value: OVIIJ

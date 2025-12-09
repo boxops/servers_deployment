@@ -1,0 +1,1572 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: ed8b8d16b49849a68710cebebabf9305
+      name: Custom
+  templates:
+    - uuid: beb3a776af014dec9313e95733bdaba9
+      template: 'Ubiquiti AF60 Wave-Pro'
+      name: 'Ubiquiti AF60 Wave-Pro'
+      description: 'Template created with Zabbix Template Generator from SNMP walk data using iReasoning MIB browser'
+      groups:
+        - name: Custom
+      items:
+        - uuid: 42edac53ab464bc48aa40d6371ded0f9
+          name: af60Bandwidth
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.1.3.1
+          key: af60Bandwidth
+          delay: 10m
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60Bandwidth
+        - uuid: c09b1ab5ffae42099221dc31634d070d
+          name: af60CpuUsage
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.2.6.1
+          key: af60CpuUsage
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: '%'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60CpuUsage
+        - uuid: a45431a808174989b79af609eb47c687
+          name: af60DevModel
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.2.2.1
+          key: af60DevModel
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60DevModel
+        - uuid: a270678da8fb4906b1c609b67da10fcc
+          name: af60DevName
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.2.3.1
+          key: af60DevName
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60DevName
+        - uuid: 66efb96597c54c5c9170073a77629a09
+          name: af60FirmwareVersion
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.2.4.1
+          key: af60FirmwareVersion
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60FirmwareVersion
+        - uuid: 22feddccdc1e4a439c9e7a989830bb8e
+          name: af60GpsAltFt
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.4.6.1
+          key: af60GpsAltFt
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          description: 'GPS Atlitude in feet'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60GpsAltFt
+        - uuid: 9cebd2a991d543348fa80f68e787cb9b
+          name: af60GpsAltM
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.4.5.1
+          key: af60GpsAltM
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          description: 'GPS Atlitude in meters'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60GpsAltM
+        - uuid: ae2eb89d6c984076a50dbd047940ea0f
+          name: af60GpsFix
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.4.2.1
+          key: af60GpsFix
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60GpsFix
+        - uuid: 93b47adbc77e4a249a8c721a20b0e7f9
+          name: af60GpsHDOP
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.4.9.1
+          key: af60GpsHDOP
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          description: 'GPS Horizontal Dilution of Precision'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60GpsHDOP
+        - uuid: 062a4d26b2f74067925ba4ba2ff9c190
+          name: af60GpsLat
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.4.3.1
+          key: af60GpsLat
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60GpsLat
+        - uuid: 0fc87226f16f4aa7b436aff3bc4d2062
+          name: af60GpsLon
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.4.4.1
+          key: af60GpsLon
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60GpsLon
+        - uuid: 6372b9e717a4449f8b7f519ac7c30d8d
+          name: af60GpsSatsTracked
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.4.8.1
+          key: af60GpsSatsTracked
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60GpsSatsTracked
+        - uuid: bb63cc4e84b14103abce626351ce4daf
+          name: af60GpsSatsVisible
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.4.7.1
+          key: af60GpsSatsVisible
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60GpsSatsVisible
+        - uuid: 401402936ae64e788768fa1b5617a51a
+          name: af60GpsStatus
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.4.1.1
+          key: af60GpsStatus
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          valuemap:
+            name: af60GpsStatus
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60GpsStatus
+        - uuid: d37d4b4e9b524900874b94f137254733
+          name: af60LastIp
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.1.5.1
+          key: af60LastIp
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60LastIp
+        - uuid: 036b724ba2cf44c190fddf730351c2f2
+          name: af60Mac
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.2.1.1
+          key: af60Mac
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60Mac
+        - uuid: d827396ada55463394031a654f1c97f2
+          name: af60MemoryUsage
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.2.5.1
+          key: af60MemoryUsage
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: '%'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60MemoryUsage
+        - uuid: abadbea1970c4a37977c8944d9cf047a
+          name: af60OrientationRoll
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.5.2.1
+          key: af60OrientationRoll
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60OrientationRoll
+        - uuid: be04093511554115be532bf5862b2b0c
+          name: af60OrientationTilt
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.5.1.1
+          key: af60OrientationTilt
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60OrientationTilt
+        - uuid: 940f1f09daec41a1b08b06eb3bb5d526
+          name: af60Ssid
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.1.4.1
+          key: af60Ssid
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60Ssid
+        - uuid: a5b2a09a354b42a9aaf1e41c0d7ec1a1
+          name: sunMaxBatCurrent
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.1.1.1
+          key: sunMaxBatCurrent
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: A
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60Role
+        - uuid: 36e15591fc78489b9a3f59b980e228ca
+          name: sunMaxOutCurrent
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.1.3.1
+          key: sunMaxOutCurrent
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60Frequency
+        - uuid: 47977846a46f4a6c86cb5aca342a2d68
+          name: sunMaxPVCurrent
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.41112.1.11.1.1.2.1
+          key: sunMaxPVCurrent
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: af60Frequency
+      discovery_rules:
+        - uuid: 63b084da904e4413b6a12508f97596bd
+          name: af60Station
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},.1.3.6.1.4.1.41112.1.11.1.3.1.1]'
+          key: af60Station.discovery
+          delay: 1h
+          enabled_lifetime_type: DISABLE_NEVER
+          item_prototypes:
+            - uuid: 1f09a0351efe43a7a00c8c08fb3bacf2
+              name: 'Active Link {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.11.1.3.1.2.{#SNMPINDEX}'
+              key: 'af60StaActiveLink[{#SNMPVALUE}]'
+              delay: 10m
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: af60Station
+            - uuid: 7d5ff7ee63a2426ca3a962b03e4e5c82
+              name: 'RSSI {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.11.1.3.1.3.{#SNMPINDEX}'
+              key: 'af60StaRSSI[{#SNMPVALUE}]'
+              delay: 10m
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: af60Station
+            - uuid: 9e29f4aed3894965b18c264a89e06e7f
+              name: 'RxBytes {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.11.1.3.1.10.{#SNMPINDEX}'
+              key: 'af60StaRxBytes[{#SNMPVALUE}]'
+              delay: 10m
+              trends: '0'
+              tags:
+                - tag: source
+                  value: af60Station
+            - uuid: b5310eb3aa5741ddbabcbc03d3e85cd5
+              name: 'RxCapacity {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.11.1.3.1.8.{#SNMPINDEX}'
+              key: 'af60StaRxCapacity[{#SNMPVALUE}]'
+              delay: 10m
+              trends: '0'
+              tags:
+                - tag: source
+                  value: af60Station
+            - uuid: 9b40635c095a44b99b79b0766489089d
+              name: 'RxMCS {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.11.1.3.1.6.{#SNMPINDEX}'
+              key: 'af60StaRxMCS[{#SNMPVALUE}]'
+              delay: 10m
+              trends: '0'
+              tags:
+                - tag: source
+                  value: af60Station
+            - uuid: 34d19326d0644c08b7b9ee718f9dcbc5
+              name: 'SNR {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.11.1.3.1.4.{#SNMPINDEX}'
+              key: 'af60StaSNR[{#SNMPVALUE}]'
+              delay: 10m
+              trends: '0'
+              tags:
+                - tag: source
+                  value: af60Station
+            - uuid: df826b60e6174c0f8fbe5754ddab5220
+              name: 'TxBytes {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.11.1.3.1.9.{#SNMPINDEX}'
+              key: 'af60StaTxBytes[{#SNMPVALUE}]'
+              delay: 10m
+              trends: '0'
+              tags:
+                - tag: source
+                  value: af60Station
+            - uuid: cc66a9beb70d4529a230bf7358f9fb34
+              name: 'TxCapacity {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.11.1.3.1.7.{#SNMPINDEX}'
+              key: 'af60StaTxCapacity[{#SNMPVALUE}]'
+              delay: 10m
+              trends: '0'
+              tags:
+                - tag: source
+                  value: af60Station
+            - uuid: f3a7303c88fc413098f9b32380b3c7a7
+              name: 'TxMCS {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.41112.1.11.1.3.1.5.{#SNMPINDEX}'
+              key: 'af60StaTxMCS[{#SNMPVALUE}]'
+              delay: 10m
+              trends: '0'
+              tags:
+                - tag: source
+                  value: af60Station
+        - uuid: b20ce600556c4eaeb8af0ac0e0dc69bd
+          name: if
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.2.1.2.2.1.1]'
+          key: if.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: 4aeee747202a4917ae2cceeeea74e7d3
+              name: 'ifAdminStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.7.{#SNMPINDEX}'
+              key: 'ifAdminStatus[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: bb6c2de7e96f451aaae831c8f9a7d198
+              name: 'ifDescr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.2.{#SNMPINDEX}'
+              key: 'ifDescr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: b2e49af0716e4d339a4ab56b1d8cdab9
+              name: 'ifIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.1.{#SNMPINDEX}'
+              key: 'ifIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 0190d72378a946a2abae08bb4faf4c3e
+              name: 'ifInDiscards {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.13.{#SNMPINDEX}'
+              key: 'ifInDiscards[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 9b9faf763e3f495dacfac56a22417195
+              name: 'ifInErrors {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.14.{#SNMPINDEX}'
+              key: 'ifInErrors[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 6c9d0fadbd0745e586afa10635b5e58b
+              name: 'ifInOctets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.10.{#SNMPINDEX}'
+              key: 'ifInOctets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 9fd1869c61d54e1aa93e46b22cce9947
+              name: 'ifInUcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.11.{#SNMPINDEX}'
+              key: 'ifInUcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 0266854b39074a70a1b35539fb63dc9c
+              name: 'ifLastChange {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.9.{#SNMPINDEX}'
+              key: 'ifLastChange[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 636cbad8f6b14937a7df71bf6cacf1c9
+              name: 'ifMtu {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.4.{#SNMPINDEX}'
+              key: 'ifMtu[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 773c73da934f4dfdb01c83f675d292fd
+              name: 'ifOperStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.8.{#SNMPINDEX}'
+              key: 'ifOperStatus[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 603bf61ef1064888a96e2c26fb42ce14
+              name: 'ifOutDiscards {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.19.{#SNMPINDEX}'
+              key: 'ifOutDiscards[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 2f23ced8cb9040f897d128f2af45c8e9
+              name: 'ifOutErrors {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.20.{#SNMPINDEX}'
+              key: 'ifOutErrors[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 4d9e32beb450424cb441e9cc07abea3f
+              name: 'ifOutOctets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.16.{#SNMPINDEX}'
+              key: 'ifOutOctets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: f8497ce9f3f046e9a85aa4573069fef1
+              name: 'ifOutUcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.17.{#SNMPINDEX}'
+              key: 'ifOutUcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 1c010aee3b4b4ecd8247451550ce3cc1
+              name: 'ifPhysAddress {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.6.{#SNMPINDEX}'
+              key: 'ifPhysAddress[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: fc850291498e4eeebdd19175d77e8d90
+              name: 'ifSpeed {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.5.{#SNMPINDEX}'
+              key: 'ifSpeed[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 531e963949a5492baf110ab12e56f7ed
+              name: 'ifType {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.3.{#SNMPINDEX}'
+              key: 'ifType[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+          graph_prototypes:
+            - uuid: fd2d77a96c664ddab7429a7f3d5efbad
+              name: 'Interface {#SNMPVALUE}'
+              graph_items:
+                - color: 1A7C11
+                  item:
+                    host: 'Ubiquiti AF60 Wave-Pro'
+                    key: 'ifAdminStatus[{#SNMPVALUE}]'
+                - sortorder: '1'
+                  color: '274482'
+                  item:
+                    host: 'Ubiquiti AF60 Wave-Pro'
+                    key: 'ifIndex[{#SNMPVALUE}]'
+                - sortorder: '2'
+                  color: F63100
+                  item:
+                    host: 'Ubiquiti AF60 Wave-Pro'
+                    key: 'ifMtu[{#SNMPVALUE}]'
+                - sortorder: '3'
+                  color: 2774A4
+                  item:
+                    host: 'Ubiquiti AF60 Wave-Pro'
+                    key: 'ifOperStatus[{#SNMPVALUE}]'
+                - sortorder: '4'
+                  color: A54F10
+                  item:
+                    host: 'Ubiquiti AF60 Wave-Pro'
+                    key: 'ifType[{#SNMPVALUE}]'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+      dashboards:
+        - uuid: 327f23742c8740129062361df35a4900
+          name: Interfaces
+          auto_start: 'NO'
+          pages:
+            - widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '46'
+                  fields:
+                    - type: GRAPH_PROTOTYPE
+                      name: graphid.0
+                      value:
+                        host: 'Ubiquiti AF60 Wave-Pro'
+                        name: 'Interface {#SNMPVALUE}'
+                    - type: STRING
+                      name: reference
+                      value: ITPXY
+                    - type: INTEGER
+                      name: rows
+                      value: '10'
+        - uuid: 07c09306c4114d069cb1bf3df8a25131
+          name: 'System Health'
+          auto_start: 'NO'
+          pages:
+            - widgets:
+                - type: gauge
+                  name: 'Current CPU Usage'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AF60 Wave-Pro'
+                        key: af60CpuUsage
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: gauge
+                  name: 'Current Memory Usage'
+                  'y': '3'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AF60 Wave-Pro'
+                        key: af60MemoryUsage
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: gauge
+                  name: 'Current Battery Current'
+                  'y': '6'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AF60 Wave-Pro'
+                        key: sunMaxBatCurrent
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: gauge
+                  name: 'Current Current of Output'
+                  'y': '9'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AF60 Wave-Pro'
+                        key: sunMaxOutCurrent
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: gauge
+                  name: 'Current Current of PV Panel'
+                  'y': '12'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AF60 Wave-Pro'
+                        key: sunMaxPVCurrent
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: svggraph
+                  name: 'CPU Usage'
+                  x: '18'
+                  width: '54'
+                  height: '3'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: af60CpuUsage
+                    - type: STRING
+                      name: reference
+                      value: EGOID
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'Memory Usage'
+                  x: '18'
+                  'y': '3'
+                  width: '54'
+                  height: '3'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: af60MemoryUsage
+                    - type: STRING
+                      name: reference
+                      value: THBZF
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'Battery Current'
+                  x: '18'
+                  'y': '6'
+                  width: '54'
+                  height: '3'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: sunMaxBatCurrent
+                    - type: STRING
+                      name: reference
+                      value: JYNCJ
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'Current of Output'
+                  x: '18'
+                  'y': '9'
+                  width: '54'
+                  height: '3'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: sunMaxOutCurrent
+                    - type: STRING
+                      name: reference
+                      value: DPDPL
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'Current of PV Panel'
+                  x: '18'
+                  'y': '12'
+                  width: '54'
+                  height: '3'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: sunMaxPVCurrent
+                    - type: STRING
+                      name: reference
+                      value: EZVXT
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+        - uuid: 20163e7d4786481f88c99bbba1a91ca9
+          name: 'System Info'
+          auto_start: 'NO'
+          pages:
+            - widgets:
+                - type: item
+                  name: 'Device Name'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: INTEGER
+                      name: decimal_size
+                      value: '25'
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AF60 Wave-Pro'
+                        key: af60DevName
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+                    - type: INTEGER
+                      name: value_size
+                      value: '30'
+                - type: item
+                  name: MAC
+                  'y': '3'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: INTEGER
+                      name: decimal_size
+                      value: '25'
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AF60 Wave-Pro'
+                        key: af60Mac
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+                    - type: INTEGER
+                      name: value_size
+                      value: '30'
+                - type: item
+                  name: SSID
+                  'y': '6'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: INTEGER
+                      name: decimal_size
+                      value: '25'
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AF60 Wave-Pro'
+                        key: af60Ssid
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+                    - type: INTEGER
+                      name: value_size
+                      value: '30'
+                - type: item
+                  name: 'Last IP'
+                  'y': '9'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: INTEGER
+                      name: decimal_size
+                      value: '25'
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AF60 Wave-Pro'
+                        key: af60LastIp
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+                    - type: INTEGER
+                      name: value_size
+                      value: '30'
+                - type: item
+                  name: 'GPS Latitude'
+                  'y': '12'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: INTEGER
+                      name: decimal_size
+                      value: '25'
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AF60 Wave-Pro'
+                        key: af60GpsLat
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+                    - type: INTEGER
+                      name: value_size
+                      value: '30'
+                - type: item
+                  name: 'Device Model'
+                  x: '18'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: INTEGER
+                      name: decimal_size
+                      value: '25'
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AF60 Wave-Pro'
+                        key: af60DevModel
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+                    - type: INTEGER
+                      name: value_size
+                      value: '30'
+                - type: item
+                  name: 'Current Bandwidth'
+                  x: '18'
+                  'y': '3'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: INTEGER
+                      name: decimal_size
+                      value: '25'
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AF60 Wave-Pro'
+                        key: af60Bandwidth
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+                    - type: INTEGER
+                      name: show.3
+                      value: '5'
+                    - type: INTEGER
+                      name: value_size
+                      value: '30'
+                - type: item
+                  name: 'Current GPS Status'
+                  x: '18'
+                  'y': '6'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: INTEGER
+                      name: decimal_size
+                      value: '25'
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AF60 Wave-Pro'
+                        key: af60GpsStatus
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+                    - type: INTEGER
+                      name: show.3
+                      value: '5'
+                    - type: INTEGER
+                      name: value_size
+                      value: '30'
+                - type: item
+                  name: 'GPS Atlitude in meters'
+                  x: '18'
+                  'y': '9'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: INTEGER
+                      name: decimal_size
+                      value: '25'
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AF60 Wave-Pro'
+                        key: af60GpsAltM
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+                    - type: INTEGER
+                      name: value_size
+                      value: '30'
+                - type: item
+                  name: 'GPS Longitude'
+                  x: '18'
+                  'y': '12'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: INTEGER
+                      name: decimal_size
+                      value: '25'
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AF60 Wave-Pro'
+                        key: af60GpsLon
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+                    - type: INTEGER
+                      name: value_size
+                      value: '30'
+                - type: item
+                  name: 'Device Firmware Version'
+                  x: '36'
+                  width: '36'
+                  height: '3'
+                  fields:
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: INTEGER
+                      name: decimal_size
+                      value: '25'
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AF60 Wave-Pro'
+                        key: af60FirmwareVersion
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+                    - type: INTEGER
+                      name: value_size
+                      value: '30'
+                - type: svggraph
+                  name: Bandwidth
+                  x: '36'
+                  'y': '3'
+                  width: '36'
+                  height: '3'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: af60Bandwidth
+                    - type: STRING
+                      name: reference
+                      value: BXQMY
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'GPS Status'
+                  x: '36'
+                  'y': '6'
+                  width: '36'
+                  height: '3'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: af60GpsStatus
+                    - type: STRING
+                      name: reference
+                      value: FFYGN
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: item
+                  name: 'Orientation Roll'
+                  x: '36'
+                  'y': '9'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: INTEGER
+                      name: decimal_size
+                      value: '25'
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AF60 Wave-Pro'
+                        key: af60OrientationRoll
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+                    - type: INTEGER
+                      name: value_size
+                      value: '30'
+                - type: item
+                  name: 'GPS Fix Status'
+                  x: '36'
+                  'y': '12'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: INTEGER
+                      name: decimal_size
+                      value: '25'
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AF60 Wave-Pro'
+                        key: af60GpsFix
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+                    - type: INTEGER
+                      name: show.3
+                      value: '5'
+                    - type: INTEGER
+                      name: value_size
+                      value: '30'
+                - type: item
+                  name: 'Orientation Tilt'
+                  x: '54'
+                  'y': '9'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: INTEGER
+                      name: decimal_size
+                      value: '25'
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AF60 Wave-Pro'
+                        key: af60OrientationTilt
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+                    - type: INTEGER
+                      name: value_size
+                      value: '30'
+                - type: item
+                  name: 'GPS Horizontal Dilution of Precision'
+                  x: '54'
+                  'y': '12'
+                  width: '18'
+                  height: '3'
+                  fields:
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: INTEGER
+                      name: decimal_size
+                      value: '25'
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Ubiquiti AF60 Wave-Pro'
+                        key: af60GpsHDOP
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '3'
+                    - type: INTEGER
+                      name: show.2
+                      value: '4'
+                    - type: INTEGER
+                      name: value_size
+                      value: '30'
+      valuemaps:
+        - uuid: 39b4d8a0359b494fbf2f4132a42f2cc1
+          name: af60GpsStatus
+          mappings:
+            - value: '0'
+              newvalue: absent
+            - value: '1'
+              newvalue: 'off'
+            - value: '2'
+              newvalue: 'on'

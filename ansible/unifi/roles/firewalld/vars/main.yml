@@ -1,0 +1,38 @@
+---
+# Default ports to open for UniFi controller (common ports used by UniFi Network controller)
+unifi_firewalld_zone: public
+
+unifi_firewalld_ports:
+  # - { port: 3478, proto: udp, comment: "STUN" }
+  # - { port: 10001, proto: udp, comment: "Device discovery / AP discovery" }
+  # - { port: 8080, proto: tcp, comment: "Device inform / adoption" }
+  # - { port: 8443, proto: tcp, comment: "Controller web interface / API" }
+  # - { port: 8880, proto: tcp, comment: "Guest portal (HTTP)" }
+  # - { port: 8843, proto: tcp, comment: "Guest portal (HTTPS)" }
+  # - { port: 6789, proto: tcp, comment: "UniFi mobile speed test / legacy services" }
+  # - { port: 27117, proto: tcp, comment: "Local MongoDB (legacy controllers)" }
+
+  - port: 3478
+    proto: udp
+    comment: "STUN"
+  - port: 10001
+    proto: udp
+    comment: "Device discovery / AP discovery"
+  - port: 8080
+    proto: tcp
+    comment: "Device inform / adoption"
+  - port: 8443
+    proto: tcp
+    comment: "Controller web interface / API"
+  - port: 8880
+    proto: tcp
+    comment: "Guest portal (HTTP)"
+  - port: 8843
+    proto: tcp
+    comment: "Guest portal (HTTPS)"
+  - port: 6789
+    proto: tcp
+    comment: "UniFi mobile speed test / legacy services"
+  - port: 27117
+    proto: tcp
+    comment: "Local MongoDB (legacy controllers)"

@@ -1,0 +1,33 @@
+### Mount a new disk
+
+# mkfs.ext4 /dev/sdb
+# mkdir -p /var/aaa
+# echo "/dev/sdb /var/aaa ext4 defaults 0 0" >> /etc/fstab
+# mount /var/aaa
+
+- name: Create filesystem
+  filesystem:
+    fstype: "{{ fstype }}"
+    dev: "{{ dev }}"
+
+- name: Create mount point
+  file:
+    path: "{{ directory }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Add to fstab
+  lineinfile:
+    path: /etc/fstab
+    line: "{{ dev }} {{ directory }} {{ fstype }} defaults 0 0"
+    state: present
+    create: yes
+
+- name: Mount new disk
+  mount:
+    path: "{{ directory }}"
+    src: "{{ dev }}"
+    fstype: "{{ fstype }}"
+    state: mounted

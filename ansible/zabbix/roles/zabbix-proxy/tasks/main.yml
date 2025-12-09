@@ -1,0 +1,123 @@
+---
+- name: Download Zabbix repository package
+  get_url:
+    url: "https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.0-2+ubuntu24.04_all.deb"
+    dest: /tmp/zabbix-release.deb
+
+- name: Install Zabbix repository
+  apt:
+    deb: /tmp/zabbix-release.deb
+    state: present
+
+- name: Update package cache after adding Zabbix repo
+  apt:
+    update_cache: true
+
+- name: Install Zabbix proxy
+  apt:
+    name:
+      - zabbix-proxy-mysql
+      - zabbix-sql-scripts
+      - zabbix-agent
+    state: present
+
+- name: Ensure Zabbix user home directory exists
+  file:
+    path: /var/lib/zabbix
+    state: directory
+    owner: zabbix
+    group: zabbix
+    mode: 0750
+
+- name: Create Zabbix proxy database
+  mysql_db:
+    name: "{{ zabbix_proxy_dbname }}"
+    state: present
+    login_user: "{{ mysql_root_user }}"
+    login_password: "{{ mysql_root_password }}"
+    login_host: "{{ zabbix_proxy_dbhost }}"
+  when: zabbix_proxy_dbname is defined
+
+- name: Grant privileges to Zabbix proxy database user
+  mysql_user:
+    name: "{{ zabbix_proxy_dbuser }}"
+    password: "{{ zabbix_proxy_dbpassword }}"
+    host: "%"
+    priv: "{{ zabbix_proxy_dbname }}.*:ALL"
+    state: present
+    login_user: "{{ mysql_root_user }}"
+    login_password: "{{ mysql_root_password }}"
+    login_host: "{{ zabbix_proxy_dbhost }}"
+  when: zabbix_proxy_dbuser is defined
+
+- name: Check if Zabbix proxy database is already populated
+  command: mysql -u {{ zabbix_proxy_dbuser }} -p{{ zabbix_proxy_dbpassword }} -h {{ zabbix_proxy_dbhost }} {{ zabbix_proxy_dbname }} -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '{{ zabbix_proxy_dbname }}';"
+  register: proxy_db_check
+  failed_when: false
+  changed_when: false
+
+- name: Check if proxy service is working (test for clean schema)
+  command: mysql -u {{ zabbix_proxy_dbuser }} -p{{ zabbix_proxy_dbpassword }} -h {{ zabbix_proxy_dbhost }} {{ zabbix_proxy_dbname }} -e "SELECT mandatory FROM dbversion;"
+  register: proxy_version_check
+  failed_when: false
+  changed_when: false
+
+- name: Drop and recreate Zabbix proxy database if corrupted or partially populated
+  mysql_db:
+    name: "{{ zabbix_proxy_dbname }}"
+    state: absent
+    login_user: "{{ mysql_root_user }}"
+    login_password: "{{ mysql_root_password }}"
+    login_host: "{{ zabbix_proxy_dbhost }}"
+  when: proxy_db_check.stdout is defined and proxy_db_check.stdout | int > 0 and proxy_version_check.rc != 0
+
+- name: Recreate Zabbix proxy database if it was dropped
+  mysql_db:
+    name: "{{ zabbix_proxy_dbname }}"
+    state: present
+    login_user: "{{ mysql_root_user }}"
+    login_password: "{{ mysql_root_password }}"
+    login_host: "{{ zabbix_proxy_dbhost }}"
+  when: proxy_db_check.stdout is defined and proxy_db_check.stdout | int > 0 and proxy_version_check.rc != 0
+
+- name: Re-grant privileges to Zabbix proxy database user after recreation
+  mysql_user:
+    name: "{{ zabbix_proxy_dbuser }}"
+    password: "{{ zabbix_proxy_dbpassword }}"
+    host: "%"
+    priv: "{{ zabbix_proxy_dbname }}.*:ALL"
+    state: present
+    login_user: "{{ mysql_root_user }}"
+    login_password: "{{ mysql_root_password }}"
+    login_host: "{{ zabbix_proxy_dbhost }}"
+  when: proxy_db_check.stdout is defined and proxy_db_check.stdout | int > 0 and proxy_version_check.rc != 0
+
+- name: Import Zabbix proxy database schema
+  mysql_db:
+    name: "{{ zabbix_proxy_dbname }}"
+    state: import
+    target: /usr/share/zabbix-sql-scripts/mysql/proxy.sql
+    login_user: "{{ zabbix_proxy_dbuser }}"
+    login_password: "{{ zabbix_proxy_dbpassword }}"
+    login_host: "{{ zabbix_proxy_dbhost }}"
+  when: (proxy_db_check.stdout is defined and proxy_db_check.stdout | int == 0) or (proxy_version_check.rc != 0)
+  ignore_errors: true
+
+- name: Configure Zabbix proxy
+  template:
+    src: zabbix_proxy.conf.j2
+    dest: /etc/zabbix/zabbix_proxy.conf
+    backup: true
+  notify: restart zabbix-proxy
+
+- name: Start and enable Zabbix proxy
+  systemd:
+    name: zabbix-proxy
+    state: started
+    enabled: true
+
+- name: Start and enable Zabbix agent
+  systemd:
+    name: zabbix-agent
+    state: started
+    enabled: true

@@ -1,0 +1,15 @@
+---
+zabbix_version: "7.4"
+
+# Let's Encrypt variables
+# !!! For Let's Encrypt to work properly, the domain name must be publicly resolvable via DNS. 
+# admin_email: your-email@example.com
+# zabbix_fqdn: zabbix.yourdomain.com  # Must be a real domain for Let's Encrypt
+
+# For self-signed
+ssl_country: "UK"
+ssl_state: "Worcestershire"
+ssl_locality: "Droitwich"
+ssl_organization: "Example Organization"
+ssl_organizational_unit: "DevOps"
+ssl_common_name: "ab-thn-zabbix-main01"

@@ -1,0 +1,22 @@
+---
+- name: FTP health checks
+  hosts: servers
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Check vsftpd service is running
+      ansible.builtin.systemd:
+        name: vsftpd
+        state: started
+      register: vsftpd_service
+
+    - name: Fail if vsftpd is not running
+      ansible.builtin.fail:
+        msg: "vsftpd service is not running"
+      when: vsftpd_service is failed or vsftpd_service is skipped
+
+    - name: Check port 21 is listening (TCP)
+      ansible.builtin.shell: "ss -tln | grep -q ':21 '\n"
+      register: ss_port21
+      changed_when: false
+      failed_when: ss_port21.rc != 0

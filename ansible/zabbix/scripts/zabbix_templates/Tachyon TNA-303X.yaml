@@ -1,0 +1,2392 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: ed8b8d16b49849a68710cebebabf9305
+      name: Custom
+  templates:
+    - uuid: becb2e4de8cf481899f84acc3c7741df
+      template: 'Tachyon TNA-303X'
+      name: 'Tachyon TNA-303X'
+      description: 'Template created with Zabbix Template Generator from SNMP walk data using iReasoning MIB browser'
+      groups:
+        - name: Custom
+      items:
+        - uuid: 3d40d5205ad44e1486f5d7908bef20cd
+          name: cpuTemperature.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.57344.1.3.3.0
+          key: cpuTemperature.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: cpuTemperature.0
+        - uuid: 6e9989d917964161a146a14b1a764908
+          name: deviceModel.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.57344.1.3.1.0
+          key: deviceModel.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: deviceModel.0
+        - uuid: f6c686d6640846289c193ce5d8d9c081
+          name: deviceSerialNo.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.57344.1.3.2.0
+          key: deviceSerialNo.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: deviceSerialNo.0
+        - uuid: 6aef4e538e8d402b82c70f4ce6d96641
+          name: firmwareAlterateVersion.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.57344.1.3.5.0
+          key: firmwareAlterateVersion.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: firmwareAlterateVersion.0
+        - uuid: 10575c0737e245b2aad166756c350081
+          name: firmwareVersion.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.57344.1.3.4.0
+          key: firmwareVersion.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: firmwareVersion.0
+        - uuid: 6b066ab6e797414797270de92b08875e
+          name: ifNumber.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.2.1.0
+          key: ifNumber.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: ifNumber.0
+        - uuid: 155b071af33849ceae82059b37c3c06c
+          name: internalSwitchMac.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.57344.1.1.2.0
+          key: internalSwitchMac.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: internalSwitchMac.0
+        - uuid: 64e33555c0c041a4964da5dee67bbd84
+          name: physicalPortCount.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.57344.1.1.1.0
+          key: physicalPortCount.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: physicalPortCount.0
+        - uuid: 966eda762eb846b3940b7ff8245874d0
+          name: sysContact.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.1.4.0
+          key: sysContact.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: sysContact.0
+        - uuid: 7ecf27891ac7441e8f22479f2a1bc942
+          name: sysDescr.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.1.1.0
+          key: sysDescr.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: sysDescr.0
+        - uuid: 783911a706564655828e1a096c628e4b
+          name: sysLocation.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.1.6.0
+          key: sysLocation.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: sysLocation.0
+        - uuid: 42b68e76a12a4102a735f69a9449b4f3
+          name: sysName.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.1.5.0
+          key: sysName.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: sysName.0
+        - uuid: 3731c14678834732a83ac5b27fbff6fe
+          name: sysObjectID.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.1.2.0
+          key: sysObjectID.0
+          delay: 10m
+          history: 7d
+          value_type: CHAR
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: sysObjectID.0
+        - uuid: c821d59bfaff4b959e614ce931fed0e3
+          name: sysORLastChange.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.1.8.0
+          key: sysORLastChange.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: sysORLastChange.0
+        - uuid: 08765561f609448bb089063afc4c9b35
+          name: sysServices.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.1.7.0
+          key: sysServices.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: sysServices.0
+        - uuid: 8349b508c48f4665bfb37bcddde11de7
+          name: sysUpTime.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.1.3.0
+          key: sysUpTime.0
+          delay: 10m
+          history: 7d
+          value_type: TEXT
+          status: DISABLED
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: sysUpTime.0
+        - uuid: 13a92efae50243ea81c8f43ed9521835
+          name: wirelessPeersCount.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.57344.1.2.5.0
+          key: wirelessPeersCount.0
+          delay: 10m
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: wirelessPeersCount.0
+        - uuid: 1d467cbf7720428190fa2736d1cfb49e
+          name: wirelessRadioCount.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.57344.1.2.1.0
+          key: wirelessRadioCount.0
+          delay: 10m
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: wirelessRadioCount.0
+        - uuid: 2884a20d659d4bc395fe9ec240148714
+          name: wirelessVapsCount.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.57344.1.2.3.0
+          key: wirelessVapsCount.0
+          delay: 10m
+          history: 7d
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: wirelessVapsCount.0
+      discovery_rules:
+        - uuid: ebc16bf5e0694335968fb970c9f9b209
+          name: ethernet
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.57344.1.1.3.1.2]'
+          key: ethernet.discovery
+          delay: 1h
+          item_prototypes:
+            - uuid: 99b56ab1069c4e1e8cc26245e18f2059
+              name: 'ethernetAutoNeg {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.1.3.1.6.{#SNMPINDEX}'
+              key: 'ethernetAutoNeg[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: ethernet
+            - uuid: 05cb2913698343a69dd0408a9cf9d54f
+              name: 'ethernetDuplex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.1.3.1.8.{#SNMPINDEX}'
+              key: 'ethernetDuplex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: ethernet
+            - uuid: 88c2fab61fe74535a84a6be51b4d0f50
+              name: 'ethernetEnabled {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.1.3.1.10.{#SNMPINDEX}'
+              key: 'ethernetEnabled[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: ethernet
+            - uuid: 95848035930146aaa6e651a9b82a0929
+              name: 'ethernetIfaceName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.1.3.1.2.{#SNMPINDEX}'
+              key: 'ethernetIfaceName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: ethernet
+            - uuid: 32e27bcb19524d4aa348ce2b7fccf6f2
+              name: 'ethernetLink {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.1.3.1.5.{#SNMPINDEX}'
+              key: 'ethernetLink[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: ethernet
+            - uuid: 29a11898e681422b82b7991ce2769aed
+              name: 'ethernetName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.1.3.1.1.{#SNMPINDEX}'
+              key: 'ethernetName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: ethernet
+            - uuid: 8c84d70003f549c3b2b7602f3a5ee535
+              name: 'ethernetParentIface {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.1.3.1.3.{#SNMPINDEX}'
+              key: 'ethernetParentIface[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: ethernet
+            - uuid: bf6ed8cc671946848180c3f241248552
+              name: 'ethernetPoe {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.1.3.1.9.{#SNMPINDEX}'
+              key: 'ethernetPoe[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: ethernet
+            - uuid: 32e38a00a9894c84a9ac61d39f8d1f68
+              name: 'ethernetSpeed {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.1.3.1.7.{#SNMPINDEX}'
+              key: 'ethernetSpeed[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: ethernet
+            - uuid: b365610b431048c0816ebe4aeb520cc2
+              name: 'ethernetSwitchPortId {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.1.3.1.4.{#SNMPINDEX}'
+              key: 'ethernetSwitchPortId[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: ethernet
+          graph_prototypes:
+            - uuid: bdc70d9b7b814689a69c18af040527f8
+              name: 'Ethernet {#SNMPVALUE}'
+              graph_items:
+                - color: 1A7C11
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'ethernetAutoNeg[{#SNMPVALUE}]'
+                - sortorder: '1'
+                  color: '274482'
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'ethernetEnabled[{#SNMPVALUE}]'
+                - sortorder: '2'
+                  color: F63100
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'ethernetLink[{#SNMPVALUE}]'
+                - sortorder: '3'
+                  color: 2774A4
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'ethernetSwitchPortId[{#SNMPVALUE}]'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 769f1b8892124387b77f9cbc18b75659
+          name: if
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.2.1.2.2.1.1]'
+          key: if.discovery
+          delay: 1h
+          item_prototypes:
+            - uuid: 8843ee27648546f4a2239f2efb4c749f
+              name: 'ifAdminStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.7.{#SNMPINDEX}'
+              key: 'ifAdminStatus[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 4dc1d2b43e96463eb5666bdd50e68977
+              name: 'ifDescr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.2.{#SNMPINDEX}'
+              key: 'ifDescr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: ea554b1d45ab41158f614b9f47b75acd
+              name: 'ifIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.1.{#SNMPINDEX}'
+              key: 'ifIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 533f5d3eeeba4d0f9f560226e6950ae4
+              name: 'ifInDiscards {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.13.{#SNMPINDEX}'
+              key: 'ifInDiscards[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 43e7c643bc654cea8e2d3d2dbf36cba2
+              name: 'ifInErrors {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.14.{#SNMPINDEX}'
+              key: 'ifInErrors[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: d50861ad4e954eeaa62aacd459f84cd6
+              name: 'ifInOctets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.10.{#SNMPINDEX}'
+              key: 'ifInOctets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 6c3860fca1aa4e96b0c031ed8b4127d3
+              name: 'ifInUcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.11.{#SNMPINDEX}'
+              key: 'ifInUcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 57225268720744f790e52a2f5ac33a4f
+              name: 'ifLastChange {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.9.{#SNMPINDEX}'
+              key: 'ifLastChange[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 0c43bc52546f46e8bbcd34f610c4612f
+              name: 'ifMtu {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.4.{#SNMPINDEX}'
+              key: 'ifMtu[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 39309d5295d14f73a3955e5a118564e9
+              name: 'ifOperStatus {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.8.{#SNMPINDEX}'
+              key: 'ifOperStatus[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: if
+            - uuid: a06082888c604130a94a8c4ff062c422
+              name: 'ifOutDiscards {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.19.{#SNMPINDEX}'
+              key: 'ifOutDiscards[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 9f695274e6da4d04a664e23ed3418dd5
+              name: 'ifOutErrors {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.20.{#SNMPINDEX}'
+              key: 'ifOutErrors[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 749fbd0d8d6e49cc8e87aa81d4482e33
+              name: 'ifOutOctets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.16.{#SNMPINDEX}'
+              key: 'ifOutOctets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 322a0b15c57f4514b4308bd90c11b6ac
+              name: 'ifOutUcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.17.{#SNMPINDEX}'
+              key: 'ifOutUcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: e9975ea72c7743c79fc3ce7379362ea7
+              name: 'ifPhysAddress {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.6.{#SNMPINDEX}'
+              key: 'ifPhysAddress[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 47907f44c61949068bbdbb26b364c775
+              name: 'ifSpeed {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.5.{#SNMPINDEX}'
+              key: 'ifSpeed[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 6655473db67a47269c135c1785db7e51
+              name: 'ifType {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.2.2.1.3.{#SNMPINDEX}'
+              key: 'ifType[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: if
+          graph_prototypes:
+            - uuid: ddfd4cfe6e6e4aadb5d866c9e2e5e7da
+              name: 'Interface {#SNMPVALUE}'
+              graph_items:
+                - color: 1A7C11
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'ifAdminStatus[{#SNMPVALUE}]'
+                - sortorder: '1'
+                  color: '274482'
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'ifMtu[{#SNMPVALUE}]'
+                - sortorder: '2'
+                  color: F63100
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'ifOperStatus[{#SNMPVALUE}]'
+                - sortorder: '3'
+                  color: 2774A4
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'ifType[{#SNMPVALUE}]'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 4130d7864f0b4f51aba88000886d24f3
+          name: sysOR
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.2.1.1.9.1.1]'
+          key: sysOR.discovery
+          delay: 1h
+          item_prototypes:
+            - uuid: 0c9459cd386a4834abfa784ac7ac7cb1
+              name: 'sysORDescr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.1.9.1.3.{#SNMPINDEX}'
+              key: 'sysORDescr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: sysOR
+            - uuid: 83d89e4ae8e14061a15aa0674ceaa81f
+              name: 'sysORID {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.1.9.1.2.{#SNMPINDEX}'
+              key: 'sysORID[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: CHAR
+              tags:
+                - tag: source
+                  value: sysOR
+            - uuid: 5834cb6ebb844c49afcca91a598ae8df
+              name: 'sysORUpTime {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.1.9.1.4.{#SNMPINDEX}'
+              key: 'sysORUpTime[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: sysOR
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 18cb593479164ecab48d95a9c7e0e3b7
+          name: wirelessPeer
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.57344.1.2.6.1.1]'
+          key: wirelessPeer.discovery
+          delay: 1h
+          item_prototypes:
+            - uuid: 946b3a097e8d4216b199e6425f42c1bc
+              name: 'wirelessPeerAntennaKit {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.6.1.19.{#SNMPINDEX}'
+              key: 'wirelessPeerAntennaKit[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessPeer
+            - uuid: d76222061e8a45649e873c3cf3dbbf0c
+              name: 'wirelessPeerLinkDistance {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.6.1.13.{#SNMPINDEX}'
+              key: 'wirelessPeerLinkDistance[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: wirelessPeer
+            - uuid: c18c4a7d3664405c9d28b1166deab51e
+              name: 'wirelessPeerLinkUptime {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.6.1.12.{#SNMPINDEX}'
+              key: 'wirelessPeerLinkUptime[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: wirelessPeer
+            - uuid: d0f4149f725742ad8c1315be710185f9
+              name: 'wirelessPeerMac {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.6.1.1.{#SNMPINDEX}'
+              key: 'wirelessPeerMac[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessPeer
+            - uuid: ac1f6cbbf6ab4319beb530733acb141c
+              name: 'wirelessPeerModel {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.6.1.18.{#SNMPINDEX}'
+              key: 'wirelessPeerModel[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessPeer
+            - uuid: 47651dc578804895bd263519f046b054
+              name: 'wirelessPeerName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.6.1.20.{#SNMPINDEX}'
+              key: 'wirelessPeerName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessPeer
+            - uuid: 3b09ccccfa424f8a9924b16b8868db8b
+              name: 'wirelessPeerRxBytes {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.6.1.14.{#SNMPINDEX}'
+              key: 'wirelessPeerRxBytes[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessPeer
+            - uuid: b08e79d082aa4a6684db6c09d0117c17
+              name: 'wirelessPeerRxMcs {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.6.1.11.{#SNMPINDEX}'
+              key: 'wirelessPeerRxMcs[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: wirelessPeer
+            - uuid: e96d9cc2332b420bb0d8c9b75ea9b74f
+              name: 'wirelessPeerRxPackets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.6.1.4.{#SNMPINDEX}'
+              key: 'wirelessPeerRxPackets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessPeer
+            - uuid: df27aca5c9a84bef926200f59694d1dd
+              name: 'wirelessPeerRxPower {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.6.1.6.{#SNMPINDEX}'
+              key: 'wirelessPeerRxPower[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessPeer
+            - uuid: d58cc272242f40b68161e7622ca81359
+              name: 'wirelessPeerRxRate {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.6.1.9.{#SNMPINDEX}'
+              key: 'wirelessPeerRxRate[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessPeer
+            - uuid: 128f3c1968ee4a24a35dc1fe71e65e38
+              name: 'wirelessPeerRxSector {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.6.1.17.{#SNMPINDEX}'
+              key: 'wirelessPeerRxSector[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: wirelessPeer
+            - uuid: 214992326fa74fa2966e77d6bdd7b87c
+              name: 'wirelessPeerSnr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.6.1.8.{#SNMPINDEX}'
+              key: 'wirelessPeerSnr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: wirelessPeer
+            - uuid: 69698191a31a4be586bbdce6d24e3334
+              name: 'wirelessPeerTxBytes {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.6.1.15.{#SNMPINDEX}'
+              key: 'wirelessPeerTxBytes[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessPeer
+            - uuid: 389a89e3436a41559c8e5e0e09936445
+              name: 'wirelessPeerTxMcs {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.6.1.10.{#SNMPINDEX}'
+              key: 'wirelessPeerTxMcs[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: wirelessPeer
+            - uuid: 8db604f21d644de88094578bf44e0fc0
+              name: 'wirelessPeerTxPackets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.6.1.5.{#SNMPINDEX}'
+              key: 'wirelessPeerTxPackets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessPeer
+            - uuid: ebced77446be4a08bfe7857bde437952
+              name: 'wirelessPeerTxRate {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.6.1.7.{#SNMPINDEX}'
+              key: 'wirelessPeerTxRate[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessPeer
+            - uuid: b0b83745a4fc4910b1cd14c87a957d7a
+              name: 'wirelessPeerTxSector {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.6.1.16.{#SNMPINDEX}'
+              key: 'wirelessPeerTxSector[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: wirelessPeer
+            - uuid: 52af3b42e0af4d39976c364554d796e9
+              name: 'wirelessPeerVapIfIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.6.1.3.{#SNMPINDEX}'
+              key: 'wirelessPeerVapIfIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: wirelessPeer
+            - uuid: 1648bade8c8b4087bcf9b1f4f65b0678
+              name: 'wirelessPeerVap {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.6.1.2.{#SNMPINDEX}'
+              key: 'wirelessPeerVap[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessPeer
+          graph_prototypes:
+            - uuid: 6ba3f2879601415097d43a7b6195c1fd
+              name: 'Wireless Peer {#SNMPVALUE}'
+              graph_items:
+                - color: 1A7C11
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerLinkDistance[{#SNMPVALUE}]'
+                - sortorder: '1'
+                  color: '274482'
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerLinkUptime[{#SNMPVALUE}]'
+                - sortorder: '2'
+                  color: F63100
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerRxMcs[{#SNMPVALUE}]'
+                - sortorder: '3'
+                  color: 2774A4
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerRxSector[{#SNMPVALUE}]'
+                - sortorder: '4'
+                  color: A54F10
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerSnr[{#SNMPVALUE}]'
+                - sortorder: '5'
+                  color: FC6EA3
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerTxMcs[{#SNMPVALUE}]'
+                - sortorder: '6'
+                  color: 6C59DC
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerTxSector[{#SNMPVALUE}]'
+                - sortorder: '7'
+                  color: AC8C14
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerVapIfIndex[{#SNMPVALUE}]'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: 71256d4ceb1e43f48600b895b2682d10
+          name: wirelessPeerByMacEntry
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},.1.3.6.1.4.1.57344.1.2.7.1.1]'
+          key: wirelessPeerByMacEntry.discovery
+          delay: 1h
+          item_prototypes:
+            - uuid: 0fbce11c50ef436a9f317db28ffd66d0
+              name: 'wirelessPeerXAntennaKit {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.57344.1.2.7.1.19.{#SNMPINDEX}'
+              key: 'wirelessPeerXAntennaKit[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: wirelessPeerByMacEntry
+            - uuid: db3f4955fd464c3693cb6145789544ad
+              name: 'wirelessPeerXLinkDistance {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.57344.1.2.7.1.13.{#SNMPINDEX}'
+              key: 'wirelessPeerXLinkDistance[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: wirelessPeerByMacEntry
+            - uuid: dfb6ecb69d2b404d88a4a3162438b1e3
+              name: 'wirelessPeerXLinkUptime {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.57344.1.2.7.1.12.{#SNMPINDEX}'
+              key: 'wirelessPeerXLinkUptime[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: wirelessPeerByMacEntry
+            - uuid: f31d8e4a7bde4fe5a922d3abd981120a
+              name: 'wirelessPeerXModel {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.57344.1.2.7.1.18.{#SNMPINDEX}'
+              key: 'wirelessPeerXModel[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: wirelessPeerByMacEntry
+            - uuid: aa69c355dbef447c9ab6997a9f79423b
+              name: 'wirelessPeerXName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.57344.1.2.7.1.20.{#SNMPINDEX}'
+              key: 'wirelessPeerXName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: wirelessPeerByMacEntry
+            - uuid: 52c56b8c5878435a8c614961cc972262
+              name: 'wirelessPeerXRxBytes {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.57344.1.2.7.1.14.{#SNMPINDEX}'
+              key: 'wirelessPeerXRxBytes[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: wirelessPeerByMacEntry
+            - uuid: 94ed7ad6f30a404fafc50fe51dc4b68e
+              name: 'wirelessPeerXRxMcs {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.57344.1.2.7.1.11.{#SNMPINDEX}'
+              key: 'wirelessPeerXRxMcs[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: wirelessPeerByMacEntry
+            - uuid: a557ca7b0daf411f9296b40babf6c43b
+              name: 'wirelessPeerXRxPackets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.57344.1.2.7.1.4.{#SNMPINDEX}'
+              key: 'wirelessPeerXRxPackets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: wirelessPeerByMacEntry
+            - uuid: e25c7f14c2924837bc07d8839297fee6
+              name: 'wirelessPeerXRxPower {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.57344.1.2.7.1.6.{#SNMPINDEX}'
+              key: 'wirelessPeerXRxPower[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: wirelessPeerByMacEntry
+            - uuid: a1703c7dc18c4b98bbadc18746836b62
+              name: 'wirelessPeerXRxRate {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.57344.1.2.7.1.9.{#SNMPINDEX}'
+              key: 'wirelessPeerXRxRate[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: wirelessPeerByMacEntry
+            - uuid: af5e30477dd446d3b4b138384c0b01e2
+              name: 'wirelessPeerXRxSector {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.57344.1.2.7.1.17.{#SNMPINDEX}'
+              key: 'wirelessPeerXRxSector[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: wirelessPeerByMacEntry
+            - uuid: fa6994adcbcf4d58a03be67e51c21861
+              name: 'wirelessPeerXSnr {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.57344.1.2.7.1.8.{#SNMPINDEX}'
+              key: 'wirelessPeerXSnr[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: wirelessPeerByMacEntry
+            - uuid: 633aa654fbf144259f30aeaf18ba831f
+              name: 'wirelessPeerXTxBytes {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.57344.1.2.7.1.15.{#SNMPINDEX}'
+              key: 'wirelessPeerXTxBytes[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: wirelessPeerByMacEntry
+            - uuid: afd894f61b6a47638c60a8f1fe738bd8
+              name: 'wirelessPeerXTxMcs {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.57344.1.2.7.1.10.{#SNMPINDEX}'
+              key: 'wirelessPeerXTxMcs[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: wirelessPeerByMacEntry
+            - uuid: d4b260a26c6e4d21aeb500e2963bd0ab
+              name: 'wirelessPeerXTxPackets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.57344.1.2.7.1.5.{#SNMPINDEX}'
+              key: 'wirelessPeerXTxPackets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: wirelessPeerByMacEntry
+            - uuid: 33add2e3ad944f2b96f2a9465c902999
+              name: 'wirelessPeerXTxRate {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.57344.1.2.7.1.7.{#SNMPINDEX}'
+              key: 'wirelessPeerXTxRate[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: wirelessPeerByMacEntry
+            - uuid: dd4c20848c51436bbf83ee027a634fa5
+              name: 'wirelessPeerXTxSector {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.57344.1.2.7.1.16.{#SNMPINDEX}'
+              key: 'wirelessPeerXTxSector[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: wirelessPeerByMacEntry
+            - uuid: b38620f1c0a445e7ba5cad7c638e8fcb
+              name: 'wirelessPeerXVapIfIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.57344.1.2.7.1.3.{#SNMPINDEX}'
+              key: 'wirelessPeerXVapIfIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: wirelessPeerByMacEntry
+            - uuid: 3175b1b052374bb9a2621305b5d14ee2
+              name: 'wirelessPeerXVap {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.57344.1.2.7.1.2.{#SNMPINDEX}'
+              key: 'wirelessPeerXVap[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: wirelessPeerByMacEntry
+          graph_prototypes:
+            - uuid: 5f316ad7f6114034b9b06dda2f70749b
+              name: 'Wireless Peer By MAC'
+              graph_items:
+                - color: 1A7C11
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerXLinkDistance[{#SNMPVALUE}]'
+                - sortorder: '1'
+                  color: '274482'
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerXLinkUptime[{#SNMPVALUE}]'
+                - sortorder: '2'
+                  color: F63100
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerXRxBytes[{#SNMPVALUE}]'
+                - sortorder: '3'
+                  color: 2774A4
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerXRxMcs[{#SNMPVALUE}]'
+                - sortorder: '4'
+                  color: A54F10
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerXRxPackets[{#SNMPVALUE}]'
+                - sortorder: '5'
+                  color: FC6EA3
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerXRxPower[{#SNMPVALUE}]'
+                - sortorder: '6'
+                  color: 6C59DC
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerXRxRate[{#SNMPVALUE}]'
+                - sortorder: '7'
+                  color: AC8C14
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerXRxSector[{#SNMPVALUE}]'
+                - sortorder: '8'
+                  color: 611F27
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerXSnr[{#SNMPVALUE}]'
+                - sortorder: '9'
+                  color: F230E0
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerXTxBytes[{#SNMPVALUE}]'
+                - sortorder: '10'
+                  color: 5CCD18
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerXTxMcs[{#SNMPVALUE}]'
+                - sortorder: '11'
+                  color: BB2A02
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerXTxPackets[{#SNMPVALUE}]'
+                - sortorder: '12'
+                  color: 5A2B57
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerXTxRate[{#SNMPVALUE}]'
+                - sortorder: '13'
+                  color: 89ABF8
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerXTxSector[{#SNMPVALUE}]'
+                - sortorder: '14'
+                  color: 7EC25C
+                  item:
+                    host: 'Tachyon TNA-303X'
+                    key: 'wirelessPeerXVapIfIndex[{#SNMPVALUE}]'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: d1d112be80c84b9db9a227f2f8be97bc
+          name: wirelessRadio
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},.1.3.6.1.4.1.57344.1.2.2.1.2]'
+          key: wirelessRadio.discovery
+          delay: 1h
+          enabled_lifetime_type: DISABLE_NEVER
+          item_prototypes:
+            - uuid: bd0dc4d6aa4a49c896e589af5bf73a7d
+              name: 'wirelessRadioAntennaKit {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.2.1.8.{#SNMPINDEX}'
+              key: 'wirelessRadioAntennaKit[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessRadio
+            - uuid: fc1ec20237b74f7cb27b9066e7ce6776
+              name: 'wirelessRadioChannelLabel {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.2.1.9.{#SNMPINDEX}'
+              key: 'wirelessRadioChannelLabel[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessRadio
+            - uuid: 6ab570bb0fd34b308c1a473b10718971
+              name: 'wirelessRadioChannelWidth {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.2.1.6.{#SNMPINDEX}'
+              key: 'wirelessRadioChannelWidth[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: wirelessRadio
+            - uuid: de993838a4d94fa78fda843c12734892
+              name: 'wirelessRadioChannel {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.2.1.4.{#SNMPINDEX}'
+              key: 'wirelessRadioChannel[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: wirelessRadio
+            - uuid: 4da3377568974442b192d03e739c6fc4
+              name: 'wirelessRadioFailoverState {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.2.1.7.{#SNMPINDEX}'
+              key: 'wirelessRadioFailoverState[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessRadio
+            - uuid: 64d9bf3109e24b31b3d7f9b34bbafa76
+              name: 'wirelessRadioFrequency {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.2.1.5.{#SNMPINDEX}'
+              key: 'wirelessRadioFrequency[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: wirelessRadio
+            - uuid: ee4366eefa884b218fadae57ea6f80e3
+              name: 'wirelessRadioMac {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.2.1.1.{#SNMPINDEX}'
+              key: 'wirelessRadioMac[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessRadio
+            - uuid: 13d306dc9472435ba11d1d72c0923b0b
+              name: 'wirelessRadioModemTemperature {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.2.1.10.{#SNMPINDEX}'
+              key: 'wirelessRadioModemTemperature[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: wirelessRadio
+            - uuid: 6fb58022b40740f4a78708075fe88a58
+              name: 'wirelessRadioName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.2.1.2.{#SNMPINDEX}'
+              key: 'wirelessRadioName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessRadio
+            - uuid: df4e6dbcf34e4968b5ed8e21eecbf919
+              name: 'wirelessRadioTemperature {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.2.1.11.{#SNMPINDEX}'
+              key: 'wirelessRadioTemperature[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: wirelessRadio
+            - uuid: 6b572029c93946e4a20fcfdb6820d9dd
+              name: 'wirelessRadioTxPower {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.2.1.3.{#SNMPINDEX}'
+              key: 'wirelessRadioTxPower[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessRadio
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: a90b759a85f74a3c8051d6c0b3722adf
+          name: wirelessVap
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.57344.1.2.4.1.1]'
+          key: wirelessVap.discovery
+          delay: 1h
+          item_prototypes:
+            - uuid: 54439046cffc483096d07232e68c7572
+              name: 'wirelessVapIfIndex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.4.1.1.{#SNMPINDEX}'
+              key: 'wirelessVapIfIndex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: wirelessVap
+            - uuid: d97f26bb215c47baaf4151053970549f
+              name: 'wirelessVapMac {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.4.1.3.{#SNMPINDEX}'
+              key: 'wirelessVapMac[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessVap
+            - uuid: 37cd788e37014efb8a8d51b755e5f1b1
+              name: 'wirelessVapName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.4.1.2.{#SNMPINDEX}'
+              key: 'wirelessVapName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessVap
+            - uuid: 39fc30e39aaf4b0c8820a4e567a29a94
+              name: 'wirelessVapOperationMode {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.4.1.5.{#SNMPINDEX}'
+              key: 'wirelessVapOperationMode[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessVap
+            - uuid: 2cfa68db888f469b8007c58bc3bd7dbf
+              name: 'wirelessVapPeerCount {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.4.1.7.{#SNMPINDEX}'
+              key: 'wirelessVapPeerCount[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessVap
+            - uuid: bcaa28a45b6849d1a75b155fa24d06c3
+              name: 'wirelessVapPtpEnabled {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.4.1.9.{#SNMPINDEX}'
+              key: 'wirelessVapPtpEnabled[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              tags:
+                - tag: source
+                  value: wirelessVap
+            - uuid: abe44035ce40442d89a47c3173b7ba2c
+              name: 'wirelessVapRadio {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.4.1.4.{#SNMPINDEX}'
+              key: 'wirelessVapRadio[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessVap
+            - uuid: cc1d08c2480b46a8b0072142f26ac82f
+              name: 'wirelessVapSecurity {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.4.1.8.{#SNMPINDEX}'
+              key: 'wirelessVapSecurity[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessVap
+            - uuid: b3dfbaf3d67d4acd8a92abf0983b6757
+              name: 'wirelessVapSsid {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.1.2.4.1.6.{#SNMPINDEX}'
+              key: 'wirelessVapSsid[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              tags:
+                - tag: source
+                  value: wirelessVap
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+      httptests:
+        - uuid: 911150d7593b4a279e5b7b10b4d97b79
+          name: 'HTTPS Web UI Availability'
+          steps:
+            - name: 'HTTPS Availability'
+              url: 'https://{HOST.IP}'
+              follow_redirects: 'NO'
+          tags:
+            - tag: source
+              value: availability
+      dashboards:
+        - uuid: 1f4c77cedf704151bea37c11cc772635
+          name: Ethernet
+          auto_start: 'NO'
+          pages:
+            - widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '44'
+                  fields:
+                    - type: GRAPH_PROTOTYPE
+                      name: graphid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        name: 'Ethernet {#SNMPVALUE}'
+                    - type: STRING
+                      name: reference
+                      value: EQLZU
+                    - type: INTEGER
+                      name: rows
+                      value: '10'
+        - uuid: b21129217d8e4a22a19e7229e05deb19
+          name: Interfaces
+          auto_start: 'NO'
+          pages:
+            - widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '50'
+                  fields:
+                    - type: GRAPH_PROTOTYPE
+                      name: graphid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        name: 'Interface {#SNMPVALUE}'
+                    - type: STRING
+                      name: reference
+                      value: TQBPY
+                    - type: INTEGER
+                      name: rows
+                      value: '10'
+        - uuid: c55dd0f49c8045b99d26d751a6aa209f
+          name: 'System Health'
+          auto_start: 'NO'
+          pages:
+            - widgets:
+                - type: svggraph
+                  name: 'CPU Temperature'
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: cpuTemperature.0
+                    - type: STRING
+                      name: reference
+                      value: LNJKA
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+        - uuid: 7fb5ae0708434229bae42615d4cb4d54
+          name: 'Wireless Peer'
+          auto_start: 'NO'
+          pages:
+            - widgets:
+                - type: item
+                  width: '12'
+                  height: '3'
+                  fields:
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: wirelessPeersCount.0
+                - type: graphprototype
+                  'y': '3'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerLinkUptime[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: WCOQW
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  'y': '8'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerRxMcs[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: MNJGD
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  'y': '13'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerSnr[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: WMFRY
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  'y': '18'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerTxSector[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: ITEAY
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  x: '36'
+                  'y': '3'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerLinkDistance[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: EZXZK
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  x: '36'
+                  'y': '8'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerRxSector[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: NFSPH
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  x: '36'
+                  'y': '13'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerTxMcs[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: OQWXB
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  x: '36'
+                  'y': '18'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerVapIfIndex[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: JWGXM
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+        - uuid: bba4510ddb8d49be97bf5c818cf2ea8f
+          name: 'Wireless Peer By MAC'
+          auto_start: 'NO'
+          pages:
+            - widgets:
+                - type: graphprototype
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerXLinkDistance[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: HGFTE
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  'y': '5'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerXRxBytes[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: ZUNGX
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  'y': '10'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerXRxPackets[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: URBGO
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  'y': '15'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerXRxRate[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: BJIPF
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  'y': '20'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerXSnr[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: LINKE
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  'y': '25'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerXTxMcs[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: RHWUE
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  'y': '30'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerXTxRate[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: BFJVK
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  'y': '35'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerXVapIfIndex[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: QMQFA
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  x: '36'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerXLinkUptime[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: TCZJX
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  x: '36'
+                  'y': '5'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerXRxMcs[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: YNNXA
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  x: '36'
+                  'y': '10'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerXRxPower[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: BNOZB
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  x: '36'
+                  'y': '15'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerXRxSector[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: GZRCZ
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  x: '36'
+                  'y': '20'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerXTxBytes[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: TVZDO
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  x: '36'
+                  'y': '25'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerXTxPackets[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: GBPPQ
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  x: '36'
+                  'y': '30'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessPeerXTxSector[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: LGVNK
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+        - uuid: ad7e53c76ad04b61b2aa540a4a0615ee
+          name: 'Wireless Radio'
+          auto_start: 'NO'
+          pages:
+            - widgets:
+                - type: item
+                  width: '12'
+                  height: '3'
+                  fields:
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: wirelessRadioCount.0
+                - type: graphprototype
+                  'y': '3'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessRadioChannelWidth[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: SCPEM
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  'y': '8'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessRadioFrequency[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: HWBMH
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  'y': '13'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessRadioTemperature[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: NFJBK
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  x: '36'
+                  'y': '3'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessRadioChannel[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: DUWIA
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  x: '36'
+                  'y': '8'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessRadioModemTemperature[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: VZEDU
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+        - uuid: 79b56223a36e4902bc89b4b6d0b6b01d
+          name: 'Wireless Vaps'
+          auto_start: 'NO'
+          pages:
+            - widgets:
+                - type: item
+                  width: '12'
+                  height: '3'
+                  fields:
+                    - type: INTEGER
+                      name: decimal_places
+                      value: '0'
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: wirelessVapsCount.0
+                - type: graphprototype
+                  'y': '3'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessVapIfIndex[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: FCLBN
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+                - type: graphprototype
+                  x: '36'
+                  'y': '3'
+                  width: '36'
+                  height: '5'
+                  fields:
+                    - type: INTEGER
+                      name: columns
+                      value: '1'
+                    - type: ITEM_PROTOTYPE
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNA-303X'
+                        key: 'wirelessVapPtpEnabled[{#SNMPVALUE}]'
+                    - type: STRING
+                      name: reference
+                      value: EHFAT
+                    - type: INTEGER
+                      name: source_type
+                      value: '3'
+  triggers:
+    - uuid: 2e1294dfb6d046f7b5fd0ec20b2c726b
+      expression: 'last(/Tachyon TNA-303X/web.test.fail[HTTPS Web UI Availability])=1'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Tachyon TNA-303X/web.test.fail[HTTPS Web UI Availability])=0'
+      name: 'HTTPS Web UI Unavailable'
+      priority: HIGH
+      manual_close: 'YES'

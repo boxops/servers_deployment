@@ -1,0 +1,32 @@
+---
+# UISP Deployment Guide
+# https://help.uisp.com/hc/en-us/articles/22591008678039-UISP-First-Time-Setup-Installation
+- name: Deploy Servers Infrastructure
+  hosts: all
+  become: true
+  gather_facts: true
+  
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install basic packages
+      apt:
+        name:
+          - curl
+          - wget
+          - gnupg
+          - software-properties-common
+          - acl
+          - rcs
+          - qemu-guest-agent
+          - firewalld
+        state: present
+
+- name: Deploy Servers
+  hosts: servers_example
+  become: true
+  roles:
+    - firewalld

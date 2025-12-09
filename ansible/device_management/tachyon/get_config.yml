@@ -1,0 +1,69 @@
+---
+- name: Get configuration from Tachyon device
+  hosts: devices
+  gather_facts: no
+  connection: local
+
+  tasks:
+    - name: Login to device and get token
+      uri:
+        url: "https://{{ ansible_host }}/cgi.lua/apiv1/login"
+        method: POST
+        body_format: json
+        body:
+          username: "{{ ansible_user }}"
+          password: "{{ ansible_become_password }}"
+        validate_certs: no
+        return_content: yes
+        status_code: 200
+      register: login_response
+
+    - name: Normalize login response to JSON
+      set_fact:
+        login_json: >-
+          {{ login_response.json if (login_response.json is defined) else (login_response.content | default('{}') | from_json) }}
+      failed_when: false
+
+    - name: Set token fact
+      set_fact:
+        auth_token: "{{ (login_json.token | default('')) | urlencode }}"
+
+    - name: Print auth token for debugging
+      debug:
+        msg: "Auth token: {{ auth_token }}"
+
+    - name: Fail if login did not return a token
+      fail:
+        msg: "Login did not return a token. Full response: {{ login_response }}"
+      when: auth_token == ''
+
+    - name: Get configuration from device
+      uri:
+        url: "https://{{ ansible_host }}/cgi.lua/apiv1/config"
+        method: GET
+        headers:
+          Cookie: "api_token={{ auth_token }}; token={{ auth_token }}"
+        validate_certs: no
+        return_content: yes
+        status_code: 200
+      register: config_response
+
+    - name: Save configuration to file
+      copy:
+        content: "{{ config_response.content | from_json | to_nice_json }}"
+        dest: "./actual_configs/{{ inventory_hostname }}.json"
+  
+    - name: Print configuration response for debugging in JSON pretty
+      debug:
+        msg: "{{ config_response.content | from_json | to_nice_json }}"
+
+    - name: Logout from device
+      uri:
+        url: "https://{{ ansible_host }}/cgi.lua/apiv1/login"
+        method: DELETE
+        headers:
+          Cookie: "api_token={{ auth_token }}; token={{ auth_token }}"
+        validate_certs: no
+        return_content: yes
+        status_code: 200
+      register: logout_response

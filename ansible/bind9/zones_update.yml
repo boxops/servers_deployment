@@ -1,0 +1,11 @@
+---
+- name: Get DNS zones from Netbox then update Bind9 Servers
+  hosts: all
+  become: true
+  gather_facts: true
+  vars:
+    bind_zone_path: "/etc/bind/zones"
+  vars_files:
+    - inventories/production/group_vars/vars.yml
+  roles:
+    - netbox_zones_update

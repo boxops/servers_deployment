@@ -1,0 +1,17 @@
+---
+- name: restart zabbix-server
+  systemd:
+    name: zabbix-server
+    state: restarted
+    enabled: true
+
+- name: restart apache2
+  systemd:
+    name: apache2
+    state: restarted
+    enabled: true
+
+- name: reload apache2
+  systemd:
+    name: apache2
+    state: reloaded

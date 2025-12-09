@@ -1,0 +1,739 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: ed8b8d16b49849a68710cebebabf9305
+      name: Custom
+  templates:
+    - uuid: cbce415687774f6ab30361295d071b01
+      template: 'Tachyon TNS-100'
+      name: 'Tachyon TNS-100'
+      description: 'Template created with Zabbix Template Generator from SNMP walk data using iReasoning MIB browser'
+      groups:
+        - name: Custom
+      items:
+        - uuid: f70ca7e833dc49e0858a7d545f5cde59
+          name: cpuTemperature.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.57344.2.2.5.0
+          key: cpuTemperature.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: C
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: cpuTemperature.0
+          triggers:
+            - uuid: eeb0c82e271540898158a82e89ee4aa3
+              expression: 'last(/Tachyon TNS-100/cpuTemperature.0)>80'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Tachyon TNS-100/cpuTemperature.0)<80'
+              name: 'CPU Temperature Over 80C'
+              priority: HIGH
+              manual_close: 'YES'
+        - uuid: 2a38350ffcb0416f878a583f5a6e7772
+          name: deviceModel.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.57344.2.2.1.0
+          key: deviceModel.0
+          delay: 12h
+          history: 7d
+          value_type: TEXT
+          inventory_link: MODEL
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: deviceModel.0
+        - uuid: 6b997eb9df1d4b5f88b455aef8c76039
+          name: deviceSerialNo.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.57344.2.2.2.0
+          key: deviceSerialNo.0
+          delay: 12h
+          history: 7d
+          value_type: TEXT
+          inventory_link: SERIALNO_A
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: deviceSerialNo.0
+          triggers:
+            - uuid: 00d500bd5771441c85ebb9bd0f9ec1d1
+              expression: 'change(/Tachyon TNS-100/deviceSerialNo.0) and length(last(/Tachyon TNS-100/deviceSerialNo.0))>0'
+              name: 'Device Serial Number Has Changed'
+              priority: INFO
+              manual_close: 'YES'
+        - uuid: 205bae87f513454985e6cd415a6c8de2
+          name: firmwareAlterateVersion.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.57344.2.2.4.0
+          key: firmwareAlterateVersion.0
+          delay: 12h
+          history: 7d
+          value_type: TEXT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: firmwareAlterateVersion.0
+        - uuid: 901bba9ed1c64c1f974297e325132d6e
+          name: firmwareVersion.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.57344.2.2.3.0
+          key: firmwareVersion.0
+          delay: 12h
+          history: 7d
+          value_type: TEXT
+          inventory_link: SOFTWARE
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: firmwareVersion.0
+          triggers:
+            - uuid: a90cd413cf98419ba9d974c29475ee0f
+              expression: 'change(/Tachyon TNS-100/firmwareVersion.0) and length(last(/Tachyon TNS-100/firmwareVersion.0))>0'
+              name: 'Device OS Version Has Changed'
+              priority: INFO
+              manual_close: 'YES'
+        - uuid: 868bbbd939d943d5981a625e3a6f1997
+          name: ifNumber.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.2.1.0
+          key: ifNumber.0
+          delay: 12h
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: ifNumber.0
+        - uuid: d2bd617c4bce43d4aee333d69b2c03de
+          name: physicalPortCount.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.57344.2.1.1.0
+          key: physicalPortCount.0
+          delay: 12h
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: physicalPortCount.0
+        - uuid: 660418bcecd242ca81a81a995eca8d9a
+          name: qPhyTemperature.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.57344.2.2.7.0
+          key: qPhyTemperature.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: C
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: qPhyTemperature.0
+        - uuid: bc5e1d2a5d4d4847ab3248d3cdbefda1
+          name: sfpModuleTemperature.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.57344.2.2.8.0
+          key: sfpModuleTemperature.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: C
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: sfpModuleTemperature.0
+          triggers:
+            - uuid: 9b20d6b8017e4ba38d555f4aae0c6411
+              expression: 'last(/Tachyon TNS-100/sfpModuleTemperature.0)>80'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Tachyon TNS-100/sfpModuleTemperature.0)<80'
+              name: 'SFP Temperature Over 80C'
+              priority: HIGH
+              manual_close: 'YES'
+        - uuid: b280a2ce656545cd8c36c34fa488c8aa
+          name: sPhyTemperature.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.57344.2.2.6.0
+          key: sPhyTemperature.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: C
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: sPhyTemperature.0
+          triggers:
+            - uuid: d6a71ac5929f423a8d10183513ac816b
+              expression: 'last(/Tachyon TNS-100/sPhyTemperature.0)>80'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Tachyon TNS-100/sPhyTemperature.0)<80'
+              name: 'Device Temperature Over 80C'
+              priority: HIGH
+              manual_close: 'YES'
+        - uuid: 02aae392a4894c3488f987375b5ba0c3
+          name: sysServices.0
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.1.7.0
+          key: sysServices.0
+          delay: 12h
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: metric_type
+              value: item
+            - tag: source
+              value: sysServices.0
+      discovery_rules:
+        - uuid: 4798ae8734ea4452957ab42fc0ecedb0
+          name: ethernet
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.4.1.57344.2.1.2.1.1]'
+          key: ethernet.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: e0c3a1c991d041e3bd840c2e237a0501
+              name: 'ethernetAutoNeg {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.2.1.2.1.3.{#SNMPINDEX}'
+              key: 'ethernetAutoNeg[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: ethernet
+            - uuid: f3dfe8eae268476fbba028e26a08cbdf
+              name: 'ethernetDesc {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.2.1.2.1.9.{#SNMPINDEX}'
+              key: 'ethernetDesc[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: ethernet
+            - uuid: 5366868aa83f42a39662017a2d565aed
+              name: 'ethernetDuplex {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.2.1.2.1.5.{#SNMPINDEX}'
+              key: 'ethernetDuplex[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: ethernet
+            - uuid: d4749c72c9554a67a82a7b037168687f
+              name: 'ethernetEnabled {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.2.1.2.1.7.{#SNMPINDEX}'
+              key: 'ethernetEnabled[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: ethernet
+            - uuid: 459a3dca26b64552881ee552e8db81bf
+              name: 'ethernetLink {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.2.1.2.1.2.{#SNMPINDEX}'
+              key: 'ethernetLink[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: ethernet
+            - uuid: def61f94fb4e4ddd98cfe62906a87cb4
+              name: 'ethernetMac {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.2.1.2.1.8.{#SNMPINDEX}'
+              key: 'ethernetMac[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: ethernet
+            - uuid: 8110d9b2fb5f4ecd8d095c0e4c142410
+              name: 'ethernetName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.2.1.2.1.1.{#SNMPINDEX}'
+              key: 'ethernetName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: ethernet
+            - uuid: af511fd7e7e9475ebda719f9f31c36dc
+              name: 'ethernetPoe {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.2.1.2.1.6.{#SNMPINDEX}'
+              key: 'ethernetPoe[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: FLOAT
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: ethernet
+            - uuid: 2a5b836251e14018a80d06765b045fcd
+              name: 'ethernetSpeed {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.57344.2.1.2.1.4.{#SNMPINDEX}'
+              key: 'ethernetSpeed[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: ethernet
+          graph_prototypes:
+            - uuid: 1ea7249c217248ec8206d5ec76f64b4d
+              name: 'Ethernet {#SNMPVALUE}'
+              graph_items:
+                - color: 1A7C11
+                  item:
+                    host: 'Tachyon TNS-100'
+                    key: 'ethernetAutoNeg[{#SNMPVALUE}]'
+                - sortorder: '1'
+                  color: '274482'
+                  item:
+                    host: 'Tachyon TNS-100'
+                    key: 'ethernetEnabled[{#SNMPVALUE}]'
+                - sortorder: '2'
+                  color: F63100
+                  item:
+                    host: 'Tachyon TNS-100'
+                    key: 'ethernetLink[{#SNMPVALUE}]'
+                - sortorder: '3'
+                  color: 2774A4
+                  item:
+                    host: 'Tachyon TNS-100'
+                    key: 'ethernetPoe[{#SNMPVALUE}]'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+        - uuid: d11e343a552e4858aa45861267b21aae
+          name: if
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},1.3.6.1.2.1.31.1.1.1.1]'
+          key: if.discovery
+          delay: 12h
+          item_prototypes:
+            - uuid: 0d69dba7acfe41d7ae1490c79a32bf02
+              name: 'ifHCInOctets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.6.{#SNMPINDEX}'
+              key: 'ifHCInOctets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 9a655ac1b18941fc872753971cd13adf
+              name: 'ifHCInUcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.7.{#SNMPINDEX}'
+              key: 'ifHCInUcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 8b8293fd7ee6485f99052425e8f955fd
+              name: 'ifHCOutOctets {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.10.{#SNMPINDEX}'
+              key: 'ifHCOutOctets[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: b54a935b55f94c3a899fca0909e590a6
+              name: 'ifHCOutUcastPkts {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.11.{#SNMPINDEX}'
+              key: 'ifHCOutUcastPkts[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 61421cebbd1e4e0d90951e69ce1c5809
+              name: 'ifHighSpeed {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.15.{#SNMPINDEX}'
+              key: 'ifHighSpeed[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              trends: '0'
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+            - uuid: 11585d3e41344cd2a6852047bf1dfd88
+              name: 'ifName {#SNMPVALUE}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.2.1.31.1.1.1.1.{#SNMPINDEX}'
+              key: 'ifName[{#SNMPVALUE}]'
+              delay: 10m
+              history: 7d
+              value_type: TEXT
+              preprocessing:
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              tags:
+                - tag: source
+                  value: if
+          graph_prototypes:
+            - uuid: e6d5fbdf0f894fc08d6d1f5c4565362b
+              name: 'Interface {#SNMPVALUE}'
+              graph_items:
+                - color: 1A7C11
+                  item:
+                    host: 'Tachyon TNS-100'
+                    key: 'ifHCInOctets[{#SNMPVALUE}]'
+                - sortorder: '1'
+                  color: '274482'
+                  item:
+                    host: 'Tachyon TNS-100'
+                    key: 'ifHCInUcastPkts[{#SNMPVALUE}]'
+                - sortorder: '2'
+                  color: F63100
+                  item:
+                    host: 'Tachyon TNS-100'
+                    key: 'ifHCOutOctets[{#SNMPVALUE}]'
+                - sortorder: '3'
+                  color: 2774A4
+                  item:
+                    host: 'Tachyon TNS-100'
+                    key: 'ifHCOutUcastPkts[{#SNMPVALUE}]'
+                - sortorder: '4'
+                  color: A54F10
+                  item:
+                    host: 'Tachyon TNS-100'
+                    key: 'ifHighSpeed[{#SNMPVALUE}]'
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+      httptests:
+        - uuid: ca05a39ce97144d5ba46ecc4ca418a28
+          name: 'HTTPS Web UI Availability'
+          steps:
+            - name: 'HTTPS Availability'
+              url: 'https://{HOST.IP}'
+              follow_redirects: 'NO'
+      dashboards:
+        - uuid: 3f105efc3e464c36a4a9a041ee394876
+          name: Ethernet
+          auto_start: 'NO'
+          pages:
+            - widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '50'
+                  fields:
+                    - type: GRAPH_PROTOTYPE
+                      name: graphid.0
+                      value:
+                        host: 'Tachyon TNS-100'
+                        name: 'Ethernet {#SNMPVALUE}'
+                    - type: STRING
+                      name: reference
+                      value: HEQRG
+                    - type: INTEGER
+                      name: rows
+                      value: '10'
+        - uuid: 27537e62f1034e92a5d41d927be59df3
+          name: Interface
+          auto_start: 'NO'
+          pages:
+            - widgets:
+                - type: graphprototype
+                  width: '72'
+                  height: '50'
+                  fields:
+                    - type: GRAPH_PROTOTYPE
+                      name: graphid.0
+                      value:
+                        host: 'Tachyon TNS-100'
+                        name: 'Interface {#SNMPVALUE}'
+                    - type: STRING
+                      name: reference
+                      value: GOHKS
+                    - type: INTEGER
+                      name: rows
+                      value: '10'
+        - uuid: 38e31dd696bc4005a1a708a74e36d2c0
+          name: 'System Health'
+          auto_start: 'NO'
+          pages:
+            - widgets:
+                - type: gauge
+                  name: 'Current CPU Temperature'
+                  width: '18'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNS-100'
+                        key: cpuTemperature.0
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: gauge
+                  name: 'Current Device Temperature'
+                  'y': '5'
+                  width: '18'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNS-100'
+                        key: sPhyTemperature.0
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: gauge
+                  name: 'Current SFP Temperature'
+                  'y': '10'
+                  width: '18'
+                  height: '5'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Tachyon TNS-100'
+                        key: sfpModuleTemperature.0
+                    - type: STRING
+                      name: max
+                      value: '100'
+                    - type: STRING
+                      name: min
+                      value: '0'
+                    - type: INTEGER
+                      name: show.0
+                      value: '2'
+                    - type: INTEGER
+                      name: show.1
+                      value: '4'
+                    - type: INTEGER
+                      name: show.2
+                      value: '5'
+                - type: svggraph
+                  name: 'CPU Temperature'
+                  x: '18'
+                  width: '54'
+                  height: '5'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: cpuTemperature.0
+                    - type: STRING
+                      name: reference
+                      value: FWEUH
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'Device Temperature'
+                  x: '18'
+                  'y': '5'
+                  width: '54'
+                  height: '5'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: sPhyTemperature.0
+                    - type: STRING
+                      name: reference
+                      value: HIOMS
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'SFP Temperature'
+                  x: '18'
+                  'y': '10'
+                  width: '54'
+                  height: '5'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: sfpModuleTemperature.0
+                    - type: STRING
+                      name: reference
+                      value: OFFLL
+                    - type: INTEGER
+                      name: righty
+                      value: '0'

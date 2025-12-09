@@ -1,0 +1,135 @@
+---
+# ----------------- Fetch zones -----------------
+- name: Fetch zones from NetBox
+  uri:
+    url: "{{ api_url }}/api/plugins/netbox-dns/zones/"
+    method: GET
+    headers:
+      Authorization: "Token {{ api_token }}"
+    validate_certs: "{{ validate_certs }}"
+    return_content: yes
+  register: zones_response
+
+- name: Set zones fact
+  set_fact:
+    zones: "{{ zones_response.json.results }}"
+
+# ----------------- Fetch records -----------------
+- name: Fetch records for each zone
+  uri:
+    url: "{{ api_url }}/api/plugins/netbox-dns/records/?zone={{ item.name }}"
+    method: GET
+    headers:
+      Authorization: "Token {{ api_token }}"
+    validate_certs: "{{ validate_certs }}"
+    return_content: yes
+  register: records_response
+  loop: "{{ zones }}"
+
+# ----------------- Combine zones and records -----------------
+- name: Initialize zones_with_records
+  set_fact:
+    zones_with_records: []
+
+- name: Merge each zone with its records
+  set_fact:
+    zones_with_records: "{{ zones_with_records + [ {'zone': item.0, 'records': item.1 | default([]) } | combine(item.0) ] }}"
+  loop: "{{ zones | zip(records_response.results | map(attribute='json.results') | list) | list }}"
+  loop_control:
+    label: "{{ item.0.name }}"
+
+- name: Debug final zone structure
+  debug:
+    var: zones_with_records
+
+# ----------------- Forward zones -----------------
+- name: Render forward zone files to /tmp
+  template:
+    src: zone.j2
+    dest: "/tmp/db.{{ item.name }}"
+  loop: "{{ zones_with_records }}"
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: Validate forward zone syntax
+  command: named-checkzone {{ item.name }} /tmp/db.{{ item.name }}
+  loop: "{{ zones_with_records }}"
+
+# ----------------- Reverse zones -----------------
+- name: Initialize reverse_zones
+  set_fact:
+    reverse_zones: []
+
+- name: Build reverse zones list
+  set_fact:
+    reverse_zones: >-
+      {{
+        reverse_zones + [
+          {
+            'zone_name': item.name,
+            'reverse_zone_name': 'db.' + (item.name | regex_replace('\\.', '-') | regex_replace('in-addr-arpa', '')),
+            'reverse_zone_config_name': item.name,
+            'records': item.records
+          }
+        ]
+      }}
+  loop: "{{ zones_with_records }}"
+  when: "'in-addr.arpa' in item.name"
+
+- name: Render reverse DNS zone files to /tmp
+  template:
+    src: reverse_zone.j2
+    dest: "/tmp/{{ item.reverse_zone_name }}"
+  loop: "{{ reverse_zones }}"
+  when: reverse_zones | length > 0
+
+- name: Validate reverse zone syntax
+  command: named-checkzone {{ item.reverse_zone_config_name }} /tmp/{{ item.reverse_zone_name }}
+  loop: "{{ reverse_zones }}"
+  when: reverse_zones | length > 0
+
+# ----------------- Update named.conf.local -----------------
+- name: Ensure forward zones are present in named.conf.local
+  blockinfile:
+    path: /etc/bind/named.conf.local
+    marker: "# {mark} ANSIBLE MANAGED FORWARD ZONE"
+    block: |
+      {% for zone in zones_with_records %}
+      zone "{{ zone.name }}" {
+          type master;
+          file "/etc/bind/zones/db.{{ zone.name }}";
+      };
+      {% endfor %}
+
+- name: Ensure reverse zones are present in named.conf.local
+  blockinfile:
+    path: /etc/bind/named.conf.local
+    marker: "# {mark} ANSIBLE MANAGED REVERSE ZONE"
+    block: |
+      {% for zone in reverse_zones %}
+      zone "{{ zone.reverse_zone_config_name }}" {
+          type master;
+          file "/etc/bind/zones/{{ zone.reverse_zone_name }}";
+      };
+      {% endfor %}
+  when: reverse_zones | length > 0
+
+# ----------------- Deploy zones to BIND -----------------
+- name: Copy forward zone files to /etc/bind/zones
+  copy:
+    src: "/tmp/db.{{ item.name }}"
+    dest: "/etc/bind/zones/db.{{ item.name }}"
+    remote_src: yes
+  loop: "{{ zones_with_records }}"
+
+- name: Copy reverse zone files to /etc/bind/zones
+  copy:
+    src: "/tmp/{{ item.reverse_zone_name }}"
+    dest: "/etc/bind/zones/{{ item.reverse_zone_name }}"
+    remote_src: yes
+  loop: "{{ reverse_zones }}"
+  when: reverse_zones | length > 0
+
+# ----------------- Reload BIND -----------------
+- name: Reload BIND9 service
+  command: rndc reload

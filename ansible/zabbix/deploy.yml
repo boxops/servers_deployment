@@ -1,0 +1,34 @@
+---
+- name: Deploy Zabbix Infrastructure
+  hosts: all
+  become: true
+  gather_facts: true
+  
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install basic packages
+      apt:
+        name:
+          - curl
+          - wget
+          - gnupg
+          - software-properties-common
+        state: present
+
+- name: Deploy Zabbix Server
+  hosts: zabbix_servers
+  become: true
+  roles:
+    - mysql
+    - zabbix-server
+
+- name: Deploy Zabbix Proxy
+  hosts: zabbix_proxies
+  become: true
+  roles:
+    - mysql
+    - zabbix-proxy

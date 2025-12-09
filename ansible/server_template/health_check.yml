@@ -1,0 +1,11 @@
+---
+- name: Check servers service health
+  hosts: servers_example
+  become: true
+  tasks:
+
+    - name: Ensure server service is active and running
+      ansible.builtin.systemd:
+        name: server
+        state: started
+      register: server_service

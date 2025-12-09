@@ -1,0 +1,1084 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+  - uuid: 4865d7ddcbd6431b9d54912b166bd614
+    name: Custom
+  templates:
+  - uuid: e4fdfd4456174545b87363e3719452bf
+    template: UISP Power
+    name: UISP Power
+    description: Template created with Zabbix Template Generator from SNMP walk data using iReasoning MIB browser
+    groups:
+    - name: Custom
+    items:
+    - uuid: a16a662a81a242c1a24266d79c8d5195
+      name: ubntModel.0
+      key: ubntModel.0
+      type: SNMP_AGENT
+      snmp_oid: 1.3.6.1.4.1.41112.1.5.1.1.0
+      value_type: TEXT
+      delay: 10m
+      history: 7d
+      trends: '0'
+      tags:
+      - tag: source
+        value: ubntModel.0
+      - tag: metric_type
+        value: item
+      preprocessing:
+      - type: DISCARD_UNCHANGED_HEARTBEAT
+        parameters:
+        - 1h
+    - uuid: b337d75026584884acb8346ccabfbc29
+      name: ubntSerialNumber.0
+      key: ubntSerialNumber.0
+      type: SNMP_AGENT
+      snmp_oid: 1.3.6.1.4.1.41112.1.5.1.2.0
+      value_type: TEXT
+      delay: 10m
+      history: 7d
+      trends: '0'
+      tags:
+      - tag: source
+        value: ubntSerialNumber.0
+      - tag: metric_type
+        value: item
+      preprocessing:
+      - type: DISCARD_UNCHANGED_HEARTBEAT
+        parameters:
+        - 1h
+    - uuid: c6004dcf6e114edf9508c28822d2a417
+      name: ubntVersion.0
+      key: ubntVersion.0
+      type: SNMP_AGENT
+      snmp_oid: 1.3.6.1.4.1.41112.1.5.1.3.0
+      value_type: TEXT
+      delay: 10m
+      history: 7d
+      trends: '0'
+      tags:
+      - tag: source
+        value: ubntVersion.0
+      - tag: metric_type
+        value: item
+      preprocessing:
+      - type: DISCARD_UNCHANGED_HEARTBEAT
+        parameters:
+        - 1h
+    - uuid: e2351795b4624f678bb3e8836aead206
+      name: ubntPowerOutsCount.0
+      key: ubntPowerOutsCount.0
+      type: SNMP_AGENT
+      snmp_oid: 1.3.6.1.4.1.41112.1.5.2.1.0
+      value_type: TEXT
+      delay: 10m
+      history: 7d
+      trends: '0'
+      tags:
+      - tag: source
+        value: ubntPowerOutsCount.0
+      - tag: metric_type
+        value: item
+      preprocessing:
+      - type: DISCARD_UNCHANGED_HEARTBEAT
+        parameters:
+        - 1h
+    - uuid: 5baadefde0a84117a6b0901478b1b319
+      name: ubntPsuBaysNumber.0
+      key: ubntPsuBaysNumber.0
+      type: SNMP_AGENT
+      snmp_oid: 1.3.6.1.4.1.41112.1.5.3.1.0
+      value_type: TEXT
+      delay: 10m
+      history: 7d
+      trends: '0'
+      tags:
+      - tag: source
+        value: ubntPsuBaysNumber.0
+      - tag: metric_type
+        value: item
+      preprocessing:
+      - type: DISCARD_UNCHANGED_HEARTBEAT
+        parameters:
+        - 1h
+    - uuid: a5d8299cb8144e548dcb7678acdf82be
+      name: ubntThermometersCount.0
+      key: ubntThermometersCount.0
+      type: SNMP_AGENT
+      snmp_oid: 1.3.6.1.4.1.41112.1.5.4.1.0
+      value_type: TEXT
+      delay: 10m
+      history: 7d
+      trends: '0'
+      tags:
+      - tag: source
+        value: ubntThermometersCount.0
+      - tag: metric_type
+        value: item
+      preprocessing:
+      - type: DISCARD_UNCHANGED_HEARTBEAT
+        parameters:
+        - 1h
+    - uuid: fea85b97ae284373ab89aa98b1d64d78
+      name: ubntFansCount.0
+      key: ubntFansCount.0
+      type: SNMP_AGENT
+      snmp_oid: 1.3.6.1.4.1.41112.1.5.5.1.0
+      value_type: TEXT
+      delay: 10m
+      history: 7d
+      trends: '0'
+      tags:
+      - tag: source
+        value: ubntFansCount.0
+      - tag: metric_type
+        value: item
+      preprocessing:
+      - type: DISCARD_UNCHANGED_HEARTBEAT
+        parameters:
+        - 1h
+    - uuid: 79e1d74168cd49fab5334ff9fa5f6a72
+      name: memTotal.0
+      key: memTotal.0
+      type: SNMP_AGENT
+      snmp_oid: 1.3.6.1.4.1.10002.1.1.1.1.1.0
+      value_type: TEXT
+      delay: 10m
+      history: 7d
+      trends: '0'
+      tags:
+      - tag: source
+        value: memTotal.0
+      - tag: metric_type
+        value: item
+      preprocessing:
+      - type: DISCARD_UNCHANGED_HEARTBEAT
+        parameters:
+        - 1h
+    - uuid: 33f3b232ffdd4548b477d7436fb48899
+      name: memFree.0
+      key: memFree.0
+      type: SNMP_AGENT
+      snmp_oid: 1.3.6.1.4.1.10002.1.1.1.1.2.0
+      value_type: TEXT
+      delay: 10m
+      history: 7d
+      trends: '0'
+      tags:
+      - tag: source
+        value: memFree.0
+      - tag: metric_type
+        value: item
+      preprocessing:
+      - type: DISCARD_UNCHANGED_HEARTBEAT
+        parameters:
+        - 1h
+    - uuid: abb00c7b9ca74f809d30217225b268b9
+      name: memBuffer.0
+      key: memBuffer.0
+      type: SNMP_AGENT
+      snmp_oid: 1.3.6.1.4.1.10002.1.1.1.1.3.0
+      value_type: TEXT
+      delay: 10m
+      history: 7d
+      trends: '0'
+      tags:
+      - tag: source
+        value: memBuffer.0
+      - tag: metric_type
+        value: item
+      preprocessing:
+      - type: DISCARD_UNCHANGED_HEARTBEAT
+        parameters:
+        - 1h
+    - uuid: 58b4c4aaeaa34e95ba6bd0e937f03384
+      name: memCache.0
+      key: memCache.0
+      type: SNMP_AGENT
+      snmp_oid: 1.3.6.1.4.1.10002.1.1.1.1.4.0
+      value_type: TEXT
+      delay: 10m
+      history: 7d
+      trends: '0'
+      tags:
+      - tag: source
+        value: memCache.0
+      - tag: metric_type
+        value: item
+      preprocessing:
+      - type: DISCARD_UNCHANGED_HEARTBEAT
+        parameters:
+        - 1h
+    - uuid: 853fb03af3c04b52ab1f996f11760546
+      name: swapTotal.0
+      key: swapTotal.0
+      type: SNMP_AGENT
+      snmp_oid: 1.3.6.1.4.1.10002.1.1.1.2.1.0
+      value_type: TEXT
+      delay: 10m
+      history: 7d
+      trends: '0'
+      tags:
+      - tag: source
+        value: swapTotal.0
+      - tag: metric_type
+        value: item
+      preprocessing:
+      - type: DISCARD_UNCHANGED_HEARTBEAT
+        parameters:
+        - 1h
+    - uuid: 565a99a8448d4083a37f1e19fa6b33a4
+      name: swapFree.0
+      key: swapFree.0
+      type: SNMP_AGENT
+      snmp_oid: 1.3.6.1.4.1.10002.1.1.1.2.2.0
+      value_type: TEXT
+      delay: 10m
+      history: 7d
+      trends: '0'
+      tags:
+      - tag: source
+        value: swapFree.0
+      - tag: metric_type
+        value: item
+      preprocessing:
+      - type: DISCARD_UNCHANGED_HEARTBEAT
+        parameters:
+        - 1h
+    - uuid: aaccde4404974024b5ccb7245173a91f
+      name: loadNumber.0
+      key: loadNumber.0
+      type: SNMP_AGENT
+      snmp_oid: 1.3.6.1.4.1.10002.1.1.1.4.1.0
+      value_type: FLOAT
+      delay: 10m
+      history: 7d
+      trends: '0'
+      tags:
+      - tag: source
+        value: loadNumber.0
+      - tag: metric_type
+        value: item
+      preprocessing:
+      - type: DISCARD_UNCHANGED_HEARTBEAT
+        parameters:
+        - 1h
+    discovery_rules:
+    - uuid: c4d3d1f4c090483587b84b055876b04a
+      name: if
+      type: SNMP_AGENT
+      snmp_oid: discovery[{#SNMPVALUE},1.3.6.1.2.1.2.2.1.1]
+      key: if.discovery
+      delay: 12h
+      item_prototypes:
+      - uuid: 7f0f2678057c4f3b87cd2ccd0b372314
+        name: ifIndex {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.2.1.2.2.1.1.{#SNMPINDEX}
+        key: ifIndex[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: if
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 1e80c3056415413185bf130ef6076a14
+        name: ifDescr {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.2.1.2.2.1.2.{#SNMPINDEX}
+        key: ifDescr[{#SNMPVALUE}]
+        value_type: TEXT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: if
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 345967950daf4c1c9b353f04ff4c818c
+        name: ifType {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.2.1.2.2.1.3.{#SNMPINDEX}
+        key: ifType[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: if
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 8b4bff18951847008a37681ed5aef024
+        name: ifMtu {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.2.1.2.2.1.4.{#SNMPINDEX}
+        key: ifMtu[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: if
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 4a54cbc45bdf416782b9662edec87343
+        name: ifSpeed {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.2.1.2.2.1.5.{#SNMPINDEX}
+        key: ifSpeed[{#SNMPVALUE}]
+        value_type: TEXT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: if
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 52815117fa6842c19eab444ce8f2f402
+        name: ifPhysAddress {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.2.1.2.2.1.6.{#SNMPINDEX}
+        key: ifPhysAddress[{#SNMPVALUE}]
+        value_type: TEXT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: if
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 0fe43d11363c40a08942a1073a8b30e2
+        name: ifAdminStatus {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.2.1.2.2.1.7.{#SNMPINDEX}
+        key: ifAdminStatus[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: if
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 770352dae7814351a2676caa88a4b7d4
+        name: ifOperStatus {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.2.1.2.2.1.8.{#SNMPINDEX}
+        key: ifOperStatus[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: if
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 4da49237a93d43d2a9a0de15d36bf456
+        name: ifLastChange {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.2.1.2.2.1.9.{#SNMPINDEX}
+        key: ifLastChange[{#SNMPVALUE}]
+        value_type: TEXT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: if
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: aaec165cc9924e28ab6d64ee92f5bdaa
+        name: ifInOctets {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.2.1.2.2.1.10.{#SNMPINDEX}
+        key: ifInOctets[{#SNMPVALUE}]
+        value_type: TEXT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: if
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 9f750a28e06244f69f0442c646c42871
+        name: ifInUcastPkts {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.2.1.2.2.1.11.{#SNMPINDEX}
+        key: ifInUcastPkts[{#SNMPVALUE}]
+        value_type: TEXT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: if
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 9ba411f9a12a4daea88314bf65440ddf
+        name: ifInNUcastPkts {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.2.1.2.2.1.12.{#SNMPINDEX}
+        key: ifInNUcastPkts[{#SNMPVALUE}]
+        value_type: TEXT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: if
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 2e706274180742ca84d03fe4af664d17
+        name: ifInDiscards {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.2.1.2.2.1.13.{#SNMPINDEX}
+        key: ifInDiscards[{#SNMPVALUE}]
+        value_type: TEXT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: if
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: cb66426b7abd4197a153713fff0613e7
+        name: ifInErrors {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.2.1.2.2.1.14.{#SNMPINDEX}
+        key: ifInErrors[{#SNMPVALUE}]
+        value_type: TEXT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: if
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 41c507757d89483895a7aabc5df1eb21
+        name: ifInUnknownProtos {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.2.1.2.2.1.15.{#SNMPINDEX}
+        key: ifInUnknownProtos[{#SNMPVALUE}]
+        value_type: TEXT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: if
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 29b58344f2444c3086adb21246c825c1
+        name: ifOutOctets {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.2.1.2.2.1.16.{#SNMPINDEX}
+        key: ifOutOctets[{#SNMPVALUE}]
+        value_type: TEXT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: if
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 26f49411356b4a2bae8da41678e3f68a
+        name: ifOutUcastPkts {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.2.1.2.2.1.17.{#SNMPINDEX}
+        key: ifOutUcastPkts[{#SNMPVALUE}]
+        value_type: TEXT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: if
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: ac1cfbed974844b4a1a2284120165e86
+        name: ifOutNUcastPkts {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.2.1.2.2.1.18.{#SNMPINDEX}
+        key: ifOutNUcastPkts[{#SNMPVALUE}]
+        value_type: TEXT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: if
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 30b8dbab6b0d4c7190340ee4405ed0cf
+        name: ifOutDiscards {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.2.1.2.2.1.19.{#SNMPINDEX}
+        key: ifOutDiscards[{#SNMPVALUE}]
+        value_type: TEXT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: if
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: b39d98c66b164d869197c031cb2891e1
+        name: ifOutErrors {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.2.1.2.2.1.20.{#SNMPINDEX}
+        key: ifOutErrors[{#SNMPVALUE}]
+        value_type: TEXT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: if
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 6933d16872ac46a5879539cb7f77375f
+        name: ifOutQLen {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.2.1.2.2.1.21.{#SNMPINDEX}
+        key: ifOutQLen[{#SNMPVALUE}]
+        value_type: TEXT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: if
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: c16fe3ac79a04c2eac777909293e76ff
+        name: ifSpecific {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.2.1.2.2.1.22.{#SNMPINDEX}
+        key: ifSpecific[{#SNMPVALUE}]
+        value_type: CHAR
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: if
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      preprocessing:
+      - type: DISCARD_UNCHANGED_HEARTBEAT
+        parameters:
+        - 1h
+    - uuid: 02210d8330ec422bb557b14fb6621922
+      name: ubntOR
+      type: SNMP_AGENT
+      snmp_oid: discovery[{#SNMPVALUE},1.3.6.1.4.1.41112.1.1.1.1]
+      key: ubntOR.discovery
+      delay: 12h
+      item_prototypes:
+      - uuid: 54279fc4681d4e1a9b78498f5e5f2e35
+        name: ubntORIndex {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.41112.1.1.1.1.{#SNMPINDEX}
+        key: ubntORIndex[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: ubntOR
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 640608d22723434c827f7c411aad2fee
+        name: ubntORID {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.41112.1.1.1.2.{#SNMPINDEX}
+        key: ubntORID[{#SNMPVALUE}]
+        value_type: CHAR
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: ubntOR
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 1b34df4832fa4cb0b6f61ffb22670b48
+        name: ubntORDescr {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.41112.1.1.1.3.{#SNMPINDEX}
+        key: ubntORDescr[{#SNMPVALUE}]
+        value_type: TEXT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: ubntOR
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      preprocessing:
+      - type: DISCARD_UNCHANGED_HEARTBEAT
+        parameters:
+        - 1h
+    - uuid: 2d7032cf3c9c4668b9ae70d1312ca0a9
+      name: ubntPowerOut
+      type: SNMP_AGENT
+      snmp_oid: discovery[{#SNMPVALUE},1.3.6.1.4.1.41112.1.5.2.2.1.1]
+      key: ubntPowerOut.discovery
+      delay: 12h
+      item_prototypes:
+      - uuid: 4dc7065424004fbb9f30250aee8a45f5
+        name: ubntPowerOutIndex {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.41112.1.5.2.2.1.1.{#SNMPINDEX}
+        key: ubntPowerOutIndex[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: ubntPowerOut
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 520923fc9667449ca4128f750d0c5612
+        name: ubntPowerOutVoltage {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.41112.1.5.2.2.1.2.{#SNMPINDEX}
+        key: ubntPowerOutVoltage[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: ubntPowerOut
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 5eda55eef4be4f6cbf911812d44fe2e7
+        name: ubntPowerOutCurrent {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.41112.1.5.2.2.1.3.{#SNMPINDEX}
+        key: ubntPowerOutCurrent[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: ubntPowerOut
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: b95bf925f2584fa9bc53e8f05e3935c1
+        name: ubntPowerOutPower {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.41112.1.5.2.2.1.4.{#SNMPINDEX}
+        key: ubntPowerOutPower[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: ubntPowerOut
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      preprocessing:
+      - type: DISCARD_UNCHANGED_HEARTBEAT
+        parameters:
+        - 1h
+    - uuid: d593c3fa993d4bd6851ae6abc795aee4
+      name: ubntPsu
+      type: SNMP_AGENT
+      snmp_oid: discovery[{#SNMPVALUE},1.3.6.1.4.1.41112.1.5.3.2.1.1]
+      key: ubntPsu.discovery
+      delay: 12h
+      item_prototypes:
+      - uuid: c87cc8bf8253479482af2a0cbbdfe719
+        name: ubntPsuIndex {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.41112.1.5.3.2.1.1.{#SNMPINDEX}
+        key: ubntPsuIndex[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: ubntPsu
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: c0eb92ee9a304b0f8032b165e745d9b3
+        name: ubntPsuType {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.41112.1.5.3.2.1.2.{#SNMPINDEX}
+        key: ubntPsuType[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: ubntPsu
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: fe12274518f947fcb0520639ec0aed2d
+        name: ubntPsuStatus {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.41112.1.5.3.2.1.3.{#SNMPINDEX}
+        key: ubntPsuStatus[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: ubntPsu
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 023cd82ededf4f688f99146e887cda51
+        name: ubntPsuOperStatus {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.41112.1.5.3.2.1.4.{#SNMPINDEX}
+        key: ubntPsuOperStatus[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: ubntPsu
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: e7e56a927e5641dea73bb1eb1bfdeeb1
+        name: ubntPsuVoltage {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.41112.1.5.3.2.1.5.{#SNMPINDEX}
+        key: ubntPsuVoltage[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: ubntPsu
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 144a5c42d0b24a1684830704474986e5
+        name: ubntPsuTemperature {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.41112.1.5.3.2.1.6.{#SNMPINDEX}
+        key: ubntPsuTemperature[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: ubntPsu
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 6d508bc6c43542e6b816dc274292e535
+        name: ubntPsuCharging {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.41112.1.5.3.2.1.7.{#SNMPINDEX}
+        key: ubntPsuCharging[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: ubntPsu
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: dc1257ef1a034d85819d116650998779
+        name: ubntPsuBatteryQuantity {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.41112.1.5.3.2.1.8.{#SNMPINDEX}
+        key: ubntPsuBatteryQuantity[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: ubntPsu
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 1b300f9917ab41ed8ba1dbf9e260ae42
+        name: ubntPsuBatteryChargeLevel {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.41112.1.5.3.2.1.9.{#SNMPINDEX}
+        key: ubntPsuBatteryChargeLevel[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: ubntPsu
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 10890c3f4c454e60a4dd38f85cc4ede6
+        name: ubntPsuBatteryTimeRemaining {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.41112.1.5.3.2.1.10.{#SNMPINDEX}
+        key: ubntPsuBatteryTimeRemaining[{#SNMPVALUE}]
+        value_type: TEXT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: ubntPsu
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 9d1e9077e24640febab62236e0788b71
+        name: ubntPsuBatteryReplaceIndicator {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.41112.1.5.3.2.1.11.{#SNMPINDEX}
+        key: ubntPsuBatteryReplaceIndicator[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: ubntPsu
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 848be8b9d8324743848a51dac3d9b450
+        name: ubntPsuBatteryLastReplaceDate {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.41112.1.5.3.2.1.12.{#SNMPINDEX}
+        key: ubntPsuBatteryLastReplaceDate[{#SNMPVALUE}]
+        value_type: TEXT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: ubntPsu
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      preprocessing:
+      - type: DISCARD_UNCHANGED_HEARTBEAT
+        parameters:
+        - 1h
+    - uuid: d9ed78e764da48ae8b8d079cd72b88e4
+      name: ubntTherm
+      type: SNMP_AGENT
+      snmp_oid: discovery[{#SNMPVALUE},1.3.6.1.4.1.41112.1.5.4.2.1.1]
+      key: ubntTherm.discovery
+      delay: 12h
+      item_prototypes:
+      - uuid: de3a9d9738554ab7a561ae37b9ef9472
+        name: ubntThermIndex {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.41112.1.5.4.2.1.1.{#SNMPINDEX}
+        key: ubntThermIndex[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: ubntTherm
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 40d29c1383fb4de4977d6c39ee666d4e
+        name: ubntThermType {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.41112.1.5.4.2.1.2.{#SNMPINDEX}
+        key: ubntThermType[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: ubntTherm
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 299f3c0f2c9b4b6aa728c69e2b38e08b
+        name: ubntThermTemperature {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.41112.1.5.4.2.1.3.{#SNMPINDEX}
+        key: ubntThermTemperature[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: ubntTherm
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      preprocessing:
+      - type: DISCARD_UNCHANGED_HEARTBEAT
+        parameters:
+        - 1h
+    - uuid: f8719d4b8a534199a58420e937b4234c
+      name: load
+      type: SNMP_AGENT
+      snmp_oid: discovery[{#SNMPVALUE},1.3.6.1.4.1.10002.1.1.1.4.2.1.1]
+      key: load.discovery
+      delay: 12h
+      item_prototypes:
+      - uuid: a9196d0deebb427fb2543c01a9a698c8
+        name: loadIndex {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.10002.1.1.1.4.2.1.1.{#SNMPINDEX}
+        key: loadIndex[{#SNMPVALUE}]
+        value_type: FLOAT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: load
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 015a7253776849cb862d1e3680dbd4f9
+        name: loadDescr {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.10002.1.1.1.4.2.1.2.{#SNMPINDEX}
+        key: loadDescr[{#SNMPVALUE}]
+        value_type: TEXT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: load
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      - uuid: 13fa88fd86bc4d1597522b708d7b76e5
+        name: loadValue {#SNMPVALUE}
+        type: SNMP_AGENT
+        snmp_oid: 1.3.6.1.4.1.10002.1.1.1.4.2.1.3.{#SNMPINDEX}
+        key: loadValue[{#SNMPVALUE}]
+        value_type: TEXT
+        delay: 10m
+        history: 7d
+        trends: '0'
+        tags:
+        - tag: source
+          value: load
+        preprocessing:
+        - type: DISCARD_UNCHANGED_HEARTBEAT
+          parameters:
+          - 1h
+      preprocessing:
+      - type: DISCARD_UNCHANGED_HEARTBEAT
+        parameters:
+        - 1h

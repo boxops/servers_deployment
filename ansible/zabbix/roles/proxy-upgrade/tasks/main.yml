@@ -1,0 +1,46 @@
+---
+# sudo -s
+# systemctl stop zabbix-proxy
+- name: Stop Zabbix proxy
+  service:
+    name: zabbix-proxy
+    state: stopped
+  tags: proxy
+
+# wget https://repo.zabbix.com/zabbix/7.4/release/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.4+ubuntu24.04_all.deb
+- name: Download Zabbix repository package
+  get_url:
+    url: "{{ zabbix_repository_package }}"
+    dest: /tmp/zabbix-release.deb
+  tags: proxy
+
+# # dpkg -i zabbix-release_latest_7.4+ubuntu24.04_all.deb
+- name: Install Zabbix repository
+  command: dpkg -i /tmp/zabbix-release.deb
+  tags: proxy
+
+# apt update -y
+- name: Update package cache
+  apt:
+    update_cache: true
+  tags: proxy
+
+# DEBIAN_FRONTEND=noninteractive apt install -y zabbix-proxy-mysql zabbix-sql-scripts zabbix-agent
+- name: Install Zabbix proxy non-interactively
+  apt:
+    name:
+      - zabbix-proxy-mysql
+      - zabbix-sql-scripts
+      - zabbix-agent
+    state: latest
+    update_cache: yes
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+  tags: proxy
+
+# systemctl start zabbix-proxy
+- name: Start Zabbix proxy
+  service:
+    name: zabbix-proxy
+    state: started
+  tags: proxy

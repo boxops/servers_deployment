@@ -1,0 +1,50 @@
+---
+# Usage:
+# ansible-playbook -i inventories/lab/hosts.yml --limit kea_dhcp_lab diff_config.yml
+- name: Fetch and diff DHCP configs
+  hosts: all
+  gather_facts: no
+  tasks:
+    # kea-dhcp4.conf
+    - name: Fetch current kea-dhcp4.conf from server
+      ansible.builtin.fetch:
+        src: /etc/kea/kea-dhcp4.conf
+        dest: actual_configs/{{ inventory_hostname }}.kea-dhcp4.conf
+        flat: yes
+      become: true
+
+    - name: Diff intended with actual kea-dhcp4.conf config
+      ansible.builtin.command:
+        cmd: diff intended_configs/{{ inventory_hostname }}.kea-dhcp4.conf actual_configs/{{ inventory_hostname }}.kea-dhcp4.conf
+      register: diff_result_dhcp4
+      delegate_to: localhost
+      become: false
+      # diff returns 0 when files identical, 1 when different, >1 for errors
+      failed_when: diff_result_dhcp4.rc > 1
+      changed_when: diff_result_dhcp4.rc == 1
+
+    - name: Show diff result
+      ansible.builtin.debug:
+        var: diff_result_dhcp4.stdout
+
+    # kea-ctrl-agent.conf
+    - name: Fetch current kea-ctrl-agent.conf from server
+      ansible.builtin.fetch:
+        src: /etc/kea/kea-ctrl-agent.conf
+        dest: actual_configs/{{ inventory_hostname }}.kea-ctrl-agent.conf
+        flat: yes
+      become: true
+
+    - name: Diff intended with actual kea-ctrl-agent.conf config
+      ansible.builtin.command:
+        cmd: diff intended_configs/{{ inventory_hostname }}.kea-ctrl-agent.conf actual_configs/{{ inventory_hostname }}.kea-ctrl-agent.conf
+      register: diff_result_ctrl
+      delegate_to: localhost
+      become: false
+      # diff returns 0 when files identical, 1 when different, >1 for errors
+      failed_when: diff_result_ctrl.rc > 1
+      changed_when: diff_result_ctrl.rc == 1
+
+    - name: Show diff result
+      ansible.builtin.debug:
+        var: diff_result_ctrl.stdout

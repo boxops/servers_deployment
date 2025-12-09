@@ -1,0 +1,127 @@
+# Tasks for deploying firewalld configuration
+- name: Install and configure firewalld
+  ansible.builtin.apt:
+    name: firewalld
+    state: present
+
+- name: Ensure firewalld is enabled and running
+  ansible.builtin.service:
+    name: firewalld
+    state: started
+    enabled: true
+
+- name: Get current firewalld zones
+  ansible.builtin.command: firewall-cmd --list-all-zones
+  register: current_firewalld_zones
+  changed_when: false
+
+- name: Parse current zones
+  ansible.builtin.set_fact:
+    current_zones: "{{ current_firewalld_zones.stdout | regex_findall('(\\w+)\\s*\\(.*active\\)') }}"
+
+- name: Get current services for each zone
+  ansible.builtin.shell: |
+    for zone in $(firewall-cmd --get-zones); do
+      services=$(firewall-cmd --zone=$zone --list-services)
+      for service in $services; do
+        echo "{\"zone\": \"$zone\", \"service\": \"$service\"}"
+      done
+    done
+  register: current_services_output
+  changed_when: false
+
+- name: Parse current services
+  ansible.builtin.set_fact:
+    current_services: "{{ current_services_output.stdout_lines | map('from_json') | list }}"
+
+- name: Get current ports for each zone
+  ansible.builtin.shell: |
+    for zone in $(firewall-cmd --get-zones); do
+      ports=$(firewall-cmd --zone=$zone --list-ports)
+      for port in $ports; do
+        port_num=$(echo $port | cut -d'/' -f1)
+        protocol=$(echo $port | cut -d'/' -f2)
+        echo "{\"zone\": \"$zone\", \"port\": \"$port_num\", \"protocol\": \"$protocol\"}"
+      done
+    done
+  register: current_ports_output
+  changed_when: false
+
+- name: Parse current ports
+  ansible.builtin.set_fact:
+    current_ports: "{{ current_ports_output.stdout_lines | map('from_json') | list }}"
+
+- name: Remove obsolete zones (not in firewalld_zones)
+  ansible.builtin.firewalld:
+    zone: "{{ item }}"
+    state: absent
+    permanent: true
+  loop: "{{ current_zones | difference(firewalld_zones | map(attribute='zone') | list) }}"
+  notify: Reload firewalld
+
+- name: Configure firewalld zones
+  ansible.builtin.firewalld:
+    zone: "{{ item.zone }}"
+    state: present
+    permanent: true
+  loop: "{{ firewalld_zones | default([]) }}"
+  notify: Reload firewalld
+
+- name: Remove obsolete services
+  ansible.builtin.firewalld:
+    service: "{{ item.service }}"
+    zone: "{{ item.zone }}"
+    permanent: true
+    state: disabled
+  loop: "{{ current_services | difference(firewalld_services | default([])) }}"
+  notify: Reload firewalld
+
+- name: Configure firewalld services
+  ansible.builtin.firewalld:
+    service: "{{ item.service }}"
+    zone: "{{ item.zone | default('public') }}"
+    permanent: true
+    state: enabled
+  loop: "{{ firewalld_services | default([]) }}"
+  notify: Reload firewalld
+
+- name: Remove obsolete ports
+  ansible.builtin.firewalld:
+    port: "{{ item.port }}/{{ item.protocol }}"
+    zone: "{{ item.zone }}"
+    permanent: true
+    state: disabled
+  loop: "{{ current_ports | difference(firewalld_ports | default([]) | map('string') | list) }}"
+  notify: Reload firewalld
+
+- name: Configure firewalld ports
+  ansible.builtin.firewalld:
+    port: "{{ item.port }}/{{ item.protocol | default('tcp') }}"
+    zone: "{{ item.zone | default('public') }}"
+    permanent: true
+    state: enabled
+  loop: "{{ firewalld_ports | default([]) }}"
+  notify: Reload firewalld
+
+# Validation tasks
+- name: Validate firewalld zones
+  ansible.builtin.command: firewall-cmd --get-active-zones
+  register: firewalld_zones_output
+
+- name: Assert configured zones are present
+  ansible.builtin.assert:
+    that:
+      - item.zone in firewalld_zones_output.stdout
+  loop: "{{ firewalld_zones | default([]) }}"
+
+- name: Validate and assert firewalld services
+  ansible.builtin.assert:
+    that:
+      - "item.service in (lookup('pipe', 'firewall-cmd --list-services --zone=' ~ (item.zone | default('public')))).split()"
+  loop: "{{ firewalld_services | default([]) }}"
+
+- name: Validate and assert firewalld ports
+  ansible.builtin.assert:
+    that:
+      - "(item.port | string) ~ '/' ~ (item.protocol | default('tcp')) in (lookup('pipe', 'firewall-cmd --list-ports --zone=' ~ (item.zone | default('public')))).split()"
+  loop: "{{ firewalld_ports | default([]) }}"

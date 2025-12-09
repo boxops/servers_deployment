@@ -1,0 +1,2310 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: ed8b8d16b49849a68710cebebabf9305
+      name: Custom
+    - uuid: 919a8a3de4a54c6ab44688fbb8f5f464
+      name: 'Templates/Network devices'
+  templates:
+    - uuid: de30ef1d689443a7bfcd717541050537
+      template: 'Merawex SI48-2U5-1U2'
+      name: 'Merawex SI48-2U5-1U2'
+      groups:
+        - name: Custom
+        - name: 'Templates/Network devices'
+      items:
+        - uuid: 9580f89d15a94182b50519bb2c7ccacc
+          name: battCurrent.1
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.1.1.1.3.1
+          key: battCurrent.1
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: A
+          preprocessing:
+            - type: MULTIPLIER
+              parameters:
+                - '0.1'
+        - uuid: 7bc52c873349493398b1cc234ba3a619
+          name: battCurrent.2
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.1.1.1.3.2
+          key: battCurrent.2
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: A
+          preprocessing:
+            - type: MULTIPLIER
+              parameters:
+                - '0.1'
+        - uuid: 88b1a7dac16c4995b6f580a3937cbef3
+          name: battFuseFault.1
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.1.1.1.11.1
+          key: battFuseFault.1
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: cfd89ab1515f462c93abc0a8a0f86bd2
+              expression: '(last(/Merawex SI48-2U5-1U2/battFuseFault.1)=1 or last(/Merawex SI48-2U5-1U2/battFuseFault.1)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/battFuseFault.1)=0)'
+              name: 'Battery 1 Fuse Fault'
+              priority: HIGH
+            - uuid: fc4e0d7c61c847e0bca1fd1bdcf2da06
+              expression: 'last(/Merawex SI48-2U5-1U2/battFuseFault.1)=2'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Merawex SI48-2U5-1U2/battFuseFault.1)=0'
+              name: 'Battery 1 Fuse Fault Warning'
+              priority: WARNING
+        - uuid: 24f143c2336e49929dec821ebec5364f
+          name: battFuseFault.2
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.1.1.1.11.2
+          key: battFuseFault.2
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 0bcb3a4b0d9a41c9aa84a46ccb7c7549
+              expression: '(last(/Merawex SI48-2U5-1U2/battFuseFault.2)=1 or last(/Merawex SI48-2U5-1U2/battFuseFault.2)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/battFuseFault.2)=0)'
+              name: 'Battery 2 Fuse Fault'
+              priority: HIGH
+            - uuid: 3443a20eb5634b588a37c844ca6fe7b5
+              expression: 'last(/Merawex SI48-2U5-1U2/battFuseFault.2)=2'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Merawex SI48-2U5-1U2/battFuseFault.2)=0'
+              name: 'Battery 2 Fuse Fault Warning'
+              priority: WARNING
+        - uuid: 8d533bf9f6ac4dfdbbbd96e0ceadf7bc
+          name: battHighTemperature.1
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.1.1.1.7.1
+          key: battHighTemperature.1
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 3268e4fdef6048c6b1528de691cc9bc0
+              expression: '(last(/Merawex SI48-2U5-1U2/battHighTemperature.1)=1 or last(/Merawex SI48-2U5-1U2/battHighTemperature.1)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/battHighTemperature.1)=0)'
+              name: 'Battery 1 High Temperature'
+              priority: HIGH
+            - uuid: eceaed910bdc42049d19fbffae39f68d
+              expression: 'last(/Merawex SI48-2U5-1U2/battHighTemperature.1)=2'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Merawex SI48-2U5-1U2/battHighTemperature.1)=0'
+              name: 'Battery 1 High Temperature Warning'
+              priority: WARNING
+        - uuid: 5efe5ac0841c4992a17f802f838391a8
+          name: battHighTemperature.2
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.1.1.1.7.2
+          key: battHighTemperature.2
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: c8cc898bbcfc40fd8efd17093990457e
+              expression: '(last(/Merawex SI48-2U5-1U2/battHighTemperature.2)=1 or last(/Merawex SI48-2U5-1U2/battHighTemperature.2)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/battHighTemperature.2)=0)'
+              name: 'Battery 2 High Temperature'
+              priority: HIGH
+            - uuid: c73d2ecc051b49b79ef3a1bae490cbf1
+              expression: 'last(/Merawex SI48-2U5-1U2/battHighTemperature.2)=2'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Merawex SI48-2U5-1U2/battHighTemperature.2)=0'
+              name: 'Battery 2 High Temperature Warning'
+              priority: WARNING
+        - uuid: 7598d06a5fbe40f2bd3ad1509267e8ed
+          name: battLack.1
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.1.1.1.17.1
+          key: battLack.1
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: b3a49e8e3e2b48b68e42f6bfc1e8e409
+              expression: '(last(/Merawex SI48-2U5-1U2/battLack.1)=1 or last(/Merawex SI48-2U5-1U2/battLack.1)=2 or last(/Merawex SI48-2U5-1U2/battLack.1)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/battLack.1)=0)'
+              name: 'Lack of Battery 1'
+              priority: HIGH
+        - uuid: 5f712b0b97ea4afabc554590f59bf13f
+          name: battLack.2
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.1.1.1.17.2
+          key: battLack.2
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+        - uuid: fd862c1f21144f7bbc07b6cc3a85df29
+          name: battLowTemperature.1
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.1.1.1.6.1
+          key: battLowTemperature.1
+          delay: 5m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 6de483b2324046ff93af9c55e67a4dfa
+              expression: '(last(/Merawex SI48-2U5-1U2/battLowTemperature.1)=1 or last(/Merawex SI48-2U5-1U2/battLowTemperature.1)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/battLowTemperature.1)=0)'
+              name: 'Battery 1 Low Temperature'
+              priority: HIGH
+            - uuid: 0f572b3573964c9dae0a7dde6b130738
+              expression: 'last(/Merawex SI48-2U5-1U2/battLowTemperature.1)=2'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Merawex SI48-2U5-1U2/battLowTemperature.1)=0'
+              name: 'Battery 1 Low Temperature Warning'
+              priority: WARNING
+        - uuid: e44a924a15c94c21aac540e5e8e93e5a
+          name: battLowTemperature.2
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.1.1.1.6.2
+          key: battLowTemperature.2
+          delay: 5m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 9a4a6a77316443afb3a8a50bf6ff3757
+              expression: '(last(/Merawex SI48-2U5-1U2/battLowTemperature.2)=1 or last(/Merawex SI48-2U5-1U2/battLowTemperature.2)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/battLowTemperature.2)=0)'
+              name: 'Battery 2 Low Temperature'
+              priority: HIGH
+            - uuid: 0868d586d393443786b5a7b73dfef65d
+              expression: 'last(/Merawex SI48-2U5-1U2/battLowTemperature.2)=2'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Merawex SI48-2U5-1U2/battLowTemperature.2)=0'
+              name: 'Battery 2 Low Temperature Warning'
+              priority: WARNING
+        - uuid: 6bc2839eb9324794aa2cb1b5b7868930
+          name: battsConfigError.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.1.21.0
+          key: battsConfigError.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 87d9c001eceb40fc83682658ef657179
+              expression: '(last(/Merawex SI48-2U5-1U2/battsConfigError.0)=1 or last(/Merawex SI48-2U5-1U2/battsConfigError.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/battsConfigError.0)=0)'
+              name: 'Battery Config Error'
+              priority: HIGH
+            - uuid: c94b0caf27c04ac799c09f2c494c9aa1
+              expression: '(last(/Merawex SI48-2U5-1U2/battsConfigError.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/battsConfigError.0)=0)'
+              name: 'Battery Config Error Warning'
+              priority: WARNING
+        - uuid: 18401519dcaf49179a3148ae2becde0e
+          name: battsDisconnectedLVDD.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.1.14.0
+          key: battsDisconnectedLVDD.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 9534fe0fe17c478fb75633c09c6fdec6
+              expression: '(last(/Merawex SI48-2U5-1U2/battsDisconnectedLVDD.0)=1 or last(/Merawex SI48-2U5-1U2/battsDisconnectedLVDD.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/battsDisconnectedLVDD.0)=0)'
+              name: 'Battery Disconnected LVD'
+              priority: HIGH
+            - uuid: 1fcbe9e9d1fc41b3af4a4ab912e43ad7
+              expression: '(last(/Merawex SI48-2U5-1U2/battsDisconnectedLVDD.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/battsDisconnectedLVDD.0)=0)'
+              name: 'Battery Disconnected LVD Warning'
+              priority: WARNING
+        - uuid: 0b08410777cd4a5cb64bd4a361d861c8
+          name: battsMaxCurrentAsymmetry.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.1.7.0
+          key: battsMaxCurrentAsymmetry.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: a20d6172dd0d41d3a84eca7ba6b2d6cd
+              expression: '(last(/Merawex SI48-2U5-1U2/battsMaxCurrentAsymmetry.0)=1 or last(/Merawex SI48-2U5-1U2/battsMaxCurrentAsymmetry.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/battsMaxCurrentAsymmetry.0)=0)'
+              name: 'Batteries Large Asymmetry in Current'
+              priority: HIGH
+            - uuid: c2567d6665b64f9aae4c97d3ea3a660d
+              expression: '(last(/Merawex SI48-2U5-1U2/battsMaxCurrentAsymmetry.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/battsMaxCurrentAsymmetry.0)=0)'
+              name: 'Batteries Large Asymmetry in Current Warning'
+              priority: WARNING
+        - uuid: 13316d41863343cfbd2172548b68dfdf
+          name: battsMaxTemperatureDifference.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.1.5.0
+          key: battsMaxTemperatureDifference.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: e16315e9cb5143a385a2cd313323370a
+              expression: '(last(/Merawex SI48-2U5-1U2/battsMaxTemperatureDifference.0)=1 or last(/Merawex SI48-2U5-1U2/battsMaxTemperatureDifference.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/battsMaxTemperatureDifference.0)=0)'
+              name: 'Batteries Max Temperature Difference'
+              priority: HIGH
+            - uuid: ac2bc933f891471eb234268c6828cfe9
+              expression: '(last(/Merawex SI48-2U5-1U2/battsMaxTemperatureDifference.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/battsMaxTemperatureDifference.0)=0)'
+              name: 'Batteries Max Temperature Difference Warning'
+              priority: WARNING
+        - uuid: 21b1dc4135474711b5836a52f71fd26e
+          name: battsTestFailure.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.1.20.0
+          key: battsTestFailure.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: a857ba5fc9574681aef526e343fa13d0
+              expression: '(last(/Merawex SI48-2U5-1U2/battsTestFailure.0)=1 or last(/Merawex SI48-2U5-1U2/battsTestFailure.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/battsTestFailure.0)=0)'
+              name: 'Battery Test Failure'
+              priority: HIGH
+            - uuid: fb5b178b03d14e269af0253039a92d5b
+              expression: '(last(/Merawex SI48-2U5-1U2/battsTestFailure.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/battsTestFailure.0)=0)'
+              name: 'Battery Test Failure Warning'
+              priority: WARNING
+        - uuid: 75b6afe974ae4056af92ab7c8305dc12
+          name: battTemperature.1
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.1.1.1.5.1
+          key: battTemperature.1
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: C
+        - uuid: 8b695794e5534cdd9a35def3ca95753e
+          name: battTemperature.2
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.1.1.1.5.2
+          key: battTemperature.2
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: C
+        - uuid: 106ee2bc8494478b9e708121c2e80c43
+          name: battTemperatureError.1
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.1.1.1.8.1
+          key: battTemperatureError.1
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 430ed3e2de54464daea98b105d2defe1
+              expression: '(last(/Merawex SI48-2U5-1U2/battTemperatureError.1)=1 or last(/Merawex SI48-2U5-1U2/battTemperatureError.1)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/battTemperatureError.1)=0)'
+              name: 'Battery 1 Temperature Error'
+              priority: HIGH
+            - uuid: b1e51c07e2f549348021473962760c15
+              expression: 'last(/Merawex SI48-2U5-1U2/battTemperatureError.1)=2'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Merawex SI48-2U5-1U2/battTemperatureError.1)=0'
+              name: 'Battery 1 Temperature Error Warning'
+              priority: WARNING
+        - uuid: aa4bced4cae24eaab310da17da9b7fc0
+          name: battTemperatureError.2
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.1.1.1.8.2
+          key: battTemperatureError.2
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 9d9572925a7240d5a7d9ec61f2deaa93
+              expression: '(last(/Merawex SI48-2U5-1U2/battTemperatureError.2)=1 or last(/Merawex SI48-2U5-1U2/battTemperatureError.2)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/battTemperatureError.2)=0)'
+              name: 'Battery 2 Temperature Error'
+              priority: HIGH
+            - uuid: fdb82c04633840d886e8813af9a21a12
+              expression: 'last(/Merawex SI48-2U5-1U2/battTemperatureError.2)=2'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Merawex SI48-2U5-1U2/battTemperatureError.2)=0'
+              name: 'Battery 2 Temperature Error Warning'
+              priority: WARNING
+        - uuid: 3e0aa60f4a334c9a86260b710d18ca63
+          name: battVoltage.1
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.1.1.1.2.1
+          key: battVoltage.1
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: V
+          preprocessing:
+            - type: MULTIPLIER
+              parameters:
+                - '0.1'
+          triggers:
+            - uuid: 037e0b02d8e140a8a3faf26a1edba65e
+              expression: '(last(/Merawex SI48-2U5-1U2/battVoltage.1)>0 and last(/Merawex SI48-2U5-1U2/battVoltage.1)<30)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/battVoltage.1)>0 and last(/Merawex SI48-2U5-1U2/battVoltage.1)>30)'
+              name: 'Battery 1 Voltage is below 30'
+              status: DISABLED
+              priority: HIGH
+        - uuid: 5224e79f3f9f41dc904b2881b40cb855
+          name: battVoltage.2
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.1.1.1.2.2
+          key: battVoltage.2
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: V
+          preprocessing:
+            - type: MULTIPLIER
+              parameters:
+                - '0.1'
+          triggers:
+            - uuid: 0863e72a2e6448d0a74c9b856eaf49f8
+              expression: '(last(/Merawex SI48-2U5-1U2/battVoltage.2)>0 and last(/Merawex SI48-2U5-1U2/battVoltage.2)<30)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/battVoltage.2)>0 and last(/Merawex SI48-2U5-1U2/battVoltage.2)>30)'
+              name: 'Battery 2 Voltage is below 30'
+              status: DISABLED
+              priority: HIGH
+        - uuid: 494ef4376b2c4597a71c7f069dfda100
+          name: devAmbientTemperature.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.5.0
+          key: devAmbientTemperature.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: C
+        - uuid: eb267296813243198d24254f41c637ab
+          name: devAmbientTemperatureError.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.10.0
+          key: devAmbientTemperatureError.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 547020f7766a41e4a56faa84f3289b23
+              expression: '(last(/Merawex SI48-2U5-1U2/devAmbientTemperatureError.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devAmbientTemperatureError.0)=0)'
+              name: 'Device External Temperature Error Warning'
+              priority: WARNING
+        - uuid: 8113af94f902447cb8a43db5d827d3f4
+          name: devBattRemainTime.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.36.0
+          key: devBattRemainTime.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+        - uuid: 3c48fd9d83c1491c85ece485205d2145
+          name: devBattWorkTime.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.2.0
+          key: devBattWorkTime.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+        - uuid: 11aa2baaddde4b278a4ac1a8ff62089e
+          name: devBulkTime.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.3.0
+          key: devBulkTime.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+        - uuid: b1cc8f7ee44f4ee4ad905af830cee14c
+          name: devChrgRemainTime.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.37.0
+          key: devChrgRemainTime.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+        - uuid: 1dddfbc0ff934eee93da5b34aeebe295
+          name: devHighAmbientTemperature.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.7.0
+          key: devHighAmbientTemperature.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: fa1657069eeb4d11bb13fa136be11f7d
+              expression: '(last(/Merawex SI48-2U5-1U2/devHighAmbientTemperature.0)=1 or last(/Merawex SI48-2U5-1U2/devHighAmbientTemperature.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devHighAmbientTemperature.0)=0)'
+              name: 'Device High External Temperature'
+              priority: HIGH
+            - uuid: 724179afece141359efa8aa15bcfaac2
+              expression: '(last(/Merawex SI48-2U5-1U2/devHighAmbientTemperature.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devHighAmbientTemperature.0)=0)'
+              name: 'Device High External Temperature Warning'
+              priority: WARNING
+        - uuid: beb81c460dc44e78925e7d349cf06df1
+          name: devHighTemperature.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.6.0
+          key: devHighTemperature.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 015f979ecc564bde9c66cf96c22752b1
+              expression: '(last(/Merawex SI48-2U5-1U2/devHighTemperature.0)=1 or last(/Merawex SI48-2U5-1U2/devHighTemperature.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devHighTemperature.0)=0)'
+              name: 'Device High Internal Temperature'
+              priority: HIGH
+            - uuid: 380fca547c654c878f35c3ceeec8cc99
+              expression: '(last(/Merawex SI48-2U5-1U2/devHighTemperature.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devHighTemperature.0)=0)'
+              name: 'Device High Internal Temperature Warning'
+              priority: WARNING
+        - uuid: 066523bdb83e46638075432b6708df16
+          name: devInput1.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.15.0
+          key: devInput1.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: d5decc07f73143c6bdfabd7447db5b28
+              expression: '(last(/Merawex SI48-2U5-1U2/devInput1.0)=1 or last(/Merawex SI48-2U5-1U2/devInput1.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInput1.0)=0)'
+              name: 'Device Input 1 Active'
+              priority: HIGH
+            - uuid: 7c3946e1c32e45a3a6d3dc6a52c5cdb4
+              expression: '(last(/Merawex SI48-2U5-1U2/devInput1.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInput1.0)=0)'
+              name: 'Device Input 1 Active Warning'
+              priority: WARNING
+        - uuid: 2bac805a760b45488460c92250bb1cfa
+          name: devInput2.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.16.0
+          key: devInput2.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: f84260c542e04a49bf1b4cc07a5b5612
+              expression: '(last(/Merawex SI48-2U5-1U2/devInput2.0)=1 or last(/Merawex SI48-2U5-1U2/devInput2.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInput2.0)=0)'
+              name: 'Device Input 2 Active'
+              priority: HIGH
+            - uuid: 2ffaf82b394e4729b753842f79089c7e
+              expression: '(last(/Merawex SI48-2U5-1U2/devInput2.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInput2.0)=0)'
+              name: 'Device Input 2 Active Warning'
+              priority: WARNING
+        - uuid: 1d01439139974b5391c200d2d3639fc3
+          name: devInput3.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.17.0
+          key: devInput3.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 5a34463033ff4051b4a01a767edecc0e
+              expression: '(last(/Merawex SI48-2U5-1U2/devInput3.0)=1 or last(/Merawex SI48-2U5-1U2/devInput3.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInput3.0)=0)'
+              name: 'Device Input 3 Active'
+              priority: HIGH
+            - uuid: 6d9a0cac50e34233855ec2584b5f989b
+              expression: '(last(/Merawex SI48-2U5-1U2/devInput3.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInput3.0)=0)'
+              name: 'Device Input 3 Active Warning'
+              priority: WARNING
+        - uuid: 36e61430213c4a6ba3039ff256555e69
+          name: devInput4.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.18.0
+          key: devInput4.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: bf5b59a3c2df47e792faec1dac379c11
+              expression: '(last(/Merawex SI48-2U5-1U2/devInput4.0)=1 or last(/Merawex SI48-2U5-1U2/devInput4.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInput4.0)=0)'
+              name: 'Device Input 4 Active'
+              priority: HIGH
+            - uuid: 272c4b7d163a47468fbe5476c6ad8421
+              expression: '(last(/Merawex SI48-2U5-1U2/devInput4.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInput4.0)=0)'
+              name: 'Device Input 4 Active Warning'
+              priority: WARNING
+        - uuid: 98532cab7d1740db868d0e9461821dd7
+          name: devInput5.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.19.0
+          key: devInput5.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 658f820a087b4bbaaa1f67b156e8fceb
+              expression: '(last(/Merawex SI48-2U5-1U2/devInput5.0)=1 or last(/Merawex SI48-2U5-1U2/devInput5.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInput5.0)=0)'
+              name: 'Device Input 5 Active'
+              priority: HIGH
+            - uuid: b938da666c374f5dbbd8fc1734a6e00a
+              expression: '(last(/Merawex SI48-2U5-1U2/devInput5.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInput5.0)=0)'
+              name: 'Device Input 5 Active Warning'
+              priority: WARNING
+        - uuid: 7e5b1b7f24104fd5a9a59267c82a5c0c
+          name: devInput6.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.20.0
+          key: devInput6.0
+          delay: 5m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: b9b7a68fa258496cb8982c71857bb09a
+              expression: '(last(/Merawex SI48-2U5-1U2/devInput6.0)=1 or last(/Merawex SI48-2U5-1U2/devInput6.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInput6.0)=0)'
+              name: 'Device Input 6 Active'
+              priority: HIGH
+            - uuid: 33519f7b9c1b4712ab3720e0ecd32c14
+              expression: '(last(/Merawex SI48-2U5-1U2/devInput6.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInput6.0)=0)'
+              name: 'Device Input 6 Active Warning'
+              priority: WARNING
+        - uuid: 37fc5f6953e6417d92cd972fd3af29a3
+          name: devInternalError00.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.25.0
+          key: devInternalError00.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 6136e15895074f5ea60d9e927a3341f5
+              expression: '(last(/Merawex SI48-2U5-1U2/devInternalError00.0)=1 or last(/Merawex SI48-2U5-1U2/devInternalError00.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInternalError00.0)=0)'
+              name: 'Device Internal Error 00'
+              priority: HIGH
+            - uuid: 5ac7ed37dd814900bc662d7d69c68ae2
+              expression: '(last(/Merawex SI48-2U5-1U2/devInternalError00.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInternalError00.0)=0)'
+              name: 'Device Internal Error 00 Warning'
+              priority: HIGH
+        - uuid: c856b56fbb9c4286bb43f84ff0b11f4d
+          name: devInternalError01.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.26.0
+          key: devInternalError01.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 7bab09ad8ef946ac9e1aa26d4654b090
+              expression: '(last(/Merawex SI48-2U5-1U2/devInternalError01.0)=1 or last(/Merawex SI48-2U5-1U2/devInternalError01.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInternalError01.0)=0)'
+              name: 'Device Internal Error 01'
+              priority: HIGH
+            - uuid: 2ae3a1dbfdd84aa4b617e903627a0ba3
+              expression: '(last(/Merawex SI48-2U5-1U2/devInternalError01.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInternalError01.0)=0)'
+              name: 'Device Internal Error 01 Warning'
+              priority: WARNING
+        - uuid: cebcf74b7872453584a33ede97ff794a
+          name: devInternalError02.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.27.0
+          key: devInternalError02.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 2c50eaff17c444bfb993bc321f35d5c9
+              expression: '(last(/Merawex SI48-2U5-1U2/devInternalError02.0)=1 or last(/Merawex SI48-2U5-1U2/devInternalError02.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInternalError02.0)=0)'
+              name: 'Device Internal Error 02'
+              priority: HIGH
+            - uuid: 538a9968c70047b7be52334398b9d09f
+              expression: '(last(/Merawex SI48-2U5-1U2/devInternalError02.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInternalError02.0)=0)'
+              name: 'Device Internal Error 02 Warning'
+              priority: WARNING
+        - uuid: 87597968c0e24790b38b59ac0a972aef
+          name: devInternalError03.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.28.0
+          key: devInternalError03.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 920c9ae924a94a5fbb9fac4f9692271a
+              expression: '(last(/Merawex SI48-2U5-1U2/devInternalError03.0)=1 or last(/Merawex SI48-2U5-1U2/devInternalError03.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInternalError03.0)=0)'
+              name: 'Device Internal Error 03'
+              priority: HIGH
+            - uuid: 73e6182414084b57a956df3cf14518b8
+              expression: '(last(/Merawex SI48-2U5-1U2/devInternalError03.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInternalError03.0)=0)'
+              name: 'Device Internal Error 03 Warning'
+              priority: WARNING
+        - uuid: 2fc3edfe50b745f19c44122f51424c54
+          name: devInternalError04.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.29.0
+          key: devInternalError04.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 2bc7869eb7024c3eb8afe5a43180a0b7
+              expression: '(last(/Merawex SI48-2U5-1U2/devInternalError04.0)=1 or last(/Merawex SI48-2U5-1U2/devInternalError04.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInternalError04.0)=0)'
+              name: 'Device Internal Error 04'
+              priority: HIGH
+            - uuid: 592d18dba525441aaaebcb50fc804951
+              expression: '(last(/Merawex SI48-2U5-1U2/devInternalError04.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInternalError04.0)=0)'
+              name: 'Device Internal Error 04 Warning'
+              priority: WARNING
+        - uuid: e11bc9c9f92d4265aa72edafceda8b9d
+          name: devInternalError05.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.30.0
+          key: devInternalError05.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: f979bc6a46d1460dbaf1776a135f3c95
+              expression: '(last(/Merawex SI48-2U5-1U2/devInternalError05.0)=1 or last(/Merawex SI48-2U5-1U2/devInternalError05.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInternalError05.0)=0)'
+              name: 'Device Internal Error 05'
+              priority: HIGH
+            - uuid: e27ee1ee8f284f7da2d111ea45028926
+              expression: '(last(/Merawex SI48-2U5-1U2/devInternalError05.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInternalError05.0)=0)'
+              name: 'Device Internal Error 05 Warning'
+              priority: WARNING
+        - uuid: 8b750fedc0744fc783a7c54a477475b4
+          name: devInternalError06.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.31.0
+          key: devInternalError06.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 13430e50903349849257a9aa28bf325a
+              expression: '(last(/Merawex SI48-2U5-1U2/devInternalError06.0)=1 or last(/Merawex SI48-2U5-1U2/devInternalError06.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInternalError06.0)=0)'
+              name: 'Device Internal Error 06'
+              priority: HIGH
+            - uuid: d15012c54b1541bb86787e786ab8eaa5
+              expression: '(last(/Merawex SI48-2U5-1U2/devInternalError06.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInternalError06.0)=0)'
+              name: 'Device Internal Error 06 Warning'
+              priority: WARNING
+        - uuid: b0a5adc984ec446aa25f3273cf4e6ca6
+          name: devInternalError07.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.32.0
+          key: devInternalError07.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 678ba970c8bf41fe852855399baa53c5
+              expression: '(last(/Merawex SI48-2U5-1U2/devInternalError07.0)=1 or last(/Merawex SI48-2U5-1U2/devInternalError07.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInternalError07.0)=0)'
+              name: 'Device Internal Error 07'
+              priority: HIGH
+            - uuid: 929eb8edd0ea4d3bb7082794418d3864
+              expression: '(last(/Merawex SI48-2U5-1U2/devInternalError07.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInternalError07.0)=0)'
+              name: 'Device Internal Error 07 Warning'
+              priority: WARNING
+        - uuid: 7b2cab43bcda471bb6f81625b0acc809
+          name: devInternalError08.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.33.0
+          key: devInternalError08.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: a06bf9e23ffb48bb8cb98b92e84e5869
+              expression: '(last(/Merawex SI48-2U5-1U2/devInternalError08.0)=1 or last(/Merawex SI48-2U5-1U2/devInternalError08.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInternalError08.0)=0)'
+              name: 'Device Internal Error 08'
+              priority: HIGH
+            - uuid: 9ef313262c9d4dee87510a3cf8f1863a
+              expression: '(last(/Merawex SI48-2U5-1U2/devInternalError08.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInternalError08.0)=0)'
+              name: 'Device Internal Error 08 Warning'
+              priority: WARNING
+        - uuid: 2c4922f962114ebeb653caf8ff2dc9ad
+          name: devInternalError09.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.34.0
+          key: devInternalError09.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 61f6bdb30b9f4285bd3d9f5171d97e5e
+              expression: '(last(/Merawex SI48-2U5-1U2/devInternalError09.0)=1 or last(/Merawex SI48-2U5-1U2/devInternalError09.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInternalError09.0)=0)'
+              name: 'Device Internal Error 09'
+              priority: HIGH
+            - uuid: 036e67a4e6a742018c87acc6241bb443
+              expression: '(last(/Merawex SI48-2U5-1U2/devInternalError09.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInternalError09.0)=0)'
+              name: 'Device Internal Error 09 Warning'
+              priority: WARNING
+        - uuid: 269b05afffdb4354917bb0b11620b83b
+          name: devInternalError10.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.35.0
+          key: devInternalError10.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: fd90da80f6a04b139260a0f1922c3198
+              expression: '(last(/Merawex SI48-2U5-1U2/devInternalError10.0)=1 or last(/Merawex SI48-2U5-1U2/devInternalError10.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInternalError10.0)=0)'
+              name: 'Device Internal Error 10'
+              priority: HIGH
+            - uuid: 253383fe9e9d4bae8302864a2d2caa85
+              expression: '(last(/Merawex SI48-2U5-1U2/devInternalError10.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devInternalError10.0)=0)'
+              name: 'Device Internal Error 10 Warning'
+              priority: WARNING
+        - uuid: e26c285b76884801acb6e8ac19fc7fd0
+          name: devLowAmbientTemperature.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.8.0
+          key: devLowAmbientTemperature.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: d884f0bec58c4cdb9dbc118a8b954ddc
+              expression: '(last(/Merawex SI48-2U5-1U2/devLowAmbientTemperature.0)=1 or last(/Merawex SI48-2U5-1U2/devLowAmbientTemperature.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devLowAmbientTemperature.0)=0)'
+              name: 'Device Low External Temperature'
+              priority: HIGH
+            - uuid: d9dd14f972c5452cb36349319f7b345a
+              expression: '(last(/Merawex SI48-2U5-1U2/devLowAmbientTemperature.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devLowAmbientTemperature.0)=0)'
+              name: 'Device Low External Temperature Warning'
+              priority: WARNING
+        - uuid: 23924efdb90b4c66bb9f6d9abc22f32c
+          name: devWorkMode.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.5.1.0
+          key: devWorkMode.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          valuemap:
+            name: devWorkMode
+          triggers:
+            - uuid: b459792888f94c3d90b6c00cce5f9e2e
+              expression: '(last(/Merawex SI48-2U5-1U2/devWorkMode.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/devWorkMode.0)=0 or last(/Merawex SI48-2U5-1U2/devWorkMode.0)=1)'
+              name: 'Battery In Work Mode'
+              priority: HIGH
+        - uuid: 04b4f13c9ac249b6bc321abb719fed69
+          name: mainFailure.1
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.4.1.1.5.1
+          key: mainFailure.1
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: b6d93b06d0a445adb806f5352be327f1
+              expression: '(last(/Merawex SI48-2U5-1U2/mainFailure.1)=1 or last(/Merawex SI48-2U5-1U2/mainFailure.1)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/mainFailure.1)=0)'
+              name: 'Mains 1 Low Voltage or Mains Failure'
+              priority: HIGH
+            - uuid: b88be5cebd4142338a15b5439c336a18
+              expression: '(last(/Merawex SI48-2U5-1U2/mainFailure.1)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/mainFailure.1)=0)'
+              name: 'Mains 1 Low Voltage or Mains Failure Warning'
+              priority: WARNING
+        - uuid: 764673d32eee4a69b2db528c8d315c26
+          name: mainFailure.2
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.4.1.1.5.2
+          key: mainFailure.2
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 16497da616a34118abcf13a26c5ef726
+              expression: '(last(/Merawex SI48-2U5-1U2/mainFailure.2)=1 or last(/Merawex SI48-2U5-1U2/mainFailure.2)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/mainFailure.2)=0)'
+              name: 'Mains 2 Low Voltage or Mains Failure'
+              priority: HIGH
+            - uuid: 8b7921ad3c8748f789366644dc32c2b5
+              expression: '(last(/Merawex SI48-2U5-1U2/mainFailure.2)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/mainFailure.2)=0)'
+              name: 'Mains 2 Low Voltage or Mains Failure Warning'
+              priority: WARNING
+        - uuid: bb17e3f2aea44687a836f1ebd4351ef1
+          name: mainFailure.3
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.4.1.1.5.3
+          key: mainFailure.3
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: ff146b610ee24c3bb1913aacf5cdefc8
+              expression: '(last(/Merawex SI48-2U5-1U2/mainFailure.3)=1 or last(/Merawex SI48-2U5-1U2/mainFailure.3)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/mainFailure.3)=0)'
+              name: 'Mains 3 Low Voltage or Mains Failure'
+              priority: HIGH
+            - uuid: 37da6fc03c3d45db8ddd2872e1e1e91b
+              expression: '(last(/Merawex SI48-2U5-1U2/mainFailure.3)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/mainFailure.3)=0)'
+              name: 'Mains 3 Low Voltage or Mains Failure Warning'
+              priority: WARNING
+        - uuid: 4009c85ee80f48648ccfe13ac1c57c8f
+          name: mainHighVoltage.1
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.4.1.1.6.1
+          key: mainHighVoltage.1
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 6f4ce42cb6534449846d07d3e67de803
+              expression: '(last(/Merawex SI48-2U5-1U2/mainHighVoltage.1)=1 or last(/Merawex SI48-2U5-1U2/mainHighVoltage.1)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/mainHighVoltage.1)=0)'
+              name: 'Mains 1 High Voltage'
+              priority: HIGH
+            - uuid: a71b0fe14aa74ae2911762a62c772424
+              expression: '(last(/Merawex SI48-2U5-1U2/mainHighVoltage.1)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/mainHighVoltage.1)=0)'
+              name: 'Mains 1 High Voltage Warning'
+              priority: WARNING
+        - uuid: 4b23b1fda67445759e7f117c71e069bc
+          name: mainHighVoltage.2
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.4.1.1.6.2
+          key: mainHighVoltage.2
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: dc33e0aa538d4cb6b9f36b3a7e8dea59
+              expression: '(last(/Merawex SI48-2U5-1U2/mainHighVoltage.2)=1 or last(/Merawex SI48-2U5-1U2/mainHighVoltage.2)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/mainHighVoltage.2)=0)'
+              name: 'Mains 2 High Voltage'
+              priority: HIGH
+            - uuid: 558085af5d7a4b4d9d0a3c5aae5cc916
+              expression: '(last(/Merawex SI48-2U5-1U2/mainHighVoltage.2)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/mainHighVoltage.2)=0)'
+              name: 'Mains 2 High Voltage Warning'
+              priority: WARNING
+        - uuid: 8dc5d972e5bb41598659e55e4ed087aa
+          name: mainHighVoltage.3
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.4.1.1.6.3
+          key: mainHighVoltage.3
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 7fe5a5692f7a4f189a8ac1a372e2d3cc
+              expression: '(last(/Merawex SI48-2U5-1U2/mainHighVoltage.3)=1 or last(/Merawex SI48-2U5-1U2/mainHighVoltage.3)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/mainHighVoltage.3)=0)'
+              name: 'Mains 3 High Voltage'
+              priority: HIGH
+            - uuid: 14674fff66d740ee9cb8c734f89a2d89
+              expression: '(last(/Merawex SI48-2U5-1U2/mainHighVoltage.3)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/mainHighVoltage.3)=0)'
+              name: 'Mains 3 High Voltage Warning'
+              priority: WARNING
+        - uuid: 98e510d7c4bb451ea3fcb80d952f3658
+          name: mainsFailure.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.4.3.0
+          key: mainsFailure.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 2bb62bc0b3024acf92660efc059cd2d4
+              expression: '(last(/Merawex SI48-2U5-1U2/mainsFailure.0)=1 or last(/Merawex SI48-2U5-1U2/mainsFailure.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/mainsFailure.0)=0)'
+              name: 'Mains Power Failure'
+              priority: HIGH
+            - uuid: 06b7304c8510445fa6e41c5106926960
+              expression: '(last(/Merawex SI48-2U5-1U2/mainsFailure.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/mainsFailure.0)=0)'
+              name: 'Mains Power Failure Warning'
+              priority: WARNING
+        - uuid: df6d5b368a7a4f5db583ef797a66d59e
+          name: mainsFrequency.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.4.2.0
+          key: mainsFrequency.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: Hz
+        - uuid: 131d9f6b57c4498994b8444c99f59c41
+          name: mainVoltage.1
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.4.1.1.2.1
+          key: mainVoltage.1
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: V
+        - uuid: e8c0181815be4a5db33ed7300fa51e83
+          name: mainVoltage.2
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.4.1.1.2.2
+          key: mainVoltage.2
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: V
+        - uuid: 20dcca12fcd341dc873740858424894d
+          name: mainVoltage.3
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.4.1.1.2.3
+          key: mainVoltage.3
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: V
+        - uuid: 3ee61363f88b47d4860ff9c9c9521ff2
+          name: outFuseDisconnected.1
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.2.1.1.12.1
+          key: outFuseDisconnected.1
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 342d0fff7f674267b26c035e8164b07c
+              expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.1)=1 or last(/Merawex SI48-2U5-1U2/outFuseDisconnected.1)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.1)=0)'
+              name: 'Outputs Fuse 1 Disconnected'
+              priority: HIGH
+            - uuid: b6fad126b4dc42aeb60eda2c77461692
+              expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.1)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.1)=0)'
+              name: 'Outputs Fuse 1 Disconnected Warning'
+              priority: WARNING
+        - uuid: 9e7dbdba4ec2443aa531f38155f85651
+          name: outFuseDisconnected.2
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.2.1.1.12.2
+          key: outFuseDisconnected.2
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 7e07f7d75b854837b874bc4aad716dc1
+              expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.2)=1 or last(/Merawex SI48-2U5-1U2/outFuseDisconnected.2)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.2)=0)'
+              name: 'Outputs Fuse 2 Disconnected'
+              priority: HIGH
+            - uuid: 633a371a3068455da7c257475f3051ce
+              expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.2)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.2)=0)'
+              name: 'Outputs Fuse 2 Disconnected Warning'
+              priority: WARNING
+        - uuid: 9263052d54c64b1c927fae78d02932ec
+          name: outFuseDisconnected.3
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.2.1.1.12.3
+          key: outFuseDisconnected.3
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 52fdc6b7be1d4a19921927ccf68d290b
+              expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.3)=1 or last(/Merawex SI48-2U5-1U2/outFuseDisconnected.3)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.3)=0)'
+              name: 'Outputs Fuse 3 Disconnected'
+              priority: HIGH
+            - uuid: 8e737ee59b1e4f768f13a08002764fa3
+              expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.3)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.3)=0)'
+              name: 'Outputs Fuse 3 Disconnected Warning'
+              priority: WARNING
+        - uuid: 2aba56f7a8424fe2bc137849049bc75f
+          name: outFuseDisconnected.4
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.2.1.1.12.4
+          key: outFuseDisconnected.4
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 434bc016fa8248ed8e4b26d8365c968a
+              expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.4)=1 or last(/Merawex SI48-2U5-1U2/outFuseDisconnected.4)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.4)=0)'
+              name: 'Outputs Fuse 4 Disconnected'
+              priority: HIGH
+            - uuid: ff5118fff90d471eaad965b351a5386b
+              expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.4)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.4)=0)'
+              name: 'Outputs Fuse 4 Disconnected Warning'
+              priority: WARNING
+        - uuid: 526b2fa39cd647f0822c91cbb7dbe0f2
+          name: outFuseDisconnected.5
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.2.1.1.12.5
+          key: outFuseDisconnected.5
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 88cc971d3155427993ab3a79c77e8665
+              expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.5)=1 or last(/Merawex SI48-2U5-1U2/outFuseDisconnected.5)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.5)=0)'
+              name: 'Outputs Fuse 5 Disconnected'
+              priority: HIGH
+            - uuid: b9bd895cb1cd47468e9e4d9ac455d0ef
+              expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.5)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.5)=0)'
+              name: 'Outputs Fuse 5 Disconnected Warning'
+              priority: WARNING
+        - uuid: e962062579204d8a8d3617cff8e746a4
+          name: outFuseDisconnected.6
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.2.1.1.12.6
+          key: outFuseDisconnected.6
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: e7b742f2d8ac45cb822da5254dbfa351
+              expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.6)=1 or last(/Merawex SI48-2U5-1U2/outFuseDisconnected.6)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.6)=0)'
+              name: 'Outputs Fuse 6 Disconnected'
+              priority: HIGH
+            - uuid: 6d2ba981004942b4917da88b6ab28d1e
+              expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.6)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.6)=0)'
+              name: 'Outputs Fuse 6 Disconnected Warning'
+              priority: WARNING
+        - uuid: 74ccb4c04e984e14bc93fafd6160296b
+          name: outFuseDisconnected.7
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.2.1.1.12.7
+          key: outFuseDisconnected.7
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: ce2807beaa5d4600a7d8f72a6ac0dc84
+              expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.7)=1 or last(/Merawex SI48-2U5-1U2/outFuseDisconnected.7)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.7)=0)'
+              name: 'Outputs Fuse 7 Disconnected'
+              priority: HIGH
+            - uuid: 645b86d638a8458390b538cb1a67feba
+              expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.7)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.7)=0)'
+              name: 'Outputs Fuse 7 Disconnected Warning'
+              priority: WARNING
+        - uuid: 62a56c68993e458e97745a471f7ec5fc
+          name: outFuseDisconnected.8
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.2.1.1.12.8
+          key: outFuseDisconnected.8
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 8ce5e86288604a448b0830fe024531c0
+              expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.8)=1 or last(/Merawex SI48-2U5-1U2/outFuseDisconnected.8)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.8)=0)'
+              name: 'Outputs Fuse 8 Disconnected'
+              priority: HIGH
+            - uuid: 39a99c6708c74a909e1a2c2dac90d229
+              expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.8)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.8)=0)'
+              name: 'Outputs Fuse 8 Disconnected Warning'
+              priority: WARNING
+        - uuid: 4be08f2239eb475d8dea9b814a8fe1a4
+          name: outFuseDisconnected.9
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.2.1.1.12.9
+          key: outFuseDisconnected.9
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 0a963016d0c747b5ace95b62cde54812
+              expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.9)=1 or last(/Merawex SI48-2U5-1U2/outFuseDisconnected.9)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.9)=0)'
+              name: 'Outputs Fuse 9 Disconnected'
+              priority: HIGH
+            - uuid: b3031a6df47c4412aad79b1c42e3443f
+              expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.9)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outFuseDisconnected.9)=0)'
+              name: 'Outputs Fuse 9 Disconnected Warning'
+              priority: WARNING
+        - uuid: 93e5ad6b82fe4d3087c0f0fc3a9572fe
+          name: outsDisconnectedLowPriority.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.2.17.0
+          key: outsDisconnectedLowPriority.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 7d7764ef7ee44c5db397964aff695b5d
+              expression: '(last(/Merawex SI48-2U5-1U2/outsDisconnectedLowPriority.0)=1 or last(/Merawex SI48-2U5-1U2/outsDisconnectedLowPriority.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outsDisconnectedLowPriority.0)=0)'
+              name: 'Outputs Low Priority Disconnected'
+              priority: HIGH
+            - uuid: dbc7f451fa2149ae963b65af8570ec77
+              expression: '(last(/Merawex SI48-2U5-1U2/outsDisconnectedLowPriority.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outsDisconnectedLowPriority.0)=0)'
+              name: 'Outputs Low Priority Disconnected Warning'
+              priority: WARNING
+        - uuid: 92d1bea68e0545b7ab4ec7c57cf6e7c8
+          name: outsHighCurrentHighPriority.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.2.11.0
+          key: outsHighCurrentHighPriority.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: fb1a06768be9499ca1ba67314409afac
+              expression: '(last(/Merawex SI48-2U5-1U2/outsHighCurrentHighPriority.0)=1 or  last(/Merawex SI48-2U5-1U2/outsHighCurrentHighPriority.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outsHighCurrentHighPriority.0)=0)'
+              name: 'Outputs High Current High Priority'
+              priority: HIGH
+            - uuid: 05a843cf711e4c4c9b4038fe581389d3
+              expression: '(last(/Merawex SI48-2U5-1U2/outsHighCurrentHighPriority.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outsHighCurrentHighPriority.0)=0)'
+              name: 'Outputs High Current High Priority Warning'
+              priority: WARNING
+        - uuid: 81bee0f10c004a35914c1ff63c6ce8fc
+          name: outsHighCurrentLowPriority.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.2.10.0
+          key: outsHighCurrentLowPriority.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 571410c6b77c418b90bf1de694d4d9e7
+              expression: '(last(/Merawex SI48-2U5-1U2/outsHighCurrentLowPriority.0)=1 or last(/Merawex SI48-2U5-1U2/outsHighCurrentLowPriority.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outsHighCurrentLowPriority.0)=0)'
+              name: 'Outputs High Current Low Priority'
+              priority: HIGH
+            - uuid: 7887a0c778384c789f8284607c1ae1e1
+              expression: '(last(/Merawex SI48-2U5-1U2/outsHighCurrentLowPriority.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outsHighCurrentLowPriority.0)=0)'
+              name: 'Outputs High Current Low Priority Warning'
+              priority: WARNING
+        - uuid: a0bb212a7511440497725c8990523439
+          name: outsHighVoltage.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.2.8.0
+          key: outsHighVoltage.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 1ecc2d06fd774168b6f0e3a493b2fa85
+              expression: '(last(/Merawex SI48-2U5-1U2/outsHighVoltage.0)=1 or last(/Merawex SI48-2U5-1U2/outsHighVoltage.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outsHighVoltage.0)=0)'
+              name: 'Outputs High Voltage'
+              priority: HIGH
+            - uuid: e2904c9879b1414bad9fd50b86466c45
+              expression: '(last(/Merawex SI48-2U5-1U2/outsHighVoltage.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outsHighVoltage.0)=0)'
+              name: 'Outputs High Voltage Warning'
+              priority: WARNING
+        - uuid: c50f3ef8ed124c4aa2c54eef1f12a36c
+          name: outsLowVoltage.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.2.7.0
+          key: outsLowVoltage.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: a9bb5f683b2749e4b0b1c9b0410fb36b
+              expression: '(last(/Merawex SI48-2U5-1U2/outsLowVoltage.0)=1 or last(/Merawex SI48-2U5-1U2/outsLowVoltage.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outsLowVoltage.0)=0)'
+              name: 'Outputs Low Voltage'
+              priority: HIGH
+            - uuid: 6389a290b05d45d981900b8815a66eb8
+              expression: '(last(/Merawex SI48-2U5-1U2/outsLowVoltage.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/outsLowVoltage.0)=0)'
+              name: 'Outputs Low Voltage Warning'
+              priority: WARNING
+        - uuid: 25d4d09a3fef4b2f94a8d54196bc0b84
+          name: outsTotalCurrentHighPriority.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.2.6.0
+          key: outsTotalCurrentHighPriority.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: A
+          preprocessing:
+            - type: MULTIPLIER
+              parameters:
+                - '0.1'
+        - uuid: e0fce7b6339d47ffb87d4ecf1108bbdf
+          name: outsTotalCurrentLowPriority.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.2.5.0
+          key: outsTotalCurrentLowPriority.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: A
+          preprocessing:
+            - type: MULTIPLIER
+              parameters:
+                - '0.1'
+        - uuid: 441c39d00ddd4722afaa4b94497f7253
+          name: outsVoltage.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.2.2.0
+          key: outsVoltage.0
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: V
+          preprocessing:
+            - type: MULTIPLIER
+              parameters:
+                - '0.1'
+        - uuid: a10363d95ab5468cabc2c4d8d49b7eea
+          name: recFailure.1
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.3.1.1.6.1
+          key: recFailure.1
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 22d773efe0514f969b95d69d20f561e6
+              expression: '(last(/Merawex SI48-2U5-1U2/recFailure.1)=1 or last(/Merawex SI48-2U5-1U2/recFailure.1)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/recFailure.1)=0)'
+              name: 'Rectifier 1 Failure'
+              priority: HIGH
+            - uuid: 1c5c672b826542c09877483577936c08
+              expression: '(last(/Merawex SI48-2U5-1U2/recFailure.1)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/recFailure.1)=0)'
+              name: 'Rectifier 1 Failure Warning'
+              priority: WARNING
+        - uuid: a72fa572a9574a6b8c1ea114be976f4c
+          name: recFailure.2
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.3.1.1.6.2
+          key: recFailure.2
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 20739b74981d46fcb8100fa03b023dcd
+              expression: '(last(/Merawex SI48-2U5-1U2/recFailure.2)=1 or last(/Merawex SI48-2U5-1U2/recFailure.2)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/recFailure.2)=0)'
+              name: 'Rectifier 2 Failure'
+              priority: HIGH
+            - uuid: 39d544393a8f471cb7f1fa41e4cc1dd1
+              expression: '(last(/Merawex SI48-2U5-1U2/recFailure.2)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/recFailure.2)=0)'
+              name: 'Rectifier 2 Failure Warning'
+              priority: WARNING
+        - uuid: 83536726f0f4440798c8ed6cce020e22
+          name: recFailure.3
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.3.1.1.6.3
+          key: recFailure.3
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 7e76c630a76747a8af83a646a2380d84
+              expression: '(last(/Merawex SI48-2U5-1U2/recFailure.3)=1 or last(/Merawex SI48-2U5-1U2/recFailure.3)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/recFailure.3)=0)'
+              name: 'Rectifier 3 Failure'
+              priority: HIGH
+            - uuid: 2809b77bb95a4778bb1cec61df142015
+              expression: '(last(/Merawex SI48-2U5-1U2/recFailure.3)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/recFailure.3)=0)'
+              name: 'Rectifier 3 Failure Warning'
+              priority: WARNING
+        - uuid: 112cb986753b4ee5a0e626d84837e99f
+          name: recFailure.4
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.3.1.1.6.4
+          key: recFailure.4
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: b443e1d9fe124dc79625214897911f98
+              expression: '(last(/Merawex SI48-2U5-1U2/recFailure.4)=1 or last(/Merawex SI48-2U5-1U2/recFailure.4)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/recFailure.4)=0)'
+              name: 'Rectifier 4 Failure'
+              priority: HIGH
+            - uuid: fe2e17454602421aa1fdecfac75eac37
+              expression: '(last(/Merawex SI48-2U5-1U2/recFailure.4)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/recFailure.4)=0)'
+              name: 'Rectifier 4 Failure Warning'
+              priority: WARNING
+        - uuid: 1b06c3dd5e6444dbb80e1ebab59580a0
+          name: recFailure.5
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.3.1.1.6.5
+          key: recFailure.5
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: a2757a7c950542aaaf315e6b91e64e37
+              expression: '(last(/Merawex SI48-2U5-1U2/recFailure.5)=1 or last(/Merawex SI48-2U5-1U2/recFailure.5)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/recFailure.5)=0)'
+              name: 'Rectifier 5 Failure'
+              priority: HIGH
+            - uuid: a4bb9f2e64d94ef2a1de5c2f22240115
+              expression: '(last(/Merawex SI48-2U5-1U2/recFailure.5)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/recFailure.5)=0)'
+              name: 'Rectifier 5 Failure Warning'
+              priority: WARNING
+        - uuid: 37546d3b0e76445b8fd3fac148970969
+          name: recLoad.1
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.3.1.1.4.1
+          key: recLoad.1
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: '%'
+        - uuid: cb1bd74a823d46c7952bbc6005f1abb2
+          name: recLoad.2
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.3.1.1.4.2
+          key: recLoad.2
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: '%'
+        - uuid: 2f56452c1ac142978066d37f6ac86469
+          name: recLoad.3
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.3.1.1.4.3
+          key: recLoad.3
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: '%'
+        - uuid: 822fe082c1884115b946d3881dd1a7bb
+          name: recLoad.4
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.3.1.1.4.4
+          key: recLoad.4
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: '%'
+        - uuid: 191f21c546cf4fae8a22974dda786dfc
+          name: recLoad.5
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.3.1.1.4.5
+          key: recLoad.5
+          delay: 10m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          units: '%'
+        - uuid: b8501216e1f14d669206f74b36026edc
+          name: recsConfigError.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.3.6.0
+          key: recsConfigError.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: c7495b00c10b4673bb7dc627c1562003
+              expression: '(last(/Merawex SI48-2U5-1U2/recsConfigError.0)=1 or last(/Merawex SI48-2U5-1U2/recsConfigError.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/recsConfigError.0)=0)'
+              name: 'Rectifiers Config Error'
+              priority: HIGH
+            - uuid: ad4e4d66751b46958c3834e411834c24
+              expression: '(last(/Merawex SI48-2U5-1U2/recsConfigError.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/recsConfigError.0)=0)'
+              name: 'Rectifiers Config Error Warning'
+              priority: WARNING
+        - uuid: 937b2e736dc04ce8ba8845c84ad8b4ad
+          name: recsFailure.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.3.2.0
+          key: recsFailure.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: 41afecfcd629419bb9bf101f8ba80bd4
+              expression: '(last(/Merawex SI48-2U5-1U2/recsFailure.0)=1 or last(/Merawex SI48-2U5-1U2/recsFailure.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/recsFailure.0)=0)'
+              name: 'Rectifiers Failure'
+              priority: HIGH
+            - uuid: 8f427a3a24544ba490e53f316dc3e73a
+              expression: '(last(/Merawex SI48-2U5-1U2/recsFailure.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/recsFailure.0)=0)'
+              name: 'Rectifiers Failure Warning'
+              priority: WARNING
+        - uuid: f68adb1f8f2c4a7fb7e6007b3295788b
+          name: recsOverload.0
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.32228.4.3.5.0
+          key: recsOverload.0
+          delay: 2m
+          history: 7d
+          value_type: FLOAT
+          trends: '0'
+          triggers:
+            - uuid: f39a41f2883a41d0b8eb881d3d6bb1c8
+              expression: '(last(/Merawex SI48-2U5-1U2/recsOverload.0)=1 or last(/Merawex SI48-2U5-1U2/recsOverload.0)=3)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/recsOverload.0)=0)'
+              name: 'Rectifiers Overload'
+              priority: HIGH
+            - uuid: 7c44c70f9c6442c2ac113ed460c31909
+              expression: '(last(/Merawex SI48-2U5-1U2/recsOverload.0)=2)'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: '(last(/Merawex SI48-2U5-1U2/recsOverload.0)=0)'
+              name: 'Rectifiers Overload Warning'
+              priority: WARNING
+      discovery_rules:
+        - uuid: 723f2a778b4744499183054f1afd0afa
+          name: 'Battery (SNMPWALK doesn''t work)'
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},.1.3.6.1.4.1.32228.4.1.1.1]'
+          key: battery
+          delay: 1h
+          status: DISABLED
+          enabled_lifetime_type: DISABLE_NEVER
+          item_prototypes:
+            - uuid: f95239b70b884cf28cd87d78c1a032b0
+              name: 'Battery Current {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.32228.4.1.1.1.3.{#SNMPINDEX}'
+              key: 'BattCurrent.[{#SNMPVALUE}]'
+              delay: 5m
+              value_type: TEXT
+            - uuid: b1221f95308f45dd8478c00b473fb933
+              name: 'Battery Voltage {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.32228.4.1.1.1.2.{#SNMPINDEX}'
+              key: 'BattVoltage.[{#SNMPVALUE}]'
+              delay: 5m
+              trends: '0'
+              units: V
+        - uuid: f7d23fc509a54cba9067ca1a8b389e50
+          name: 'Outputs (SNMPWALK doesn''t work)'
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#SNMPVALUE},.1.3.6.1.4.1.32228.4.2.1.1]'
+          key: outputs
+          delay: 1h
+          status: DISABLED
+          enabled_lifetime_type: DISABLE_NEVER
+          item_prototypes:
+            - uuid: b442282c23ba44eba292d14f52969fff
+              name: 'Output Fuse Disconnected {#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: 'walk[1.3.6.1.4.1.32228.4.2.1.1.12]'
+              key: 'outputs.fuse.disconnected.[{#SNMPVALUE}]'
+              value_type: TEXT
+      tags:
+        - tag: build
+          value: custom
+      dashboards:
+        - uuid: 94b41cb4458e4926983c014e15c98c63
+          name: Batteries
+          pages:
+            - widgets:
+                - type: svggraph
+                  name: 'Battery 1 Voltage'
+                  width: '36'
+                  height: '4'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: battVoltage.1
+                    - type: STRING
+                      name: reference
+                      value: PSPHW
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'Battery 1 Current'
+                  'y': '4'
+                  width: '36'
+                  height: '4'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: battCurrent.1
+                    - type: STRING
+                      name: reference
+                      value: PWYDW
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'Battery 1 Temperature'
+                  'y': '8'
+                  width: '36'
+                  height: '4'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: battTemperature.1
+                    - type: STRING
+                      name: reference
+                      value: MDJQI
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'Battery 2 Voltage'
+                  x: '36'
+                  width: '36'
+                  height: '4'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: battVoltage.2
+                    - type: STRING
+                      name: reference
+                      value: DUFXV
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'Battery 2 Current'
+                  x: '36'
+                  'y': '4'
+                  width: '36'
+                  height: '4'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: battCurrent.2
+                    - type: STRING
+                      name: reference
+                      value: DXPER
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'Battery 2 Temperature'
+                  x: '36'
+                  'y': '8'
+                  width: '36'
+                  height: '4'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: battTemperature.2
+                    - type: STRING
+                      name: reference
+                      value: WFZJS
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+        - uuid: 5da6d8fd55834884ba16e8b605961fb6
+          name: Device
+          pages:
+            - widgets:
+                - type: item
+                  name: 'Device Work Mode'
+                  width: '24'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Merawex SI48-2U5-1U2'
+                        key: devWorkMode.0
+                - type: svggraph
+                  name: 'Device Ambient Temperature'
+                  'y': '3'
+                  width: '72'
+                  height: '5'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: devAmbientTemperature.0
+                    - type: STRING
+                      name: reference
+                      value: EYMOR
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: item
+                  name: 'Device Battery Remain Time'
+                  x: '24'
+                  width: '12'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Merawex SI48-2U5-1U2'
+                        key: devBattRemainTime.0
+                - type: item
+                  name: 'Device Charge Remain Time'
+                  x: '36'
+                  width: '12'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Merawex SI48-2U5-1U2'
+                        key: devChrgRemainTime.0
+                - type: item
+                  name: 'Device Battery Work Time'
+                  x: '48'
+                  width: '12'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Merawex SI48-2U5-1U2'
+                        key: devBattWorkTime.0
+                - type: item
+                  name: 'Device Bulk Time'
+                  x: '60'
+                  width: '12'
+                  height: '3'
+                  fields:
+                    - type: ITEM
+                      name: itemid.0
+                      value:
+                        host: 'Merawex SI48-2U5-1U2'
+                        key: devBulkTime.0
+        - uuid: 2e56bc0b42ed4df2ad279b8c2660b728
+          name: Mains
+          pages:
+            - widgets:
+                - type: svggraph
+                  name: 'Mains Frequency'
+                  width: '36'
+                  height: '4'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: mainsFrequency.0
+                    - type: STRING
+                      name: reference
+                      value: MODJK
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'Mains 2 Voltage'
+                  'y': '4'
+                  width: '36'
+                  height: '4'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: mainVoltage.2
+                    - type: STRING
+                      name: reference
+                      value: RBMHX
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'Mains 1 Voltage'
+                  x: '36'
+                  width: '36'
+                  height: '4'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: mainVoltage.1
+                    - type: STRING
+                      name: reference
+                      value: FEFKX
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'Mains 3 Voltage'
+                  x: '36'
+                  'y': '4'
+                  width: '36'
+                  height: '4'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: mainVoltage.3
+                    - type: STRING
+                      name: reference
+                      value: CPSXZ
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+        - uuid: 734f8745276e4f24abb16784f2efab42
+          name: Outputs
+          pages:
+            - widgets:
+                - type: svggraph
+                  name: 'Outputs Voltage'
+                  width: '71'
+                  height: '4'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: outsVoltage.0
+                    - type: STRING
+                      name: reference
+                      value: DZXHV
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'Outputs Total Current High Priority'
+                  'y': '4'
+                  width: '36'
+                  height: '4'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: outsTotalCurrentHighPriority.0
+                    - type: STRING
+                      name: reference
+                      value: PKIAJ
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'Outputs Total Current Low Priority'
+                  x: '36'
+                  'y': '4'
+                  width: '36'
+                  height: '4'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: outsTotalCurrentLowPriority.0
+                    - type: STRING
+                      name: reference
+                      value: PDDOJ
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+        - uuid: a5db4d45d89e49a9bf7cc797a9b97c34
+          name: Rectifiers
+          pages:
+            - widgets:
+                - type: svggraph
+                  name: 'Rectifier 1 Load'
+                  width: '72'
+                  height: '4'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: recLoad.1
+                    - type: STRING
+                      name: reference
+                      value: UMTVJ
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+                - type: svggraph
+                  name: 'Rectifier 2 Load'
+                  'y': '4'
+                  width: '72'
+                  height: '4'
+                  fields:
+                    - type: STRING
+                      name: ds.0.color
+                      value: 00BFFF
+                    - type: STRING
+                      name: ds.0.items.0
+                      value: recLoad.2
+                    - type: STRING
+                      name: reference
+                      value: FMNTS
+                    - type: INTEGER
+                      name: righty
+                      value: '0'
+      valuemaps:
+        - uuid: 6bf42ad2166a48f094662a80e0aba3ec
+          name: devWorkMode
+          mappings:
+            - value: '0'
+              newvalue: float
+            - value: '1'
+              newvalue: floatCharging
+            - value: '2'
+              newvalue: battery
+            - value: '3'
+              newvalue: batteryColdStart
+            - value: '4'
+              newvalue: charging
+            - value: '5'
+              newvalue: bulk
+            - value: '6'
+              newvalue: batteryTest
+            - value: '7'
+              newvalue: noBattery
+            - value: '8'
+              newvalue: batteryDisconnect
+            - value: '9'
+              newvalue: equalize
+            - value: '10'
+              newvalue: direct
+            - value: '11'
+              newvalue: batteryTestEnd
+            - value: '12'
+              newvalue: nonContinuousFloat
+            - value: '13'
+              newvalue: nonContinuousStandby
+            - value: '14'
+              newvalue: nonContinuousFloatCharging
+            - value: '15'
+              newvalue: nonContinuousRefill
+            - value: '16'
+              newvalue: nonContiniousRearm
+            - value: '17'
+              newvalue: nonConverterMode
+            - value: '32767'
+              newvalue: notAvailable
+  triggers:
+    - uuid: a3c1017bfdbb4127b65891b2f78c6c9b
+      expression: '(last(/Merawex SI48-2U5-1U2/battLack.2)=1 or last(/Merawex SI48-2U5-1U2/battLack.1)=2 or last(/Merawex SI48-2U5-1U2/battLack.2)=3)'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: '(last(/Merawex SI48-2U5-1U2/battLack.2)=0)'
+      name: 'Lack of Battery 2'
+      priority: HIGH
+  graphs:
+    - uuid: 9603d197bde4472193a6ef3be59b32e5
+      name: 'Batteries Current'
+      graph_items:
+        - drawtype: BOLD_LINE
+          color: 00BFFF
+          item:
+            host: 'Merawex SI48-2U5-1U2'
+            key: battCurrent.1
+        - sortorder: '1'
+          drawtype: BOLD_LINE
+          color: '274482'
+          item:
+            host: 'Merawex SI48-2U5-1U2'
+            key: battCurrent.2
+    - uuid: d6db0696e8b14df99dce6839d0094bc6
+      name: 'Batteries Temperature'
+      graph_items:
+        - drawtype: BOLD_LINE
+          color: 00BFFF
+          item:
+            host: 'Merawex SI48-2U5-1U2'
+            key: battTemperature.1
+        - sortorder: '1'
+          drawtype: BOLD_LINE
+          color: '274482'
+          item:
+            host: 'Merawex SI48-2U5-1U2'
+            key: battTemperature.2
+    - uuid: 895dcbf549ba43f1a370d9e696ba68ea
+      name: 'Batteries Voltage'
+      graph_items:
+        - drawtype: BOLD_LINE
+          color: 00BFFF
+          item:
+            host: 'Merawex SI48-2U5-1U2'
+            key: battVoltage.1
+        - sortorder: '1'
+          drawtype: BOLD_LINE
+          color: '274482'
+          item:
+            host: 'Merawex SI48-2U5-1U2'
+            key: battVoltage.2
+    - uuid: 58be96facbe540ed9e27934c2ed974a6
+      name: 'Device Ambient Temperature'
+      graph_items:
+        - drawtype: BOLD_LINE
+          color: 00BFFF
+          item:
+            host: 'Merawex SI48-2U5-1U2'
+            key: devAmbientTemperature.0
+    - uuid: 269d206cc36e4ae187e0846361634a19
+      name: 'Mains 1 Voltage'
+      graph_items:
+        - drawtype: BOLD_LINE
+          color: 00BFFF
+          item:
+            host: 'Merawex SI48-2U5-1U2'
+            key: mainVoltage.1
+    - uuid: 63f3fd2b01314dbab7e98ca334f2484b
+      name: 'Mains 2 Voltage'
+      graph_items:
+        - drawtype: BOLD_LINE
+          color: 00BFFF
+          item:
+            host: 'Merawex SI48-2U5-1U2'
+            key: mainVoltage.2
+    - uuid: cc863a58ceb94fe48ae1b197ed17da54
+      name: 'Mains 3 Voltage'
+      graph_items:
+        - drawtype: BOLD_LINE
+          color: 00BFFF
+          item:
+            host: 'Merawex SI48-2U5-1U2'
+            key: mainVoltage.3
+    - uuid: a478f0b9408748e7bda5f78468d4c7d1
+      name: 'Mains Frequency'
+      graph_items:
+        - drawtype: BOLD_LINE
+          color: 00BFFF
+          item:
+            host: 'Merawex SI48-2U5-1U2'
+            key: mainsFrequency.0
+    - uuid: 077c1c04bf0945f799bf96e9126d5f8e
+      name: 'Outputs Total Current High Priority'
+      graph_items:
+        - drawtype: BOLD_LINE
+          color: 00BFFF
+          item:
+            host: 'Merawex SI48-2U5-1U2'
+            key: outsTotalCurrentHighPriority.0
+    - uuid: 6f683606fade47739e9d1eab5cf91a82
+      name: 'Outputs Total Current Low Priority'
+      graph_items:
+        - drawtype: BOLD_LINE
+          color: 00BFFF
+          item:
+            host: 'Merawex SI48-2U5-1U2'
+            key: outsTotalCurrentLowPriority.0
+    - uuid: 91181f5b66744162b994e96cc8f56ec1
+      name: 'Outputs Voltage'
+      graph_items:
+        - drawtype: BOLD_LINE
+          color: 00BFFF
+          item:
+            host: 'Merawex SI48-2U5-1U2'
+            key: outsVoltage.0
+    - uuid: 080f7808e8b44b749e9d880e4f6d10ae
+      name: 'Rectifier 1 Load'
+      graph_items:
+        - drawtype: BOLD_LINE
+          color: 00BFFF
+          item:
+            host: 'Merawex SI48-2U5-1U2'
+            key: recLoad.1
+    - uuid: 8e0f7173e6224fd89447d16f33aae9ee
+      name: 'Rectifier 2 Load'
+      graph_items:
+        - drawtype: BOLD_LINE
+          color: 00BFFF
+          item:
+            host: 'Merawex SI48-2U5-1U2'
+            key: recLoad.2
+    - uuid: 78aeb9e3c5334b61a1ab1a1a6ca51ef9
+      name: 'Rectifier 3 Load'
+      graph_items:
+        - drawtype: BOLD_LINE
+          color: 00BFFF
+          item:
+            host: 'Merawex SI48-2U5-1U2'
+            key: recLoad.3
+    - uuid: c4f27fb8dfb14c4dbb7b3fe50fdfb643
+      name: 'Rectifier 4 Load'
+      graph_items:
+        - drawtype: BOLD_LINE
+          color: 00BFFF
+          item:
+            host: 'Merawex SI48-2U5-1U2'
+            key: recLoad.4
+    - uuid: 215a19430376415993cb6ad6e98d7b89
+      name: 'Rectifier 5 Load'
+      graph_items:
+        - drawtype: BOLD_LINE
+          color: 00BFFF
+          item:
+            host: 'Merawex SI48-2U5-1U2'
+            key: recLoad.5

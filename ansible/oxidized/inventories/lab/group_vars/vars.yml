@@ -1,0 +1,8 @@
+---
+oxidized_user: oxidized
+oxidized_home: "/home/{{ oxidized_user }}"
+oxidized_config_path: "{{ oxidized_home }}/.config/oxidized/config"
+# Netbox API settings
+api_url: https://172.22.2.4/api
+api_token: b6d142fb8b77a2599f6587e131796678006ca5d8
+validate_certs: false

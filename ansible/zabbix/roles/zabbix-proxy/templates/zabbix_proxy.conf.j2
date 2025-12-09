@@ -1,0 +1,189 @@
+# This is the Zabbix proxy configuration file
+
+### Option: ProxyMode
+ProxyMode=0
+
+### Option: Server
+Server={{ zabbix_proxy_server }}
+
+### Option: ServerPort
+# ServerPort=10051
+
+### Option: Hostname
+Hostname={{ ansible_hostname }}
+
+### Option: ListenPort
+# ListenPort=10051
+
+### Option: ListenIP
+# ListenIP=0.0.0.0
+
+### Option: SourceIP
+# SourceIP=
+
+### Option: LogFile
+LogFile=/var/log/zabbix/zabbix_proxy.log
+
+### Option: LogFileSize
+LogFileSize=0
+
+### Option: PidFile
+PidFile=/run/zabbix/zabbix_proxy.pid
+
+### Option: SocketDir
+SocketDir=/run/zabbix
+
+### Option: DBHost
+DBHost={{ zabbix_proxy_dbhost }}
+
+### Option: DBName
+DBName={{ zabbix_proxy_dbname }}
+
+### Option: DBUser
+DBUser={{ zabbix_proxy_dbuser }}
+
+### Option: DBPassword
+DBPassword={{ zabbix_proxy_dbpassword }}
+
+### Option: DBSocket
+# DBSocket=
+
+### Option: DBPort
+# DBPort=3306
+
+### Option: ProxyLocalBuffer
+# ProxyLocalBuffer=0
+
+### Option: ProxyOfflineBuffer
+# ProxyOfflineBuffer=1
+
+### Option: HeartbeatFrequency
+# HeartbeatFrequency=60
+
+### Option: ConfigFrequency
+# ConfigFrequency=3600
+
+### Option: DataSenderFrequency
+# DataSenderFrequency=1
+
+### Option: StartPollers
+# StartPollers=5
+
+### Option: StartIPMIPollers
+# StartIPMIPollers=0
+
+### Option: StartPollersUnreachable
+# StartPollersUnreachable=1
+
+### Option: StartTrappers
+# StartTrappers=5
+
+### Option: StartPingers
+# StartPingers=1
+
+### Option: StartDiscoverers
+# StartDiscoverers=1
+
+### Option: StartHTTPPollers
+# StartHTTPPollers=1
+
+### Option: JavaGateway
+# JavaGateway=
+
+### Option: JavaGatewayPort
+# JavaGatewayPort=10052
+
+### Option: StartJavaPollers
+# StartJavaPollers=0
+
+### Option: StartVMwareCollectors
+# StartVMwareCollectors=0
+
+### Option: VMwareFrequency
+# VMwareFrequency=60
+
+### Option: VMwarePerfFrequency
+# VMwarePerfFrequency=60
+
+### Option: VMwareCacheSize
+# VMwareCacheSize=8M
+
+### Option: VMwareTimeout
+# VMwareTimeout=10
+
+### Option: SNMPTrapperFile
+# SNMPTrapperFile=/tmp/zabbix_traps.tmp
+
+### Option: StartSNMPTrapper
+# StartSNMPTrapper=0
+
+### Option: HousekeepingFrequency
+# HousekeepingFrequency=1
+
+### Option: CacheSize
+# CacheSize=8M
+
+### Option: StartDBSyncers
+# StartDBSyncers=4
+
+### Option: HistoryCacheSize
+# HistoryCacheSize=16M
+
+### Option: HistoryIndexCacheSize
+# HistoryIndexCacheSize=4M
+
+### Option: Timeout
+# Timeout=3
+
+### Option: TrapperTimeout
+# TrapperTimeout=300
+
+### Option: UnreachablePeriod
+# UnreachablePeriod=45
+
+### Option: UnavailableDelay
+# UnavailableDelay=60
+
+### Option: UnreachableDelay
+# UnreachableDelay=15
+
+### Option: ExternalScripts
+ExternalScripts=/usr/lib/zabbix/externalscripts
+
+### Option: FpingLocation
+FpingLocation=/usr/bin/fping
+
+### Option: Fping6Location
+Fping6Location=/usr/bin/fping6
+
+### Option: SSHKeyLocation
+# SSHKeyLocation=
+
+### Option: LogSlowQueries
+# LogSlowQueries=3000
+
+### Option: TmpDir
+# TmpDir=/tmp
+
+### Option: AllowRoot
+# AllowRoot=0
+
+### Option: User
+User=zabbix
+
+### Option: Include
+# Include=/usr/local/etc/zabbix_proxy.general.conf
+# Include=/usr/local/etc/zabbix_proxy.conf.d/
+# Include=/usr/local/etc/zabbix_proxy.conf.d/*.conf
+
+### Option: SSLCertLocation
+# SSLCertLocation=${datadir}/zabbix/ssl/certs
+
+### Option: SSLKeyLocation
+# SSLKeyLocation=${datadir}/zabbix/ssl/keys
+
+### Option: SSLCALocation
+# SSLCALocation=
+
+### Option: StatsAllowedIP
+# StatsAllowedIP=

@@ -1,0 +1,105 @@
+---
+### FreeIPA Client setup on Ubuntu 24 LTS
+
+# Set hostname and local DNS resolver
+# sudo hostnamectl set-hostname $(hostname).example.local
+# sudo hostnamectl set-hostname example-server01.example.local
+# sudo nano /etc/hosts
+# ```
+# 10.0.1.51 example-server01.example.local example-server01
+# 10.0.1.120 ipa.example.local ipa
+# ```
+
+# sudo timedatectl set-timezone Europe/London
+
+# sudo apt update -y
+# sudo apt install -y freeipa-client
+# Prompts:
+# Kerberos servers for your client:
+# ipa.example.local
+# Administrative server for your Kerberos realm:
+# ipa.example.local
+
+### Connect Clients to the FreeIPA Server
+
+## Setup Option 1: Manual Setup (Recommended):
+# sudo ipa-client-install \
+#   --mkhomedir \
+#   --domain=example.local \
+#   --server=ipa.example.local \
+#   --realm=EXAMPLE.LOCAL
+
+# Proceed with fixed values and no DNS discovery? [no]: yes
+# Do you want to configure chrony with NTP server or pool address? [no]: no
+# Client hostname: example-server01.example.local
+# Realm: EXAMPLE.LOCAL
+# DNS Domain: example.local
+# IPA Server: ipa.example.local
+# BaseDN: dc=example,dc=local
+
+# Continue to configure the system with these values? [no]: yes
+# Synchronizing time
+# No SRV records of NTP servers found and no NTP server or pool address was provided.
+# Using default chrony configuration.
+# Attempting to sync time with chronyc.
+# Time synchronization was successful.
+# User authorized to enroll computers: admin
+# Password for admin@EXAMPLE.LOCAL: <your-freeipa-admin-password>
+
+
+## Setup Option 2: Unattended convenience client setup (Not Recommended):
+# https://linux.die.net/man/1/ipa-client-install
+# ipa-client-install \
+#   --mkhomedir \
+#   --domain=example.local \
+#   --server=ipa.example.local \
+#   --realm=EXAMPLE.LOCAL \
+#   --principal=admin \
+#   --password={{ vault_freeipa_admin_password }} \
+#   -U
+
+- name: Install required system packages
+  apt:
+    name:
+      - freeipa-client
+    state: present
+    update_cache: true
+  tags:
+    - ipa
+
+- name: Set hostname
+  command: hostnamectl set-hostname {{ ansible_hostname }}.example.local
+  become: true
+  tags:
+    - ipa
+
+- name: Update /etc/hosts loop
+  lineinfile:
+    path: /etc/hosts
+    line: "{{ item }}"
+    state: present
+  with_items:
+    - 10.0.1.51 example-server01.example.local example-server01
+    - 10.0.1.120 ipa.example.local ipa
+  become: true
+  tags:
+    - ipa
+
+- name: Set timezone
+  command: timedatectl set-timezone Europe/London
+  become: true
+  tags:
+    - ipa
+
+- name: Configure FreeIPA client
+  command: >
+    ipa-client-install
+    --mkhomedir
+    --domain=example.local
+    --server=ipa.example.local
+    --realm=EXAMPLE.LOCAL
+    --principal=admin
+    --password={{ vault_freeipa_admin_password }}
+    -U
+  tags:
+    - ipa

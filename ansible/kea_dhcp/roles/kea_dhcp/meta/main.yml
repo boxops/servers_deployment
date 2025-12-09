@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: "Network DevOps Team"
+  description: "ISC Kea"
+  company: ""
+  license: license (MIT)
+  min_ansible_version: "2.2"
+  platforms:
+    - name: Debian
+      versions:
+        - all
+  galaxy_tags:
+    - networking
+    - dhcp
+dependencies: []
