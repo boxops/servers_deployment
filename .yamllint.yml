@@ -1,0 +1,67 @@
+---
+# yamllint configuration
+# https://yamllint.readthedocs.io/en/stable/configuration.html
+
+extends: default
+
+rules:
+  # Allow longer lines — many Ansible when: conditions and template paths are long
+  line-length:
+    max: 160
+    level: warning
+
+  # Allow both true/false and yes/no booleans (Ansible uses both)
+  truthy:
+    allowed-values: ["true", "false", "yes", "no"]
+    check-keys: false
+
+  # Don't require document-start markers (---) in every file
+  document-start:
+    level: warning
+
+  # Be lenient about comments spacing — auto-generated files vary
+  comments:
+    min-spaces-from-content: 1
+
+  # Warn only — existing codebase uses mixed indentation styles
+  indentation:
+    spaces: 2
+    indent-sequences: true
+    check-multi-line-strings: false
+    level: warning
+
+  # Warn only — trailing spaces present in pre-existing files
+  trailing-spaces:
+    level: warning
+
+  # Warn only — pre-existing files use Windows (CRLF) line endings
+  new-lines:
+    type: unix
+    level: warning
+
+  # Warn only — pre-existing files have occasional brace spacing issues
+  braces:
+    min-spaces-inside: 0
+    max-spaces-inside: 1
+    level: warning
+
+  # Required by ansible-lint's embedded yamllint integration
+  comments-indentation: false
+  octal-values:
+    forbid-implicit-octal: true
+    forbid-explicit-octal: true
+
+  # Warn only — pre-existing files missing trailing newline
+  new-line-at-end-of-file:
+    level: warning
+
+  # Warn only — pre-existing files have extra blank lines
+  empty-lines:
+    max: 2
+    max-start: 0
+    max-end: 0
+    level: warning
+
+ignore: |
+  ansible/zabbix/scripts/zabbix_templates/
+  ansible/zabbix/scripts/generated_zabbix_template.yaml

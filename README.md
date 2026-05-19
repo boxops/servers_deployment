@@ -176,6 +176,13 @@ make terraform-init    # Initialize Terraform
 make terraform-plan    # Plan infrastructure changes
 make ansible-check     # Check Ansible syntax
 make docs              # Generate documentation
+make test              # Run unit tests (mocked, no services needed)
+make test-integration  # Run integration tests (requires env vars)
+make test-cov          # Run unit tests with coverage report
+make test-report       # Generate HTML coverage report
+make lint              # Run all static analysis (Terraform + Ansible)
+make lint-terraform    # Terraform fmt + validate + checkov
+make lint-ansible      # ansible-lint + yamllint
 ```
 
 ### Multi-Environment Support
@@ -203,11 +210,38 @@ Configure environment-specific variables in respective `inventories/` directorie
 3. Test in lab environment
 4. Submit pull request with clear description
 
+## Testing
+
+```bash
+# Install test dependencies
+pip install -r requirements.txt
+
+# Run all unit tests (no real services needed)
+make test
+
+# Run with coverage (enforces 80% minimum)
+make test-cov
+
+# Run integration tests against real services (skipped if env vars not set)
+make test-integration
+
+# Run all static analysis (Terraform + Ansible)
+make lint
+```
+
+All external services (NetBox, Zabbix, Kea DHCP, HTTP APIs) are mocked in unit tests —
+no real service connectivity is needed. Integration tests require environment variables
+to be set for each service; see [docs/TESTING.md](docs/TESTING.md) for the full list.
+
+See [docs/TESTING.md](docs/TESTING.md) for the full testing guide, including Terraform
+and Ansible static analysis, fixture reference, and instructions for writing new tests.
+
 ## Documentation
 
 - [Architecture Guide](docs/ARCHITECTURE.md) - Complete architecture overview
 - [Service Management Guide](docs/SERVICE_MANAGEMENT_GUIDE.md) - Service lifecycle patterns
 - [VM Deployment Guide](docs/VM_DEPLOYMENT_GUIDE.md) - Terraform deployment guide
+- [Testing Guide](docs/TESTING.md) - Test suite, coverage, and writing new tests
 
 ## License
 

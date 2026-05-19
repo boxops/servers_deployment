@@ -1,0 +1,69 @@
+---
+# ansible-lint configuration
+# https://ansible-lint.readthedocs.io/configuring/
+
+profile: basic
+
+# Exclude paths that should not be linted
+exclude_paths:
+  - venv/
+  - .cache/
+  - .git/
+  - htmlcov/
+
+# Rules to skip project-wide
+# command-instead-of-module: Many roles use `command:` legitimately (dpkg, git,
+#   systemctl, rndc, ipa-client-install) where no clean module equivalent exists.
+# no-changed-when: Several tasks intentionally have no changed_when because they
+#   always trigger a handler or are idempotent by design.
+skip_list:
+  - command-instead-of-module
+  - no-changed-when
+  - yaml[line-length]
+
+# Warn on these (not fail) during initial rollout
+# These represent pre-existing violations in the codebase and should be
+# progressively fixed and promoted back to errors.
+warn_list:
+  - experimental
+  - role-name
+  - no-free-form
+  # yaml formatting — pre-existing in codebase
+  - yaml[trailing-spaces]
+  - yaml[comments-indentation]
+  - yaml[new-line-at-end-of-file]
+  - yaml[empty-lines]
+  - yaml[indentation]
+  - yaml[document-start]
+  - yaml[truthy]
+  - yaml[octal-values]
+  # ansible-lint rules — pre-existing in codebase
+  - parser-error
+  - name[missing]
+  - name[casing]
+  - var-naming[no-role-prefix]
+  - command-instead-of-shell
+  - jinja[spacing]
+  - partial-become[task]
+
+# Mock missing roles/modules so syntax-check doesn't fail in CI
+# (these are real roles/collections required at runtime on the control node)
+mock_roles:
+  - firewalld
+  - server
+
+mock_modules:
+  - community.postgresql.postgresql_db
+  - community.postgresql.postgresql_user
+  - community.postgresql.postgresql_privs
+  - community.postgresql.postgresql_query
+  - community.postgresql.postgresql_owner
+  - gem
+  - mysql_user
+  - mysql_db
+  - mysql_variables
+  - ansible.posix.firewalld
+  - ansible.builtin.firewalld
+
+# Enforce FQCN (fully qualified collection name) for built-in modules
+use_default_rules: true

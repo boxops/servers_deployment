@@ -66,6 +66,8 @@ id_rsa*
 *.temp
 .pytest_cache/
 cover/
+htmlcov/
+.coverage
 
 # Translations
 *.mo

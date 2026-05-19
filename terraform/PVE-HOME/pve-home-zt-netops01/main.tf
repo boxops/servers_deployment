@@ -16,10 +16,10 @@ provider "proxmox" {
 }
 
 # Create NetBox VM
-resource "proxmox_vm_qemu" "pve-home-netobs01" {
-  name        = "pve-home-netobs01"
+resource "proxmox_vm_qemu" "pve-home-zt-netops01" {
+  name        = "pve-home-zt-netops01"
   target_node = var.proxmox_node
-  vmid        = 104
+  vmid        = 108
   onboot      = true
   
   # Clone from template
@@ -81,7 +81,7 @@ resource "proxmox_vm_qemu" "pve-home-netobs01" {
   # Cloud-init configuration
   ciuser = "ubuntu"
   cipassword = "ubuntu"
-  ipconfig0 = "ip=192.168.10.245/24,gw=192.168.10.254"
+  ipconfig0 = "ip=192.168.10.247/24,gw=192.168.10.254"
   nameserver = "1.1.1.1"
   
   # Serial console
@@ -95,5 +95,5 @@ resource "proxmox_vm_qemu" "pve-home-netobs01" {
   define_connection_info = true
   
   # Tags for identification
-  tags = "netobs"
+  tags = "zero-touch-netops"
 }
